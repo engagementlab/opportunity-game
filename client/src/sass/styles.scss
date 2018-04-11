@@ -1,0 +1,74 @@
+// src/sass/styles.scss
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:400,500,600,700');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,700');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,700');
+
+@import './variables';
+
+@import 
+  '~bootstrap/scss/_functions',
+  '~bootstrap/scss/_variables',
+  '~bootstrap/scss/_mixins',
+  '~bootstrap/scss/_print',
+  '~bootstrap/scss/_reboot',
+  '~bootstrap/scss/_type',
+  '~bootstrap/scss/_grid',
+  '~bootstrap/scss/_navbar';
+
+// GLOBAL STYLING
+@media (min-width: 1430px) {
+  .container {
+    max-width: 1400px;
+  }
+}
+
+body {
+	font-family: 'Work Sans', sans-serif;
+	font-size: 16px;
+}
+
+h1, h2 {
+  font-size: 1.5em;
+}
+
+h3 {
+  font-weight: 600;
+  &:after {
+    position: relative;
+    display: flex;
+    content: ''; 
+    width: 60px; 
+    height: 4px; 
+    background: $light-gold; 
+    bottom: -10px;
+    margin-bottom: 5%;
+    
+    @include mq($from: mobile, $until: tablet) {
+      margin-bottom: 10%;
+    }
+  }
+}
+
+.condense p {
+  @include font-roboto();
+
+  font-stretch: condensed;
+  line-height: 1.5;
+  letter-spacing: 1px;
+}
+
+#loading {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  margin:0;
+  background: rgba(255, 255, 255, .8);
+  z-index: 10;
+  img {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}

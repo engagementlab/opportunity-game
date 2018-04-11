@@ -1,0 +1,4 @@
+<cl-image *ngIf="cloudinaryId !== undefined && cloudinaryId.length > 0"  secure="true" public-id="{{cloudinaryId}}" attr.alt="{{alt}}" class="cdn-image">
+  <cl-transformation attr.width="{{width}}" attr.quality="{{quality}}" crop="scale" fetch-format="auto" dpr="auto" crop="fill" attr.style="width:20px">
+  </cl-transformation>
+</cl-image>

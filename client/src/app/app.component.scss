@@ -1,0 +1,9 @@
+@import "~sass/_variables";
+
+/* Application-wide Styles */
+#qa-build {
+	background-color: $yellow;
+	text-align: center;
+	font-weight: bold;
+	font-size: large;
+}

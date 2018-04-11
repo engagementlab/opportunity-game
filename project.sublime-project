@@ -1,0 +1,25 @@
+{
+	"folders":
+	[
+		{
+			"name": "Client",
+			"path": "client"
+		},
+		{
+			"folder_exclude_patterns":
+			[
+				"node_modules"
+			],
+			"name": "Server",
+			"path": "server"
+		},
+		{
+			"folder_exclude_patterns":
+			[
+				"node_modules"
+			],
+			"name": "All",
+			"path": "./"
+		}
+	]
+}

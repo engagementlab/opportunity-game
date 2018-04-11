@@ -1,0 +1,19 @@
+// CDN CONFIG
+$cdn-product: 'civic-idea';
+
+// COLORS
+$yellow: #fecf33;
+$light-orange: #fdbd39;
+$light-gold: #ffc952;
+$peach: #ee6723;
+$pinkish-grey: #c8c8c8;
+$dusty-orange: #f16922;
+
+@mixin font-roboto() {
+	font-family: 'Roboto Condensed', sans-serif;
+	// @return $font-family;
+}
+
+// Mixins 
+@import '~sass-mq/_mq';
+@import './mixins';

@@ -1,0 +1,209 @@
+// PX TO EM
+$base-font-size: 16px;
+/**
+ * Strips the unit from a given number-unit-combination and returns the number.
+ * @link: http://stackoverflow.com/a/12335841/1779999
+ * @usage: parse-int(10px) => 10
+ */
+
+@function parse-int($number) {
+  @return $number / ($number * 0 + 1);
+}
+
+/**
+ * Simply adds the em unit to a given number. This is used twice in the 
+ * function underneath, thus the need for a separate function.
+ */
+
+@function add-em-unit($number) {
+  @return $number * 1em;
+}
+
+/**
+ * Calculates em values for a given list of (px or em) values and a given em 
+ * base. Multiply base values for nested em structures (last @usage example).
+ * @usage: em(10px, 1.125) => .55556em
+ *         em(24px, .875em) => 1.71429em
+ *         em(12px 0 7em rgba(0, 0, 0, .7), 1.75) => .42857em 0 4em rgba(0, 0, 0, 0.7)
+ *         em(12px) + em(3em) => 3.75em
+ *         em(23px, em(53px)) => .43396em
+ *         em(24px, 1.5 * 1.125) => .88889em
+ */
+
+@function em($values, $em-base: 1) {
+  $base-font-size: parse-int($base-font-size);
+  $em-base: parse-int($em-base);
+  $result: ();
+
+  @each $value in $values {
+    @if $value == 0 or type-of($value) != "number" {
+      $result: append($result, $value);
+    } @else {
+      $unit: unit($value);
+      $value: parse-int($value);
+
+      @if $unit == "px" {
+        $result: append($result, add-em-unit($value / ($base-font-size * $em-base)));
+      } @else if $unit == "em" {
+        $result: append($result, add-em-unit($value / $em-base));
+      }
+    }
+  }
+  
+  /**
+   * If only one value is provided, output the instance of that object instead 
+   * of the whole list. This enables use cases like nested function invocations 
+   * (e.g. `em(2px, em(15px))`) or additions/subtractions (e.g. `em(5px) + em(32px)`).
+   */
+  @if length($result) == 1 {
+    @return nth($result, 1);
+  } @else {
+    @return $result;
+  }
+}
+
+// TRANSFORMS
+// generic transform
+@mixin transform($transforms) {
+     -moz-transform: $transforms;
+       -o-transform: $transforms;
+      -ms-transform: $transforms;
+  -webkit-transform: $transforms;
+          transform: $transforms;
+}
+// rotate
+@mixin rotate ($deg) {
+  @include transform(rotate(#{$deg}deg));
+}
+ 
+// scale
+@mixin scale($scale) {
+   @include transform(scale($scale));
+} 
+// translate
+@mixin translate ($x, $y) {
+   @include transform(translate($x, $y));
+}
+// skew
+@mixin skew ($x, $y) {
+   @include transform(skew(#{$x}deg, #{$y}deg));
+}
+
+@mixin transition($transition-property, $transition-time, $method) {
+  -webkit-transition: $transition-property $transition-time $method;
+  -moz-transition: $transition-property $transition-time $method;
+  -ms-transition: $transition-property $transition-time $method;
+  -o-transition: $transition-property $transition-time $method;
+  transition: $transition-property $transition-time $method;
+}
+
+// FILTERS
+// grayscale      ex: filter: grayscale(100%);
+// sepia          ex: filter: sepia(100%);
+// saturate       ex: filter: saturate(0%);
+// hue-rotate     ex: filter: hue-rotate(45deg);
+// invert         ex: filter: invert(100%);
+// brightness     ex: filter: brightness(15%);
+// contrast       ex: filter: contrast(200%);
+// blur           ex: filter: blur(2px);
+
+@mixin filter($filter-type,$filter-amount) { 
+  -webkit-filter: $filter-type+unquote('(#{$filter-amount})');
+  -moz-filter: $filter-type+unquote('(#{$filter-amount})');
+  -ms-filter: $filter-type+unquote('(#{$filter-amount})');
+  -o-filter: $filter-type+unquote('(#{$filter-amount})');
+  filter: $filter-type+unquote('(#{$filter-amount})');
+}
+
+// KEYFRAME ANIMATIONS
+@mixin animation($animate...) {
+    $max: length($animate);
+    $animations: '';
+
+    @for $i from 1 through $max {
+        $animations: #{$animations + nth($animate, $i)};
+
+        @if $i < $max {
+            $animations: #{$animations + ", "};
+        }
+    }
+    -webkit-animation: $animations;
+    -moz-animation:    $animations;
+    -o-animation:      $animations;
+    animation:         $animations;
+}
+
+@mixin keyframes($animationName) {
+    @-webkit-keyframes #{$animationName} {
+        @content;
+    }
+    @-moz-keyframes #{$animationName} {
+        @content;
+    }
+    @-o-keyframes #{$animationName} {
+        @content;
+    }
+    @keyframes #{$animationName} {
+        @content;
+    }
+}
+
+@mixin placeholder {
+
+    &::placeholder {
+      opacity: 1;
+      font-family: 'Roboto Condensed', sans-serif;
+      font-size: em(16px);
+      font-weight: 300;
+      font-stretch: condensed;
+      color: $pinkish-grey;
+    }
+    &:-ms-input-placeholder {
+      opacity: 1;
+      font-family: 'Roboto Condensed', sans-serif;
+      font-size: em(16px);
+      font-weight: 300;
+      font-stretch: condensed;
+      color: $pinkish-grey;
+    }
+    &::-ms-input-placeholder {
+      opacity: 1;
+      font-family: 'Roboto Condensed', sans-serif;
+      font-size: em(16px);
+      font-weight: 300;
+      font-stretch: condensed;
+      color: $pinkish-grey;      
+    }
+    
+}
+
+@mixin semi-bold {
+  font-weight: 600;
+}
+
+@mixin mobile-only {
+  @include mq($from: mobile, $until: tablet) {
+    @content;
+  }
+}
+
+@mixin border-radius($radius) {
+
+  -webkit-border-radius: #{$radius + "px"};
+  -moz-border-radius: #{$radius + "px"};
+  border-radius: #{$radius + "px"};
+
+}
+
+@function cdn-image($imgName, $options...) {
+
+  $imgParams: ();
+  $version: random(500000) + 10000000;
+  $strPrefix: "https://res.cloudinary.com/engagement-lab-home/image/upload/f_auto";
+  
+  @each $value in $options {
+    $strPrefix: $strPrefix + "," + $value;
+  }
+
+  @return url("#{$strPrefix}/v#{$version}/#{$cdn-product}/#{$imgName}");
+}

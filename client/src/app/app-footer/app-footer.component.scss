@@ -1,0 +1,46 @@
+@import "~sass/_variables";
+
+footer {
+	border-top: solid 2px black;
+	margin-top: 3%;
+
+	@include mobile-only {
+		padding: 3%;
+	}
+
+	@include mq($from: tablet) {
+		margin-left: 50px;
+		margin-right: 50px;
+	}
+}
+
+#text {
+	@include mq($from: tablet) {
+		float: left;
+		width: 40%;
+	}
+	font-size: em(12px);
+	padding-top: 2%;
+}
+
+#logo {
+	@include mq($from: tablet) {
+		float: right;
+		width: 47%;
+	}
+	padding-top: 1%;
+
+	::ng-deep img {
+		width: auto;
+		display: inline-block;
+		padding-left: 4%;
+
+		@include mobile-only {		
+			width: 31%;	
+			padding-top: 4%;
+		}
+  	@include mq($from: tablet, $until: wide) {
+			width: 30%;
+		}
+	}
+}
