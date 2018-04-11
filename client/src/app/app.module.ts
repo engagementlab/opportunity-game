@@ -39,8 +39,8 @@ const appRoutes: Routes = [
     component: GameComponent,
     children: [
       {path: '', redirectTo: 'start', pathMatch: 'full'}, 
-      {path: 'start', component: GameStartComponent}, 
-      {path: 'character', component: GameCharacterComponent}, 
+      {path: 'start', component: GameStartComponent, data: {index: 0}}, 
+      {path: 'character', component: GameCharacterComponent, data: {index: 1}}, 
     ]
   },
   { path: 'about', component: AboutComponent },
