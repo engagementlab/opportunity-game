@@ -1,8 +1,31 @@
-<input type="radio" name="editList" id="always" value="always"/>
+Career
+<fieldset name="career">
+	<input type="radio" name="career" value="0" (change)="onSelectionChange($event)"/>
+	<input type="radio" name="career" value="1" (change)="onSelectionChange($event)"/>
+	<input type="radio" name="career" value="2" (change)="onSelectionChange($event)"/>
+	<input type="radio" name="career" value="3" (change)="onSelectionChange($event)"/>
+	<input type="radio" name="career" value="4" (change)="onSelectionChange($event)"/>
+</fieldset>
 
-<input type="radio" name="editList" id="never" value="never"/>
-<input type="radio" name="editList" id="never" value="never"/>
+Engagement
+<fieldset name="engagement">
+	<input type="radio" name="engagement" value="0" (change)="onSelectionChange($event)"/>
+	<input type="radio" name="engagement" value="1" (change)="onSelectionChange($event)"/>
+	<input type="radio" name="engagement" value="2" (change)="onSelectionChange($event)"/>
+	<input type="radio" name="engagement" value="3" (change)="onSelectionChange($event)"/>
+	<input type="radio" name="engagement" value="4" (change)="onSelectionChange($event)"/>
+</fieldset>
 
-<input type="radio" name="editList" id="change" value="costChange"/>
-<label for="always">not important</label>
-<label for="change">very important</label>
+Health
+<fieldset name="health">
+	<input type="radio" name="health" value="0" (change)="onSelectionChange($event)"/>
+	<input type="radio" name="health" value="1" (change)="onSelectionChange($event)"/>
+	<input type="radio" name="health" value="2" (change)="onSelectionChange($event)"/>
+	<input type="radio" name="health" value="3" (change)="onSelectionChange($event)"/>
+	<input type="radio" name="health" value="4" (change)="onSelectionChange($event)"/>
+</fieldset>
+
+<!-- <label for="always">not important</label>
+<label for="change">very important</label> -->
+
+<app-button label="Submit" route="/game/welcome" ariaLabel="Submit"></app-button>

@@ -17,7 +17,7 @@ export const cloudinary = {
 export const config: CloudinaryConfiguration = cloudinaryConfiguration;
 
 import { AppComponent } from './app.component';
-import { JsonService } from './json.service';
+import { DataService } from './data.service';
 import { AppRoutingModule } from './/app-routing.module';
 
 import { AppNavbarComponent } from './app-navbar/app-navbar.component';
@@ -32,6 +32,11 @@ import { LoaderComponent } from './loader/loader.component';
 import { GameComponent } from './game/game.component';
 import { GameStartComponent } from './game/start/start.component';
 import { GameCharacterComponent } from './game/character/character.component';
+import { GameWelcomeComponent } from './game/welcome/welcome.component';
+import { GameMapComponent } from './game/map/map.component';
+import { GameLocationComponent } from './game/location/location.component';
+import { GameToolbarComponent } from './game/toolbar/toolbar.component';
+import { GameEmblemComponent } from './game/emblem/emblem.component';
 
 const appRoutes: Routes = [
   { 
@@ -41,6 +46,8 @@ const appRoutes: Routes = [
       {path: '', redirectTo: 'start', pathMatch: 'full'}, 
       {path: 'start', component: GameStartComponent, data: {index: 0}}, 
       {path: 'character', component: GameCharacterComponent, data: {index: 1}}, 
+      {path: 'welcome', component: GameWelcomeComponent}, 
+      {path: 'map', component: GameMapComponent}, 
     ]
   },
   { path: 'about', component: AboutComponent },
@@ -60,7 +67,12 @@ const appRoutes: Routes = [
     LoaderComponent,
     GameComponent,
     GameStartComponent,
-    GameCharacterComponent
+    GameCharacterComponent,
+    GameWelcomeComponent,
+    GameMapComponent,
+    GameLocationComponent,
+    GameToolbarComponent,
+    GameEmblemComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -78,7 +90,7 @@ const appRoutes: Routes = [
     LoaderComponent
   ],
   providers: [
-    JsonService,
+    DataService,
     LoaderComponent
   ],
   bootstrap: [AppComponent]

@@ -46,7 +46,6 @@ router.all('/admin', function(req, res, next) {
     res.redirect('/keystone');
 });
 
-// Views
-// router.get('/', routes.views.index);
+router.get('/api/get/data', keystone.middleware.api, routes.api.data.get);
 
 module.exports = router;

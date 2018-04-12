@@ -1,5 +1,5 @@
 import { Component, OnInit, Injectable, Input } from '@angular/core';
-import { JsonService } from '../json.service';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-loader',
@@ -11,7 +11,7 @@ import { JsonService } from '../json.service';
 export class LoaderComponent implements OnInit {
 
 	isLoading: boolean;
-  constructor(private jsonSvc: JsonService) {
+  constructor(private jsonSvc: DataService) {
 		
 		this.jsonSvc.isLoading.subscribe( value => {
         this.isLoading = value;

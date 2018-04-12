@@ -2,7 +2,6 @@ import { Component, OnInit, HostListener, Inject,
          ViewChild,
          AfterViewInit,
          ElementRef } from '@angular/core';
-import { JsonService } from '../json.service';
 
 @Component({
   selector: 'app-homepage',
@@ -22,7 +21,7 @@ export class HomepageComponent implements OnInit {
         });*/
   }
 
-  constructor(private jsonSvc: JsonService) { }
+  constructor() { }
 
   ngOnInit() {
     // this.getData();

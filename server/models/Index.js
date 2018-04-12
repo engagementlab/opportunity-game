@@ -1,5 +1,5 @@
 /**
- * Civic IDEA
+ * Opportunity Game
  * 
  * Index page Model
  * @module index
