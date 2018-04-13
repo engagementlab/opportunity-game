@@ -19,10 +19,9 @@ export class GameComponent implements OnInit {
   
   getData() {
 
-    this.dataSvc.getAllData('data')
-        .subscribe(response => {
-          console.log(this.dataSvc.locationData)
-        });
+    this.dataSvc.getAllData('data').subscribe(response => {
+      // console.log(this.dataSvc.locationData)
+    });
 
   }
 

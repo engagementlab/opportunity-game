@@ -1,7 +1,9 @@
 <div id="services">
 
-	<button>
-		Spicy jalapeno frankfurter ullamco id
-	</button>
+	<div *ngFor="let service of currentLocation.services">
+		<button>
+			{{service.name}}
+		</button>
+	</div>
 
 </div>

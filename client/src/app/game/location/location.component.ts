@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { DataService } from '../../data.service';
+
+import { Location } from '../../models/location';
 
 @Component({
   selector: 'app-location',
@@ -7,9 +11,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameLocationComponent implements OnInit {
 
-  constructor() { }
+	currentLocation: Location;
+	
+  constructor(private route: ActivatedRoute, private dataSvc: DataService) { 
+
+  }
 
   ngOnInit() {
+
+  	let url = this.route.snapshot.params.locationUrl;
+  	this.currentLocation = this.dataSvc.getLocationByUrl(url);
+
   }
 
 }

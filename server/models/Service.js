@@ -37,7 +37,8 @@ Service.add({
       type: Types.Relationship,
       ref: 'Location',
       label: 'Location',
-      note: 'The Location this service is for.',
+      note: 'The Location(s) this service is for.',
+      many: true,
       required: true,
       initial: true
   },

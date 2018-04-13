@@ -39,6 +39,7 @@ import { GameToolbarComponent } from './game/toolbar/toolbar.component';
 import { GameEmblemComponent } from './game/emblem/emblem.component';
 
 const appRoutes: Routes = [
+  { path: '', redirectTo: 'game', pathMatch: 'full' },
   { 
     path: 'game',
     component: GameComponent,
@@ -48,6 +49,7 @@ const appRoutes: Routes = [
       {path: 'character', component: GameCharacterComponent, data: {index: 1}}, 
       {path: 'welcome', component: GameWelcomeComponent}, 
       {path: 'map', component: GameMapComponent}, 
+      {path: 'location/:locationUrl', component: GameLocationComponent} 
     ]
   },
   { path: 'about', component: AboutComponent },

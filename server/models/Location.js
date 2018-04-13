@@ -38,7 +38,8 @@ Location.add({
       type: Types.Relationship,
       ref: 'Service',
       label: 'Services',
-      note: 'The services for this location.'
+      note: 'The services for this location.',
+      many: true
   },
 
 	createdAt: { type: Date, default: Date.now, noedit: true, hidden: true }

@@ -5,8 +5,9 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Response } from '@angular/http';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../environments/environment';
+import * as _ from 'underscore';
 
-import { location } from './models/location';
+import { Location } from './models/location';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -19,7 +20,7 @@ export class DataService {
     baseUrl: string;
     index: any;
     public gameData = new Map<string, any>();
-    public locationData: location;
+    public locationData: Location[];
 
     public isLoading: Subject<boolean> = new Subject<boolean>();
 
@@ -29,10 +30,16 @@ export class DataService {
 
     }
 
-    assembleData(newData: any, type: string) {
+    public getLocationByUrl(locationUrl: string) {
 
-        debugger;
-        location = newData[0][0];
+        // console.log(_.where(this.locationData, {url: locationUrl}))
+        return _.where(this.locationData, {url: locationUrl})[0];
+
+    }
+
+    private assembleData(newData: any, type: string) {
+
+        this.locationData = newData[0];
         // this.gameData.set('game', newData[0][0]);
 
 /*        switch(type) {
@@ -59,7 +66,7 @@ export class DataService {
         return this.gameData;
     }
 	
-    getAllData(type: string): Observable<any> {
+    public getAllData(type: string): Observable<any> {
 
         this.isLoading.next(true);
         

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../../data.service';
 
 @Component({
   selector: 'app-map',
@@ -7,7 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameMapComponent implements OnInit {
 
-  constructor() { }
+  locations: any[];
+
+  constructor(private dataSvc: DataService) {
+
+  	// TEMPORARY
+    this.dataSvc.getAllData('data').subscribe(response => {
+      
+      this.locations = this.dataSvc.locationData;
+
+    });
+
+ }
 
   ngOnInit() {
   }

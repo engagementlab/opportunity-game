@@ -20,7 +20,7 @@ var buildData = (params, res) => {
     let dataObj = {};
     let promises = [];
 
-    let locations = Location.model.find({}).populate('services').exec();
+    let locations = Location.model.find({}, 'name intro description services url imageName').populate('services').exec();
     promises.push(locations);
 
     return Bluebird.all(promises.map(function (promise) {
