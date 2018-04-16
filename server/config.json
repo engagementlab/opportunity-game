@@ -1,7 +1,6 @@
 {
 	"name": "Portland of Opportunity",
 	"database": "opportunity-game",
-	"subdomain": "og",
 	"allowed_domains": ["portland.qa.opportunitygame.org", "portland.opportunitygame.org"],
 	"admin_nav": { 
 									"index": ["Index"]

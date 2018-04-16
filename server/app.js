@@ -10,37 +10,49 @@
  * ==========
  */
 
+// Load .env vars
+if(process.env.NODE_ENV !== 'test')
+	require('dotenv').load();
+
+const SiteFactory = require('./factory'),
+		 express = require('express');
+
+_ = require('underscore'),
+colors = require('colors');
+
 // Return server object
 serverStart = function() {
 
-	return require('express')();
+	return express();
 
 };
 
 // Any custom app initialization logic should go here
 appStart = function(app) {
 
-	_ = require('underscore');
-
 };
 
-module.exports = function(frameworkDir, shared) {
+module.exports = function() {
 
-	// Added web sdk dependencies 
-	require('app-module-path').addPath(frameworkDir + '/node_modules');
-	
-	// Obtain app root path and set as keystone's module root
-	var appRootPath = require('app-root-path').path;
-	var keystoneInst = require('keystone');	
-	keystoneInst.set('module root', appRootPath);
-	keystoneInst.set('wysiwyg additional buttons', 'blockquote');
+	let expressApp = serverStart();
 
-	return { 
+	expressApp.listen(3000, () => {
 
-		keystone: keystoneInst,
-		server: serverStart,
-		start: appStart	
+		require('fs').readFile('./config.json', {encoding: 'utf8'}, function (err, data) {
+		  
+		  if (err) throw err;
+		  var configData = 	JSON.parse(data);
 
-	}
+			new SiteFactory({ 
 
-};
+				config: configData,
+				app: expressApp,
+				server: express
+
+			});
+
+		});
+
+	});
+
+}();

@@ -1,45 +1,41 @@
 {
-  "apps" : [{
-    "name": "Civic Idea",
-    "script": "server.js",
-    "env_production": {
-      "NODE_ENV": "production"
-    },
-    "env_staging": {
-      "NODE_ENV": "staging"
-    }
-  }],
-  "deploy" : {
-
-    "staging" : {
-      "user": "node",
-      "host": "199.94.80.19",
-      "repo": "git@github.com:engagementgamelab/civic-idea.git",
-      "ref": "origin/master",
-      "path": "/srv/civic-idea/"
-    },
-
-    "framework-production" : {
-      "user": "node",
-      "host": "xxx.xxx.xxx.xx",
-      "repo": "git@github.com:engagementgamelab/repo-name.git",
-      "ref": "origin/master",
-      "path": "/srv/framework",
-      "pre-deploy-local" : "echo 'Cloning and running npm install. Be patient.'",
-      "post-deploy" : "npm install ; grunt compile --sites=repo-name --env production ; pm2 restart 0 -- repo-name --env production",
-      "env": {
+  "apps" : [
+    {
+      "name": "opportunity-game-server",
+      "script": "app.js",
+      "env_production": {
         "NODE_ENV": "production"
+      },
+      "env_staging": {
+        "NODE_ENV": "staging"
       }
     },
+    {
+      "name": "opportunity-game-client",      
+      "exec_interpreter": "/home/node/.nvm/versions/node/v8.11.1/bin/node",
+      "args": "/srv/opportunity-game/source/client/dist -p 8080",
+      "script": "/home/node/.nvm/versions/node/v8.11.1/bin/http-server",
+    }
+  ],
+  "deploy" : {
+
+     "staging" : {
+        "user" : "node",
+        "host" : "159.203.174.12",
+        "repo": "git@github.com:engagementgamelab/opportunity-game.git",
+        "ref": "origin/master",
+        "path": "/srv/opportunity-game/",
+        "post-deploy": "cd client ; nvm use ; npm i ; npm run build-qa ; pm2 restart 'opportunity-game-client' ; cd ../server ; nvm use ; npm i ; pm2 restart 'opportunity-game-server'"
+      },
 
     "production" : {
       "user": "node",
       "host": "xxx.xxx.xxx.xx",
-      "repo": "git@github.com:engagementgamelab/repo-name.git",
+      "repo": "git@github.com:engagementgamelab/opportunity-game.git",
       "ref": "origin/production",
-      "path": "/srv/repo-name",
-      "pre-deploy-local" : "echo 'NPM linking repo-name and restarting app.';",
-      "post-deploy" : "npm i ; cd /srv/framework/current/ ; grunt compile --sites=repo-name --env production ; NODE_ENV=production pm2 restart server.js -- repo-name --env production"
+      "path": "/srv/opportunity-game",
+      "pre-deploy-local" : "echo 'NPM linking opportunity-game and restarting app.';",
+      "post-deploy" : "npm i ; NODE_ENV=production pm2 restart app.js --env production"
     }
 
   }
