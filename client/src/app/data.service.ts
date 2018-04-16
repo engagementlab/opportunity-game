@@ -1,13 +1,18 @@
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
-import { Observable } from 'rxjs/Observable';
+import { Injectable, Input, Output, EventEmitter } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Response } from '@angular/http';
+
+import { Subject } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { catchError } from 'rxjs/operators';
+
 import { environment } from '../environments/environment';
-import * as _ from 'underscore';
 
 import { Location } from './models/location';
+import { PlayerData } from './models/playerdata';
+import { Character } from './models/character';
+
+import * as _ from 'underscore';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -19,14 +24,46 @@ export class DataService {
 
     baseUrl: string;
     index: any;
-    public gameData = new Map<string, any>();
-    public locationData: Location[];
 
+    playerDataUpdate = new EventEmitter();
+    playerData: PlayerData = 
+    {
+        money: 0,
+        days: 0,
+        character: {
+            career_ranking: 0,
+            engagement_ranking: 0,
+            health_ranking: 0
+        }
+    };
+
+    public locationData: Location[];
     public isLoading: Subject<boolean> = new Subject<boolean>();
 
     constructor(private http: HttpClient) {
 
         this.baseUrl = (environment.production ? 'https://'+window.location.host : 'http://localhost:3000') + '/api/';
+
+    }
+
+    public changeCharacter(attribute: string, value: number) {
+
+        this.playerData.character[attribute] = value;
+        this.playerDataUpdate.emit(this.playerData);
+
+    }
+
+    public changeMoney(value: number) {
+
+        this.playerData.money = value;
+        // this.playerDataUpdate.emit(data);
+
+    }
+
+    public modifyPlayerData(data: PlayerData) {
+
+        this.playerData = data;
+        // this.playerDataUpdate.emit(data);
 
     }
 
@@ -62,8 +99,6 @@ export class DataService {
         }
 */
         this.isLoading.next(false);
-
-        return this.gameData;
     }
 	
     public getAllData(type: string): Observable<any> {

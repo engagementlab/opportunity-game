@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../../data.service';
 import * as _ from 'underscore';
 
 @Component({
@@ -11,7 +12,7 @@ export class GameCharacterComponent implements OnInit {
 	// var selectedAttributes = {};
 	data = new Map<string, number>();
 
-  constructor() { }
+  constructor(private _dataSvc: DataService) { }
 
   ngOnInit() {
   }
@@ -20,6 +21,8 @@ export class GameCharacterComponent implements OnInit {
   	let category = evt.target.parentElement.name;
   	let otherCategories = document.getElementsByTagName('fieldset');
 		this.data.set(category, evt.target.value);
+
+    this._dataSvc.changeCharacter(category, parseInt(evt.target.value));
 
   	_.each(otherCategories, (el) => {
   		_.each(el.children, (child) => {
@@ -35,6 +38,8 @@ export class GameCharacterComponent implements OnInit {
 				item.setAttribute('disabled', 'disabled');
   		}
   	});
+
+
   }
 
 }
