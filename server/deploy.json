@@ -2,7 +2,8 @@
   "apps" : [
     {
       "name": "opportunity-game-server",
-      "script": "app.js",
+      "script": "app.js",      
+      "exec_interpreter": "/home/node/.nvm/versions/node/v8.11.1/bin/node",
       "env_production": {
         "NODE_ENV": "production"
       },

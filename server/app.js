@@ -36,7 +36,7 @@ module.exports = function() {
 
 	let expressApp = serverStart();
 
-	expressApp.listen(3000, () => {
+	expressApp.listen(process.env.PORT || 3000, () => {
 
 		require('fs').readFile('./config.json', {encoding: 'utf8'}, function (err, data) {
 		  
