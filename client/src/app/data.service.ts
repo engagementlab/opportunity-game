@@ -53,9 +53,10 @@ export class DataService {
 
     }
 
-    public changeMoney(value: number) {
+    public changeMoneyAndDays(moneyVal: number, dayVal: number) {
 
-        this.playerData.money += value;
+        this.playerData.money += moneyVal;
+        this.playerData.days += dayVal;
         this.playerDataUpdate.emit(this.playerData);
 
     }

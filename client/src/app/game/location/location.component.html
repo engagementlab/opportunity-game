@@ -1,9 +1,23 @@
 <div id="services">
 
-	<div *ngFor="let service of currentLocation.services">
-		<button (click)="selectService(service.moneyCost, service.dayCost)">
-			{{service.name}} (${{service.moneyCost}}) <b>({{service.type}})</b>
+ 	<div id="list" class="col-sm-12">
+		<button *ngFor="let service of currentLocation?.services" (click)="viewOpportunity(service._id)" class="col-sm-8" id="listing_{{service._id}}">
+			{{service.name}}  <b>({{service.type}})</b>
 		</button>
 	</div>
+
+	<div id="details">
+		<div *ngFor="let service of currentLocation?.services" class="opportunity" id="detail_{{service._id}}">
+			(${{service.moneyCost}})
+			(Days: {{service.daysCost}})
+			<button (click)="backToList()">
+				Back
+			</button>
+			<button (click)="selectService(service.moneyCost, service.dayCost)">
+				Submit
+			</button>
+		</div>
+	</div>
+
 
 </div>

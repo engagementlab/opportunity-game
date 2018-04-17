@@ -1,5 +1,5 @@
 {
-	"name": "Portland of Opportunity",
+	"name": "Game of Opportunity",
 	"database": "opportunity-game",
 	"allowed_domains": ["portland.qa.opportunitygame.org", "portland.opportunitygame.org"],
 	"admin_nav": { 

@@ -21,6 +21,7 @@
     "keystone-slacker": "git://github.com/engagementgamelab/keystone-slacker.git",
     "keystone-storage-adapter-azure": "^1.1.0",
     "multer": "^1.3.0",
+    "node-sass-middleware": "^0.11.0",
     "slack-node": "^0.1.7",
     "twitter": "^1.2.5",
     "underscore": "^1.8.3",

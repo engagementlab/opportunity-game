@@ -34,9 +34,9 @@ appStart = function(app) {
 
 module.exports = function() {
 
-	let expressApp = serverStart();
+	// let expressApp = serverStart();
 
-	expressApp.listen(process.env.PORT || 3000, () => {
+	// expressApp.listen(process.env.PORT || 3000, () => {
 
 		require('fs').readFile('./config.json', {encoding: 'utf8'}, function (err, data) {
 		  
@@ -45,14 +45,12 @@ module.exports = function() {
 
 			new SiteFactory({ 
 
-				config: configData,
-				app: expressApp,
-				server: express
+				config: configData
 
 			});
 
 		});
 
-	});
+	// });
 
 }();

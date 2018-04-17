@@ -21,9 +21,7 @@
  var SiteFactory = (function(params, callback) { 
 
 	// Global dependencies
-	var Slack = require('slack-node'),
-			Twitter = require('twitter'),
-			compression = require('compression'),
+	var compression = require('compression'),
 			FrameworkMiddleware = require('./middleware');
 
 	var siteConfig = params.config, 
@@ -51,12 +49,9 @@
 		'user model': 'User',
 
 		// // Setup SASS and Handlebars
-		// 'sass': [__dirname  + '/../public', moduleRoot + 'public'],
-		// 'static': [__dirname  + '/../public', moduleRoot + 'public'],
-		// 'views': moduleRoot + 'templates/views',
-		// 'view engine': 'hbs',
-		// 'handlebars': hbsInstance,
-		// 'custom engine': hbsInstance.engine,
+		'sass': [moduleRoot + 'public'],
+		'static': [moduleRoot + 'public'],
+		'views': moduleRoot + 'templates/views',
 
 		'locals': {
 
@@ -76,7 +71,6 @@
 		'cloudinary secure': true
 
 	});
-	keystoneInst.initExpressSession();
 
 
 	// appInst.use(express.static(__dirname  + '/../public'));
@@ -91,17 +85,6 @@
 	// keystoneInst.import(__dirname  + '/../models');
 
 	// keystoneInst.initDatabaseConfig();
-	appInst.use(compression());	
-	appInst.use('/keystone', keystoneInst.Admin.Server.createStaticRouter(keystoneInst));
-
-	appInst.use(keystoneInst.get('session options').cookieParser);
-
-	appInst.use(keystoneInst.expressSession);
-	appInst.use(keystoneInst.session.persist);
-	appInst.use(require('connect-flash')());
-
-	appInst.use('/keystone', keystoneInst.Admin.Server.createDynamicRouter(keystoneInst));
-
 	// Used only for production, otherwise sessions are stored in-memory
 	if (process.env.NODE_ENV === 'production') {
 
@@ -117,12 +100,13 @@
 
 	}
 
+
 	keystoneInst.import('models');
 	keystoneInst.set('wysiwyg additional buttons', 'blockquote');
 	
 	// Load this site's routes
 	keystoneInst.set('routes', require(moduleRoot + 'routes'));
-	appInst.use(require(moduleRoot + 'routes'));
+	// appInst.use(require(moduleRoot + 'routes'));
 
 	// Configure Admin UI
 	keystoneInst.set('nav', siteConfig.admin_nav);
@@ -135,14 +119,29 @@
 		keystoneInst.pre('routes', middleware.urlWhitelist(siteConfig.allowed_domains));
 	else
 		keystoneInst.set('cors allow origin', true);
+	
+	keystoneInst.start();
 
-	keystoneInst.openDatabaseConnection(function () {
-		if(callback)
-			callback();
 
-		logger.info('> Site ' + colors.rainbow(siteConfig.name) + ' mounted'.italic + ' at ' + process.env.port);
+	// appInst.use(compression());	
+	// appInst.use('/keystone', keystoneInst.Admin.Server.createStaticRouter(keystoneInst));
 
-	});
+	// appInst.use(keystoneInst.get('session options').cookieParser);
+
+	// appInst.use(keystoneInst.expressSession);
+	// appInst.use(keystoneInst.session.persist);
+	// appInst.use(require('connect-flash')());
+
+	// appInst.use('/keystone', keystoneInst.Admin.Server.createDynamicRouter(keystoneInst));
+
+
+	// keystoneInst.openDatabaseConnection(function () {
+	// 	if(callback)
+	// 		callback();
+
+	// 	logger.info('> Site ' + colors.rainbow(siteConfig.name) + ' mounted'.italic + ' at ' + process.env.port);
+
+	// });
 		
 });
 
