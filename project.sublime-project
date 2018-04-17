@@ -19,7 +19,10 @@
 				"node_modules"
 			],
 			"name": "All",
-			"path": "./"
+			"path": "."
+		},
+		{
+			"path": "server/node_modules/keystone"
 		}
 	]
 }

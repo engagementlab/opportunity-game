@@ -1,3 +1,5 @@
+import { Service } from './service';
+
 export interface Location {
 
 	_id?: string;
@@ -7,6 +9,6 @@ export interface Location {
 	readonly imageName: string;
 	readonly url: string;
 	
-  services: any[];
+  services: Service[];
 
 }

@@ -9,10 +9,14 @@ import { PlayerData } from '../../models/playerdata';
 })
 export class GameToolbarComponent implements AfterViewInit {
 
+	money: number;
+
   constructor(private _dataSvc: DataService) {
 
+  	this.money = this._dataSvc.playerData.money;
+
   	this._dataSvc.playerDataUpdate.subscribe((data: PlayerData) => {
-  		console.log(data)
+  		this.money = data.money;
   	});
 
    }

@@ -1,8 +1,8 @@
 <div id="services">
 
 	<div *ngFor="let service of currentLocation.services">
-		<button>
-			{{service.name}}
+		<button (click)="selectService(service.moneyCost, service.dayCost)">
+			{{service.name}} (${{service.moneyCost}}) <b>({{service.type}})</b>
 		</button>
 	</div>
 

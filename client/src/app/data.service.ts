@@ -22,13 +22,16 @@ import 'rxjs/add/observable/of';
 @Injectable()
 export class DataService {
 
+    public locationData: Location[];
+    public isLoading: Subject<boolean> = new Subject<boolean>();
+
     baseUrl: string;
     index: any;
 
     playerDataUpdate = new EventEmitter();
-    playerData: PlayerData = 
+    public playerData: PlayerData = 
     {
-        money: 0,
+        money:30,
         days: 0,
         character: {
             career_ranking: 0,
@@ -36,9 +39,6 @@ export class DataService {
             health_ranking: 0
         }
     };
-
-    public locationData: Location[];
-    public isLoading: Subject<boolean> = new Subject<boolean>();
 
     constructor(private http: HttpClient) {
 
@@ -55,8 +55,8 @@ export class DataService {
 
     public changeMoney(value: number) {
 
-        this.playerData.money = value;
-        // this.playerDataUpdate.emit(data);
+        this.playerData.money += value;
+        this.playerDataUpdate.emit(this.playerData);
 
     }
 
@@ -69,7 +69,6 @@ export class DataService {
 
     public getLocationByUrl(locationUrl: string) {
 
-        // console.log(_.where(this.locationData, {url: locationUrl}))
         return _.where(this.locationData, {url: locationUrl})[0];
 
     }

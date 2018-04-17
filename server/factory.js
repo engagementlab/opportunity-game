@@ -117,16 +117,12 @@
 
 	}
 
-	// Save global server instance reference to keystone, in case needed by module
-	keystoneInst.set('appServer', appServer);
-
 	keystoneInst.import('models');
 	keystoneInst.set('wysiwyg additional buttons', 'blockquote');
 	
 	// Load this site's routes
 	keystoneInst.set('routes', require(moduleRoot + 'routes'));
 	appInst.use(require(moduleRoot + 'routes'));
-	 
 
 	// Configure Admin UI
 	keystoneInst.set('nav', siteConfig.admin_nav);
@@ -134,7 +130,6 @@
 		keystoneInst.set('nav', siteConfig.admin_nav);
 
 	var middleware = new FrameworkMiddleware();
-	// app.use(mid)
 	
 	if(siteConfig.allowed_domains !== undefined)
 		keystoneInst.pre('routes', middleware.urlWhitelist(siteConfig.allowed_domains));
