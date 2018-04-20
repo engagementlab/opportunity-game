@@ -35,10 +35,10 @@ export class GameLocationComponent implements OnInit {
   viewOpportunity(id: Service["_id"]) {
     let detailsParent = document.getElementById('details');
     let allDetails = document.querySelector('#details').querySelectorAll('.opportunity');
-    let detailsChild = document.getElementById('detail_' + id);
+    let detailsChild = (<HTMLElement>document.getElementById('detail_' + id));
 
     _.each(allDetails, (el) => {
-      el.style.display = 'none';
+      (<HTMLElement>el).style.display = 'none';
     });
 
     detailsChild.style.display = 'block';

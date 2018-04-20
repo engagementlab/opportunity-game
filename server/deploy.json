@@ -36,7 +36,7 @@
       "ref": "origin/master",
       "path": "/srv/opportunity-game",
       "pre-deploy-local" : "echo 'NPM linking opportunity-game and restarting app.';",
-      "post-deploy": "cd client ; nvm use ; npm i ; npm run build-qa ; pm2 restart 'opportunity-game-client' ; cd ../server ; nvm use ; npm i ; pm2 restart 'opportunity-game-server'"
+      "post-deploy": "cd client ; nvm use ; npm i ; npm run build ; pm2 restart 'opportunity-game-client' ; cd ../server ; nvm use ; npm i ; pm2 restart 'opportunity-game-server'"
     }
 
   }
