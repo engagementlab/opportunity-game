@@ -39,7 +39,7 @@ export class GameComponent implements OnInit {
         if(val.url === "/game/start")
           TweenLite.to(document.getElementById('logo'), 1, {scale:1});
 
-        if(val.url === "/game/map")
+        if(val.url === "/game/home")
           TweenLite.to(document.getElementById('toolbar'), 1, {autoAlpha: 1, display:'block'});
         
       }

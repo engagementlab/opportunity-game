@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../../data.service';
 
 import { Location } from '../../models/location';
-import { Service } from '../../models/service';
+import { Opportunity } from '../../models/opportunity';
 
 import { TweenLite } from 'gsap';
 import * as _ from 'underscore';
@@ -28,11 +28,11 @@ export class GameLocationComponent implements OnInit {
   	this.currentLocation = this.dataSvc.getLocationByUrl(url);
 
     if(this.currentLocation === undefined)
-      this.router.navigateByUrl('/game/map');
+      this.router.navigateByUrl('/game/home');
 
   }
 
-  viewOpportunity(id: Service["_id"]) {
+  viewOpportunity(id: Opportunity["_id"]) {
     let detailsParent = document.getElementById('details');
     let allDetails = document.querySelector('#details').querySelectorAll('.opportunity');
     let detailsChild = (<HTMLElement>document.getElementById('detail_' + id));
@@ -54,10 +54,10 @@ export class GameLocationComponent implements OnInit {
 
   }
 
-  selectService(money: number, days: number) {
+  selectOpportunity(opportunity: Opportunity) {
 
     // let moneyCost = getServiceInfoById(id).
-    this.dataSvc.changeMoneyAndDays(-money, -days);
+    this.dataSvc.changeMoneyAndActions(-opportunity.moneyCost, -opportunity.actionCost);
 
   }
 

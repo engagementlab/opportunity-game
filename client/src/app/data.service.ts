@@ -32,7 +32,7 @@ export class DataService {
     public playerData: PlayerData = 
     {
         money:30,
-        days: 0,
+        actions: 10,
         character: {
             career_ranking: 0,
             engagement_ranking: 0,
@@ -53,10 +53,10 @@ export class DataService {
 
     }
 
-    public changeMoneyAndDays(moneyVal: number, dayVal: number) {
+    public changeMoneyAndActions(moneyVal: number, actionVal: number) {
 
         this.playerData.money += moneyVal;
-        this.playerData.days += dayVal;
+        this.playerData.actions += actionVal;
         this.playerDataUpdate.emit(this.playerData);
 
     }

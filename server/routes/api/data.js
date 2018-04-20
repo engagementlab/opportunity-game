@@ -10,8 +10,8 @@
 const keystone = require('keystone'),
       mongoose = keystone.get('mongoose'),
       Bluebird = require('bluebird'),
-      Location = keystone.list('Location'),
-      Service = keystone.list('Service');
+      Location = keystone.list('Location');
+      // Service = keystone.list('Service');
 
 mongoose.Promise = require('bluebird');
 
@@ -20,7 +20,9 @@ var buildData = (params, res) => {
     let dataObj = {};
     let promises = [];
 
-    let locations = Location.model.find({}, 'name intro description.html services url imageName').populate('services', 'name description.html moneyCost daysCost type').exec();
+    let locations = Location.model.find({}, 'name intro category description.html opportunities url imageName')
+                    .populate('opportunities', 'name description.html moneyCost actionCost commReward jobReward englishReward type')
+                    .exec();
     promises.push(locations);
 
     return Bluebird.all(promises.map(function (promise) {

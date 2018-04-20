@@ -32,13 +32,19 @@ Location.add({
 	intro: { type: Types.Markdown, label: "Intro Text",  initial: true, required: true },
 	description: { type: Types.Textarea, label: "Description",  initial: true, required: true },
 	imageName: { type: String, required: true, initial: true, note: "Image to use in background." },
-	url: { type: String, required: true, initial: true, note: "URL shown for this location (e.g. /location/xyz)." },
-	
-  services: {
+  url: { type: String, required: true, initial: true, note: "URL shown for this location (e.g. /location/xyz)." },
+	category:
+        {
+            "Community": {type: Types.Boolean},
+            "Job": {type: Types.Boolean},
+            "English": {type: Types.Boolean},
+            "Health and Help": {type: Types.Boolean},
+        },
+  opportunities: {
       type: Types.Relationship,
-      ref: 'Service',
-      label: 'Services',
-      note: 'The services for this location.',
+      ref: 'Opportunity',
+      label: 'Opportunities',
+      note: 'The opportunities for this location.',
       many: true
   },
 

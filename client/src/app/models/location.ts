@@ -1,4 +1,4 @@
-import { Service } from './service';
+import { Opportunity } from './opportunity';
 
 export interface Location {
 
@@ -9,6 +9,6 @@ export interface Location {
 	readonly imageName: string;
 	readonly url: string;
 	
-  services: Service[];
+  services: Opportunity[];
 
 }

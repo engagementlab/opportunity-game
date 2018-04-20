@@ -33,7 +33,7 @@ import { GameComponent } from './game/game.component';
 import { GameStartComponent } from './game/start/start.component';
 import { GameCharacterComponent } from './game/character/character.component';
 import { GameWelcomeComponent } from './game/welcome/welcome.component';
-import { GameMapComponent } from './game/map/map.component';
+import { GameHomeComponent } from './game/home/home.component';
 import { GameLocationComponent } from './game/location/location.component';
 import { GameToolbarComponent } from './game/toolbar/toolbar.component';
 import { GameEmblemComponent } from './game/emblem/emblem.component';
@@ -48,7 +48,7 @@ const appRoutes: Routes = [
       {path: 'start', component: GameStartComponent, data: {index: 0}}, 
       {path: 'character', component: GameCharacterComponent, data: {index: 1}}, 
       {path: 'welcome', component: GameWelcomeComponent}, 
-      {path: 'map', component: GameMapComponent}, 
+      {path: 'home', component: GameHomeComponent}, 
       {path: 'location/:locationUrl', component: GameLocationComponent} 
     ]
   },
@@ -71,7 +71,7 @@ const appRoutes: Routes = [
     GameStartComponent,
     GameCharacterComponent,
     GameWelcomeComponent,
-    GameMapComponent,
+    GameHomeComponent,
     GameLocationComponent,
     GameToolbarComponent,
     GameEmblemComponent

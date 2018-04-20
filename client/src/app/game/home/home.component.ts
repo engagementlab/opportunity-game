@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../data.service';
 
 @Component({
-  selector: 'app-map',
-  templateUrl: './map.component.html',
-  styleUrls: ['./map.component.scss']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
-export class GameMapComponent implements OnInit {
+export class GameHomeComponent implements OnInit {
 
   locations: any[];
 

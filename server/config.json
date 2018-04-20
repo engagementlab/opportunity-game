@@ -3,6 +3,7 @@
 	"database": "opportunity-game",
 	"allowed_domains": ["portland.qa.opportunitygame.org", "portland.opportunitygame.org"],
 	"admin_nav": { 
-									"index": ["Index"]
+									"index": ["Index"],
+									"locations": ["Location", "Opportunity"]
 								}
 }
