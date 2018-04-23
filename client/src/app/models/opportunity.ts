@@ -1,6 +1,7 @@
 export interface Opportunity {
 
 	_id?: string;
+	enabled: boolean;
 
 	readonly actionCost: number;
 	readonly moneyCost: number;

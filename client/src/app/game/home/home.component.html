@@ -1,5 +1,12 @@
 <!-- <game-emblem text="Spicy jalapeno frankfurter ullamco id, leberkas pancetta spare ribs tongue dolor dolore deserunt jerky alcatra est pariatur ca"></game-emblem> -->
 
+<div id="filters">
+	<button (click)="filterSelection('health_and_help')">Health and Help</button>
+	<button (click)="filterSelection('english')">English</button>
+	<button (click)="filterSelection('job')">Job</button>
+	<button (click)="filterSelection('community')">Community</button>
+</div>
+
 <div *ngFor="let location of locations">
-  <h1><a routerLink="/game/location/{{location.url}}">{{location.name}}</a></h1>
+  <h1 attr.data-categories="{{location.categoriesStr}}" class="location show"><a routerLink="/game/location/{{location.url}}">{{location.name}}</a></h1>
 </div>

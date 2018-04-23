@@ -8,7 +8,9 @@ export interface Location {
 	readonly description: string;
 	readonly imageName: string;
 	readonly url: string;
+	readonly categories: object;
+	readonly categoriesStr: string;
 	
-  services: Opportunity[];
+  opportunities: Opportunity[];
 
 }

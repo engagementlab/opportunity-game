@@ -17,7 +17,7 @@ if(process.env.NODE_ENV !== 'test')
 const SiteFactory = require('./factory'),
 		 express = require('express');
 
-_ = require('underscore'),
+_ = require('lodash');
 colors = require('colors');
 
 // Return server object

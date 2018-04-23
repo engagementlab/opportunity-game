@@ -11,6 +11,7 @@ import { environment } from '../environments/environment';
 import { Location } from './models/location';
 import { PlayerData } from './models/playerdata';
 import { Character } from './models/character';
+import { Opportunity } from './models/opportunity';
 
 import * as _ from 'underscore';
 
@@ -29,15 +30,28 @@ export class DataService {
     index: any;
 
     playerDataUpdate = new EventEmitter();
+    locationDataUpdate = new EventEmitter();
+    endRoundUpdate = new EventEmitter();
+
     public playerData: PlayerData = 
     {
-        money:30,
-        actions: 10,
+        round: 1,
+        money: 5,
+        actions: 5,
+        
+        commLevel: 0,
+        jobLevel: 0,
+        englishLevel: 0,
+        
+        wellnessScore: 5,
+
         character: {
             career_ranking: 0,
             engagement_ranking: 0,
             health_ranking: 0
-        }
+        },
+
+        newRound: false
     };
 
     constructor(private http: HttpClient) {
@@ -53,24 +67,67 @@ export class DataService {
 
     }
 
-    public changeMoneyAndActions(moneyVal: number, actionVal: number) {
+    public updateStats(moneyVal: number, actionVal: number, commLevel: number, jobLevel: number, englishLevel: number) {
 
         this.playerData.money += moneyVal;
         this.playerData.actions += actionVal;
+
+        this.playerData.commLevel += commLevel;
+        this.playerData.jobLevel += jobLevel;
+        this.playerData.englishLevel += englishLevel;
+
         this.playerDataUpdate.emit(this.playerData);
+
+        if(this.playerData.actions === 0)
+            this.endRound();
 
     }
 
     public modifyPlayerData(data: PlayerData) {
 
         this.playerData = data;
-        // this.playerDataUpdate.emit(data);
 
     }
 
     public getLocationByUrl(locationUrl: string) {
 
         return _.where(this.locationData, {url: locationUrl})[0];
+
+    }
+
+    public updateOpportunity(opportunity: Opportunity, locationUrl: string) {
+
+        _.each(this.locationData, (loc) => { 
+
+            let thisOpp = _.where(loc.opportunities, {_id: opportunity._id})[0];
+            thisOpp.enabled = false;
+
+            if(loc.url === locationUrl)
+                this.locationDataUpdate.emit(loc);
+
+        });
+
+    }
+
+    private endRound() {
+
+        this.playerData.money = 5;
+        this.playerData.actions = 5;
+
+        this.playerData.wellnessScore = this.calcWellness();
+        this.playerData.newRound = true;
+
+        this.playerData.round++;
+        this.playerDataUpdate.emit(this.playerData);
+
+        this.playerData.newRound = false;
+
+    }
+
+    private calcWellness() {
+
+        let jceLvl = 2 * (this.playerData.jobLevel + this.playerData.commLevel + this.playerData.englishLevel);
+        return jceLvl + this.playerData.money;
 
     }
 
@@ -102,6 +159,9 @@ export class DataService {
     }
 	
     public getAllData(type: string): Observable<any> {
+
+        if(this.locationData !== undefined)            
+            return Observable.of(this.locationData).map((d:any) => d);
 
         this.isLoading.next(true);
         

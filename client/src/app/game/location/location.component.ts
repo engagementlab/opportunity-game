@@ -18,17 +18,36 @@ export class GameLocationComponent implements OnInit {
 
 	currentLocation: Location;
 	
-  constructor(private route: ActivatedRoute, private router: Router, private dataSvc: DataService) { 
+  constructor(private route: ActivatedRoute, private router: Router, private _dataSvc: DataService) { 
+
+    this._dataSvc.locationDataUpdate.subscribe((data: Location) => {
+
+      this.currentLocation = data;
+
+    });
 
   }
 
   ngOnInit() {
 
   	let url = this.route.snapshot.params.locationUrl;
-  	this.currentLocation = this.dataSvc.getLocationByUrl(url);
+  	this.currentLocation = this._dataSvc.getLocationByUrl(url);
 
     if(this.currentLocation === undefined)
       this.router.navigateByUrl('/game/home');
+
+  }
+
+  getCosts(opportunity: Opportunity) {
+
+    let costs = [];
+
+    if(opportunity.actionCost > 0)
+      costs.push({icon: 'action', amt: opportunity.actionCost});
+    if(opportunity.moneyCost > 0)
+      costs.push({icon: 'money', amt: opportunity.moneyCost});
+
+    return costs;
 
   }
 
@@ -47,6 +66,11 @@ export class GameLocationComponent implements OnInit {
 
   }
 
+  backToMap() {
+
+      this.router.navigateByUrl('/game/home');
+  }
+
   backToList() { 
 
     TweenLite.to(document.getElementById('details'), 1, {top:'100%', autoAlpha:0});
@@ -56,8 +80,12 @@ export class GameLocationComponent implements OnInit {
 
   selectOpportunity(opportunity: Opportunity) {
 
-    // let moneyCost = getServiceInfoById(id).
-    this.dataSvc.changeMoneyAndActions(-opportunity.moneyCost, -opportunity.actionCost);
+    this._dataSvc.updateStats(-opportunity.moneyCost, -opportunity.actionCost, opportunity.commReward, opportunity.jobReward, opportunity.englishReward);
+
+    // opportunity.enabled = false;
+    this._dataSvc.updateOpportunity(opportunity, this.route.snapshot.params.locationUrl);
+    this.backToList();
+
 
   }
 

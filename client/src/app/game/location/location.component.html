@@ -1,15 +1,24 @@
+<button (click)="backToMap()"><- Back home</button>
+
 <div id="opportunities">
 
  	<div id="list" class="col-sm-12">
-		<button *ngFor="let opportunity of currentLocation?.opportunities" (click)="viewOpportunity(opportunity._id)" class="col-sm-8" id="listing_{{opportunity._id}}">
-			{{opportunity.name}}  <b>({{opportunity.type}})</b>
+		<button *ngFor="let opportunity of currentLocation?.opportunities" (click)="viewOpportunity(opportunity._id)" class="col-sm-8" id="listing_{{opportunity._id}}" [disabled]="opportunity.enabled !== undefined">
+			{{opportunity.name}}  | {{opportunity.enabled}}
+			
+				Requires: {{opportunity.type}}
+				<div class="costs">
+					<span *ngFor="let cost of getCosts(opportunity)">
+						[{{cost.icon}}] {{cost.amt}}
+					</span>
+				</div>
 		</button>
 	</div>
 
 	<div id="details">
 		<div *ngFor="let opportunity of currentLocation?.opportunities" class="opportunity" id="detail_{{opportunity._id}}">
-			(${{opportunity.moneyCost}})
-			(Actions: {{opportunity.actionCost}})
+			<!-- (${{opportunity.moneyCost}})
+			(Actions: {{opportunity.actionCost}}) -->
 
 			(Comm: {{opportunity.commReward}})
 			(Job: {{opportunity.jobReward}})

@@ -4,6 +4,14 @@
 	<router-outlet #o="outlet"></router-outlet>
 </div>
 
-<div id="toolbar" style="display: none">
+<div id="round-over-parent" class="modal" style="display: none">
+	<div id="round-over">
+		<h1>ROUND {{round}} OVER</h1>
+		Your wellness is {{currentWellnessScore}}
+		<button (click)="nextRound()">Continue</button>
+	</div>
+</div>
+
+<div id="toolbar-parent" style="display: none">
 	<game-toolbar></game-toolbar>
 </div>

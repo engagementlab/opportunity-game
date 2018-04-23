@@ -5,6 +5,8 @@ import { DataService } from '../data.service';
 import { slideAnimation } from '../_animations/slide';
 import { TweenLite } from "gsap";
 
+import { PlayerData } from '../models/playerdata';
+
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
@@ -13,19 +15,22 @@ import { TweenLite } from "gsap";
 })
 export class GameComponent implements OnInit {
 
+  currentWellnessScore: number;
+  round: number = 1;
+
   public getRouterOutletState(outlet) {
     return outlet.isActivated ? outlet.activatedRoute : '';
   }
   
   getData() {
 
-    this.dataSvc.getAllData('data').subscribe(response => {
-      // console.log(this.dataSvc.locationData)
+    this._dataSvc.getAllData('data').subscribe(response => {
+
     });
 
   }
 
-  constructor(private router: Router, private dataSvc: DataService) { 
+  constructor(private router: Router, private _dataSvc: DataService) { 
 
     this.getData();
 
@@ -40,15 +45,31 @@ export class GameComponent implements OnInit {
           TweenLite.to(document.getElementById('logo'), 1, {scale:1});
 
         if(val.url === "/game/home")
-          TweenLite.to(document.getElementById('toolbar'), 1, {autoAlpha: 1, display:'block'});
+          TweenLite.to(document.getElementById('toolbar-parent'), 1, {autoAlpha: 1, display:'block'});
         
       }
       
     });
 
+    this._dataSvc.playerDataUpdate.subscribe((data: PlayerData) => {
+
+      if(data.newRound) {
+        this.currentWellnessScore = data.wellnessScore;
+        TweenLite.to(document.getElementById('round-over-parent'), 1, {autoAlpha: 1, display:'block'});
+      }
+
+
+    });
+
   }
 
   ngOnInit() {
+  }
+
+  nextRound() {
+
+      this.router.navigateByUrl('/game/home');
+      TweenLite.to(document.getElementById('round-over-parent'), 1, {autoAlpha: 0, display:'none'});
   }
 
 }

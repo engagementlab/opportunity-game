@@ -9,7 +9,8 @@
  * ==========
  */
 
-var keystone = require('keystone');
+var keystone = require('keystone'),
+    mongoose = require('mongoose');
 var Types = keystone.Field.Types;
 
 /**
@@ -47,8 +48,35 @@ Location.add({
       note: 'The opportunities for this location.',
       many: true
   },
-
 	createdAt: { type: Date, default: Date.now, noedit: true, hidden: true }
+});
+Location.schema.add({categories: mongoose.Schema.Types.Mixed});
+Location.schema.add({categoriesStr: mongoose.Schema.Types.String});
+
+/**
+ * Hooks
+ * =============
+ */
+Location.schema.pre('save', function(next) {
+
+    let cleanedObj = {};
+    this.categories = {};
+    _.each(Object.keys(this.category), (key) => {
+      cleanedObj[key.replace(/ /g,"_").toLowerCase()] = this.category[key];
+    });
+
+    let savedObj = {
+       health_and_help: cleanedObj['health_and_help'],
+       english: cleanedObj['english'],
+       job: cleanedObj['job'],
+       community: cleanedObj['community']
+    };
+
+    this.categories = savedObj;
+    this.categoriesStr = "";
+
+    next();
+
 });
 
 /**
