@@ -8,7 +8,7 @@
 	<div id="round-over">
 		<h1>ROUND {{round}} OVER</h1>
 		Your wellness is {{currentWellnessScore}}
-		<button (click)="nextRound()">Continue</button>
+		<button (click)="nextRound()">Next Round</button>
 	</div>
 </div>
 
@@ -21,6 +21,13 @@
 		A Job!
 	</div>
 	<button (click)="closeCheevo()">Continue</button>
+</div>
+
+<!-- LIFE EVENTS -->
+<div id="life-events" class="modal hide">
+	<div *ngFor="let event of lifeEvents" id="{{event._id}}" class="hide">
+		<game-event [data]="event"></game-event>
+	</div>
 </div>
 
 <div id="toolbar-parent" style="display: none">

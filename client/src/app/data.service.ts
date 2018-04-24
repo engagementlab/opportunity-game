@@ -9,6 +9,7 @@ import { catchError } from 'rxjs/operators';
 import { environment } from '../environments/environment';
 
 import { Location } from './models/location';
+import { Event } from './models/event';
 import { PlayerData } from './models/playerdata';
 import { Character } from './models/character';
 import { Opportunity } from './models/opportunity';
@@ -24,6 +25,7 @@ import 'rxjs/add/observable/of';
 export class DataService {
 
     public locationData: Location[];
+    public eventData: Event[];
     public isLoading: Subject<boolean> = new Subject<boolean>();
 
     baseUrl: string;
@@ -73,7 +75,7 @@ export class DataService {
 
     }
 
-    public updateStats(moneyVal: number, actionVal: number, commLevel: number, jobLevel: number, englishLevel: number) {
+    public updateStats(moneyVal: number, actionVal: number = 0, commLevel: number = 0, jobLevel: number = 0, englishLevel: number = 0) {
 
         this.playerData.money += moneyVal;
         this.playerData.actions += actionVal;
@@ -97,7 +99,7 @@ export class DataService {
             this.playerData.gotJob = true;
 
         this.playerData[key] = value;
-        
+
         this.playerDataUpdate.emit(this.playerData);
 
         this.playerData.gotJob = false;
@@ -149,43 +151,25 @@ export class DataService {
 
     }
 
-    private assembleData(newData: any, type: string) {
+    private assembleData(newData: any) {
 
-        this.locationData = newData[0];
-        // this.gameData.set('game', newData[0][0]);
+        this.locationData = newData.locations;
+        this.eventData = newData.events;
 
-/*        switch(type) {
-            case 'index':
-                this.data.set("index", newData[0]);
-
-                newData[1].forEach((element) => {
-                    this.modules.set(element.url, element);
-                });
-                this.data.set("modules", this.modules);
-                break;
-            case 'guides':
-                newData[0].forEach((element) => {
-                    this.modules.set(element.url, element);
-                });
-                break;
-            case 'about':
-                this.data.set("about", newData[0]);
-                break;
-        }
-*/
         this.isLoading.next(false);
+
     }
 	
-    public getAllData(type: string): Observable<any> {
+    public getAllData(): Observable<any> {
 
         if(this.locationData !== undefined)            
             return Observable.of(this.locationData).map((d:any) => d);
 
         this.isLoading.next(true);
         
-        return this.http.get(this.baseUrl+'get/'+type)
+        return this.http.get(this.baseUrl+'get/data')
         .map((res:any)=> {
-          return this.assembleData(res.data, type);
+          return this.assembleData(res.data);
         })
         .catch((error:any) => { 
             this.isLoading.next(false);

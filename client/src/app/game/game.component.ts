@@ -6,6 +6,7 @@ import { slideAnimation } from '../_animations/slide';
 import { TweenLite } from "gsap";
 
 import { PlayerData } from '../models/playerdata';
+import { Event } from '../models/event';
 
 @Component({
   selector: 'app-game',
@@ -15,6 +16,8 @@ import { PlayerData } from '../models/playerdata';
 })
 export class GameComponent implements OnInit {
 
+  public lifeEvents: Event[];
+  
   currentWellnessScore: number;
   round: number = 1;
 
@@ -24,7 +27,9 @@ export class GameComponent implements OnInit {
   
   getData() {
 
-    this._dataSvc.getAllData('data').subscribe(response => {
+    this._dataSvc.getAllData().subscribe(response => {
+      
+      this.lifeEvents = this._dataSvc.eventData;
 
     });
 
@@ -79,6 +84,18 @@ export class GameComponent implements OnInit {
 
       this.router.navigateByUrl('/game/home');
       TweenLite.to(document.getElementById('round-over-parent'), 1, {autoAlpha: 0, display:'none'});
+
+      // Dice roll for random event
+      // if(Math.round(Math.random()) == 1) {
+        let lifeEventSel = document.querySelector('#life-events');
+        let allEvents = lifeEventSel.children;
+        let eventIndex = Math.floor(Math.random() * ((allEvents.length-1) - 0 + 1));
+        
+        TweenLite.to(lifeEventSel, 1, {autoAlpha: 1, display:'block'});
+        TweenLite.to(allEvents[eventIndex], 1, {autoAlpha:1, display:'block'});
+
+
+      // }
   }
 
   closeCheevo() {

@@ -37,6 +37,7 @@ import { GameHomeComponent } from './game/home/home.component';
 import { GameLocationComponent } from './game/location/location.component';
 import { GameToolbarComponent } from './game/toolbar/toolbar.component';
 import { GameEmblemComponent } from './game/emblem/emblem.component';
+import { GameEventComponent } from './game/event/event.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'game', pathMatch: 'full' },
@@ -74,7 +75,8 @@ const appRoutes: Routes = [
     GameHomeComponent,
     GameLocationComponent,
     GameToolbarComponent,
-    GameEmblemComponent
+    GameEmblemComponent,
+    GameEventComponent
   ],
   imports: [
     RouterModule.forRoot(

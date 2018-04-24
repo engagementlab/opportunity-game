@@ -10,49 +10,40 @@
 const keystone = require('keystone'),
       mongoose = keystone.get('mongoose'),
       Bluebird = require('bluebird'),
-      Location = keystone.list('Location');
+      Location = keystone.list('Location'),
+      Event = keystone.list('Event');
 
 mongoose.Promise = require('bluebird');
 
 var buildData = (params, res) => {
 
-    let dataObj = {};
-    let promises = [];
-
     let locations = Location.model.find({}, 'name intro categories categoriesStr description.html opportunities url imageName')
                     .populate('opportunities', 'name description.html moneyCost actionCost commReward jobReward englishReward givesTransit givesJob type')
                     .exec();
-    promises.push(locations);
+    let events = Event.model.find({}).exec();
 
-    return Bluebird.all(promises.map(function (promise) {
-      return promise.reflect();
-    }))
+    Bluebird.props({
+        locationData: locations,
+        eventData: events
+    })
     .then(results => {
+        let arrResponseLocations = [];
 
-        let arrResponse = [];
+        results.locationData
+        .forEach(
+            location => {
+        
+                location.categories = _.omitBy(location.categories, (value, key) => {
+                    return !value;
+                });
+                location.categoriesStr = Object.keys(location.categories).join(' ');
 
-        results.forEach(
-            result => {
-                if(result.isFulfilled()) {
-                    let locations = result.value();
+                arrResponseLocations.push(location);
 
-                    _.each(locations, (l) => {
-                        
-                        l.categories = _.omitBy(l.categories, (value, key) => {
-                            return !value;
-                        });
-                        l.categoriesStr = Object.keys(l.categories).join(' ');
-
-                    });
-
-                    arrResponse.push(locations);
-                }
-                else
-                    console.error('Server error', result.reason());
             }
         );
 
-        return res.status(200).json({status: 200, data: arrResponse});
+        return res.status(200).json({status: 200, data: {locations: arrResponseLocations, events: results.eventData}});
 
     }).catch(err => {
         console.log(err);
@@ -61,7 +52,7 @@ var buildData = (params, res) => {
 }
 
 /*
- * Get all modules
+ * Get all data
  */
 exports.get = function(req, res) {
 

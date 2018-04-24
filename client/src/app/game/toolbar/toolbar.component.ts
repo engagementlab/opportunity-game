@@ -41,7 +41,7 @@ export class GameToolbarComponent implements AfterViewInit {
 
       if(data.gotTransit)
         this.hasTransit = true;
-      else if(data.gosJob)
+      else if(data.gotJob)
         this.hasJob = true;
 
   	});

@@ -13,7 +13,7 @@ export class GameHomeComponent implements OnInit {
 
   constructor(private dataSvc: DataService) {
 
-    this.dataSvc.getAllData('data').subscribe(response => {
+    this.dataSvc.getAllData().subscribe(response => {
       
       this.locations = this.dataSvc.locationData;
 
