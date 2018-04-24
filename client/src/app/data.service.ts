@@ -45,13 +45,19 @@ export class DataService {
         
         wellnessScore: 5,
 
+        hasTransit: false,
+        hasJob: false,
+
         character: {
             career_ranking: 0,
             engagement_ranking: 0,
             health_ranking: 0
         },
 
-        newRound: false
+        newRound: false,
+        gotTransit: false,
+        gotJob: false
+
     };
 
     constructor(private http: HttpClient) {
@@ -83,9 +89,19 @@ export class DataService {
 
     }
 
-    public modifyPlayerData(data: PlayerData) {
+    public modifyPlayerData(key: string, value: any) {
 
-        this.playerData = data;
+        if(key === 'hasTransit')
+            this.playerData.gotTransit = true;
+        if(key === 'hasJob')
+            this.playerData.gotJob = true;
+
+        this.playerData[key] = value;
+        
+        this.playerDataUpdate.emit(this.playerData);
+
+        this.playerData.gotJob = false;
+        this.playerData.gotTransit = false;
 
     }
 
@@ -100,11 +116,13 @@ export class DataService {
         _.each(this.locationData, (loc) => { 
 
             let thisOpp = _.where(loc.opportunities, {_id: opportunity._id})[0];
-            thisOpp.enabled = false;
 
-            if(loc.url === locationUrl)
-                this.locationDataUpdate.emit(loc);
+            if(thisOpp) {
+                thisOpp.enabled = false;
 
+                if(loc.url === locationUrl)
+                    this.locationDataUpdate.emit(loc);
+            }
         });
 
     }

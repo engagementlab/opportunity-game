@@ -16,6 +16,9 @@ export class GameToolbarComponent implements AfterViewInit {
   jobLevel: number;
   englishLevel: number;
 
+  public hasTransit: boolean;
+  public hasJob: boolean;
+
   constructor(private _dataSvc: DataService) {
 
     this.money = this._dataSvc.playerData.money;
@@ -35,6 +38,11 @@ export class GameToolbarComponent implements AfterViewInit {
       this.englishLevel = data.englishLevel;
 
       this.round = data.round;
+
+      if(data.gotTransit)
+        this.hasTransit = true;
+      else if(data.gosJob)
+        this.hasJob = true;
 
   	});
 

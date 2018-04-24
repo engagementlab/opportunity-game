@@ -81,9 +81,13 @@ export class GameLocationComponent implements OnInit {
   selectOpportunity(opportunity: Opportunity) {
 
     this._dataSvc.updateStats(-opportunity.moneyCost, -opportunity.actionCost, opportunity.commReward, opportunity.jobReward, opportunity.englishReward);
-
-    // opportunity.enabled = false;
     this._dataSvc.updateOpportunity(opportunity, this.route.snapshot.params.locationUrl);
+
+    if(opportunity.givesTransit)
+      this._dataSvc.modifyPlayerData('hasTransit', true);
+    else if(opportunity.givesJob)
+      this._dataSvc.modifyPlayerData('hasJob', true);
+
     this.backToList();
 
 

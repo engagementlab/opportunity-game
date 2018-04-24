@@ -20,7 +20,7 @@ var buildData = (params, res) => {
     let promises = [];
 
     let locations = Location.model.find({}, 'name intro categories categoriesStr description.html opportunities url imageName')
-                    .populate('opportunities', 'name description.html moneyCost actionCost commReward jobReward englishReward type')
+                    .populate('opportunities', 'name description.html moneyCost actionCost commReward jobReward englishReward givesTransit givesJob type')
                     .exec();
     promises.push(locations);
 

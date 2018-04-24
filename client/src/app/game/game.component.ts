@@ -58,6 +58,15 @@ export class GameComponent implements OnInit {
         TweenLite.to(document.getElementById('round-over-parent'), 1, {autoAlpha: 1, display:'block'});
       }
 
+      if(data.gotTransit) {
+        TweenLite.to(document.getElementById('achievement'), 1, {autoAlpha: 1, display:'block'});
+        TweenLite.to(document.getElementById('transit'), 1, {autoAlpha: 1, display:'block'});
+      }
+      else if(data.gotTransit) {
+        TweenLite.to(document.getElementById('achievement'), 1, {autoAlpha: 1, display:'block'});
+        TweenLite.to(document.getElementById('job'), 1, {autoAlpha: 1, display:'block'});
+      }
+
 
     });
 
@@ -70,6 +79,12 @@ export class GameComponent implements OnInit {
 
       this.router.navigateByUrl('/game/home');
       TweenLite.to(document.getElementById('round-over-parent'), 1, {autoAlpha: 0, display:'none'});
+  }
+
+  closeCheevo() {
+
+      TweenLite.to(document.getElementById('achievement'), 1, {autoAlpha: 0, display:'none'});
+
   }
 
 }

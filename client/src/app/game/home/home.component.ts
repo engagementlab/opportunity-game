@@ -13,7 +13,6 @@ export class GameHomeComponent implements OnInit {
 
   constructor(private dataSvc: DataService) {
 
-  	// TEMPORARY
     this.dataSvc.getAllData('data').subscribe(response => {
       
       this.locations = this.dataSvc.locationData;
@@ -27,6 +26,7 @@ export class GameHomeComponent implements OnInit {
   }
 
   filterSelection(category: string) {
+
     let x, i;
     let showAll = (category === "all");
     x = document.getElementsByClassName("location");
@@ -44,6 +44,7 @@ export class GameHomeComponent implements OnInit {
         x[i].classList.add("show");
 
     }
+    
   }
 
 }

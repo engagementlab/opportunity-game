@@ -1,5 +1,9 @@
 @import "~sass/_variables";
 
+.hide {
+	display: none;
+}
+
 .modal {
 	position: absolute;
 	top: 0;
@@ -9,6 +13,13 @@
 	background: rgba(255, 255, 255, .8);
 }
 
+.center {	
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
 #logo img {
 	width: 100%;
 }
@@ -16,8 +27,4 @@
 #round-over {
 	background: black;
 	color: white;
-	position: fixed;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
 }

@@ -10,7 +10,14 @@ export interface PlayerData {
 	englishLevel: number;
 	character: Character;
   
+  hasTransit?: boolean;
+  hasJob?: boolean;
+  
   wellnessScore?: number;
+  
+  // Internal flags
   newRound?: boolean;
+  gotTransit?: boolean;
+  gotJob?: boolean;
 
 }

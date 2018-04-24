@@ -9,7 +9,8 @@
  * ==========
  */
 
-var keystone = require('keystone');
+var keystone = require('keystone'),
+    mongoose = require('mongoose');
 var Types = keystone.Field.Types;
 
 /**
@@ -48,13 +49,40 @@ Opportunity.add({
   "Benefits", {
     commReward: { type: Number, default: 1, label: "Community Reward", required: true, initial: true },
     jobReward: { type: Number, default: 1, label: "Job Reward", required: true, initial: true },
-    englishReward: { type: Number, default: 1, label: "English Reward", required: true, initial: true }
+    englishReward: { type: Number, default: 1, label: "English Reward", required: true, initial: true },
+    achievement:
+    {
+        "Transit": {type: Types.Boolean},
+        "Job": {type: Types.Boolean}
+    }
   },
   
   {    
     createdAt: { type: Date, default: Date.now, noedit: true, hidden: true }
   }
 );
+Opportunity.schema.add({givesTransit: mongoose.Schema.Types.Boolean});
+Opportunity.schema.add({givesJob: mongoose.Schema.Types.Boolean});
+
+/**
+ * Hooks
+ * =============
+ */
+Opportunity.schema.pre('save', function(next) {
+
+    if(this.achievement["Transit"])
+      this.givesTransit = true;
+    else
+      this.givesTransit = false;
+
+    if(this.achievement["Job"])
+      this.givesJob = true;
+    else
+      this.givesJob = false;
+
+    next();
+
+});
 
 /**
  * Model Registration
