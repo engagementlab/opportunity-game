@@ -13,6 +13,10 @@ export interface Opportunity {
 	readonly name: string;
 	readonly type: string;
 
+	readonly effect: string;
+	readonly effectTrigger: string;
+	readonly effectWait: number;
+
 	readonly givesTransit?: boolean;
 	readonly givesJob?: boolean;
 

@@ -30,6 +30,13 @@
 	</div>
 </div>
 
+<!-- EFFECT EVENTS -->
+<div id="effect-events" class="modal hide">
+	<div *ngFor="let event of effectEvents" id="{{event._id}}" class="hide">
+		<game-event [data]="event"></game-event>
+	</div>
+</div>
+
 <div id="toolbar-parent" style="display: none">
 	<game-toolbar></game-toolbar>
 </div>

@@ -21,6 +21,17 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/observable/of';
 
+enum DurationEffectTrigger {
+    actions = 0,
+    rounds = 1
+};
+interface DurationEffect {
+   id: string,
+   trigger: DurationEffectTrigger,
+   triggerWait: number,
+   triggerCount: number
+};
+
 @Injectable()
 export class DataService {
 
@@ -30,10 +41,12 @@ export class DataService {
 
     baseUrl: string;
     index: any;
+    durationEffectQueue = [];
 
     playerDataUpdate = new EventEmitter();
     locationDataUpdate = new EventEmitter();
     endRoundUpdate = new EventEmitter();
+    effectTrigger = new EventEmitter();
 
     public playerData: PlayerData = 
     {
@@ -84,6 +97,25 @@ export class DataService {
         this.playerData.jobLevel += jobLevel;
         this.playerData.englishLevel += englishLevel;
 
+        // Trigger duration effect? (if actions being removed)
+        if(actionVal < 0)
+        { 
+            for(let i = 0; i < this.durationEffectQueue.length; i++) {
+                let effect = this.durationEffectQueue[i];
+    
+                if(effect.trigger === DurationEffectTrigger.actions) {
+                    effect.triggerCount -= actionVal;
+    
+                    if(effect.triggerCount >= effect.triggerWait) {
+                        this.effectTrigger.emit(effect.id);
+    
+                        this.durationEffectQueue.splice(i, 1);
+                        break;
+                    }
+                }
+            }
+        }
+
         this.playerDataUpdate.emit(this.playerData);
 
         if(this.playerData.actions === 0)
@@ -125,7 +157,14 @@ export class DataService {
                 if(loc.url === locationUrl)
                     this.locationDataUpdate.emit(loc);
             }
-        });
+        }); 
+    }
+
+    public startDurationEffect(effectId: string, trigger: string, triggerWait: number) {
+
+        let triggerType = (trigger === 'actions') ? DurationEffectTrigger.actions : DurationEffectTrigger.rounds;
+        let effect: DurationEffect = { id: effectId, trigger: triggerType, triggerWait: triggerWait, triggerCount: 0 };
+        this.durationEffectQueue.push(effect);
 
     }
 

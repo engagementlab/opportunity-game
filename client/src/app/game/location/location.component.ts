@@ -52,6 +52,7 @@ export class GameLocationComponent implements OnInit {
   }
 
   viewOpportunity(id: Opportunity["_id"]) {
+    
     let detailsParent = document.getElementById('details');
     let allDetails = document.querySelector('#details').querySelectorAll('.opportunity');
     let detailsChild = (<HTMLElement>document.getElementById('detail_' + id));
@@ -87,6 +88,10 @@ export class GameLocationComponent implements OnInit {
       this._dataSvc.modifyPlayerData('hasTransit', true);
     else if(opportunity.givesJob)
       this._dataSvc.modifyPlayerData('hasJob', true);
+    
+    // Duration effect?
+    if(opportunity.effect)
+      this._dataSvc.startDurationEffect(opportunity.effect, opportunity.effectTrigger, opportunity.effectWait);
 
     this.backToList();
 

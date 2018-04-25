@@ -8,6 +8,8 @@ import { TweenLite } from "gsap";
 import { PlayerData } from '../models/playerdata';
 import { Event } from '../models/event';
 
+import * as _ from 'underscore';
+
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
@@ -17,6 +19,7 @@ import { Event } from '../models/event';
 export class GameComponent implements OnInit {
 
   public lifeEvents: Event[];
+  public effectEvents: Event[];
   
   currentWellnessScore: number;
   round: number = 1;
@@ -29,7 +32,8 @@ export class GameComponent implements OnInit {
 
     this._dataSvc.getAllData().subscribe(response => {
       
-      this.lifeEvents = this._dataSvc.eventData;
+      this.lifeEvents = _.filter(this._dataSvc.eventData, (e) => {return e.type === 'random'});
+      this.effectEvents = _.filter(this._dataSvc.eventData, (e) => {return e.type === 'effect'});
 
     });
 
@@ -75,6 +79,16 @@ export class GameComponent implements OnInit {
 
     });
 
+    this._dataSvc.effectTrigger.subscribe((eventId: string) => {
+
+        let effectEventSel = document.getElementById('effect-events');
+        let eventToShow =  document.getElementById(eventId);
+        
+        TweenLite.to(effectEventSel, 1, {autoAlpha: 1, display:'block'});
+        TweenLite.to(eventToShow, 1, {autoAlpha:1, display:'block'});
+
+    });
+
   }
 
   ngOnInit() {
@@ -86,7 +100,8 @@ export class GameComponent implements OnInit {
       TweenLite.to(document.getElementById('round-over-parent'), 1, {autoAlpha: 0, display:'none'});
 
       // Dice roll for random event
-      // if(Math.round(Math.random()) == 1) {
+      if(Math.round(Math.random()) == 1) {
+        
         let lifeEventSel = document.querySelector('#life-events');
         let allEvents = lifeEventSel.children;
         let eventIndex = Math.floor(Math.random() * ((allEvents.length-1) - 0 + 1));
@@ -94,8 +109,7 @@ export class GameComponent implements OnInit {
         TweenLite.to(lifeEventSel, 1, {autoAlpha: 1, display:'block'});
         TweenLite.to(allEvents[eventIndex], 1, {autoAlpha:1, display:'block'});
 
-
-      // }
+      }
   }
 
   closeCheevo() {

@@ -54,7 +54,20 @@ Opportunity.add({
     {
         "Transit": {type: Types.Boolean},
         "Job": {type: Types.Boolean}
-    }
+    },
+    triggerAmt: { type: Number, default: 0, label: "Trigger After Actions", required: true, initial: true, note: 'Number of actions to wait before benefit.' },
+    effect: {
+        type: Types.Relationship,
+        ref: 'Event',
+        label: 'Duration Effect (Event)',
+        filters: {
+          type: 'effect'
+        },
+        note: 'The event to show as duration effect (after x actions or rounds).',
+        many: false
+    },
+    effectTrigger: { type: Types.Select, options: 'actions, rounds', note: 'What triggers duration effect event?' },
+    effectWait: { type: Number, default: 0, label: "Actions/Rounds to Wait", note: 'Number of actions or rounds to wait before event.' },
   },
   
   {    

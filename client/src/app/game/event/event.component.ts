@@ -17,13 +17,32 @@ export class GameEventComponent implements OnInit {
   ngOnInit() {
   }
 
+  getCosts() {
+
+    let costs = [];
+
+    if(this.data.actionCost > 0)
+      costs.push({icon: 'action', amt: this.data.actionCost});
+    if(this.data.moneyCost > 0)
+      costs.push({icon: 'money', amt: this.data.moneyCost});
+
+    if(this.data.commReward > 0)
+      costs.push({icon: 'comm', amt: this.data.commReward});
+    if(this.data.jobReward > 0)
+      costs.push({icon: 'job', amt: this.data.jobReward});
+    if(this.data.englishReward > 0)
+      costs.push({icon: 'english', amt: this.data.englishReward});
+
+    return costs;
+
+  }
+
   removeEvent() {
 
   	let thisEl = document.getElementById(this.data._id);
     TweenLite.to(thisEl.parentNode, 1, {autoAlpha: 0, display:'none'});
   	thisEl.parentNode.removeChild(thisEl);
     
-
   }
 
   selectNo() {
@@ -34,7 +53,7 @@ export class GameEventComponent implements OnInit {
  
   selectYes() {
   	
-  	this._dataSvc.updateStats(this.data.moneyCost, this.data.actionCost);
+  	this._dataSvc.updateStats(this.data.moneyCost, this.data.actionCost, this.data.commReward, this.data.jobReward, this.data.englishReward);
   	this.removeEvent();
 
   }

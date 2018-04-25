@@ -29,7 +29,7 @@ var Location = new keystone.List('Location',
  * @main Location
  */
 Location.add({
-	name: { type: String, default: "Location Page", hidden: true, required: true, initial: true },
+	name: { type: String, default: "Location Name", hidden: true, required: true, initial: true },
 	intro: { type: Types.Markdown, label: "Intro Text",  initial: true, required: true },
 	description: { type: Types.Textarea, label: "Description",  initial: true, required: true },
 	imageName: { type: String, required: true, initial: true, note: "Image to use in background." },

@@ -27,11 +27,6 @@ serverStart = function() {
 
 };
 
-// Any custom app initialization logic should go here
-appStart = function(app) {
-
-};
-
 module.exports = function() {
 
 	// let expressApp = serverStart();

@@ -30,10 +30,16 @@ var Event = new keystone.List('Event',
  */
 Event.add({
   	name: { type: String, default: "Event Name", label: "Name", required: true, initial: true },
+    
+    type: { type: Types.Select, options: 'random, effect', note: 'What type of event is this?', initial: true, required: true },
   	flavor: { type: Types.Text, label: "Flavor Text", initial: true, required: true },
 
     moneyCost: { type: Number, default: 1, label: "Money Cost", required: true, initial: true },
     actionCost: { type: Number, default: 1, label: "Action Cost", required: true, initial: true },
+
+    commReward: { type: Number, default: 0, label: "Community Reward", initial: true },
+    jobReward: { type: Number, default: 0, label: "Job Reward", initial: true },
+    englishReward: { type: Number, default: 0, label: "English Reward", initial: true },
     
     createdAt: { type: Date, default: Date.now, noedit: true, hidden: true }
   }
@@ -43,5 +49,5 @@ Event.add({
  * Model Registration
  */
 Event.defaultSort = '-createdAt';
-Event.defaultColumns = 'name, moneyCost, actionCost';
+Event.defaultColumns = 'name, effect, moneyCost, actionCost';
 Event.register();
