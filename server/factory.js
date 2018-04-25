@@ -88,7 +88,7 @@
 	// Used only for production, otherwise sessions are stored in-memory
 	if (process.env.NODE_ENV === 'production') {
 
-		keystoneInst.set('session store', 'connect-mongostore');
+		keystoneInst.set('session store', 'connect-mongo');
 		keystoneInst.set('session store options', {
 			"db": {
 				"name": siteConfig.database,
