@@ -1,6 +1,6 @@
 /*!
  * Engagement Lab Site Framework
- * Developed by Engagement Lab, 2016
+ * Developed by Engagement Lab, 2016-2018
  * ==============
 */
 
