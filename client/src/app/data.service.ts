@@ -8,10 +8,10 @@ import { catchError } from 'rxjs/operators';
 
 import { environment } from '../environments/environment';
 
+import { Character } from './models/character';
 import { Location } from './models/location';
 import { Event } from './models/event';
 import { PlayerData } from './models/playerdata';
-import { Character } from './models/character';
 import { Opportunity } from './models/opportunity';
 
 import * as _ from 'underscore';
@@ -43,6 +43,7 @@ interface DelayedReward {
 export class DataService {
 
     public locationData: Location[];
+    public characterData: Character[];
     public eventData: Event[];
     public isLoading: Subject<boolean> = new Subject<boolean>();
 
@@ -149,7 +150,7 @@ export class DataService {
         }
         else {
             let delayedReward: DelayedReward = {
-                                                    commReward: commLevel
+                                                    commReward: commLevel,
                                                     jobReward: jobLevel,
                                                     englishReward: englishLevel,
                                                     triggerWait: triggerAmt, 
@@ -232,12 +233,35 @@ export class DataService {
 
     }
 
+    private assembleCharacterData(newData: any) {
+        
+        this.characterData = newData;
+
+        this.isLoading.next(false);
+
+    }
+
     private assembleData(newData: any) {
 
         this.locationData = newData.locations;
         this.eventData = newData.events;
 
         this.isLoading.next(false);
+
+    }
+    
+    public getCharacterData(): Observable<any> {
+
+        this.isLoading.next(true);
+        
+        return this.http.get(this.baseUrl+'get/characters')
+        .map((res:any)=> {
+          return this.assembleCharacterData(res.data);
+        })
+        .catch((error:any) => { 
+            this.isLoading.next(false);
+            return Observable.throw(error);
+        });
 
     }
 	

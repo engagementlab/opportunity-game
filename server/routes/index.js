@@ -47,5 +47,6 @@ router.all('/admin', function(req, res, next) {
 });
 
 router.get('/api/get/data', keystone.middleware.api, routes.api.data.get);
+router.get('/api/get/characters', keystone.middleware.api, routes.api.characters.get);
 
 module.exports = router;

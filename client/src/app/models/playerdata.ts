@@ -1,4 +1,4 @@
-import { Character } from './character';
+import { Ranks } from './ranks';
 
 export interface PlayerData {
 
@@ -8,7 +8,7 @@ export interface PlayerData {
 	commLevel: number;
 	jobLevel: number;
 	englishLevel: number;
-	character: Character;
+	character: Ranks;
   
   hasTransit?: boolean;
   hasJob?: boolean;

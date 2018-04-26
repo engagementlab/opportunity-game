@@ -1,7 +1,37 @@
+@import "~sass/_variables";
+
 input[type=radio] {
 	display: inline-block;
 	margin-right: 25%;
 }
 label {
 	display: block;
+}
+.character {
+	@include transition(all, 1s, linear);
+	&.selected {
+		width: 100%!important;
+		max-width: 100%!important;
+		@include flex(0, 0, 100%);
+		.bio {
+			display: block;
+			@include transition(all, 1s, linear 2s);
+		}
+		::ng-deep img {
+			display: block;
+			width: 40%;
+			margin-right: auto;
+			margin-left: auto;
+		}
+	}
+	&.hidden {
+		width: 0;
+		@include flex(0, 0, 0);
+	}
+}
+.character-btn {
+	cursor: pointer;
+}
+.bio {
+	display: none;
 }

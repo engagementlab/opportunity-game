@@ -5,15 +5,7 @@
 
 @import './variables';
 
-@import 
-  '~bootstrap/scss/_functions',
-  '~bootstrap/scss/_variables',
-  '~bootstrap/scss/_mixins',
-  '~bootstrap/scss/_print',
-  '~bootstrap/scss/_reboot',
-  '~bootstrap/scss/_type',
-  '~bootstrap/scss/_grid',
-  '~bootstrap/scss/_navbar';
+@import '~bootstrap-4-grid/scss/grid.scss';
 
 // GLOBAL STYLING
 @media (min-width: 1430px) {

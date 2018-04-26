@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="154" height="154" viewBox="0 0 154 154">
+    <g fill="none" fill-rule="evenodd">
+        <path fill="#A3D39F" d="M152 77c0 41.42-33.579 75-75 75-41.42 0-75-33.58-75-75"/>
+        <path stroke="#020303" stroke-width="3" d="M152 77c0 41.42-33.579 75-75 75-41.42 0-75-33.58-75-75"/>
+        <path fill="#DBA826" d="M152 77c0-41.421-33.579-75-75-75C35.58 2 2 35.579 2 77"/>
+        <path stroke="#020303" stroke-width="3" d="M152 77c0-41.421-33.579-75-75-75C35.58 2 2 35.579 2 77"/>
+        <path fill="#EFAFCE" d="M122 77v18.75H95.75V122h-37.5V95.75H32V77"/>
+        <path stroke="#020303" stroke-width="3" d="M122 77v18.75H95.75V122h-37.5V95.75H32V77"/>
+        <path fill="#F05822" d="M122 77V58.25H95.75V32h-37.5v26.25H32V77"/>
+        <path stroke="#020303" stroke-width="3" d="M122 77V58.25H95.75V32h-37.5v26.25H32V77M2 77h150"/>
+    </g>
+</svg>

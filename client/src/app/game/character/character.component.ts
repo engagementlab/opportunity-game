@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../data.service';
+import { Character } from '../../models/character';
 import * as _ from 'underscore';
 
 @Component({
@@ -9,11 +10,43 @@ import * as _ from 'underscore';
 })
 export class GameCharacterComponent implements OnInit {
 
+  characters: Character[];
 	categoryData = new Map<string, number>();
 
-  constructor(private _categoryDataSvc: DataService) { }
+  constructor(private _dataSvc: DataService) {
+
+    this._dataSvc.getCharacterData().subscribe(response => {
+
+      this.characters = this._dataSvc.characterData;
+
+
+    });
+  }
 
   ngOnInit() {
+  }
+
+  chooseCharacter(evt) {
+
+    evt.currentTarget.classList.add('selected');
+
+    let buttons = document.getElementsByClassName('character');
+    _.each(buttons, (btn) => {
+      if(btn !== evt.currentTarget)
+        btn.classList.add('hidden');
+    });
+
+  }
+
+  goBack() {
+
+    
+    let buttons = document.getElementsByClassName('character');
+    _.each(buttons, (btn) => {
+        btn.classList.remove('hidden');
+        btn.classList.remove('selected');
+    });
+
   }
 
   onSelectionChange(evt) {
@@ -21,7 +54,7 @@ export class GameCharacterComponent implements OnInit {
   	let otherCategories = document.getElementsByTagName('fieldset');
 		this.categoryData.set(category, evt.target.value);
 
-    this._categoryDataSvc.changeCharacter(category, parseInt(evt.target.value));
+    this._dataSvc.changeCharacter(category, parseInt(evt.target.value));
 
   	_.each(otherCategories, (el) => {
   		_.each(el.children, (child) => {

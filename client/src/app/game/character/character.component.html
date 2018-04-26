@@ -1,4 +1,14 @@
-Career
+<div class="row">
+	<div *ngFor="let character of characters; let i = index;" class="col-6 col-md-3 character" (click)="chooseCharacter($event)">
+		<cdn-image cloudinaryId="opportunity-game/characters/{{i+1}}.svg" width="150" autoFormat="false" alt="Character portrait #{{i+1}}" class="character-btn"></cdn-image>
+		<p class="bio">{{character.bio}}</p>
+	</div>
+</div>
+
+<button id="back" (click)="goBack()">back</button>
+<app-button label="Submit" route="/game/welcome" ariaLabel="Submit"></app-button>
+
+<!-- Career
 <fieldset name="career_ranking">
 	<input type="radio" name="career_ranking" value="0" (change)="onSelectionChange($event)"/>
 	<input type="radio" name="career_ranking" value="1" (change)="onSelectionChange($event)"/>
@@ -24,8 +34,8 @@ Health
 	<input type="radio" name="health_ranking" value="3" (change)="onSelectionChange($event)"/>
 	<input type="radio" name="health_ranking" value="4" (change)="onSelectionChange($event)"/>
 </fieldset>
+ -->
+
 
 <!-- <label for="always">not important</label>
 <label for="change">very important</label> -->
-
-<app-button label="Submit" route="/game/welcome" ariaLabel="Submit"></app-button>

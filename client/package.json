@@ -33,6 +33,7 @@
     "@types/ismobilejs": "^0.4.1",
     "@types/underscore": "^1.8.8",
     "bootstrap": "^4.0.0-alpha.6",
+    "bootstrap-4-grid": "^2.4.0",
     "cloudinary-core": "^2.5.0",
     "core-js": "^2.4.1",
     "dotenv": "^5.0.1",
