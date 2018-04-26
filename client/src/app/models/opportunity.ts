@@ -8,6 +8,8 @@ export interface Opportunity {
 	readonly commReward: number;
 	readonly jobReward: number;
 	readonly englishReward: number;
+
+	readonly triggerAmt: number;
 	
 	readonly description: string;
 	readonly name: string;

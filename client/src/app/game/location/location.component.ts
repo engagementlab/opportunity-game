@@ -52,7 +52,7 @@ export class GameLocationComponent implements OnInit {
   }
 
   viewOpportunity(id: Opportunity["_id"]) {
-    
+
     let detailsParent = document.getElementById('details');
     let allDetails = document.querySelector('#details').querySelectorAll('.opportunity');
     let detailsChild = (<HTMLElement>document.getElementById('detail_' + id));
@@ -81,7 +81,7 @@ export class GameLocationComponent implements OnInit {
 
   selectOpportunity(opportunity: Opportunity) {
 
-    this._dataSvc.updateStats(-opportunity.moneyCost, -opportunity.actionCost, opportunity.commReward, opportunity.jobReward, opportunity.englishReward);
+    this._dataSvc.updateStats(-opportunity.moneyCost, -opportunity.actionCost, opportunity.commReward, opportunity.jobReward, opportunity.englishReward, opportunity.triggerAmt);
     this._dataSvc.updateOpportunity(opportunity, this.route.snapshot.params.locationUrl);
 
     if(opportunity.givesTransit)

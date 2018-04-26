@@ -31,6 +31,13 @@ interface DurationEffect {
    triggerWait: number,
    triggerCount: number
 };
+interface DelayedReward {     
+    commReward: number,
+    jobReward: number,
+    englishReward: number,
+    triggerWait: number,
+    triggerCount: number
+};
 
 @Injectable()
 export class DataService {
@@ -41,7 +48,9 @@ export class DataService {
 
     baseUrl: string;
     index: any;
+
     durationEffectQueue = [];
+    delayedRewardQueue = [];
 
     playerDataUpdate = new EventEmitter();
     locationDataUpdate = new EventEmitter();
@@ -88,16 +97,12 @@ export class DataService {
 
     }
 
-    public updateStats(moneyVal: number, actionVal: number = 0, commLevel: number = 0, jobLevel: number = 0, englishLevel: number = 0) {
+    public updateStats(moneyVal: number, actionVal: number = 0, commLevel: number = 0, jobLevel: number = 0, englishLevel: number = 0, triggerAmt: number = 0) {
 
         this.playerData.money += moneyVal;
         this.playerData.actions += actionVal;
 
-        this.playerData.commLevel += commLevel;
-        this.playerData.jobLevel += jobLevel;
-        this.playerData.englishLevel += englishLevel;
-
-        // Trigger duration effect? (if actions being removed)
+        // Trigger duration effects or delayed rewards? (if actions being removed)
         if(actionVal < 0)
         { 
             for(let i = 0; i < this.durationEffectQueue.length; i++) {
@@ -114,11 +119,48 @@ export class DataService {
                     }
                 }
             }
+
+            let e = 0;
+            while(e < this.delayedRewardQueue.length) {
+            
+                let reward = this.delayedRewardQueue[e];
+                reward.triggerCount -= actionVal;
+
+                if(reward.triggerCount >= reward.triggerWait) {
+
+                    this.playerData.commLevel += reward.commReward;
+                    this.playerData.jobLevel += reward.jobReward;
+                    this.playerData.englishLevel += reward.englishReward;
+
+                    this.delayedRewardQueue.splice(e, 1);
+                    break;
+                }
+
+                e++;
+            
+            }
+        }
+
+        // Reward now or later?
+        if(triggerAmt === 0) {
+            this.playerData.commLevel += commLevel;
+            this.playerData.jobLevel += jobLevel;
+            this.playerData.englishLevel += englishLevel;
+        }
+        else {
+            let delayedReward: DelayedReward = {
+                                                    commReward: commLevel
+                                                    jobReward: jobLevel,
+                                                    englishReward: englishLevel,
+                                                    triggerWait: triggerAmt, 
+                                                    triggerCount: 0
+                                               };
+            this.delayedRewardQueue.push(delayedReward);
         }
 
         this.playerDataUpdate.emit(this.playerData);
 
-        if(this.playerData.actions === 0)
+        if(this.playerData.actions <= 0)
             this.endRound();
 
     }
