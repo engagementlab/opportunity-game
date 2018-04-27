@@ -34,6 +34,7 @@ Location.add({
 	description: { type: Types.Textarea, label: "Description",  initial: true, required: true },
 	imageName: { type: String, required: true, initial: true, note: "Image to use in background." },
   url: { type: String, required: true, initial: true, note: "URL shown for this location (e.g. /location/xyz)." },
+  unlockedAtStart: { type: Types.Boolean, label: "Unlocked at start" },
 	category:
         {
             "Community": {type: Types.Boolean},

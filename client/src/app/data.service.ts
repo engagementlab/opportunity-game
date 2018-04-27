@@ -203,6 +203,17 @@ export class DataService {
         }); 
     }
 
+    public enableLocations(locationIds: string[]) {
+
+        _.each(locationIds, (id) => { 
+
+            let thisLoc = _.where(this.locationData, {_id: id})[0];
+
+            if(thisLoc)
+                thisLoc.enabled = true;
+        }); 
+    }
+
     public startDurationEffect(effectId: string, trigger: string, triggerWait: number) {
 
         let triggerType = (trigger === 'actions') ? DurationEffectTrigger.actions : DurationEffectTrigger.rounds;

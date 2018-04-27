@@ -31,7 +31,6 @@ var Opportunity = new keystone.List('Opportunity',
 Opportunity.add({
   	name: { type: String, default: "Opportunity Name", label: "Name", required: true, initial: true },
   	description: { type: Types.Markdown, label: "Description", initial: true, required: true },
-    type: { type: Types.Select, label: "Type", options: "Community, Job, English", required: true, initial: true },
 
     location: {
         type: Types.Relationship,
@@ -47,6 +46,16 @@ Opportunity.add({
   },
 
   "Benefits", {
+    locationUnlocks: {
+        type: Types.Relationship,
+        ref: 'Location',
+        label: 'Unlocks Location(s)',
+        filters: {
+          unlockedAtStart: false
+        },
+        note: 'The Location(s) this opportunity unlocks.',
+        many: true
+    },
     commReward: { type: Number, default: 1, label: "Community Reward", required: true, initial: true },
     jobReward: { type: Number, default: 1, label: "Job Reward", required: true, initial: true },
     englishReward: { type: Number, default: 1, label: "English Reward", required: true, initial: true },

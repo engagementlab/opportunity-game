@@ -81,8 +81,15 @@ export class GameLocationComponent implements OnInit {
 
   selectOpportunity(opportunity: Opportunity) {
 
-    this._dataSvc.updateStats(-opportunity.moneyCost, -opportunity.actionCost, opportunity.commReward, opportunity.jobReward, opportunity.englishReward, opportunity.triggerAmt);
     this._dataSvc.updateOpportunity(opportunity, this.route.snapshot.params.locationUrl);
+    this.backToList();
+
+    if(opportunity.locationUnlocks !== undefined && opportunity.locationUnlocks.length > 0) {
+      this._dataSvc.enableLocations(opportunity.locationUnlocks);
+      return;
+    }
+    
+    this._dataSvc.updateStats(-opportunity.moneyCost, -opportunity.actionCost, opportunity.commReward, opportunity.jobReward, opportunity.englishReward, opportunity.triggerAmt);
 
     if(opportunity.givesTransit)
       this._dataSvc.modifyPlayerData('hasTransit', true);
@@ -92,9 +99,6 @@ export class GameLocationComponent implements OnInit {
     // Duration effect?
     if(opportunity.effect)
       this._dataSvc.startDurationEffect(opportunity.effect, opportunity.effectTrigger, opportunity.effectWait);
-
-    this.backToList();
-
 
   }
 

@@ -10,6 +10,9 @@ export interface Location {
 	readonly url: string;
 	readonly categories: object;
 	readonly categoriesStr: string;
+
+	readonly unlockedAtStart: boolean;
+	readonly enabled: boolean;
 	
   opportunities: Opportunity[];
 

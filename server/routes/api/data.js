@@ -17,7 +17,7 @@ mongoose.Promise = require('bluebird');
 
 var buildData = (params, res) => {
 
-    let locations = Location.model.find({}, 'name intro categories categoriesStr description.html opportunities url imageName')
+    let locations = Location.model.find({}, 'name intro categories categoriesStr description.html opportunities url imageName unlockedAtStart')
                     .populate('opportunities')
                     .exec();
     let events = Event.model.find({}).exec();

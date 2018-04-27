@@ -8,5 +8,9 @@
 </div>
 
 <div *ngFor="let location of locations">
-  <h1 attr.data-categories="{{location.categoriesStr}}" class="location show"><a routerLink="/game/location/{{location.url}}">{{location.name}}</a></h1>
+  <h1 attr.data-categories="{{location.categoriesStr}}" class="location show">
+  	<a *ngIf="location.unlockedAtStart === undefined || location.unlockedAtStart === true || location.enabled === true" 
+	  	routerLink="/game/location/{{location.url}}">{{location.name}}</a>
+  	<span *ngIf="location.unlockedAtStart === false && location.enabled === undefined">{{location.name}}</span>
+  </h1>
 </div>
