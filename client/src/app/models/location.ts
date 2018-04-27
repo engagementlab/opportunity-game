@@ -6,13 +6,13 @@ export interface Location {
 	readonly name: string;
 	readonly intro: string;
 	readonly description: string;
-	readonly imageName: string;
-	readonly url: string;
+	readonly image: string;
+	readonly key: string;
 	readonly categories: object;
 	readonly categoriesStr: string;
 
 	readonly unlockedAtStart: boolean;
-	readonly enabled: boolean;
+	enabled: boolean;
 	
   opportunities: Opportunity[];
 

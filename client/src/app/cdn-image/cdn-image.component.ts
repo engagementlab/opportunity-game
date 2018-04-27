@@ -11,7 +11,7 @@ export class CdnImageComponent implements OnInit {
 	@Input() alt: string;
 	@Input() width: number;
   @Input() quality: number;
-	@Input() autoFormat: boolean = true;
+	@Input() autoFormat: boolean;
 
   constructor() { }
 

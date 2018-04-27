@@ -25,6 +25,7 @@ import { AppFooterComponent } from './app-footer/app-footer.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { AboutComponent } from './about/about.component';
 import { CleanStringPipe } from './utils/clean-string.pipe';
+import { KeysPipe } from './utils/keys.pipe';
 import { ButtonComponent } from './button/button.component';
 import { CdnImageComponent } from './cdn-image/cdn-image.component';
 import { LoaderComponent } from './loader/loader.component';
@@ -62,7 +63,6 @@ const appRoutes: Routes = [
     AppNavbarComponent,
     AppFooterComponent,
     HomepageComponent,
-    CleanStringPipe,
     ButtonComponent,
     AboutComponent,
     CdnImageComponent,
@@ -75,7 +75,10 @@ const appRoutes: Routes = [
     GameLocationComponent,
     GameToolbarComponent,
     GameEmblemComponent,
-    GameEventComponent
+    GameEventComponent,
+    
+    CleanStringPipe,
+    KeysPipe
   ],
   imports: [
     RouterModule.forRoot(

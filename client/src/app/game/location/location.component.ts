@@ -31,7 +31,7 @@ export class GameLocationComponent implements OnInit {
   ngOnInit() {
 
   	let url = this.route.snapshot.params.locationUrl;
-  	this.currentLocation = this._dataSvc.getLocationByUrl(url);
+  	this.currentLocation = this._dataSvc.getLocationByKey(url);
 
     if(this.currentLocation === undefined)
       this.router.navigateByUrl('/game/home');

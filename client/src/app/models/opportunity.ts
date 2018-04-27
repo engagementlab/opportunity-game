@@ -5,7 +5,7 @@ export interface Opportunity {
 
 	readonly actionCost: number;
 	readonly moneyCost: number;
-	readonly locationUnlocks: array;
+	readonly locationUnlocks: string[];
 	readonly commReward: number;
 	readonly jobReward: number;
 	readonly englishReward: number;

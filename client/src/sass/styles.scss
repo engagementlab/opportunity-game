@@ -1,13 +1,13 @@
 // src/sass/styles.scss
-@import url('https://fonts.googleapis.com/css?family=Work+Sans:400,500,600,700');
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,700');
-@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,700');
-
+@import url('https://fonts.googleapis.com/css?family=Cabin:400,700');
 @import './variables';
 
 @import '~bootstrap-4-grid/scss/grid.scss';
 
 // GLOBAL STYLING
+.container {
+  padding: 0;
+}
 @media (min-width: 1430px) {
   .container {
     max-width: 1400px;
@@ -15,7 +15,7 @@
 }
 
 body {
-	font-family: 'Work Sans', sans-serif;
+	font-family: 'Cabin', sans-serif;
 	font-size: 16px;
 }
 
@@ -41,12 +41,19 @@ h3 {
   }
 }
 
-.condense p {
-  @include font-roboto();
+// Center any column, yay!
+.col-centered {
+  float: none;
+  display: inline-block;
+  margin: 0 auto;
+}
 
-  font-stretch: condensed;
-  line-height: 1.5;
-  letter-spacing: 1px;
+.btn {
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
 }
 
 #loading {

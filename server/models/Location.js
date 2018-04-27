@@ -21,7 +21,12 @@ var Types = keystone.Field.Types;
 var Location = new keystone.List('Location', 
 	{
 		label: 'Location',
-		plural: 'Locations'
+		plural: 'Locations',
+    autokey: {
+        path: 'key',
+        from: 'name',
+        unique: true
+    }
 	});
 
 /**
@@ -32,8 +37,7 @@ Location.add({
 	name: { type: String, default: "Location Name", hidden: true, required: true, initial: true },
 	intro: { type: Types.Markdown, label: "Intro Text",  initial: true, required: true },
 	description: { type: Types.Textarea, label: "Description",  initial: true, required: true },
-	imageName: { type: String, required: true, initial: true, note: "Image to use in background." },
-  url: { type: String, required: true, initial: true, note: "URL shown for this location (e.g. /location/xyz)." },
+  image: { type: Types.Select, label: 'Image Type', options: 'health-center, info-center, cultural-center, center, school', required: true, initial: true },
   unlockedAtStart: { type: Types.Boolean, label: "Unlocked at start" },
 	category:
         {

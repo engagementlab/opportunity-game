@@ -29,6 +29,8 @@ export class GameCharacterComponent implements OnInit {
   chooseCharacter(evt) {
 
     evt.currentTarget.classList.add('selected');
+    document.getElementById('welcome').classList.remove('hidden');
+    document.getElementById('logo').classList.add('hidden');
 
     let buttons = document.getElementsByClassName('character');
     _.each(buttons, (btn) => {
@@ -40,6 +42,8 @@ export class GameCharacterComponent implements OnInit {
 
   goBack() {
 
+    document.getElementById('welcome').classList.add('hidden');
+    document.getElementById('logo').classList.remove('hidden');
     
     let buttons = document.getElementsByClassName('character');
     _.each(buttons, (btn) => {

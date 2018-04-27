@@ -1,5 +1,69 @@
+@import "~sass/_variables";
+
+
+.bubble {
+	color: white;
+	text-align: center;
+	height: 71px;
+	background: cdn-image('speech-bubble', c_scale, w_600);
+	background-repeat: no-repeat;
+	background-position: bottom;
+	background-size: contain;
+	.content {
+	  margin-left: auto;
+	  margin-right: auto;
+	  position: relative;
+	  top: 50%;
+	  transform: translateY(-50%);
+	}
+}
+
+.plackard {
+	color: white;
+	text-transform: uppercase;
+	text-align: center;
+	background: cdn-image('plackard-bg', c_scale, w_133);
+	background-repeat: no-repeat;
+	background-position: bottom;
+	background-size: contain;
+}
+
+#filters {
+	.filter {
+		background-color: $white;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    ::ng-deep img {
+    	position: absolute;
+    	width: 40%;
+		  top: 50%;
+		  left: 43%;
+		  transform: translate(-50%,-50%);
+    }
+	}
+}
+
+#house {
+	min-height: 300px;
+	background: cdn-image('map-bg');
+  .centered {
+  	position: absolute;
+  	width: 80%;
+	  // top: 50%;
+	  transform: translate(0,-50%);
+  }
+}
+
+#map {
+
+}
+
 .location {
 	display: none;
+	.locked {
+		@include filter(opacity, 50%);
+	}
 	&.show {
 		display: block;
 	}

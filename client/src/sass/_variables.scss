@@ -1,7 +1,8 @@
 // CDN CONFIG
-$cdn-product: 'civic-idea';
+$cdn-product: 'opportunity-game';
 
 // COLORS
+$white: #e8e6e5;
 $yellow: #fecf33;
 $light-orange: #fdbd39;
 $light-gold: #ffc952;
@@ -9,8 +10,8 @@ $peach: #ee6723;
 $pinkish-grey: #c8c8c8;
 $dusty-orange: #f16922;
 
-@mixin font-roboto() {
-	font-family: 'Roboto Condensed', sans-serif;
+@mixin font-cabin() {
+	font-family: 'Cabin', sans-serif;
 	// @return $font-family;
 }
 

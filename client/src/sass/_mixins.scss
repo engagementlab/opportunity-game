@@ -199,7 +199,7 @@ $base-font-size: 16px;
 
   $imgParams: ();
   $version: random(500000) + 10000000;
-  $strPrefix: "https://res.cloudinary.com/engagement-lab-home/image/upload/f_auto";
+  $strPrefix: "https://res.cloudinary.com/engagement-lab-home/image/upload/";
   
   @each $value in $options {
     $strPrefix: $strPrefix + "," + $value;

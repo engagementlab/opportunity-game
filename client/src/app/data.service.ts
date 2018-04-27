@@ -182,13 +182,13 @@ export class DataService {
 
     }
 
-    public getLocationByUrl(locationUrl: string) {
+    public getLocationByKey(locationKey: string) {
 
-        return _.where(this.locationData, {url: locationUrl})[0];
+        return _.where(this.locationData, {key: locationKey})[0];
 
     }
 
-    public updateOpportunity(opportunity: Opportunity, locationUrl: string) {
+    public updateOpportunity(opportunity: Opportunity, locationKey: string) {
 
         _.each(this.locationData, (loc) => { 
 
@@ -197,7 +197,7 @@ export class DataService {
             if(thisOpp) {
                 thisOpp.enabled = false;
 
-                if(loc.url === locationUrl)
+                if(loc.key === locationKey)
                     this.locationDataUpdate.emit(loc);
             }
         }); 

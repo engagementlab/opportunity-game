@@ -7,6 +7,26 @@ input[type=radio] {
 label {
 	display: block;
 }
+
+#logo {
+	&.hidden {
+		@include mobile-only {
+			display: none;
+		}
+	}
+	img {
+		width: 100%;
+	}
+}
+#welcome {
+	&.hidden {
+		display: none;
+	}
+	img {
+		width: 100%;
+	}
+}
+
 .character {
 	@include transition(all, 1s, linear);
 	&.selected {

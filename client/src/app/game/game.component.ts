@@ -46,13 +46,7 @@ export class GameComponent implements OnInit {
   	router.events.subscribe((val) =>  {
 
       if(val instanceof NavigationEnd) {
-
-        if(val.url === "/game/character")
-          TweenLite.to(document.getElementById('logo'), 1, {scale:0.5});
-
-        if(val.url === "/game/start")
-          TweenLite.to(document.getElementById('logo'), 1, {scale:1});
-
+        
         if(val.url === "/game/home")
           TweenLite.to(document.getElementById('toolbar-parent'), 1, {autoAlpha: 1, display:'block'});
         

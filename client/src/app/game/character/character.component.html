@@ -1,3 +1,10 @@
+<div id="logo">
+  <cdn-image cloudinaryId="opportunity-game/logo.svg" width="650" autoFormat="false" alt="Portland of Opportunity logo"></cdn-image>
+</div>
+<div id="welcome" class="hidden">
+  <cdn-image cloudinaryId="opportunity-game/welcome.svg" width="650" autoFormat="false" alt="Welcome to Portland logo"></cdn-image>
+</div>
+
 <div class="row">
 	<div *ngFor="let character of characters; let i = index;" class="col-6 col-md-3 character" (click)="chooseCharacter($event)">
 		<cdn-image cloudinaryId="opportunity-game/characters/{{i+1}}.svg" width="150" autoFormat="false" alt="Character portrait #{{i+1}}" class="character-btn"></cdn-image>
@@ -6,7 +13,7 @@
 </div>
 
 <button id="back" (click)="goBack()">back</button>
-<app-button label="Submit" route="/game/welcome" ariaLabel="Submit"></app-button>
+<app-button label="Submit" route="/game/home" ariaLabel="Submit"></app-button>
 
 <!-- Career
 <fieldset name="career_ranking">

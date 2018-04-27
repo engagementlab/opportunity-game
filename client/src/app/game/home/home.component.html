@@ -1,16 +1,40 @@
-<!-- <game-emblem text="Spicy jalapeno frankfurter ullamco id, leberkas pancetta spare ribs tongue dolor dolore deserunt jerky alcatra est pariatur ca"></game-emblem> -->
-
-<div id="filters">
-	<button (click)="filterSelection('health_and_help')">Health and Help</button>
-	<button (click)="filterSelection('english')">English</button>
-	<button (click)="filterSelection('job')">Job</button>
-	<button (click)="filterSelection('community')">Community</button>
+<div id="home">
+	<div id="filters" class="row">
+		<!-- <div ng-repeat=" in filters"> -->
+		<div *ngFor="let filter of filters" class="col-6 col-md-3">
+			<div *ngFor="let key of filter | keys" (click)="filterSelection(key)" class="filter btn">
+				<cdn-image cloudinaryId="opportunity-game/icons/{{key}}.svg" width="150" alt="Icon for {{filter[key]}} filter"></cdn-image>
+			</div>
+		</div>
+		<!-- </div> -->
+	</div>
+	<div id="house" class="row">
+		<div class="col-10 col-centered bubble"><div class="content">Choose a category to explore</div></div>
+		<div class="col-6 col-centered">
+			<div class="centered">
+				<cdn-image cloudinaryId="opportunity-game/locations/home.svg" width="150" alt="Icon for Home"></cdn-image>
+				<div class="plackard">home</div>
+			</div>
+		</div>
+	</div>
 </div>
 
-<div *ngFor="let location of locations">
-  <h1 attr.data-categories="{{location.categoriesStr}}" class="location show">
-  	<a *ngIf="location.unlockedAtStart === undefined || location.unlockedAtStart === true || location.enabled === true" 
-	  	routerLink="/game/location/{{location.url}}">{{location.name}}</a>
-  	<span *ngIf="location.unlockedAtStart === false && location.enabled === undefined">{{location.name}}</span>
-  </h1>
+<div id="map" class="hidden">
+	<div *ngFor="let location of locations" class="col-6 col-centered">
+
+			<div class="centered" attr.data-categories="{{location.categoriesStr}}" class="location">
+				
+				<!-- <div class="plackard">home</div> -->
+				
+				<a *ngIf="location.unlockedAtStart === undefined || location.unlockedAtStart === true || location.enabled === true"
+				routerLink="/game/location/{{location.key}}">
+					<cdn-image cloudinaryId="opportunity-game/locations/{{location.image}}.svg" width="150" alt="Icon for {{location.name}}"></cdn-image>
+				</a>
+				
+				<span *ngIf="location.unlockedAtStart === false && location.enabled === undefined" class="locked">
+					<cdn-image cloudinaryId="opportunity-game/locations/{{location.image}}.svg" width="150" alt="Icon for {{location.name}}"></cdn-image>
+				</span>
+			</div>
+		
+	</div>
 </div>
