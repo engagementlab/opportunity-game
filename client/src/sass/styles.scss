@@ -23,22 +23,9 @@ h1, h2 {
   font-size: 1.5em;
 }
 
-h3 {
-  font-weight: 600;
-  &:after {
-    position: relative;
-    display: flex;
-    content: ''; 
-    width: 60px; 
-    height: 4px; 
-    background: $light-gold; 
-    bottom: -10px;
-    margin-bottom: 5%;
-    
-    @include mq($from: mobile, $until: tablet) {
-      margin-bottom: 10%;
-    }
-  }
+.bold {
+  font-family: 'Cabin', sans-serif;
+  font-weight: 700;
 }
 
 // Center any column, yay!

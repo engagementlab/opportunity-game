@@ -12,10 +12,10 @@ export class GameHomeComponent implements OnInit {
   locations: any[];
   filters: object[] = 
   [
-      {job: 'Jobs & Training'},
-      {community: 'Community'},
-      {english: 'English Language'},
-      {health_and_help: 'Health & Help'}
+      {key: 'job', label: 'Jobs & Training'},
+      {key: 'community', label: 'Community'},
+      {key: 'english', label: 'English Language'},
+      {key: 'health_and_help', label: 'Health & Help'}
   ];
 
   constructor(private dataSvc: DataService) {
@@ -24,10 +24,7 @@ export class GameHomeComponent implements OnInit {
       
       this.locations = this.dataSvc.locationData;
 
-    });   
-
-
-    console.log(this.filters)
+    });
 
   }
 
@@ -39,9 +36,13 @@ export class GameHomeComponent implements OnInit {
 
     let x, i;
     let showAll = (category === "all");
+    let label = _.where(this.filters, {key: category})[0].label;
+
     x = document.getElementsByClassName("location");
     document.getElementById('map').classList.remove('hidden');
     document.getElementById('home').classList.add('hidden');
+
+    document.getElementById('category-label').innerHTML = label;
     
     // Add the "show" class to the filtered elements, and remove the "show" class from the elements that are not selected
     for (i = 0; i < x.length; i++) {
@@ -57,6 +58,13 @@ export class GameHomeComponent implements OnInit {
 
     }
     
+  }
+
+  backToHome() { 
+
+    document.getElementById('map').classList.add('hidden');
+    document.getElementById('home').classList.remove('hidden');
+
   }
 
 }

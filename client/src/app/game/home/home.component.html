@@ -1,13 +1,10 @@
 <div id="home">
 	<div id="filters" class="row">
-		<!-- <div ng-repeat=" in filters"> -->
-		<div *ngFor="let filter of filters" class="col-6 col-md-3">
-			<div *ngFor="let key of filter | keys" (click)="filterSelection(key)" class="filter btn">
-				<cdn-image cloudinaryId="opportunity-game/icons/{{key}}.svg" width="150" alt="Icon for {{filter[key]}} filter"></cdn-image>
-			</div>
+		<div *ngFor="let filter of filters" class="col-6 col-md-3 filter btn" (click)="filterSelection(filter.key)">
+				<cdn-image cloudinaryId="opportunity-game/icons/{{filter.key}}.svg" width="150" alt="Icon for {{filter.label}} filter"></cdn-image>
 		</div>
-		<!-- </div> -->
 	</div>
+
 	<div id="house" class="row">
 		<div class="col-10 col-centered bubble"><div class="content">Choose a category to explore</div></div>
 		<div class="col-6 col-centered">
@@ -20,20 +17,25 @@
 </div>
 
 <div id="map" class="hidden">
+	
+	<app-button label="Back" ariaLabel="Back to Home" clickData="true" (clickEvent)="backToHome()" class="gold"></app-button>
+	<div id="category-label" class="bold">Category</div>
+
 	<div *ngFor="let location of locations" class="col-6 col-centered">
 
 			<div class="centered" attr.data-categories="{{location.categoriesStr}}" class="location">
-				
-				<!-- <div class="plackard">home</div> -->
-				
+								
 				<a *ngIf="location.unlockedAtStart === undefined || location.unlockedAtStart === true || location.enabled === true"
 				routerLink="/game/location/{{location.key}}">
 					<cdn-image cloudinaryId="opportunity-game/locations/{{location.image}}.svg" width="150" alt="Icon for {{location.name}}"></cdn-image>
+					<div class="plackard">{{location.name}}</div>
 				</a>
 				
 				<span *ngIf="location.unlockedAtStart === false && location.enabled === undefined" class="locked">
 					<cdn-image cloudinaryId="opportunity-game/locations/{{location.image}}.svg" width="150" alt="Icon for {{location.name}}"></cdn-image>
+					<div class="plackard">{{location.name}}</div>
 				</span>
+
 			</div>
 		
 	</div>

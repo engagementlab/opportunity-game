@@ -34,9 +34,7 @@ a.btn {
     @include scale(.8);
   }
 
-  &.large {
-  	font-size: em(14px);
-    background-color: yellow;
-    padding: 6%;
+  &.gold {
+    background-color: $gold;
   }
 }
