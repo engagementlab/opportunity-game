@@ -58,7 +58,7 @@ export class GameComponent implements OnInit {
 
       if(data.newRound) {
         this.currentWellnessScore = data.wellnessScore;
-        TweenLite.to(document.getElementById('round-over-parent'), 1, {autoAlpha: 1, display:'block'});
+        TweenLite.to(document.getElementById('round-over'), 1, {autoAlpha: 1, display:'block'});
       }
 
       if(data.gotTransit) {
@@ -91,7 +91,7 @@ export class GameComponent implements OnInit {
   nextRound() {
 
       this.router.navigateByUrl('/game/home');
-      TweenLite.to(document.getElementById('round-over-parent'), 1, {autoAlpha: 0, display:'none'});
+      TweenLite.to(document.getElementById('round-over'), 1, {autoAlpha: 0, display:'none'});
 
       // Dice roll for random event
       if(Math.round(Math.random()) == 1) {

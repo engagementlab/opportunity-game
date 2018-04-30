@@ -1,7 +1,10 @@
 <div id="home">
 	<div id="filters" class="row">
 		<div *ngFor="let filter of filters" class="col-6 col-md-3 filter btn" (click)="filterSelection(filter.key)">
+			<div class="content">
 				<cdn-image cloudinaryId="opportunity-game/icons/{{filter.key}}.svg" width="150" alt="Icon for {{filter.label}} filter"></cdn-image>
+			</div>
+			<div class="label bold">{{filter.label}}</div>
 		</div>
 	</div>
 

@@ -1,3 +1,95 @@
+@import "~sass/_variables";
+
+.location {
+	min-height: 480px;
+	background: cdn-image('locations/background/info-center', c_scale, w_1440);
+	@include mobile-only {
+		background: cdn-image('locations/background/info-center_mobile');
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+}
+
+#list {
+	button {
+		@include box-shadow(4px, 4px, 0, #000000);
+		margin-top: 6%;
+		min-height: 125px;
+	}
+	.name {
+		text-align: left;
+	}
+	.costs {
+		position: absolute;
+		width: 40%;
+		bottom: 7%;
+		left: -5%;
+
+		.cost {
+			display: inline-block;
+			width: 40px;
+		}
+		.money {
+			background: cdn-image('icons/money-cost', c_scale, w_15);
+			background-repeat: no-repeat;
+		}
+		.action {
+			background: cdn-image('icons/action-cost', c_scale, w_15);
+			background-repeat: no-repeat;
+		}
+	}
+	.reward {
+		float: inline-end;
+		background-color: $white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+  	&:after {
+  		content: "+";
+  		color: $hospital-green;
+			position: relative;
+  		top: 37%;
+			left: 9%;
+			font-size: x-large;
+  	}
+		::ng-deep img {
+    	position: absolute;
+    	width: 30px;
+    	transform: translate(-37%, 59%);
+		}
+	}
+	.achievement {
+		float: inline-end;
+		::ng-deep img {
+			width: 30px;
+		}
+
+	}
+}
+
 .opportunity {
-	display: none;
+	.content {
+
+		font-size: large;
+		background: white;
+		@include box-shadow(4px, 4px, 0, #000000);
+
+		position: fixed;
+		left: 50%;
+		top: 50%;
+		min-height: 450px;
+		transform: translate(-50%, -50%);
+
+		.back {
+			width: 30px;
+			height: 30px;
+			background-color: $gold;
+	    border-radius: 50%;
+		}
+
+		::ng-deep .app-button {
+			padding: 20%;
+		}
+
+	}
 }

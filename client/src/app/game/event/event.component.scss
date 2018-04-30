@@ -1,0 +1,48 @@
+@import "~sass/_variables";
+
+.game-event {
+
+	font-size: large;
+	background: white;
+	@include box-shadow(4px, 4px, 0, #000000);
+
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	min-height: 300px;
+	transform: translate(-50%, -50%);
+
+}
+
+.items {
+
+	.cost {
+		color: $bright-orange;
+		text-align: center;
+	}
+	.reward {
+		color: $hospital-green;
+		text-align: center;
+	}
+
+	.money {
+		background: cdn-image('icons/money-cost', c_scale, w_35);
+		background-repeat: no-repeat;
+	}
+	.action {
+		background: cdn-image('icons/action-cost', c_scale, w_35);
+		background-repeat: no-repeat;
+	}
+	.comm {
+		background: cdn-image('icons/community-clear', c_scale, w_35);
+		background-repeat: no-repeat;
+	}
+	.job {
+		background: cdn-image('icons/job-clear', c_scale, w_35);
+		background-repeat: no-repeat;
+	}
+	.english {
+		background: cdn-image('icons/englisg-cost', c_scale, w_35);
+		background-repeat: no-repeat;
+	}
+}

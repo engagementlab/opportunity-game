@@ -1,19 +1,24 @@
-<div class="game-event">
+<div class="game-event col-10">
+
+	<h2 *ngIf="type === 'life'">Life Event</h2>
 
 	<b>{{data.flavor}}</b>
 
-	<button (click)="selectNo()">
-		Nopppe
-	</button>
-	<button (click)="selectYes()">
-		Sure
-		<!-- ({{data.moneyCost}} | {{data.actionCost}}) -->
+	<div class="items row">
+		<div class="{{item.icon}} {{item.type}} col-5" *ngFor="let item of getCostsAndRewards()">
 
-		<div class="costs">
-			<span *ngFor="let cost of getCosts()">
-				[{{cost.icon}}] {{cost.amt}}
+			<span *ngIf="item.type === 'cost'">
+				{{item.amt}}
 			</span>
-		</div>
-	</button>
+			<span *ngIf="item.type === 'reward'">
+				+
+			</span>
 
+		</div>
+	</div>
+
+	<div class="row">
+		<button (click)="selectNo()" class="col-5"><-----</button>
+		<app-button label="Yes" ariaLabel="Click to accept this offer" clickData="true" (clickEvent)="selectYes()" class="green col-centered col-6"></app-button>
+	</div>
 </div>

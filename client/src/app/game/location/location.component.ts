@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import { DataService } from '../../data.service';
 
-import { Location } from '../../models/location';
+import { GameLocation } from '../../models/gamelocation';
 import { Opportunity } from '../../models/opportunity';
 
 import { TweenLite } from 'gsap';
@@ -16,11 +18,11 @@ import * as _ from 'underscore';
 })
 export class GameLocationComponent implements OnInit {
 
-	currentLocation: Location;
+	currentLocation: GameLocation;
 	
-  constructor(private route: ActivatedRoute, private router: Router, private _dataSvc: DataService) { 
+  constructor(private route: ActivatedRoute, private router: Router, private _location: Location, private _dataSvc: DataService) { 
 
-    this._dataSvc.locationDataUpdate.subscribe((data: Location) => {
+    this._dataSvc.locationDataUpdate.subscribe((data: GameLocation) => {
 
       this.currentLocation = data;
 
@@ -62,20 +64,27 @@ export class GameLocationComponent implements OnInit {
     });
 
     detailsChild.style.display = 'block';
-    TweenLite.to(document.getElementById('list'), 1, {top:'100%', autoAlpha:0});
-    TweenLite.to(detailsParent, 1, {top:'0%', autoAlpha:1, display:'block'});
+    TweenLite.to(document.getElementById('list'), 1, {top:'100%', autoAlpha:0, display:'none', oncomplete:() => {
+
+      TweenLite.to(detailsParent, 1, {top:'0%', autoAlpha:1, display:'block'});
+    
+    }});
 
   }
 
   backToMap() {
 
-      this.router.navigateByUrl('/game/home');
+      this._location.back();
+
   }
 
   backToList() { 
 
-    TweenLite.to(document.getElementById('details'), 1, {top:'100%', autoAlpha:0});
-    TweenLite.to(document.getElementById('list'), 1, {top:'0%', autoAlpha:1, display:'block'});
+    TweenLite.to(document.getElementById('details'), 1, {top:'100%', autoAlpha:0, display:'none', oncomplete:() => {
+
+      TweenLite.to(document.getElementById('list'), 1, {top:'0%', autoAlpha:1, display:'block'});
+    
+    }});
 
   }
 

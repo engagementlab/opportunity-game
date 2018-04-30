@@ -1,6 +1,6 @@
 import { Opportunity } from './opportunity';
 
-export interface Location {
+export interface GameLocation {
 
 	_id?: string;
 	readonly name: string;

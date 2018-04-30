@@ -2,36 +2,45 @@
 	<router-outlet #o="outlet"></router-outlet>
 </div>
 
-<div id="round-over-parent" class="modal" style="display: none">
-	<div id="round-over">
+<div id="round-over" class="modal hide">
+	
+	<div id="content" class="col-10">
 		<h1>ROUND {{round}} OVER</h1>
-		Your wellness is {{currentWellnessScore}}
-		<button (click)="nextRound()">Next Round</button>
+		You earned +{{currentWellnessScore}} wellbeing.
+
+		<div class="row col-centered">
+			<app-button label="Next Round" ariaLabel="Click/tap to go to next round" clickData="true" (clickEvent)="nextRound()" class="green col-centered col-6"></app-button>
+		</div>
 	</div>
+
 </div>
 
 <div id="achievement" class="modal center hide">
-	<h1>UNLOCKED</h1>
-	<div id="transit" class="hide">
-		Public Transit!
+
+	<div id="content" class="col-10">
+		<h1>UNLOCKED</h1>
+		<div id="transit" class="hide">
+			Public Transit!
+		</div>
+		<div id="job" class="hide">
+			A Job!
+		</div>
+		<button (click)="closeCheevo()">Continue</button>
 	</div>
-	<div id="job" class="hide">
-		A Job!
-	</div>
-	<button (click)="closeCheevo()">Continue</button>
+
 </div>
 
 <!-- LIFE EVENTS -->
 <div id="life-events" class="modal hide">
 	<div *ngFor="let event of lifeEvents" id="{{event._id}}" class="hide">
-		<game-event [data]="event"></game-event>
+		<game-event [data]="event" [type]="life"></game-event>
 	</div>
 </div>
 
 <!-- EFFECT EVENTS -->
 <div id="effect-events" class="modal hide">
 	<div *ngFor="let event of effectEvents" id="{{event._id}}" class="hide">
-		<game-event [data]="event"></game-event>
+		<game-event [data]="event" [type]="effect"></game-event>
 	</div>
 </div>
 

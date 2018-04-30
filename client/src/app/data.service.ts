@@ -9,7 +9,7 @@ import { catchError } from 'rxjs/operators';
 import { environment } from '../environments/environment';
 
 import { Character } from './models/character';
-import { Location } from './models/location';
+import { GameLocation } from './models/gamelocation';
 import { Event } from './models/event';
 import { PlayerData } from './models/playerdata';
 import { Opportunity } from './models/opportunity';
@@ -42,7 +42,7 @@ interface DelayedReward {
 @Injectable()
 export class DataService {
 
-    public locationData: Location[];
+    public locationData: GameLocation[];
     public characterData: Character[];
     public eventData: Event[];
     public isLoading: Subject<boolean> = new Subject<boolean>();

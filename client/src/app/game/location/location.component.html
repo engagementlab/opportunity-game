@@ -1,34 +1,79 @@
-<button (click)="backToMap()"><- Back home</button>
+<div class="location">
 
-<div id="opportunities">
+	<app-button label="Back" ariaLabel="Back to Home" clickData="true" (clickEvent)="backToMap()" class="gold"></app-button>
 
- 	<div id="list" class="col-sm-12">
-		<button *ngFor="let opportunity of currentLocation?.opportunities" (click)="viewOpportunity(opportunity._id)" class="col-sm-8" id="listing_{{opportunity._id}}" [disabled]="opportunity.enabled !== undefined">
-			{{opportunity.name}}  | {{opportunity.enabled}}
-			
-				Requires: {{opportunity.type}}
-				<div class="costs">
-					<span *ngFor="let cost of getCosts(opportunity)">
-						[{{cost.icon}}] {{cost.amt}}
-					</span>
-				</div>
-		</button>
-	</div>
+	<div id="opportunities">
 
-	<div id="details">
-		<div *ngFor="let opportunity of currentLocation?.opportunities" class="opportunity" id="detail_{{opportunity._id}}">
+	 	<div id="list" class="col-sm-12">
+			<button *ngFor="let opportunity of currentLocation?.opportunities" (click)="viewOpportunity(opportunity._id)" class="col-sm-8 bold" id="listing_{{opportunity._id}}" [disabled]="opportunity.enabled !== undefined">
 
-			(Comm: {{opportunity.commReward}})
-			(Job: {{opportunity.jobReward}})
-			(Eng: {{opportunity.englishReward}})
-			<button (click)="backToList()">
-				Back
-			</button>
-			<button (click)="selectOpportunity(opportunity)">
-				Submit
+					<div class="name">
+						{{opportunity.name}}
+					</div>
+
+					<div class="achievement" *ngIf="opportunity.effect && opportunity.effectWait > 0">
+						<cdn-image cloudinaryId="opportunity-game/icons/duration.png" alt="Icon for Duration effect"></cdn-image>
+					</div>
+					<div class="reward" *ngIf="opportunity.locationUnlocks && opportunity.locationUnlocks.length > 0">
+						<cdn-image cloudinaryId="opportunity-game/icons/location-unlock.png" alt="Icon for Location unlock"></cdn-image>
+					</div>
+
+					<!-- Rewards -->
+					<div class="reward" *ngIf="opportunity.commReward > 0">
+						<cdn-image cloudinaryId="opportunity-game/icons/community-clear.svg" alt="Icon for Community reward"></cdn-image>
+					</div>
+					<div class="reward" *ngIf="opportunity.englishReward > 0">
+						<cdn-image cloudinaryId="opportunity-game/icons/english-clear.svg" alt="Icon for English reward"></cdn-image>
+					</div>
+					<div class="reward" *ngIf="opportunity.jobReward > 0">
+						<cdn-image cloudinaryId="opportunity-game/icons/job-clear.svg" alt="Icon for Job reward"></cdn-image>
+					</div>
+					
+					<!-- Achievements -->
+					<div class="achievement" *ngIf="opportunity.givesTransit">
+						<cdn-image cloudinaryId="opportunity-game/toolbar/transit.svg" alt="Icon for Transit achievement"></cdn-image>
+					</div>
+					<div class="achievement" *ngIf="opportunity.givesJob">
+						<cdn-image cloudinaryId="opportunity-game/toolbar/job.svg" alt="Icon for Job achievement"></cdn-image>
+					</div>
+
+					<!-- Requires: {{opportunity.type}} -->
+					<div class="costs">
+						<div class="{{cost.icon}} cost" *ngFor="let cost of getCosts(opportunity)">{{cost.amt}}</div>
+					</div>
 			</button>
 		</div>
-	</div>
 
+		<div id="details" class="hidden">
+			<div *ngFor="let opportunity of currentLocation?.opportunities" class="opportunity modal" id="detail_{{opportunity._id}}">
+
+
+				<div class="content col-10">
+				<div (click)="backToList()" class="back btn"><--</div>
+
+					<div class="col-centered col-12 medium">
+							Would you like to learn about <span class="bold">{{opportunity.name}}</span>? 
+
+						<!-- Rewards -->
+						<div class="reward" *ngIf="opportunity.commReward > 0">
+							<cdn-image cloudinaryId="opportunity-game/icons/community.svg" alt="Icon for Community reward"></cdn-image>
+						</div>
+						<div class="reward" *ngIf="opportunity.englishReward > 0">
+							<cdn-image cloudinaryId="opportunity-game/icons/english.svg" alt="Icon for English reward"></cdn-image>
+						</div>
+						<div class="reward" *ngIf="opportunity.jobReward > 0">
+							<cdn-image cloudinaryId="opportunity-game/icons/job.svg" alt="Icon for Job reward"></cdn-image>
+						</div>
+
+						<div class="row">
+							<app-button label="Yes" ariaLabel="Click to learn about {{opportunity.name}}" clickData="true" (clickEvent)="selectOpportunity(opportunity)" class="green col-centered"></app-button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
 
 </div>

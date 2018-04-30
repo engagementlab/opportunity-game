@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router'
+
 import { DataService } from '../../data.service';
 import * as _ from 'underscore';
 
@@ -7,7 +9,7 @@ import * as _ from 'underscore';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class GameHomeComponent implements OnInit {
+export class GameHomeComponent implements OnInit, AfterViewChecked {
 
   locations: any[];
   filters: object[] = 
@@ -17,26 +19,43 @@ export class GameHomeComponent implements OnInit {
       {key: 'english', label: 'English Language'},
       {key: 'health_and_help', label: 'Health & Help'}
   ];
+  loadCategory: boolean;
+  loadedCategory: boolean;
 
-  constructor(private dataSvc: DataService) {
-
-    this.dataSvc.getAllData().subscribe(response => {
-      
-      this.locations = this.dataSvc.locationData;
-
-    });
+  constructor(private route: ActivatedRoute, private router: Router, private _dataSvc: DataService) {
 
   }
 
   ngOnInit() {
+
+    this._dataSvc.getAllData().subscribe(response => {
+      
+      this.locations = this._dataSvc.locationData;
+      this.loadCategory = true;
+
+    });
     
+  }
+
+  ngAfterViewChecked() {
+
+      if(!this.loadCategory || this.loadedCategory)
+        return;
+      
+      let categoryId = this.route.snapshot.queryParams.cat;
+      // Load category now?
+      if(categoryId)
+        this.filterSelection(categoryId);
+
+      this.loadedCategory = true;
+
   }
 
   filterSelection(category: string) {
 
     let x, i;
     let showAll = (category === "all");
-    let label = _.where(this.filters, {key: category})[0].label;
+    let label = _.where(this.filters, {key: category})[0]['label'];
 
     x = document.getElementsByClassName("location");
     document.getElementById('map').classList.remove('hidden');
@@ -57,6 +76,14 @@ export class GameHomeComponent implements OnInit {
         x[i].classList.add("show");
 
     }
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        ...this.route.snapshot.queryParams,
+        cat: category,
+      }
+    });
     
   }
 
@@ -64,6 +91,11 @@ export class GameHomeComponent implements OnInit {
 
     document.getElementById('map').classList.add('hidden');
     document.getElementById('home').classList.remove('hidden');
+
+    const params = { ...this.route.snapshot.queryParams };
+    delete params.cat;
+    this.router.navigate([], { queryParams: params });
+    
 
   }
 

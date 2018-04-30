@@ -56,9 +56,11 @@ Opportunity.add({
         note: 'The Location(s) this opportunity unlocks.',
         many: true
     },
-    commReward: { type: Number, default: 1, label: "Community Reward", required: true, initial: true },
-    jobReward: { type: Number, default: 1, label: "Job Reward", required: true, initial: true },
-    englishReward: { type: Number, default: 1, label: "English Reward", required: true, initial: true },
+    
+    commReward: { type: Number, default: 0, label: "Community Reward", required: true },
+    jobReward: { type: Number, default: 0, label: "Job Reward", required: true },
+    englishReward: { type: Number, default: 0, label: "English Reward", required: true},
+    
     achievement:
     {
         "Transit": {type: Types.Boolean},
@@ -75,8 +77,8 @@ Opportunity.add({
         note: 'The event to show as duration effect (after x actions or rounds).',
         many: false
     },
-    effectTrigger: { type: Types.Select, options: 'actions, rounds', note: 'What triggers duration effect event?' },
-    effectWait: { type: Number, default: 0, label: "Actions/Rounds to Wait", note: 'Number of actions or rounds to wait before event.' },
+    effectTrigger: { type: Types.Select, options: 'actions, end of round', note: 'What triggers duration effect event?' },
+    effectWait: { type: Number, default: 0, label: "Actions to Wait", dependsOn: { effectTrigger: 'actions' }, note: 'Number of actions to wait before event.' },
   },
   
   {    

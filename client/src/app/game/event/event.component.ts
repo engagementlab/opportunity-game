@@ -10,28 +10,29 @@ import { TweenLite } from "gsap";
 })
 export class GameEventComponent implements OnInit {
 	
-	@Input() data: Event;
+  @Input() data: Event;
+	@Input() type: string;
 
   constructor(private _dataSvc: DataService) { }
 
   ngOnInit() {
   }
 
-  getCosts() {
+  getCostsAndRewards() {
 
     let costs = [];
 
     if(this.data.actionCost > 0)
-      costs.push({icon: 'action', amt: this.data.actionCost});
+      costs.push({type: 'cost', icon: 'action', amt: -this.data.actionCost});
     if(this.data.moneyCost > 0)
-      costs.push({icon: 'money', amt: this.data.moneyCost});
+      costs.push({type: 'cost', icon: 'money', amt: -this.data.moneyCost});
 
     if(this.data.commReward > 0)
-      costs.push({icon: 'comm', amt: this.data.commReward});
+      costs.push({type: 'reward', icon: 'comm', amt: this.data.commReward});
     if(this.data.jobReward > 0)
-      costs.push({icon: 'job', amt: this.data.jobReward});
+      costs.push({type: 'reward', icon: 'job', amt: this.data.jobReward});
     if(this.data.englishReward > 0)
-      costs.push({icon: 'english', amt: this.data.englishReward});
+      costs.push({type: 'reward', icon: 'english', amt: this.data.englishReward});
 
     return costs;
 
