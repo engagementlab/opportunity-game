@@ -2,6 +2,10 @@
 	<router-outlet #o="outlet"></router-outlet>
 </div>
 
+<div id="toolbar-parent" class="hide">
+	<game-toolbar></game-toolbar>
+</div>
+
 <div id="round-over" class="modal hide">
 	
 	<div id="content" class="col-10">
@@ -40,10 +44,6 @@
 <!-- EFFECT EVENTS -->
 <div id="effect-events" class="modal hide">
 	<div *ngFor="let event of effectEvents" id="{{event._id}}" class="hide">
-		<game-event [data]="event" [type]="effect"></game-event>
+		<game-event [data]="event" type="effect"></game-event>
 	</div>
-</div>
-
-<div id="toolbar-parent" style="display: none">
-	<game-toolbar></game-toolbar>
 </div>

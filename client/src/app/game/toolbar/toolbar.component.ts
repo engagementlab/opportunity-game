@@ -7,7 +7,7 @@ import { PlayerData } from '../../models/playerdata';
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss']
 })
-export class GameToolbarComponent implements AfterViewInit {
+export class GameToolbarComponent {
 
   round: number = 1;
   actions: number;
@@ -28,10 +28,11 @@ export class GameToolbarComponent implements AfterViewInit {
     this.jobLevel = this._dataSvc.playerData.jobLevel;
     this.englishLevel = this._dataSvc.playerData.englishLevel;
 
-  	this._dataSvc.playerDataUpdate.subscribe((data: PlayerData) => {
+
+    this._dataSvc.playerDataUpdate.subscribe((data: PlayerData) => {
 
       this.money = data.money;
-  		this.actions = data.actions;
+      this.actions = data.actions;
 
       this.commLevel = data.commLevel;
       this.jobLevel = data.jobLevel;
@@ -48,8 +49,10 @@ export class GameToolbarComponent implements AfterViewInit {
 
    }
 
-  ngAfterViewInit() {
-  	
-  }
+   openDrawer() {
+    
+    document.getElementById('toolbar').classList.toggle('open');
+
+   }
 
 }

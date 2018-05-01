@@ -1,4 +1,4 @@
 <cl-image *ngIf="cloudinaryId !== undefined && cloudinaryId.length > 0"  secure="true" public-id="{{cloudinaryId}}" attr.alt="{{alt}}" class="cdn-image">
-  <cl-transformation *ngIf="autoFormat === true" attr.width="{{width}}" attr.quality="{{quality}}" crop="scale" fetch-format="auto" dpr="auto" crop="fill" attr.style="width:20px"></cl-transformation>
-  <cl-transformation *ngIf="autoFormat === false" attr.width="{{width}}" attr.quality="{{quality}}" crop="scale" dpr="auto" crop="fill" attr.style="width:20px"></cl-transformation>
+  <cl-transformation *ngIf="autoFormat === true" attr.width="{{width}}" attr.quality="{{quality}}" crop="scale" fetch-format="auto" dpr="auto" crop="fill"></cl-transformation>
+  <cl-transformation *ngIf="autoFormat === false" attr.width="{{width}}" attr.quality="{{quality}}" crop="scale" dpr="auto" crop="fill"></cl-transformation>
 </cl-image>

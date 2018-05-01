@@ -3,6 +3,7 @@
 .game-event {
 
 	font-size: large;
+	text-align: center;
 	background: white;
 	@include box-shadow(4px, 4px, 0, #000000);
 
@@ -16,6 +17,12 @@
 
 .items {
 
+	font-size: x-large;
+	padding-top: 5%;
+	padding-bottom: 5%;
+	div {
+		background-position-y: center;
+	}
 	.cost {
 		color: $bright-orange;
 		text-align: center;

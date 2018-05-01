@@ -1,11 +1,12 @@
 <div class="game-event col-10">
 
+	<h2 *ngIf="type === 'effect'">Opportunity Event</h2>
 	<h2 *ngIf="type === 'life'">Life Event</h2>
 
 	<b>{{data.flavor}}</b>
 
 	<div class="items row">
-		<div class="{{item.icon}} {{item.type}} col-5" *ngFor="let item of getCostsAndRewards()">
+		<div class="{{item.icon}} {{item.type}} col-4 col-centered" *ngFor="let item of getCostsAndRewards()">
 
 			<span *ngIf="item.type === 'cost'">
 				{{item.amt}}

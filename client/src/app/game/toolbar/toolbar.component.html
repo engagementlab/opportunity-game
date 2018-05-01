@@ -1,6 +1,44 @@
-<div id="toolbar">
-[Round] {{round}} /	${{money}} | T{{actions}} / [Comm] {{commLevel}} | [Job] {{jobLevel}} | [English] {{englishLevel}}
+<div id="toolbar" class="no-margin col-md-6 col-lg-12">
+	 
+	<div id="ellipses" class="hidden" (click)="openDrawer()">
+		<cdn-image cloudinaryId="opportunity-game/toolbar/ellipses.svg" autoFormat="true" alt="'More' toolbar icon"></cdn-image>
+	</div>
 
-	<div *ngIf="hasTransit === true">[✓Transit]</div>
-	<div *ngIf="hasJob === true">[✓Job]</div>
+	<div id="main" class="row">
+
+		<span id="player" class="col-3 col-md-2 col-lg-1 icon"><cdn-image cloudinaryId="opportunity-game/toolbar/player.svg" alt="Player toolbar icon"></cdn-image></span>
+		<span id="money" class="col-2 col-md-1 col-lg-1 icon"><cdn-image cloudinaryId="opportunity-game/toolbar/money.svg" alt="Money toolbar icon"></cdn-image></span>
+		<span class="col-1 col-lg-1 label bold no-pad">{{money}}</span>
+
+		<span id="actions" class="col-2 col-md-1 col-lg-1 icon"><cdn-image cloudinaryId="opportunity-game/toolbar/actions.svg" alt="Actions toolbar icon"></cdn-image></span>
+		<span class="col-1 col-md-1 col-lg-1 label bold no-pad">{{actions}}</span>
+
+		<span id="community-lvl" [class.disabled]="commLevel === 0" class="col-4 col-lg-1 icon-lg">
+			<cdn-image cloudinaryId="opportunity-game/toolbar/community-lvl.svg" alt="Community level toolbar icon"></cdn-image>
+			<div class="badge bold">{{commLevel}}</div>
+		</span>
+
+		<span id="job-lvl" [class.disabled]="jobLevel === 0" class="col-4 col-lg-1 icon-lg">
+			<cdn-image cloudinaryId="opportunity-game/toolbar/job-lvl.svg" alt="Job level toolbar icon"></cdn-image>
+			<div class="badge bold">{{jobLevel}}</div>
+		</span>
+
+		<span id="english-lvl" [class.disabled]="englishLevel === 0" class="col-4 col-lg-1 icon-lg">
+			<cdn-image cloudinaryId="opportunity-game/toolbar/english-lvl.svg" alt="English level toolbar icon"></cdn-image> 
+			<div class="badge bold">{{englishLevel}}</div>
+		</span>
+
+	</div>
+
+	<div id="drawer">
+
+		<div id="english-lvl" [class.disabled]="hasTransit === false" class="icon-lg">
+				<cdn-image cloudinaryId="opportunity-game/toolbar/transit.svg" alt="Public transit toolbar icon"></cdn-image> 
+		</div>
+		<div id="english-lvl" [class.disabled]="hasJob === false" class="icon-lg">
+			<cdn-image cloudinaryId="opportunity-game/toolbar/job.svg" alt="Job toolbar icon"></cdn-image>
+		</div>	
+
+	</div>
+
 </div>
