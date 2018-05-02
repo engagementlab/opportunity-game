@@ -4,15 +4,18 @@
 	color: white;
 	text-align: center;
 	height: 71px;
+	font-size: medium;
+
 	background: cdn-image('speech-bubble', c_scale, w_600);
 	background-repeat: no-repeat;
 	background-position: bottom;
 	background-size: contain;
+
 	.content {
 	  margin-left: auto;
 	  margin-right: auto;
 	  position: relative;
-	  top: 50%;
+	  top: 45%;
 	  transform: translateY(-50%);
 	}
 }
@@ -23,7 +26,7 @@
 	text-align: center;
 	background: cdn-image('plackard-bg', c_scale, w_133);
 	background-repeat: no-repeat;
-	background-position: bottom;
+	background-position: center bottom;
 	background-size: contain;
 }
 
@@ -56,15 +59,17 @@
 	background: cdn-image('map-bg');
   .centered {
   	position: absolute;
-  	width: 80%;
-	  // top: 50%;
-	  transform: translate(0,-50%);
+  	width: 45%;
+  	transform: translate(35%, -93%);
   }
 }
 
 #map {
 	
 	background: cdn-image('map-bg');
+	@include mobile-only {
+		height: 100%;
+	}
 
 	#category-label {
 		text-align: center;
@@ -84,8 +89,8 @@
 	.plackard {
 		font-size: 10px;
 		min-height: 39px;
-		background-position: inherit;
-
+		padding-left: 6%;
+		padding-right: 6%;
 	}
 	.locked {
 		@include filter(opacity, 50%);

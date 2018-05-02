@@ -57,16 +57,16 @@ Opportunity.add({
         many: true
     },
     
-    commReward: { type: Number, default: 0, label: "Community Reward", required: true },
-    jobReward: { type: Number, default: 0, label: "Job Reward", required: true },
-    englishReward: { type: Number, default: 0, label: "English Reward", required: true},
+    commReward: { type: Number, default: 0, label: "Community Reward" },
+    jobReward: { type: Number, default: 0, label: "Job Reward" },
+    englishReward: { type: Number, default: 0, label: "English Reward" },
     
     achievement:
     {
         "Transit": {type: Types.Boolean},
         "Job": {type: Types.Boolean}
     },
-    triggerAmt: { type: Number, default: 0, label: "Trigger After Actions", required: true, initial: true, note: 'Number of actions to wait before benefit.' },
+    triggerAmt: { type: Number, default: 0, label: "Trigger After Actions", note: 'Number of actions to wait before benefit.' },
     effect: {
         type: Types.Relationship,
         ref: 'Event',

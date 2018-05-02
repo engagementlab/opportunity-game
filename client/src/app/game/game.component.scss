@@ -19,8 +19,8 @@
 	#content {
 
 		font-size: large;
+		text-align: center;
 		background: white;
-		@include box-shadow(4px, 4px, 0, #000000);
 
 		position: fixed;
 		left: 50%;
@@ -28,5 +28,7 @@
 		min-height: 250px;
 		transform: translate(-50%, -50%);
 
+		@include box-shadow(4px, 4px, 0, #000000);
+		
 	}
 }

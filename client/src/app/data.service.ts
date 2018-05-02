@@ -61,7 +61,7 @@ export class DataService {
     public playerData: PlayerData = 
     {
         round: 1,
-        money: 5,
+        money: 30,
         actions: 5,
         
         commLevel: 0,
@@ -234,6 +234,19 @@ export class DataService {
         this.playerDataUpdate.emit(this.playerData);
 
         this.playerData.newRound = false;
+
+        // DEBUG ONLY
+         _.each(this.locationData, (loc) => {
+
+            _.each(loc.opportunities, (thisOpp) => {
+
+            if(!thisOpp.enabled)
+                thisOpp.enabled = undefined;
+
+            }); 
+
+            this.locationDataUpdate.emit(loc);
+        }); 
 
     }
 

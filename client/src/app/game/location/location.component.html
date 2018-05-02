@@ -2,8 +2,6 @@
 
 	<app-button label="Back" ariaLabel="Back to Home" clickData="true" (clickEvent)="backToMap()" class="gold"></app-button>
 
-	<div id="opportunities">
-
 	 	<div id="list" class="col-sm-12">
 			<button *ngFor="let opportunity of currentLocation?.opportunities" (click)="viewOpportunity(opportunity._id)" class="col-sm-8 bold" id="listing_{{opportunity._id}}" [disabled]="opportunity.enabled !== undefined">
 
@@ -47,33 +45,31 @@
 		<div id="details" class="hidden">
 			<div *ngFor="let opportunity of currentLocation?.opportunities" class="opportunity modal" id="detail_{{opportunity._id}}">
 
+				<div class="content col-10 medium">
+					<div (click)="backToList()" class="back btn"><--</div>
 
-				<div class="content col-10">
-				<div (click)="backToList()" class="back btn"><--</div>
-
-					<div class="col-centered col-12 medium">
+					<div>
 							Would you like to learn about <span class="bold">{{opportunity.name}}</span>? 
-
+					</div>
+					<div class="row">
 						<!-- Rewards -->
-						<div class="reward" *ngIf="opportunity.commReward > 0">
+						<div class="reward col-5 col-centered" *ngIf="opportunity.commReward > 0">
 							<cdn-image cloudinaryId="opportunity-game/icons/community.svg" alt="Icon for Community reward"></cdn-image>
 						</div>
-						<div class="reward" *ngIf="opportunity.englishReward > 0">
+						<div class="reward col-5 col-centered" *ngIf="opportunity.englishReward > 0">
 							<cdn-image cloudinaryId="opportunity-game/icons/english.svg" alt="Icon for English reward"></cdn-image>
 						</div>
-						<div class="reward" *ngIf="opportunity.jobReward > 0">
+						<div class="reward col-5 col-centered" *ngIf="opportunity.jobReward > 0">
 							<cdn-image cloudinaryId="opportunity-game/icons/job.svg" alt="Icon for Job reward"></cdn-image>
 						</div>
+					</div>
 
-						<div class="row">
-							<app-button label="Yes" ariaLabel="Click to learn about {{opportunity.name}}" clickData="true" (clickEvent)="selectOpportunity(opportunity)" class="green col-centered"></app-button>
-						</div>
+					<div class="row">
+						<app-button label="Yes" ariaLabel="Click to learn about {{opportunity.name}}" clickData="true" (clickEvent)="selectOpportunity(opportunity)" class="green col-centered"></app-button>
 					</div>
 
 				</div>
 			</div>
 		</div>
-
-	</div>
 
 </div>

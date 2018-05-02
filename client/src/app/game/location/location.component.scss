@@ -13,6 +13,10 @@
 
 #list {
 	overflow: scroll;
+	padding-bottom: 5%;
+	@include mobile-only {
+		height: 100vw;
+	} 
 
 	button {
 		@include box-shadow(4px, 4px, 0, #000000);
@@ -42,7 +46,7 @@
 		}
 	}
 	.reward {
-		float: inline-end;
+		float: right;
 		background-color: $white;
     border-radius: 50%;
     width: 60px;
@@ -62,11 +66,10 @@
 		}
 	}
 	.achievement {
-		float: inline-end;
+		float: right;
 		::ng-deep img {
 			width: 30px;
 		}
-
 	}
 }
 

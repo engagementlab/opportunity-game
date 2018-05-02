@@ -1,20 +1,40 @@
-<div id="game" [@slideAnimation]="getRouterOutletState(o)">
+<div id="game" [@slideAnimation]="getRouterOutletState(o)" class="round-{{round}}">
+	
 	<router-outlet #o="outlet"></router-outlet>
+
 </div>
 
 <div id="toolbar-parent" class="hide">
 	<game-toolbar></game-toolbar>
 </div>
 
-<div id="round-over" class="modal hide">
+<div id="round-over" class="modal hide round-{{round}}">
 	
 	<div id="content" class="col-10">
-		<h1>ROUND {{round}} OVER</h1>
-		You earned +{{currentWellnessScore}} wellbeing.
-
-		<div class="row col-centered">
-			<app-button label="Next Round" ariaLabel="Click/tap to go to next round" clickData="true" (clickEvent)="nextRound()" class="green col-centered col-6"></app-button>
+		<h1 class="round1">ROUND {{round}} OVER</h1>
+		<h1 class="round2">ROUND {{round}} OVER</h1>
+		<h1 class="round3">GAME END!</h1>
+		
+		<div class="round1">
+			You earned +{{currentWellnessScore - lastWellnessScore}} wellbeing.
 		</div>
+		<div class="round2">
+			You earned +{{currentWellnessScore - lastWellnessScore}} wellbeing.
+		</div>
+		<div class="round3">
+			You got {{currentWellnessScore}} wellbeing overall.
+		</div>
+
+		<div class="row round1">
+			<app-button label="Go to Round 2" ariaLabel="Click/tap to go to round 2" clickData="true" (clickEvent)="nextRound()" class="green col-centered"></app-button>
+		</div>
+		<div class="row round2">
+			<app-button label="Go to Round 3" ariaLabel="Click/tap to go to round 3" clickData="true" (clickEvent)="nextRound()" class="green col-centered"></app-button>
+		</div>
+		<div class="row round3">
+			<app-button label="Go to Survey" ariaLabel="Click/tap to go to post-game survery" href="/" class="green col-centered"></app-button>
+		</div>
+
 	</div>
 
 </div>

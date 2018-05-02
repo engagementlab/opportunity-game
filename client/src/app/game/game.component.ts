@@ -22,7 +22,9 @@ export class GameComponent implements OnInit {
   public effectEvents: Event[];
   
   currentWellnessScore: number;
+  lastWellnessScore: number = 0;
   round: number = 1;
+  newRound: number;
 
   public getRouterOutletState(outlet) {
     return outlet.isActivated ? outlet.activatedRoute : '';
@@ -70,6 +72,8 @@ export class GameComponent implements OnInit {
         TweenLite.to(document.getElementById('job'), 1, {autoAlpha: 1, display:'block'});
       }
 
+      this.newRound = data.round;
+
 
     });
 
@@ -104,6 +108,13 @@ export class GameComponent implements OnInit {
         TweenLite.to(allEvents[eventIndex], 1, {autoAlpha:1, display:'block'});
 
       }
+
+      // Update last score 
+      this.lastWellnessScore = this.currentWellnessScore;
+
+      // Update round
+      this.round = this.newRound;
+
   }
 
   closeCheevo() {

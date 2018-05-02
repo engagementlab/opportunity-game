@@ -39,15 +39,15 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
 
   ngAfterViewChecked() {
 
-      if(!this.loadCategory || this.loadedCategory)
-        return;
-      
-      let categoryId = this.route.snapshot.queryParams.cat;
-      // Load category now?
-      if(categoryId)
-        this.filterSelection(categoryId);
+    if(!this.loadCategory || this.loadedCategory)
+      return;
+    
+    let categoryId = this.route.snapshot.queryParams.cat;
+    // Load category now?
+    if(categoryId)
+      this.filterSelection(categoryId);
 
-      this.loadedCategory = true;
+    this.loadedCategory = true;
 
   }
 

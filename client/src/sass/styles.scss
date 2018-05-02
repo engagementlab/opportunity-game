@@ -71,6 +71,25 @@ button {
   background: rgba(217, 217, 217, .8);
 }
 
+// Global round selectors 
+div {
+  &.round-1 {
+    .round2, .round3 {
+      display: none;
+    }
+  }
+  &.round-2 {
+    .round1, .round3 {
+      display: none;
+    }
+  }
+  &.round-3 {
+    .round1, .round2 {
+      display: none;
+    }
+  }
+}
+
 #loading {
   position: fixed;
   width: 100%;
