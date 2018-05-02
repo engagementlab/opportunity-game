@@ -67,9 +67,10 @@
 #map {
 	
 	background: cdn-image('map-bg');
+		
 	@include mobile-only {
-		height: 100%;
-	}
+		height: 102vw;
+	} 
 
 	#category-label {
 		text-align: center;

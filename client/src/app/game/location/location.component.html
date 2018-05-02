@@ -2,7 +2,7 @@
 
 	<app-button label="Back" ariaLabel="Back to Home" clickData="true" (clickEvent)="backToMap()" class="gold"></app-button>
 
-	 	<div id="list" class="col-sm-12">
+	 	<div id="list" class="col-sm-12 col-lg-6 col-centered">
 			<button *ngFor="let opportunity of currentLocation?.opportunities" (click)="viewOpportunity(opportunity._id)" class="col-sm-8 bold" id="listing_{{opportunity._id}}" [disabled]="opportunity.enabled !== undefined">
 
 					<div class="name">
