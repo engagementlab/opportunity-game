@@ -29,6 +29,7 @@
     "@cloudinary/angular-5.x": "^1.0.1",
     "@ng-bootstrap/ng-bootstrap": "^1.0.0",
     "@nicky-lenaers/ngx-scroll-to": "^0.6.0",
+    "@types/greensock": "^1.15.32",
     "@types/gsap": "^1.19.2",
     "@types/ismobilejs": "^0.4.1",
     "@types/underscore": "^1.8.8",

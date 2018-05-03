@@ -54,6 +54,12 @@ button {
   margin: 0 auto;
 }
 
+.vert-center {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 .btn {
   cursor: pointer;
 }

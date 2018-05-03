@@ -1,29 +1,45 @@
 <div id="home">
 
-	<div id="filters" class="row">
+	<div id="filters" class="row col-md-10 col-centered">
 	
 		<div *ngFor="let filter of filters" class="col-6 col-md-3 filter btn" (click)="filterSelection(filter.key)">
-			<div class="content">
+			<div class="content vert-center">
 				<cdn-image cloudinaryId="opportunity-game/icons/{{filter.key}}.svg" width="150" alt="Icon for {{filter.label}} filter"></cdn-image>
+				<div class="label bold">{{filter.label}}</div>
 			</div>
-			<div class="label bold">{{filter.label}}</div>
 		</div>
 	
 	</div>
 
 	<div id="house" class="row">
 
-		<div class="col-10 col-centered bubble">
+		<div class="col-10 col-centered bubble mobile">
 			<div class="content">
 				<span class="round1">Choose a category to explore</span>
 				<span class="round2">Keep exploring and finding Opportunities! Maybe you should find a way to work on your English.</span>
 			</div>
 		</div>
 
-		<div class="col-6 col-centered">
+		<div class="col-6 col-centered mobile">
 			<div class="centered">
 				<cdn-image cloudinaryId="opportunity-game/locations/home.svg" width="150" alt="Icon for Home"></cdn-image>
 				<div class="plackard">home</div>
+			</div>
+		</div>
+
+		<div class="col-6 desktop">
+			<div class="centered">
+				<cdn-image cloudinaryId="opportunity-game/locations/home.svg" width="150" alt="Icon for Home"></cdn-image>
+				<div class="plackard">home</div>
+			</div>
+		</div>
+
+		<div class="col-5 desktop">
+			<div class="bubble vert-center">
+				<div class="content">
+					<span class="round1">Choose a category to explore</span>
+					<span class="round2">Keep exploring and finding Opportunities! Maybe you should find a way to work on your English.</span>
+				</div>
 			</div>
 		</div>
 
@@ -36,8 +52,8 @@
 	<app-button label="Back" ariaLabel="Back to Home" clickData="true" (clickEvent)="backToHome()" class="gold"></app-button>
 	<div id="category-label" class="bold">Category</div>
 
-	<div class="locations row">
-		<div *ngFor="let location of locations" attr.data-categories="{{location.categoriesStr}}" class="col-6 col-centered location">
+	<div class="locations row col-md-10">
+		<div *ngFor="let location of locations" attr.data-categories="{{location.categoriesStr}}" class="col-6 col-md-3 location">
 
 			<div class="centered">
 								

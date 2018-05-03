@@ -41,8 +41,9 @@ export class GameEventComponent implements OnInit {
   removeEvent() {
 
   	let thisEl = document.getElementById(this.data._id);
-    TweenLite.to(thisEl.parentNode, 1, {autoAlpha: 0, display:'none'});
-  	thisEl.parentNode.removeChild(thisEl);
+    TweenLite.to(thisEl.parentNode, 1, {autoAlpha: 0, display:'none', oncomplete: () => {
+    	// thisEl.parentNode.removeChild(thisEl);
+    }});
     
   }
 

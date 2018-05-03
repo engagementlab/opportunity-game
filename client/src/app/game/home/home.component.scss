@@ -1,10 +1,18 @@
 @import "~sass/_variables";
 
 .bubble {
+
 	color: white;
 	text-align: center;
 	height: 71px;
 	font-size: medium;
+	
+	@include mq($from: tablet) {
+		background: cdn-image('speech-bubble-desktop', c_scale, w_600);
+		background-repeat: no-repeat;
+		background-position: bottom;
+		background-size: contain;
+	}
 
 	background: cdn-image('speech-bubble', c_scale, w_600);
 	background-repeat: no-repeat;
@@ -18,9 +26,11 @@
 	  top: 45%;
 	  transform: translateY(-50%);
 	}
+
 }
 
 .plackard {
+
 	color: white;
 	text-transform: uppercase;
 	text-align: center;
@@ -28,75 +38,139 @@
 	background-repeat: no-repeat;
 	background-position: center bottom;
 	background-size: contain;
+
+}
+
+#home {
+	
+	height: 100%;
+
 }
 
 #filters {
+
+	display: flex;
+	@include mq($from: tablet) {
+		min-height: 50%;
+	}
+	@include mobile-only {
+		padding-bottom: 10%;
+	}
+
 	.filter {
+		@include mobile-only { 
+			 padding-top: 10%;
+		}
 		.content {
-			background-color: $white;
+		  background-color: $white;
 	    border-radius: 50%;
 	    width: 120px;
 	    height: 120px;
 	    margin: 0 auto;
 	    ::ng-deep img {
-	    	position: absolute;
-	    	width: 40%;
-			  top: 50%;
-			  left: 50%;
-			  transform: translate(-50%, -68%);
-			  max-width: 80px;
+	    	// position: absolute;
+	    	width: 100%;
+		     padding: 25%;
+			  // top: 50%;
+			  // left: 50%;
+			  // transform: translate(-50%, -68%);
+			  // max-width: 80px;
+				
+				// @include mq($from: tablet) {
+		  //     width: 62%;
+			 //    top: 50%;
+			 //    left: 50%;
+			 //    transform: translate(-30%, -74%);
+			 //  }
 	    }
 	  }
 	  .label {
 	  	text-align: center;
-
 	  }
 	}
 }
 
 #house {
-	min-height: 300px;
+
+	min-height: 100%;
 	background: cdn-image('map-bg');
   .centered {
   	position: absolute;
   	width: 45%;
   	transform: translate(35%, -93%);
   }
+	@include mobile-only {
+		.mobile {
+			display: block;
+		}
+		.desktop {
+			display: none;
+		}
+	}
+	@include mq($from: tablet) {
+		.desktop {
+			display: block;
+
+		  .centered {
+		  	position: relative;
+		  	width: 45%;
+		  	transform: translate(100%, 0);
+		  }
+		  .bubble {
+		  	top: 25%;
+		  }
+		}
+		.mobile {
+			display: none;
+		}
+	}
+
 }
 
 #map {
 	
 	background: cdn-image('map-bg');
+	min-height: 100%;
 		
-	@include mobile-only {
-		height: 102vw;
-	} 
-
 	#category-label {
 		text-align: center;
-		padding: 5%;
 		font-size: large;
+		padding: 1%;
+		@include mobile-only {
+			padding: 5%;
+		}
 	}
 
 }
 
-.location {
-	display: none;
-
-	a {
-		text-decoration: none;
+.locations {
+	margin: auto;
+  height: 65vh;
+	@media(max-height: 680px) {
+		height: 58vh;
+	}
+	@include mobile-only {
+	  overflow: scroll;
 	}
 
-	.plackard {
-		font-size: 10px;
-		min-height: 39px;
-		padding-left: 6%;
-		padding-right: 6%;
-	}
-	.locked {
-		@include filter(opacity, 50%);
-	}
-	&.show {
-		display: block;
+	.location {
+		display: none;
+
+		a {
+			text-decoration: none;
+		}
+
+		.plackard {
+			font-size: 10px;
+			min-height: 39px;
+			padding-left: 6%;
+			padding-right: 6%;
+		}
+		.locked {
+			@include filter(opacity, 50%);
+		}
+		&.show {
+			display: block;
+		}
 	}
 }

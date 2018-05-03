@@ -1,9 +1,9 @@
 <div class="location">
 
-	<app-button label="Back" ariaLabel="Back to Home" clickData="true" (clickEvent)="backToMap()" class="gold"></app-button>
+	<div><app-button label="Back" ariaLabel="Back to Home" clickData="true" (clickEvent)="backToMap()" class="gold"></app-button></div>
 
-	 	<div id="list" class="col-sm-12 col-lg-6 col-centered">
-			<button *ngFor="let opportunity of currentLocation?.opportunities" (click)="viewOpportunity(opportunity._id)" class="col-sm-8 bold" id="listing_{{opportunity._id}}" [disabled]="opportunity.enabled !== undefined">
+	 	<div id="list" class="col-sm-12 col-md-8">
+			<button *ngFor="let opportunity of currentLocation?.opportunities" (click)="viewOpportunity(opportunity._id)" class="col-sm-8 col-md-12 bold" id="listing_{{opportunity._id}}" [disabled]="opportunity.enabled !== undefined">
 
 					<div class="name">
 						{{opportunity.name}}
@@ -42,11 +42,10 @@
 			</button>
 		</div>
 
-		<div id="details" class="hidden">
-			<div *ngFor="let opportunity of currentLocation?.opportunities" class="opportunity modal" id="detail_{{opportunity._id}}">
+		<div id="details" class="modal hidden">
+			<div *ngFor="let opportunity of currentLocation?.opportunities" class="opportunity col-8 col-centered medium vert-center hidden" id="detail_{{opportunity._id}}">
 
-				<div class="content col-10 medium">
-					<div (click)="backToList()" class="back btn"><--</div>
+					<div (click)="backToList(opportunity._id)" class="back btn"><--</div>
 
 					<div>
 							Would you like to learn about <span class="bold">{{opportunity.name}}</span>? 
@@ -65,10 +64,9 @@
 					</div>
 
 					<div class="row">
-						<app-button label="Yes" ariaLabel="Click to learn about {{opportunity.name}}" clickData="true" (clickEvent)="selectOpportunity(opportunity)" class="green col-centered"></app-button>
+						<app-button label="Yes" ariaLabel="Click to learn about {{opportunity.name}}" clickData="true" (clickEvent)="selectOpportunity(opportunity, opportunity._id)" class="green col-centered"></app-button>
 					</div>
 
-				</div>
 			</div>
 		</div>
 
