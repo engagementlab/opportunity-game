@@ -1,20 +1,29 @@
-<div id="logo">
-  <cdn-image cloudinaryId="opportunity-game/logo.svg" width="650" autoFormat="false" alt="Portland of Opportunity logo"></cdn-image>
-</div>
-<div id="welcome" class="hidden">
-  <cdn-image cloudinaryId="opportunity-game/welcome.svg" width="650" autoFormat="false" alt="Welcome to Portland logo"></cdn-image>
-</div>
 
 <div class="row">
-	<div *ngFor="let character of characters; let i = index;" class="col-6 col-md-3 character" (click)="chooseCharacter($event)">
-		<cdn-image cloudinaryId="opportunity-game/characters/{{i+1}}.svg" width="150" autoFormat="false" alt="Character portrait #{{i+1}}" class="character-btn"></cdn-image>
-		<p class="bio">{{character.bio}}</p>
+	<div id="logo" class="col-10 col-md-5 col-centered">
+	  <cdn-image cloudinaryId="opportunity-game/logo.svg" width="650" autoFormat="false" alt="Portland of Opportunity logo"></cdn-image>
 	</div>
 </div>
 
-<button id="back" (click)="goBack()">back</button>
-<app-button label="Submit" route="/game/home" ariaLabel="Submit"></app-button>
+<div class="row">
+	<div id="welcome" class="col-10 col-md-5 col-centered hidden">
+	  <cdn-image cloudinaryId="opportunity-game/welcome.svg" width="650" autoFormat="false" alt="Welcome to Portland logo"></cdn-image>
+	</div>
+</div>
 
+<div id="characters" class="col-md-6">
+	<div class="row">
+		<div *ngFor="let character of characters; let i = index;" class="col-6 col-md-3 character" (click)="chooseCharacter($event)">
+			<cdn-image cloudinaryId="opportunity-game/characters/{{i+1}}.svg" width="150" autoFormat="false" alt="Character portrait #{{i+1}}" class="character-btn"></cdn-image>
+			<p class="bio col-md-3">{{character.bio}}</p>
+		</div>
+	</div>
+</div>
+
+<div id="buttons">
+	<button id="back" class="vert-center" (click)="goBack()"><-</button>
+	<app-button label="Submit" route="/game/home" ariaLabel="Submit" class="green"></app-button>
+</div>
 <!-- Career
 <fieldset name="career_ranking">
 	<input type="radio" name="career_ranking" value="0" (change)="onSelectionChange($event)"/>

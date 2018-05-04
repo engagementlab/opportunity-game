@@ -51,37 +51,28 @@
 
 	display: flex;
 	@include mq($from: tablet) {
-		min-height: 50%;
+		min-height: 40%;
 	}
 	@include mobile-only {
 		padding-bottom: 10%;
 	}
 
 	.filter {
+		// display: inline-table;
 		@include mobile-only { 
 			 padding-top: 10%;
 		}
 		.content {
-		  background-color: $white;
-	    border-radius: 50%;
-	    width: 120px;
-	    height: 120px;
+      background-size: 120% 100%;
+	    background-image: radial-gradient(ellipse at center, #e8e6e5 50%,#ffffff 51%);
+	    background-repeat: no-repeat;
+	    background-position: center -.5em;
+
+	    // font-size: em(20px);
 	    margin: 0 auto;
 	    ::ng-deep img {
-	    	// position: absolute;
-	    	width: 100%;
-		     padding: 25%;
-			  // top: 50%;
-			  // left: 50%;
-			  // transform: translate(-50%, -68%);
-			  // max-width: 80px;
-				
-				// @include mq($from: tablet) {
-		  //     width: 62%;
-			 //    top: 50%;
-			 //    left: 50%;
-			 //    transform: translate(-30%, -74%);
-			 //  }
+				width: 100%;
+				padding: 25%;
 	    }
 	  }
 	  .label {
@@ -92,12 +83,12 @@
 
 #house {
 
-	min-height: 100%;
+	min-height: 60%;
 	background: cdn-image('map-bg');
   .centered {
   	position: absolute;
   	width: 45%;
-  	transform: translate(35%, -93%);
+  	transform: translate(35%, -100%);
   }
 	@include mobile-only {
 		.mobile {
@@ -130,7 +121,7 @@
 #map {
 	
 	background: cdn-image('map-bg');
-	min-height: 100%;
+	min-height: 400%;
 		
 	#category-label {
 		text-align: center;

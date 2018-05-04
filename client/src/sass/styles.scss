@@ -10,7 +10,7 @@
 }
 @media (min-width: 1430px) {
   .container {
-    max-width: 1400px;
+    margin: 0;
   }
 }
 
@@ -58,6 +58,14 @@ button {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
+}
+
+.row-lg {
+  @include mq($from: tablet) {
+    display: flex;
+    margin-right: -15px;
+    margin-left: -15px;
+  }
 }
 
 .btn {

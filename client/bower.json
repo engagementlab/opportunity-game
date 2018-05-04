@@ -16,6 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "angular-cloudinary": "^1.2.4"
+    "angular-cloudinary": "^1.2.4",
+    "particles.js": "^2.0.0"
   }
 }

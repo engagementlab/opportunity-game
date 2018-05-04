@@ -10,6 +10,9 @@ export class GameStartComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  	/*particlesJS.load('parent', '../../assets/particles.json', function() {
+		  console.log('callback - particles.js config loaded');
+		});*/
   }
 
 }

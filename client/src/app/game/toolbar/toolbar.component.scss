@@ -74,6 +74,7 @@
 }
 #main {
 	float: left;
+	min-width: 50%;
 	@include mobile-only {
 		max-width: 75%;
 	}

@@ -1,0 +1,14 @@
+@import "~sass/_variables";
+
+#parent {
+	background-image: cdn-image('confetti');
+	// background-position-y: 200%;
+	background-repeat: no-repeat;
+	height: 100%;
+}
+#new {
+  float: none;
+  margin: 0 auto;
+  font-size: xx-large;
+  text-align: center;
+}
