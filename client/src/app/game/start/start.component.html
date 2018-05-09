@@ -6,9 +6,11 @@
 		  <cdn-image cloudinaryId="opportunity-game/logo.svg" width="650" autoFormat="false" alt="Portland of Opportunity logo"></cdn-image>
 		</div>
 	</div>
+	
+	<game-character id="characters-parent" class="hidden"></game-character>
 
 	<div id="new">
-		<app-button label="New Game" route="/game/character" class="large gold" ariaLabel="Start new Game"></app-button>
+		<app-button label="New Game" clickData="true" (clickEvent)="showCharacters()" class="large gold" ariaLabel="Start new Game"></app-button>
 	</div>
 
 </div>

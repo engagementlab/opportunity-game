@@ -1,14 +1,46 @@
 @import "~sass/_variables";
 
-#parent {
-	background-image: cdn-image('confetti');
-	// background-position-y: 200%;
-	background-repeat: no-repeat;
-	height: 100%;
+@include keyframes('backgroundMove') {
+	from {background-position: 0 0;}
+  to {background-position: 0 130%;}
 }
+
+#parent {
+
+	transition: background-image 1s ease-in-out;
+	@include mq($from: tablet) {
+		background-image: cdn-image('confetti');
+		background-repeat: repeat-x;
+	}
+	background-image: url(http://res.cloudinary.com/engagement-lab-home/image/upload/c_scale,f_auto,w_480/v1525878909/opportunity-game/confetti-mobile.png);
+	// background-position-y: 200%;
+	height: 100%;
+
+	@include mobile-only {
+		background-repeat: no-repeat;
+		// @include animation(backgroundMove 5s linear 1);
+		&.characters {
+			background-image: url(http://res.cloudinary.com/engagement-lab-home/image/upload/c_scale,f_auto,w_480/v1525878909/opportunity-game/confetti-mobile-top.png);
+		}
+	}
+}
+
+#start {
+	@include mq($from: desktop) {
+	  max-width: 70%;
+		margin: auto;
+	}
+}
+
 #new {
   float: none;
   margin: 0 auto;
   font-size: xx-large;
   text-align: center;
+}
+
+#logo {
+	img {
+		width: 100%;
+	}
 }

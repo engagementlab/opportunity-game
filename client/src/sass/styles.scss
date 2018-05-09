@@ -40,6 +40,9 @@ button {
   font-weight: 500;
 }
 
+.auto {  
+  margin: auto;
+}
 .no-margin {
   margin: 0;
 }
@@ -75,6 +78,16 @@ button {
 .hidden {
   display: none;
 }
+.hidden-desktop {
+  @include mq($from: tablet) {
+    display: none;
+  }
+}
+.hidden-mobile {
+  @include mobile-only {
+    display: none;
+  }
+}
 
 .modal {
   position: absolute;
@@ -102,6 +115,36 @@ div {
       display: none;
     }
   }
+}
+
+
+.bubble {
+
+  color: white;
+  text-align: center;
+  height: 71px;
+  font-size: medium;
+  
+  @include mq($from: tablet) {
+    background: cdn-image('speech-bubble-desktop', c_scale, w_600);
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: contain;
+  }
+
+  background: cdn-image('speech-bubble', c_scale, w_600);
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: contain;
+
+  .content {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 45%;
+    transform: translateY(-50%);
+  }
+
 }
 
 #loading {

@@ -4,7 +4,7 @@ import { Character } from '../../models/character';
 import * as _ from 'underscore';
 
 @Component({
-  selector: 'app-character',
+  selector: 'game-character',
   templateUrl: './character.component.html',
   styleUrls: ['./character.component.scss']
 })
@@ -24,57 +24,61 @@ export class GameCharacterComponent implements OnInit {
   }
 
   ngOnInit() {
+    
+    let bubble = document.getElementById('bubble');
+    TweenLite.fromTo(bubble, 1.5, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, delay:3, display:'block', ease:Elastic.easeOut});
   }
 
-  chooseCharacter(evt) {
+  chooseCharacter(index: number) {
 
-    evt.currentTarget.classList.add('selected');
     document.getElementById('welcome').classList.remove('hidden');
     document.getElementById('logo').classList.add('hidden');
 
-    let buttons = document.getElementsByClassName('character');
-    _.each(buttons, (btn) => {
-      if(btn !== evt.currentTarget)
-        btn.classList.add('hidden');
-    });
+    document.getElementById('characters').classList.add('hidden');
+    document.getElementById('character-detail').classList.remove('hidden')
+    document.querySelector('#character-detail #detail-'+index).classList.remove('hidden');
+
+    document.getElementById('questionnaire').style.display = 'none';
 
   }
 
   goBack() {
 
+    document.getElementById('characters').classList.remove('hidden');
     document.getElementById('welcome').classList.add('hidden');
-    document.getElementById('logo').classList.remove('hidden');
+    document.getElementById('character-detail').classList.add('hidden');
     
-    let buttons = document.getElementsByClassName('character');
-    _.each(buttons, (btn) => {
-        btn.classList.remove('hidden');
-        btn.classList.remove('selected');
+    let details = document.getElementsByClassName('detail');
+    _.each(details, (detail) => {
+        detail.classList.add('hidden');
     });
 
   }
 
   onSelectionChange(evt) {
-  	let category = evt.target.parentElement.name;
-  	let otherCategories = document.getElementsByTagName('fieldset');
-		this.categoryData.set(category, evt.target.value);
 
-    this._dataSvc.changeCharacter(category, parseInt(evt.target.value));
+  	let category = evt.target.name;
+  	let otherCategories = document.getElementsByClassName('buttons');
+
+		this.categoryData.set(category, evt.target.value);
+    this._dataSvc.changeCharacter(category, evt.target.value);
 
   	_.each(otherCategories, (el) => {
-  		_.each(el.children, (child) => {
-  		  let childEl = <HTMLInputElement>child;
-  			let indexChosen = Array.from(this.categoryData.values()).includes(parseInt(childEl.value));
-  			if(!indexChosen)
-	  			child.removeAttribute('disabled');
-  		
+
+      _.each(el.children, (child) => {
+        let childEl = <HTMLInputElement>child.children[0];
+        let indexChosen = Array.from(this.categoryData.values()).includes(childEl.value);
+        console.log(this.categoryData.values())
+        console.log(childEl.value)
+        if(!indexChosen)
+	  			childEl.removeAttribute('disabled');
   		});
 
-  		if(el.name != category) {
-  			let item = el.children.item(evt.target.value);
-				item.setAttribute('disabled', 'disabled');
-  		}
-  	});
+      let input = el.children[evt.target.value].children[0];
+      if(input.name !== category)
+        input.setAttribute('disabled', 'disabled');
 
+  	});
 
   }
 

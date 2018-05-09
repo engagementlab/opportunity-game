@@ -1,7 +1,9 @@
-
-<div class="row">
-	<div id="logo" class="col-10 col-md-5 col-centered">
-	  <cdn-image cloudinaryId="opportunity-game/logo.svg" width="650" autoFormat="false" alt="Portland of Opportunity logo"></cdn-image>
+<div id="bubble" class="col-10 auto hidden">
+	<div class="bubble">
+		<div class="content">
+			<!-- Choose your character. -->
+			Rank the following to help us<br />match you with your character.
+		</div>
 	</div>
 </div>
 
@@ -11,47 +13,176 @@
 	</div>
 </div>
 
-<div id="characters" class="col-md-6">
+<div id="characters" class="col-10 hidden">
 	<div class="row">
-		<div *ngFor="let character of characters; let i = index;" class="col-6 col-md-3 character" (click)="chooseCharacter($event)">
-			<cdn-image cloudinaryId="opportunity-game/characters/{{i+1}}.svg" width="150" autoFormat="false" alt="Character portrait #{{i+1}}" class="character-btn"></cdn-image>
-			<p class="bio col-md-3">{{character.bio}}</p>
+		<div *ngFor="let character of characters; let i = index;" class="col-5 col-md-3 col-centered character" (click)="chooseCharacter(i)">
+			<cdn-image cloudinaryId="opportunity-game/characters/{{i+1}}.svg" height="164" autoFormat="false" alt="Character portrait #{{i+1}}" class="character-btn"></cdn-image>
 		</div>
 	</div>
 </div>
 
-<div id="buttons">
-	<button id="back" class="vert-center" (click)="goBack()"><-</button>
-	<app-button label="Submit" route="/game/home" ariaLabel="Submit" class="green"></app-button>
+<div id="character-detail" class="col-12 col-md-6 auto hidden">
+		<div *ngFor="let character of characters; let i = index;" id="detail-{{i}}" class="hidden row detail">
+			<div class="col-4 col-md-4"><cdn-image cloudinaryId="opportunity-game/characters/{{i+1}}.svg" width="150" autoFormat="false" alt="Character portrait #{{i+1}}" class="character-btn"></cdn-image></div>
+			<div class="bio col-8 col-md-8">{{character.bio}}</div>
+		</div>
+		<div id="buttons">
+			<button id="back" class="vert-center" (click)="goBack()"><-</button>
+			<app-button label="Submit" route="/game/home" ariaLabel="Submit" class="green"></app-button>
+		</div>
 </div>
-<!-- Career
-<fieldset name="career_ranking">
-	<input type="radio" name="career_ranking" value="0" (change)="onSelectionChange($event)"/>
-	<input type="radio" name="career_ranking" value="1" (change)="onSelectionChange($event)"/>
-	<input type="radio" name="career_ranking" value="2" (change)="onSelectionChange($event)"/>
-	<input type="radio" name="career_ranking" value="3" (change)="onSelectionChange($event)"/>
-	<input type="radio" name="career_ranking" value="4" (change)="onSelectionChange($event)"/>
-</fieldset>
 
-Engagement
-<fieldset name="engagement_ranking">
-	<input type="radio" name="engagement_ranking" value="0" (change)="onSelectionChange($event)"/>
-	<input type="radio" name="engagement_ranking" value="1" (change)="onSelectionChange($event)"/>
-	<input type="radio" name="engagement_ranking" value="2" (change)="onSelectionChange($event)"/>
-	<input type="radio" name="engagement_ranking" value="3" (change)="onSelectionChange($event)"/>
-	<input type="radio" name="engagement_ranking" value="4" (change)="onSelectionChange($event)"/>
-</fieldset>
+<div id="questionnaire" class="hidden-mobile">
+	
+	<div class="row">
+		<div id="labels" class="col-12 col-md-4">
+			<div>
+				<cdn-image cloudinaryId="opportunity-game/icons/job.svg" width="83" alt="Career Prospects"></cdn-image>
+				<span class="bold">Career Prospects</span>
+			</div>
+			<div>
+				<cdn-image cloudinaryId="opportunity-game/icons/community.svg" width="83" alt="Community Engagement"></cdn-image>
+				<span class="bold">Community Engagement</span>
+			</div>
+			<div>
+				<cdn-image cloudinaryId="opportunity-game/icons/health_and_help.svg" width="83" alt="Comfort and Health"></cdn-image>
+				<span class="bold">Comfort and Health</span>
+			</div>
+		</div>
 
-Health
-<fieldset name="health_ranking">
-	<input type="radio" name="health_ranking" value="0" (change)="onSelectionChange($event)"/>
-	<input type="radio" name="health_ranking" value="1" (change)="onSelectionChange($event)"/>
-	<input type="radio" name="health_ranking" value="2" (change)="onSelectionChange($event)"/>
-	<input type="radio" name="health_ranking" value="3" (change)="onSelectionChange($event)"/>
-	<input type="radio" name="health_ranking" value="4" (change)="onSelectionChange($event)"/>
-</fieldset>
- -->
+		<div class="col-10 col-md-6">
+			<!-- Career -->
+			<div name="career_ranking" class="buttons row">
+				<div class="col-4 container">
+					<input type="radio" name="career_ranking" value="0" (change)="onSelectionChange($event)"/>
+					<span class="radio">1</span>
+				</div>
 
+				<div class="col-4 container">
+					<input type="radio" name="career_ranking" value="1" (change)="onSelectionChange($event)"/>
+					<span class="radio">2</span>
+				</div>
 
-<!-- <label for="always">not important</label>
-<label for="change">very important</label> -->
+				<div class="col-4 container">
+					<input type="radio" name="career_ranking" value="2" (change)="onSelectionChange($event)"/>
+					<span class="radio">3</span>
+				</div>
+			</div>
+
+			<!-- Community Engagement -->
+			<div name="engagement_ranking" class="buttons row">
+				<div class="col-4 container">
+					<input type="radio" name="engagement_ranking" value="0" (change)="onSelectionChange($event)"/>
+					<span class="radio">1</span>
+				</div>
+
+				<div class="col-4 container">
+					<input type="radio" name="engagement_ranking" value="1" (change)="onSelectionChange($event)"/>
+					<span class="radio">2</span>
+				</div>
+
+				<div class="col-4 container">
+					<input type="radio" name="engagement_ranking" value="2" (change)="onSelectionChange($event)"/>
+					<span class="radio">3</span>
+				</div>
+			</div>
+
+			<!-- Comfort and Health -->
+			<div name="health_ranking" class="buttons row">
+				<div class="col-4 container">
+					<input type="radio" name="health_ranking" value="0" (change)="onSelectionChange($event)"/>
+					<span class="radio">1</span>
+				</div>
+
+				<div class="col-4 container">
+					<input type="radio" name="health_ranking" value="1" (change)="onSelectionChange($event)"/>
+					<span class="radio">2</span>
+				</div>
+
+				<div class="col-4 container">
+					<input type="radio" name="health_ranking" value="2" (change)="onSelectionChange($event)"/>
+					<span class="radio">3</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="buttons">
+		<app-button label="Submit" ariaLabel="Click/tap to see character" clickData="true" (clickEvent)="chooseCharacter(1)" class="green col-centered"></app-button>
+	</div>
+</div>
+
+<div id="questionnaire" class="hidden-desktop">
+	
+	<div id="labels" class="col-12 col-md-6">
+	</div>
+
+	<div class="col-10 col-md-6 auto">
+		<!-- Career -->
+		<div>
+			<cdn-image cloudinaryId="opportunity-game/icons/job.svg" width="83" alt="Career Prospects"></cdn-image>
+			<span class="bold">Career Prospects</span>
+		</div>
+		<div name="career_ranking" class="buttons row">
+			<div class="col-4 container">
+				<input type="radio" name="career_ranking" value="0" (change)="onSelectionChange($event)"/>
+				<span class="radio">1</span>
+			</div>
+
+			<div class="col-4 container">
+				<input type="radio" name="career_ranking" value="1" (change)="onSelectionChange($event)"/>
+				<span class="radio">2</span>
+			</div>
+
+			<div class="col-4 container">
+				<input type="radio" name="career_ranking" value="2" (change)="onSelectionChange($event)"/>
+				<span class="radio">3</span>
+			</div>
+		</div>
+
+		<!-- Community Engagement -->
+		<div>
+			<cdn-image cloudinaryId="opportunity-game/icons/community.svg" width="83" alt="Community Engagement"></cdn-image>
+			<span class="bold">Community Engagement</span>
+		</div>
+		<div name="engagement_ranking" class="buttons row">
+			<div class="col-4 container">
+				<input type="radio" name="engagement_ranking" value="0" (change)="onSelectionChange($event)"/>
+				<span class="radio">1</span>
+			</div>
+
+			<div class="col-4 container">
+				<input type="radio" name="engagement_ranking" value="1" (change)="onSelectionChange($event)"/>
+				<span class="radio">2</span>
+			</div>
+
+			<div class="col-4 container">
+				<input type="radio" name="engagement_ranking" value="2" (change)="onSelectionChange($event)"/>
+				<span class="radio">3</span>
+			</div>
+		</div>
+
+		<!-- Comfort and Health -->
+		<div>
+			<cdn-image cloudinaryId="opportunity-game/icons/health_and_help.svg" width="83" alt="Comfort and Health"></cdn-image>
+			<span class="bold">Comfort and Health</span>
+		</div>
+		<div name="health_ranking" class="buttons row">
+			<div class="col-4 container">
+				<input type="radio" name="health_ranking" value="0" (change)="onSelectionChange($event)"/>
+				<span class="radio">1</span>
+			</div>
+
+			<div class="col-4 container">
+				<input type="radio" name="health_ranking" value="1" (change)="onSelectionChange($event)"/>
+				<span class="radio">2</span>
+			</div>
+
+			<div class="col-4 container">
+				<input type="radio" name="health_ranking" value="2" (change)="onSelectionChange($event)"/>
+				<span class="radio">3</span>
+			</div>
+		</div>
+	</div>
+
+</div>

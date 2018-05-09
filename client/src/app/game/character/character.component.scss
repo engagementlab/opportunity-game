@@ -1,23 +1,89 @@
 @import "~sass/_variables";
 
-input[type=radio] {
-	display: inline-block;
-	margin-right: 25%;
-}
 label {
 	display: block;
 }
 
-#logo {
-	&.hidden {
-		@include mobile-only {
-			display: none;
-		}
+#questionnaire {
+
+	::ng-deep img {
+		max-width: 20%;
 	}
-	img {
-		width: 100%;
+	#labels {
+		font-size: xx-large;
 	}
+
+	.buttons {
+		margin-bottom: 25%;
+	}
+
+	.container {
+		text-align: center;
+	}
+	
+	/* Hide the browser's default radio button */
+	.container input {
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  height: 45px;
+	  width: 45px;
+	  opacity: 0;
+	  z-index: 100;
+	}
+
+	/* Create a custom radio button */
+	.radio {
+	  position: absolute;
+	  display: inline-block;
+	  border: solid 4px $gold;
+	  top: 0;
+	  left: 0;
+	  height: 45px;
+	  width: 45px;
+	  padding-top: 8%;
+	  border-radius: 50%;
+	}
+
+	/* On mouse-over, add a grey background color */
+	.container:hover input ~ .radio {
+	  background-color: #ccc;
+	}
+
+	/* When the radio button is checked, add a blue background */
+	.container input:checked ~ .radio {
+	  background-color: $gold;
+	  color: white;
+	}	
+	.container input:disabled ~ .radio {
+	  opacity: .5;
+	  color: white;
+	}
+
+	/* Create the indicator (the dot/circle - hidden when not checked) */
+	.radio:after {
+	  content: "";
+	  position: absolute;
+	  display: none;
+	}
+
+	/* Show the indicator (dot/circle) when checked */
+	.container input:checked ~ .radio:after {
+	  display: block;
+	}
+
+	/* Style the indicator (dot/circle) */
+	.container input:after {
+	  top: 9px;
+	  left: 9px;
+	  width: 8px;
+	  height: 8px;
+	  border-radius: 50%;
+	  background: white;
+	}
+
 }
+
 #welcome {
 	&.hidden {
 		display: none;
@@ -57,9 +123,6 @@ label {
 }
 .character-btn {
 	cursor: pointer;
-}
-.bio {
-	display: none;
 }
 
 #buttons {
