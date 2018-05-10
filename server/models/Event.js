@@ -31,7 +31,7 @@ var Event = new keystone.List('Event',
 Event.add({
   	name: { type: String, default: "Event Name", label: "Name", required: true, initial: true },
     
-    type: { type: Types.Select, options: 'random, effect', note: 'What type of event is this?', initial: true, required: true },
+    type: { type: Types.Select, options: 'life, effect', note: 'What type of event is this?', initial: true, required: true },
   	flavor: { type: Types.Text, label: "Flavor Text", initial: true, required: true },
 
     moneyCost: { type: Number, default: 1, label: "Money Cost", required: true, initial: true },
@@ -49,5 +49,5 @@ Event.add({
  * Model Registration
  */
 Event.defaultSort = '-createdAt';
-Event.defaultColumns = 'name, effect, moneyCost, actionCost';
+Event.defaultColumns = 'name, type, moneyCost, actionCost';
 Event.register();
