@@ -20,9 +20,8 @@
 
 #filters {
 
-	@include mq($from: tablet) {
-		min-height: 40%;
-	}
+	height: 35%;
+
 	@include mq($from: mobile, $until: mobileLg) {
 		padding-bottom: 10%;
 		overflow-x: scroll;
@@ -30,6 +29,11 @@
 	}
 
 	.filter {
+		@include mq($from: tablet) {
+			&:nth-child(even) {
+				margin-top: 15%;
+			}
+		}
 		@include mobile-only { 
 			 padding-top: 1%;
 		}
@@ -48,11 +52,19 @@
 #house {
 
 	min-height: 35%;
-	background: cdn-image('map-bg');
+	// width: 100%;
+	background-image: cdn-image('home-bg',  c_scale, w_1024);
+	background-repeat: no-repeat;
+	background-size: cover;
+
   .centered {
   	position: absolute;
   	width: 45%;
   	transform: translate(35%, -100%);
+
+  	&::ng-deep img {
+  		width: 68%;
+  	}
   }
 	@include mobile-only {
 		.mobile {
