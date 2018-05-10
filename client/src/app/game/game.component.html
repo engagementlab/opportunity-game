@@ -8,31 +8,50 @@
 	<game-toolbar></game-toolbar>
 </div>
 
-<div id="round-over" class="modal hide round-{{round}}">
+<div id="round-over" class="full-screen col-12 round-{{round}} hidden">
 	
-	<div id="content" class="col-10">
+	<div id="content" class="col-12 col-md-6 auto">
 		<h1 class="round1">ROUND {{round}} OVER</h1>
 		<h1 class="round2">ROUND {{round}} OVER</h1>
 		<h1 class="round3">GAME END!</h1>
-		
-		<div class="round1">
-			You earned +{{currentWellnessScore - lastWellnessScore}} wellbeing.
-		</div>
-		<div class="round2">
-			You earned +{{currentWellnessScore - lastWellnessScore}} wellbeing.
-		</div>
-		<div class="round3">
-			You got {{currentWellnessScore}} wellbeing overall.
+
+		<div class="row">
+			<div class="col-4 col-md-3 auto">
+				<cdn-image cloudinaryId="opportunity-game/characters/1.svg" width="150" autoFormat="false" alt="Character portrait"></cdn-image>
+			</div>
+			<div class="col-8 col-md-8 bold auto">
+				
+				<div class="small">
+					You earned <br />
+				</div>
+				<div class="round1 large">
+					+{{currentWellnessScore - lastWellnessScore}} wellbeing.
+				</div>
+				<div class="round2 large">
+					+{{currentWellnessScore - lastWellnessScore}} wellbeing.
+				</div>
+				<div class="round3 large">
+					{{currentWellnessScore}} wellbeing overall.
+				</div>
+
+			</div>
 		</div>
 
-		<div class="row round1">
-			<app-button label="Go to Round 2" ariaLabel="Click/tap to go to round 2" clickData="true" (clickEvent)="nextRound()" class="green col-centered"></app-button>
+		<!-- EFFECT EVENTS -->
+		<div id="effect-events">
+			<div *ngFor="let event of effectEvents" id="{{event._id}}">
+				<game-event [data]="event" [buttons]="false" type="effect"></game-event>
+			</div>
 		</div>
-		<div class="row round2">
-			<app-button label="Go to Round 3" ariaLabel="Click/tap to go to round 3" clickData="true" (clickEvent)="nextRound()" class="green col-centered"></app-button>
+
+		<div class="col-12 auto round1">
+			<app-button label="Go to Round 2" ariaLabel="Click/tap to go to round 2" clickData="true" (clickEvent)="nextRound()" class="gold"></app-button>
 		</div>
-		<div class="row round3">
-			<app-button label="Go to Survey" ariaLabel="Click/tap to go to post-game survery" href="/" class="green col-centered"></app-button>
+		<div class="col-12 auto round2">
+			<app-button label="Go to Round 3" ariaLabel="Click/tap to go to round 3" clickData="true" (clickEvent)="nextRound()" class="gold"></app-button>
+		</div>
+		<div class="col-12 auto round3">
+			<app-button label="Go to Survey" ariaLabel="Click/tap to go to post-game survery" href="/" class="gold"></app-button>
 		</div>
 
 	</div>
@@ -57,7 +76,7 @@
 <!-- LIFE EVENTS -->
 <div id="life-events" class="modal hide">
 	<div *ngFor="let event of lifeEvents" id="{{event._id}}" class="hide">
-		<game-event [data]="event" [type]="life"></game-event>
+		<game-event [data]="event" [type]="life" [buttons]="true"></game-event>
 	</div>
 </div>
 

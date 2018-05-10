@@ -31,7 +31,7 @@ export class GameStartComponent implements OnInit {
 
     tl.to(newBtn, .5, {autoAlpha:0, display: 'none');
     tl.to(logo, .5, {scale:.7});
-    tl.fromTo(characters, .5, {autoAlpha:0}, {scale:1, autoAlpha:1, marginTop:0 display:'block', ease:Sine.easeOut}, '+=.2');
+    tl.fromTo(characters, .5, {autoAlpha:0}, {scale:1, autoAlpha:1, display:'block', ease:Sine.easeOut}, '+=.2');
     // tl.to(logo, 1, { marginTop:'5%'}, '-=1');
     
     tl.play();

@@ -14,5 +14,8 @@
 
 #content {
 	height: 100vh;
-	overflow: hidden;
+
+	// @include mobile-only {
+		overflow: hidden;
+	// }
 }

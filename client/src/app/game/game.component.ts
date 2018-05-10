@@ -60,7 +60,7 @@ export class GameComponent implements OnInit {
 
       if(data.newRound) {
         this.currentWellnessScore = data.wellnessScore;
-        TweenLite.to(document.getElementById('round-over'), 1, {autoAlpha: 1, display:'block'});
+        TweenLite.fromTo(document.getElementById('round-over'), 1, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, display:'block', ease: Back.easeOut});
       }
 
       if(data.gotTransit) {

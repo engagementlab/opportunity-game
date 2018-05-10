@@ -1,25 +1,25 @@
-<div class="game-event col-8">
+<div class="game-event col-10" [class.inner-modal]="buttons === true">
 
-	<h2 *ngIf="type === 'effect'">Opportunity Event</h2>
+	<h2 *ngIf="type === 'effect'" [class.small]="buttons === false">Opportunity Event</h2>
 	<h2 *ngIf="type === 'life'">Life Event</h2>
 
 	<b>{{data.flavor}}</b>
 
 	<div class="items row">
-		<div class="{{item.icon}} {{item.type}} col-4 col-centered" *ngFor="let item of getCostsAndRewards()">
+		<div class="{{item.icon}} {{item.type}} col-1 col-centered" *ngFor="let item of getCostsAndRewards()">
 
 			<span *ngIf="item.type === 'cost'">
 				{{item.amt}}
 			</span>
 			<span *ngIf="item.type === 'reward'">
-				+
+				
 			</span>
 
 		</div>
 	</div>
 
-	<div class="row">
-		<button (click)="selectNo()" class="col-5"><-----</button>
-		<app-button label="Yes" ariaLabel="Click to accept this offer" clickData="true" (clickEvent)="selectYes()" class="green col-centered col-6"></app-button>
+	<div *ngIf="buttons === true || type === 'life'" class="row">
+		<app-button label="Yes" ariaLabel="Click/tap to accept this offer" clickData="true" (clickEvent)="selectYes()" class="green col-centered col-6"></app-button>
+		<app-button label="No" ariaLabel="Click/tap to deny this offer" clickData="true" (clickEvent)="selectNo()" class="orange col-centered col-6"></app-button>
 	</div>
 </div>

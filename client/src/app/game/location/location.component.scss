@@ -3,11 +3,46 @@
 .location {
 	min-height: 480px;
 	height: 100%;
-	background: cdn-image('locations/background/info-center', c_scale, w_1440);
 	@include mobile-only {
-		background: cdn-image('locations/background/info-center_mobile');
 		background-size: cover;
 		background-repeat: no-repeat;
+	}
+	
+	&.career {
+		background: cdn-image('locations/background/career', c_scale, w_1440);
+		@include mobile-only {
+			background: cdn-image('locations/background/career_mobile');
+		}
+	}
+	&.child-care {
+		background: cdn-image('locations/background/child-care', c_scale, w_1440);
+		@include mobile-only {
+			background: cdn-image('locations/background/child-care_mobile');
+		}
+	}
+	&.cultural-center {
+		background: cdn-image('locations/background/cultural-center', c_scale, w_1440);
+		@include mobile-only {
+			background: cdn-image('locations/background/cultural-center_mobile');
+		}
+	}
+	&.hospital {
+		background: cdn-image('locations/background/hospital', c_scale, w_1440);
+		@include mobile-only {
+			background: cdn-image('locations/background/hospital_mobile');
+		}
+	}
+	&.info-center {
+		background: cdn-image('locations/background/info-center', c_scale, w_1440);
+		@include mobile-only {
+			background: cdn-image('locations/background/info-center_mobile');
+		}
+	}
+	&.school {
+		background: cdn-image('locations/background/school', c_scale, w_1440);
+		@include mobile-only {
+			background: cdn-image('locations/background/school_mobile');
+		}
 	}
 }
 
@@ -16,9 +51,10 @@
 	padding-bottom: 5%;
 	margin: auto;
 
-	@include mobile-only {
-		height: 100vh;
-	} 
+  height: 65vh;
+	@media(max-height: 680px) {
+		height: 72vh;
+	}
 
 	button {
 		@include box-shadow(4px, 4px, 0, #000000);

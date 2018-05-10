@@ -37,7 +37,7 @@ Location.add({
 	name: { type: String, default: "Location Name", hidden: true, required: true, initial: true },
 	intro: { type: Types.Markdown, label: "Intro Text",  initial: true, required: true },
 	description: { type: Types.Textarea, label: "Description",  initial: true, required: true },
-  image: { type: Types.Select, label: 'Image Type', options: 'health-center, info-center, cultural-center, center, school', required: true, initial: true },
+  image: { type: Types.Select, label: 'Image Type', options: 'career, child-care, cultural-center, hospital, info-center, school', required: true, initial: true },
   unlockedAtStart: { type: Types.Boolean, label: "Unlocked at start" },
 	category:
         {

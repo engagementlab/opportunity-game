@@ -11,8 +11,9 @@ import { TweenLite } from "gsap";
 export class GameEventComponent implements OnInit {
 	
   @Input() data: Event;
-	@Input() type: string;
-
+  @Input() type: string;
+	@Input() buttons: boolean;
+  
   constructor(private _dataSvc: DataService) { }
 
   ngOnInit() {

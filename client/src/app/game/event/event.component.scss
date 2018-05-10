@@ -4,14 +4,25 @@
 
 	font-size: large;
 	text-align: center;
-	background: white;
-	@include box-shadow(4px, 4px, 0, #000000);
+	
+	&.inner-modal {
+		background: white;
 
-	position: fixed;
-	left: 50%;
-	top: 50%;
-	min-height: 300px;
-	transform: translate(-50%, -50%);
+		position: fixed;
+		left: 50%;
+		top: 50%;
+		min-height: 300px;
+		transform: translate(-50%, -50%);
+
+		@include box-shadow(4px, 4px, 0, #000000);
+	}
+
+	h2 {
+		&.small {
+			font-size: medium;
+			text-transform: uppercase;
+		}
+	}
 
 }
 
@@ -20,8 +31,12 @@
 	font-size: x-large;
 	padding-top: 5%;
 	padding-bottom: 5%;
+
 	div {
+		background-size: contain;
 		background-position-y: center;
+		min-height: 35px;
+		min-width: 35px;
 	}
 	.cost {
 		color: $bright-orange;
@@ -33,23 +48,23 @@
 	}
 
 	.money {
-		background: cdn-image('icons/money-cost', c_scale, w_35);
+		background-image: cdn-image('icons/money-cost', c_scale, w_35);
 		background-repeat: no-repeat;
 	}
 	.action {
-		background: cdn-image('icons/action-cost', c_scale, w_35);
+		background-image: cdn-image('icons/action-cost', c_scale, w_35);
 		background-repeat: no-repeat;
 	}
 	.comm {
-		background: cdn-image('icons/community-clear', c_scale, w_35);
+		background-image: cdn-image('icons/community', c_scale, w_35);
 		background-repeat: no-repeat;
 	}
 	.job {
-		background: cdn-image('icons/job-clear', c_scale, w_35);
+		background-image: cdn-image('icons/job', c_scale, w_35);
 		background-repeat: no-repeat;
 	}
 	.english {
-		background: cdn-image('icons/englisg-cost', c_scale, w_35);
+		background-image: cdn-image('icons/english', c_scale, w_35);
 		background-repeat: no-repeat;
 	}
 }
