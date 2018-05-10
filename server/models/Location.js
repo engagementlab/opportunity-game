@@ -35,9 +35,9 @@ var Location = new keystone.List('Location',
  */
 Location.add({
 	name: { type: String, default: "Location Name", hidden: true, required: true, initial: true },
-	intro: { type: Types.Markdown, label: "Intro Text",  initial: true, required: true },
-	description: { type: Types.Textarea, label: "Description",  initial: true, required: true },
-  image: { type: Types.Select, label: 'Image Type', options: 'career, child-care, cultural-center, hospital, info-center, school', required: true, initial: true },
+	intro: { type: Types.Markdown, label: "Flavor Text", initial: true, required: true },
+	image: { type: Types.Select, label: 'Image Type', options: 'career, child-care, cultural-center, hospital, info-center, school', required: true, initial: true },
+  
   unlockedAtStart: { type: Types.Boolean, label: "Unlocked at start" },
 	category:
         {
@@ -53,6 +53,7 @@ Location.add({
       note: 'The opportunities for this location.',
       many: true
   },
+
 	createdAt: { type: Date, default: Date.now, noedit: true, hidden: true }
 });
 Location.schema.add({categories: mongoose.Schema.Types.Mixed});

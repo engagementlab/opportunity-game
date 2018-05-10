@@ -11,6 +11,7 @@ export interface Opportunity {
 	readonly englishReward: number;
 
 	readonly triggerAmt: number;
+	readonly rewardFlavor: string;
 	
 	readonly description: string;
 	readonly name: string;

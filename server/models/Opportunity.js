@@ -29,8 +29,8 @@ var Opportunity = new keystone.List('Opportunity',
  * @main Opportunity
  */
 Opportunity.add({
-  	name: { type: String, default: "Opportunity Name", label: "Name", required: true, initial: true },
-  	description: { type: Types.Markdown, label: "Description", initial: true, required: true },
+    name: { type: String, default: "Opportunity Name", label: "Name", required: true, initial: true },
+    description: { type: Types.Markdown, label: "Description", initial: true, required: true },
 
     location: {
         type: Types.Relationship,
@@ -66,6 +66,7 @@ Opportunity.add({
         "Transit": {type: Types.Boolean},
         "Job": {type: Types.Boolean}
     },
+  	rewardFlavor: { type: String, label: "Reward Flavor for delayed reward(s)" },
     triggerAmt: { type: Number, default: 0, label: "Trigger After Actions", note: 'Number of actions to wait before benefit.' },
     effect: {
         type: Types.Relationship,
