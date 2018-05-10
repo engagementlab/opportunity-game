@@ -70,10 +70,7 @@ Opportunity.add({
     effect: {
         type: Types.Relationship,
         ref: 'Event',
-        label: 'Duration Effect (Event)',
-        filters: {
-          type: 'effect'
-        },
+        label: 'Duration Effect (Life and/or Opportunity Event)',
         note: 'The event to show as duration effect (after x actions or rounds).',
         many: false
     },

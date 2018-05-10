@@ -20,30 +20,23 @@
 
 #filters {
 
-	display: flex;
 	@include mq($from: tablet) {
 		min-height: 40%;
 	}
-	@include mobile-only {
+	@include mq($from: mobile, $until: mobileLg) {
 		padding-bottom: 10%;
+		overflow-x: scroll;
+		display: flex;
 	}
 
 	.filter {
-		// display: inline-table;
 		@include mobile-only { 
-			 padding-top: 10%;
+			 padding-top: 1%;
 		}
 		.content {
-      background-size: 120% 100%;
-	    background-image: radial-gradient(ellipse at center, #e8e6e5 50%,#ffffff 51%);
-	    background-repeat: no-repeat;
-	    background-position: center -.5em;
-
-	    // font-size: em(20px);
 	    margin: 0 auto;
 	    ::ng-deep img {
 				width: 100%;
-				padding: 25%;
 	    }
 	  }
 	  .label {
@@ -54,7 +47,7 @@
 
 #house {
 
-	min-height: 60%;
+	min-height: 35%;
 	background: cdn-image('map-bg');
   .centered {
   	position: absolute;

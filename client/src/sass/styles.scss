@@ -41,7 +41,7 @@ button {
 }
 
 .auto {  
-  margin: auto;
+  margin: auto!important;
 }
 .no-margin {
   margin: 0;
@@ -63,9 +63,18 @@ button {
   transform: translateY(-50%);
 }
 
+.row-sm {
+  @include mq($from: mobileLg) {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+}
 .row-lg {
   @include mq($from: tablet) {
     display: flex;
+    flex-wrap: wrap;
     margin-right: -15px;
     margin-left: -15px;
   }

@@ -67,15 +67,14 @@ export class GameCharacterComponent implements OnInit {
 
       _.each(el.children, (child) => {
         let childEl = <HTMLInputElement>child.children[0];
-        let indexChosen = Array.from(this.categoryData.values()).includes(childEl.value);
-        console.log(this.categoryData.values())
-        console.log(childEl.value)
+        let indexChosen = Array.from(this.categoryData.values()).includes(parseInt(childEl.value));
+
         if(!indexChosen)
 	  			childEl.removeAttribute('disabled');
   		});
 
       let input = el.children[evt.target.value].children[0];
-      if(input.name !== category)
+      if(input.getAttribute('name') !== category)
         input.setAttribute('disabled', 'disabled');
 
   	});
