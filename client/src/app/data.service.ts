@@ -47,6 +47,8 @@ export class DataService {
     public eventData: Event[];
     public isLoading: Subject<boolean> = new Subject<boolean>();
 
+    public assignedCharIndex: number = 1;
+
     baseUrl: string;
     index: any;
 
@@ -91,9 +93,10 @@ export class DataService {
 
     }
 
-    public changeCharacter(attribute: string, value: number) {
+    public changeCharacter(index: number) {
 
-        this.playerData.character[attribute] = value;
+        // this.playerData.character[attribute] = value;
+        this.assignedCharIndex = index;
         this.playerDataUpdate.emit(this.playerData);
 
     }

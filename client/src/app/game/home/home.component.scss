@@ -57,13 +57,18 @@
 	background-repeat: no-repeat;
 	background-size: cover;
 
+	.row {
+		@include mobile-only {
+			padding-top: 15%;
+		}
+	}
   .centered {
   	position: absolute;
   	width: 45%;
   	transform: translate(35%, -100%);
 
   	&::ng-deep img {
-  		width: 68%;
+  		// width: 68%;
   	}
   }
 	@include mobile-only {
@@ -80,7 +85,7 @@
 
 		  .centered {
 		  	position: relative;
-		  	width: 45%;
+		  	width: 58%;
 		  	transform: translate(100%, 0);
 		  }
 		  .bubble {

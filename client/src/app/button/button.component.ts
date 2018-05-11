@@ -7,6 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ButtonComponent implements OnInit {
 
+  @Input() id: string;
 	@Input() label: string;
 	@Input() route: string;
   @Input() href: string;

@@ -4,7 +4,9 @@ label {
 	display: block;
 }
 
-#questionnaire {
+.questionnaire {
+
+	overflow-y: scroll;
 
 	::ng-deep img {
 		max-width: 20%;
@@ -15,6 +17,8 @@ label {
 
 	.buttons {
 		margin-bottom: 25%;
+		margin-right: auto;
+		margin-left: auto;
 	}
 
 	.container {

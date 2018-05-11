@@ -12,6 +12,7 @@ export class GameCharacterComponent implements OnInit {
 
   characters: Character[];
 	categoryData = new Map<string, string>();
+  showBtn: boolean;
 
   constructor(private _dataSvc: DataService) {
 
@@ -27,19 +28,6 @@ export class GameCharacterComponent implements OnInit {
     
     let bubble = document.getElementById('bubble');
     TweenLite.fromTo(bubble, 1.5, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, delay:3, display:'block', ease:Elastic.easeOut});
-  }
-
-  chooseCharacter(index: number) {
-
-    document.getElementById('welcome').classList.remove('hidden');
-    document.getElementById('logo').classList.add('hidden');
-
-    document.getElementById('characters').classList.add('hidden');
-    document.getElementById('character-detail').classList.remove('hidden')
-    document.querySelector('#character-detail #detail-'+index).classList.remove('hidden');
-
-    document.getElementById('questionnaire').style.display = 'none';
-
   }
 
   goBack() {
@@ -59,9 +47,9 @@ export class GameCharacterComponent implements OnInit {
 
   	let category = evt.target.name;
   	let otherCategories = document.getElementsByClassName('buttons');
+    let startBtn = document.getElementById('submit-btn');
 
 		this.categoryData.set(category, evt.target);
-    this._dataSvc.changeCharacter(category, evt.target.value);
 
     _.each(otherCategories, (el) => {
 
@@ -76,6 +64,50 @@ export class GameCharacterComponent implements OnInit {
   		});
 
   	});
+
+    // Show/hide submit
+    if(document.querySelectorAll('input[type="radio"]:checked').length === 3 && !this.showBtn) {
+      TweenLite.fromTo(startBtn, 1.2, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, display:'block', ease:Elastic.easeOut});
+      this.showBtn = true;
+    }
+    else if(this.showBtn) {
+      TweenLite.to(startBtn, .6, {autoAlpha:0, scale:0, display:'none', ease:Back.easeIn});
+      this.showBtn = false;
+    }
+
+  }
+
+  chooseCharacter(index: number) {
+
+    document.getElementById('welcome').classList.remove('hidden');
+    document.getElementById('logo').classList.add('hidden');
+
+    document.getElementById('characters').classList.add('hidden');
+    document.getElementById('character-detail').classList.remove('hidden')
+    document.querySelector('#character-detail #detail-'+index).classList.remove('hidden');
+
+    document.getElementById('questionnaire').style.display = 'none';
+
+  }
+
+  assignCharacter() {
+
+    this.assignedIndex = (Math.floor(Math.random() * (3 - 0 + 1)) + 0);
+
+    document.getElementById('welcome').classList.remove('hidden');
+    document.getElementById('logo').classList.add('hidden');
+
+    document.getElementById('characters').classList.add('hidden');
+    document.getElementById('character-detail').classList.remove('hidden')
+    document.querySelector('#character-detail #detail-'+this.assignedIndex).classList.remove('hidden');
+
+    document.getElementById('questionnaire-desktop').style.display = 'none';
+    document.getElementById('questionnaire-mobile').style.display = 'none';
+    // this._dataSvc.assignedCharIndex
+
+    this._dataSvc.changeCharacter(this.assignedIndex+1);
+
+
 
   }
 

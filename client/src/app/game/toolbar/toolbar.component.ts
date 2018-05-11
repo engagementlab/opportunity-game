@@ -18,6 +18,7 @@ export class GameToolbarComponent {
 
   public hasTransit: boolean;
   public hasJob: boolean;
+  public playerIndex: boolean = 2;
 
   constructor(private _dataSvc: DataService) {
 
@@ -27,7 +28,6 @@ export class GameToolbarComponent {
     this.commLevel = this._dataSvc.playerData.commLevel;
     this.jobLevel = this._dataSvc.playerData.jobLevel;
     this.englishLevel = this._dataSvc.playerData.englishLevel;
-
 
     this._dataSvc.playerDataUpdate.subscribe((data: PlayerData) => {
 
@@ -44,6 +44,8 @@ export class GameToolbarComponent {
         this.hasTransit = true;
       else if(data.gotJob)
         this.hasJob = true;
+
+      this.playerIndex = this._dataSvc.assignedCharIndex;
 
   	});
 

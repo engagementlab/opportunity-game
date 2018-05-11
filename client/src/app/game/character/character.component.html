@@ -32,28 +32,41 @@
 		</div>
 </div>
 
-<div id="questionnaire" class="hidden-mobile">
+<div id="questionnaire-desktop" class="questionnaire hidden-mobile">
 	
 	<div class="row">
-		<div id="labels" class="col-12 col-md-4">
-			<div>
-				<cdn-image cloudinaryId="opportunity-game/icons/job.svg" width="83" alt="Career Prospects"></cdn-image>
-				<span class="bold">Career Prospects</span>
+		<div id="labels" class="col-12 col-md-6">
+			<div class="row">
+				<div class="col-3">
+					<cdn-image cloudinaryId="opportunity-game/icons/job.svg" width="83" alt="Career Prospects"></cdn-image>
+				</div>
+				<div class="col-7">
+					<span class="bold">Career Prospects</span>
+				</div>
+			<div class="row">
+				<div class="col-3">
+					<cdn-image cloudinaryId="opportunity-game/icons/community.svg" width="83" alt="Community Engagement"></cdn-image>
+				</div>
+				<div class="col-7">
+					<span class="bold">Community Engagement</span>
+				</div>
 			</div>
-			<div>
-				<cdn-image cloudinaryId="opportunity-game/icons/community.svg" width="83" alt="Community Engagement"></cdn-image>
-				<span class="bold">Community Engagement</span>
-			</div>
-			<div>
-				<cdn-image cloudinaryId="opportunity-game/icons/health_and_help.svg" width="83" alt="Comfort and Health"></cdn-image>
-				<span class="bold">Comfort and Health</span>
+			<div class="row">
+				<div class="col-3">
+					<cdn-image cloudinaryId="opportunity-game/icons/health_and_help.svg" width="83" alt="Comfort and Health"></cdn-image>
+				</div>
+				<div class="col-7">
+					<span class="bold">Comfort and Health</span>
+				</div>
 			</div>
 		</div>
+	</div>
 
 		<div class="col-10 col-md-6">
 			<!-- Career -->
 			<div name="career_ranking" class="buttons row">
 				<div class="col-4 container">
+
 					<input type="radio" name="career_ranking" value="1" (change)="onSelectionChange($event)"/>
 					<span class="radio">1</span>
 				</div>
@@ -108,11 +121,11 @@
 	</div>
 
 	<div id="buttons">
-		<app-button label="Submit" ariaLabel="Click/tap to see character" clickData="true" (clickEvent)="chooseCharacter(1)" class="green col-centered"></app-button>
+		<app-button id="submit-btn" label="Submit" ariaLabel="Click/tap to see character" clickData="true" (clickEvent)="assignCharacter()" class="green hidden col-centered"></app-button>
 	</div>
 </div>
 
-<div id="questionnaire" class="hidden-desktop">
+<div id="questionnaire-mobile" class="questionnaire hidden-desktop">
 	
 	<div id="labels" class="col-12 col-md-6">
 	</div>
@@ -146,9 +159,13 @@
 		</div>
 
 		<!-- Community Engagement -->
-		<div>
-			<cdn-image cloudinaryId="opportunity-game/icons/community.svg" width="50" alt="Community Engagement"></cdn-image>
+		<div class="row">
+			<div class="col-3">
+				<cdn-image cloudinaryId="opportunity-game/icons/community.svg" width="50" alt="Community Engagement"></cdn-image>
+			</div>
+			<div class="col-7">
 			<span class="bold">Community Engagement</span>
+			</div>
 		</div>
 		<div name="engagement_ranking" class="buttons row">
 			<div class="col-4 container">
@@ -168,9 +185,13 @@
 		</div>
 
 		<!-- Comfort and Health -->
-		<div>
-			<cdn-image cloudinaryId="opportunity-game/icons/health_and_help.svg" width="83" alt="Comfort and Health"></cdn-image>
-			<span class="bold">Comfort and Health</span>
+		<div class="row">
+			<div class="col-3">
+				<cdn-image cloudinaryId="opportunity-game/icons/health_and_help.svg" width="50" alt="Comfort and Health"></cdn-image>
+			</div>
+			<div class="col-7">
+				<span class="bold">Comfort and Health</span>
+			</div>
 		</div>
 		<div name="health_ranking" class="buttons row">
 			<div class="col-4 container">
@@ -188,6 +209,9 @@
 				<span class="radio">3</span>
 			</div>
 		</div>
+	</div>
+	<div id="buttons">
+		<app-button id="submit-btn" label="Submit" ariaLabel="Click/tap to see character" clickData="true" (clickEvent)="assignCharacter()" class="green hidden col-centered"></app-button>
 	</div>
 
 </div>

@@ -11,6 +11,8 @@ import * as _ from 'underscore';
 })
 export class GameHomeComponent implements OnInit, AfterViewChecked {
 
+  public playerIndex: number;
+
   locations: any[];
   filters: object[] = 
   [
@@ -32,6 +34,11 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
       
       this.locations = this._dataSvc.locationData;
       this.loadCategory = true;
+
+      this.playerIndex = this._dataSvc.assignedCharIndex;
+      
+      TweenLite.fromTo(document.getElementById('house-bubble'), 1.5, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, delay:2, display:'block', ease:Elastic.easeOut});
+
 
     });
     
