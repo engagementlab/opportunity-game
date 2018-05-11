@@ -64,7 +64,7 @@ export class DataService {
     {
         round: 1,
         money: 30,
-        actions: 5,
+        actions: 50,
         
         commLevel: 0,
         jobLevel: 0,

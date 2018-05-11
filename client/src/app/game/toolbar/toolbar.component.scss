@@ -10,17 +10,12 @@
 	background: black;
 	color: white;
 
-	&.open {
-		left: -25%;
-	}
 	@include mobile-only {
-		width: 150%;
 		.flex {
-			width: 90%;
+			width: 100%;
 			display: flex;
 			flex-wrap: wrap;
-		}
-	
+		}	
 	}
 
 	.icon {
@@ -28,7 +23,6 @@
 		::ng-deep img {
     	max-height: 35px;
     	max-width: 40px;
-
 		}
 	}
 	.icon-lg {
@@ -56,8 +50,14 @@
 
 		}
 	}
+	.open {
+		display: flex!important;
+		max-height: 50px!important;
+		
+		// height: auto;
+	}
 
-  @include transition('left', 150ms, cubic-bezier(0.64, 0.57, 0.67, 1.53));
+  // @include transition('all', 150ms, cubic-bezier(0.64, 0.57, 0.67, 1.53));
 }
 
 #ellipses {
@@ -73,24 +73,46 @@
 	}
 }
 #main {
-	float: left;
-	min-width: 50%;
+
 	@include mobile-only {
-		max-width: 75%;
+		#mobile-drawer {
+			max-height: 0;
+		  @include transition(max-height, 150ms, cubic-bezier(0.64, 0.57, 0.67, 1.53));
+		}
 	}
 	@include mq($from: tablet) {
 		display: block;
+		min-width: 50%;
+		float: left;
+		#mobile-drawer {
+			display: inline;
+		}
+	}
+
+	#open-btn {
+		&.open {
+			div {
+				@include transform(rotate(180deg));
+			  @include transition(transform, 150ms, ease-in-out);	
+			}
+		}
 	}
 }
-#drawer {
-  @include mobile-only {
-		z-index: 100;
-		display: block;
-	}    
-
+#drawer { 
 	@include mq($from: tablet) {
 		float: right;
 		display: flex;
+	}
+	@include mobile-only {
+		max-height: 0;
+	  @include transition(max-height, 150ms, cubic-bezier(0.64, 0.57, 0.67, 1.53));
+	}
+	.icon-lg { 
+		padding-right: 0;
+	}
+	.label {
+		color: $greyish-brown;
+		font-size: x-small;
 	}
 }
 

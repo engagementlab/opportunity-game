@@ -53,7 +53,9 @@ export class GameToolbarComponent {
 
    openDrawer() {
     
-    document.getElementById('toolbar').classList.toggle('open');
+    document.getElementById('mobile-drawer').classList.toggle('open');
+    document.getElementById('drawer').classList.toggle('open');
+    document.getElementById('open-btn').classList.toggle('open');
 
    }
 
