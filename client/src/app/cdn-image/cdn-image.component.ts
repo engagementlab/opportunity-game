@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl, SafeStyle } from '@angular/platform-browser';
 
 @Component({
   selector: 'cdn-image',
@@ -14,7 +14,7 @@ export class CdnImageComponent implements OnInit {
   @Input() quality: number;
 	@Input() autoFormat: boolean;
 
-  public widthCss: string;
+  public widthCss: SafeStyle;
 
   constructor(private _sanitizer: DomSanitizer) { }
 

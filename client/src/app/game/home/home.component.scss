@@ -127,11 +127,11 @@
 			text-decoration: none;
 		}
 
-		.plackard {
+		.name {
+			color: black;
+			text-align: center;
 			font-size: 10px;
 			min-height: 39px;
-			padding-left: 6%;
-			padding-right: 6%;
 		}
 		.locked {
 			@include filter(opacity, 50%);

@@ -11,7 +11,7 @@ import * as _ from 'underscore';
 export class GameCharacterComponent implements OnInit {
 
   characters: Character[];
-	categoryData = new Map<string, number>();
+	categoryData = new Map<string, string>();
 
   constructor(private _dataSvc: DataService) {
 
@@ -60,22 +60,20 @@ export class GameCharacterComponent implements OnInit {
   	let category = evt.target.name;
   	let otherCategories = document.getElementsByClassName('buttons');
 
-		this.categoryData.set(category, evt.target.value);
+		this.categoryData.set(category, evt.target);
     this._dataSvc.changeCharacter(category, evt.target.value);
 
-  	_.each(otherCategories, (el) => {
+    _.each(otherCategories, (el) => {
 
       _.each(el.children, (child) => {
+        // Get radio button
         let childEl = <HTMLInputElement>child.children[0];
-        let indexChosen = Array.from(this.categoryData.values()).includes(parseInt(childEl.value));
 
-        if(!indexChosen)
-	  			childEl.removeAttribute('disabled');
+        // Find if value already checked in other category and uncheck
+        if(evt.target.value === childEl.value && 
+           childEl.getAttribute('name') !== category)
+          childEl.checked = false;
   		});
-
-      let input = el.children[evt.target.value].children[0];
-      if(input.getAttribute('name') !== category)
-        input.setAttribute('disabled', 'disabled');
 
   	});
 

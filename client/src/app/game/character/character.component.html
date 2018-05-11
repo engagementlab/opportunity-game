@@ -54,17 +54,17 @@
 			<!-- Career -->
 			<div name="career_ranking" class="buttons row">
 				<div class="col-4 container">
-					<input type="radio" name="career_ranking" value="0" (change)="onSelectionChange($event)"/>
+					<input type="radio" name="career_ranking" value="1" (change)="onSelectionChange($event)"/>
 					<span class="radio">1</span>
 				</div>
 
 				<div class="col-4 container">
-					<input type="radio" name="career_ranking" value="1" (change)="onSelectionChange($event)"/>
+					<input type="radio" name="career_ranking" value="2" (change)="onSelectionChange($event)"/>
 					<span class="radio">2</span>
 				</div>
 
 				<div class="col-4 container">
-					<input type="radio" name="career_ranking" value="2" (change)="onSelectionChange($event)"/>
+					<input type="radio" name="career_ranking" value="3" (change)="onSelectionChange($event)"/>
 					<span class="radio">3</span>
 				</div>
 			</div>
@@ -72,12 +72,12 @@
 			<!-- Community Engagement -->
 			<div name="engagement_ranking" class="buttons row">
 				<div class="col-4 container">
-					<input type="radio" name="engagement_ranking" value="0" (change)="onSelectionChange($event)"/>
+					<input type="radio" name="engagement_ranking" value="1" (change)="onSelectionChange($event)"/>
 					<span class="radio">1</span>
 				</div>
 
 				<div class="col-4 container">
-					<input type="radio" name="engagement_ranking" value="1" (change)="onSelectionChange($event)"/>
+					<input type="radio" name="engagement_ranking" value="2" (change)="onSelectionChange($event)"/>
 					<span class="radio">2</span>
 				</div>
 
@@ -90,17 +90,17 @@
 			<!-- Comfort and Health -->
 			<div name="health_ranking" class="buttons row">
 				<div class="col-4 container">
-					<input type="radio" name="health_ranking" value="0" (change)="onSelectionChange($event)"/>
+					<input type="radio" name="health_ranking" value="1" (change)="onSelectionChange($event)"/>
 					<span class="radio">1</span>
 				</div>
 
 				<div class="col-4 container">
-					<input type="radio" name="health_ranking" value="1" (change)="onSelectionChange($event)"/>
+					<input type="radio" name="health_ranking" value="2" (change)="onSelectionChange($event)"/>
 					<span class="radio">2</span>
 				</div>
 
 				<div class="col-4 container">
-					<input type="radio" name="health_ranking" value="2" (change)="onSelectionChange($event)"/>
+					<input type="radio" name="health_ranking" value="3" (change)="onSelectionChange($event)"/>
 					<span class="radio">3</span>
 				</div>
 			</div>
@@ -119,10 +119,15 @@
 
 	<div class="col-10 col-md-6 auto">
 		<!-- Career -->
-		<div>
-			<cdn-image cloudinaryId="opportunity-game/icons/job.svg" width="83" alt="Career Prospects"></cdn-image>
-			<span class="bold">Career Prospects</span>
+		<div class="row">
+			<div class="col-3">
+				<cdn-image cloudinaryId="opportunity-game/icons/job.svg" width="50" alt="Career Prospects"></cdn-image>
+			</div>
+			<div class="col-7">
+				<span class="bold">Career Prospects</span>
+			</div>
 		</div>
+
 		<div name="career_ranking" class="buttons row">
 			<div class="col-4 container">
 				<input type="radio" name="career_ranking" value="0" (change)="onSelectionChange($event)"/>
@@ -142,7 +147,7 @@
 
 		<!-- Community Engagement -->
 		<div>
-			<cdn-image cloudinaryId="opportunity-game/icons/community.svg" width="83" alt="Community Engagement"></cdn-image>
+			<cdn-image cloudinaryId="opportunity-game/icons/community.svg" width="50" alt="Community Engagement"></cdn-image>
 			<span class="bold">Community Engagement</span>
 		</div>
 		<div name="engagement_ranking" class="buttons row">

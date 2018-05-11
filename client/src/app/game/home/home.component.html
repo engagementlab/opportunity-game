@@ -11,7 +11,6 @@
 
 		<div class="col-4 col-centered mobile">
 			<cdn-image cloudinaryId="opportunity-game/locations/home.svg" width="150" alt="Icon for Home"></cdn-image>
-			<!-- <div class="plackard">home</div> -->
 		</div>
 
 		<div class="col-8 auto row">
@@ -60,12 +59,12 @@
 				<a *ngIf="location.unlockedAtStart === undefined || location.unlockedAtStart === true || location.enabled === true"
 				routerLink="/game/location/{{location.key}}">
 					<cdn-image cloudinaryId="opportunity-game/locations/{{location.image}}.svg" width="150" alt="Icon for {{location.name}}"></cdn-image>
-					<div class="plackard">{{location.name}}</div>
+					<div class="name">{{location.name}}</div>
 				</a>
 				
 				<span *ngIf="location.unlockedAtStart === false && location.enabled === undefined" class="locked">
 					<cdn-image cloudinaryId="opportunity-game/locations/{{location.image}}.svg" width="150" alt="Icon for {{location.name}}"></cdn-image>
-					<div class="plackard">{{location.name}}</div>
+					<div class="name">{{location.name}}</div>
 				</span>
 
 			</div>
