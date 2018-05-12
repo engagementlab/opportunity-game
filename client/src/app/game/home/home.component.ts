@@ -12,6 +12,7 @@ import * as _ from 'underscore';
 export class GameHomeComponent implements OnInit, AfterViewChecked {
 
   public playerIndex: number;
+  locationImgIndex: number = 1;
 
   locations: any[];
   filters: object[] = 
@@ -103,6 +104,18 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
     delete params.cat;
     this.router.navigate([], { queryParams: params });
     
+
+  }
+
+
+  imageIndex() {
+
+    if(this.locationImgIndex < 4) 
+      this.locationImgIndex++;
+    else if(this.locationImgIndex > 1) 
+      this.locationImgIndex--;
+
+    return this.locationImgIndex;
 
   }
 

@@ -135,8 +135,7 @@
 		.name {
 			color: black;
 			text-align: center;
-			font-size: 10px;
-			min-height: 39px;
+			font-size: smaller;
 		}
 		.locked {
 			@include filter(opacity, 50%);

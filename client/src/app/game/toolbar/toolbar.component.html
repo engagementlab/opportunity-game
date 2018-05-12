@@ -1,9 +1,5 @@
 <div id="toolbar" class="no-margin">
-	 <!-- 
-	<div id="ellipses" class="hidden" (click)="openDrawer()">
-		<cdn-image cloudinaryId="opportunity-game/toolbar/ellipses.svg" autoFormat="true" alt="'More' toolbar icon"></cdn-image>
-	</div>
- -->
+
 	<div id="main" class="row no-margin">
 		
 		<div class="flex">
@@ -49,17 +45,17 @@
 
 	<div id="drawer" class="row no-margin">
 
-		<div id="english-lvl" [class.disabled]="hasTransit === false" class="col-3 icon-lg">
+		<div id="job" [class.disabled]="hasJob === undefined" class="col-3 icon-lg">
 				<cdn-image cloudinaryId="opportunity-game/toolbar/transit.svg" alt="Public transit toolbar icon"></cdn-image> 
 		</div>
 		<div *ngIf="hasTransit === undefined" class="col-3 medium label no-pad">You don’t have a job yet!</div>
 		<div *ngIf="hasTransit === true" class="col-3 medium label no-pad">Part-time Job</div>
 
-		<div id="english-lvl" [class.disabled]="hasJob === false" class="col-3 icon-lg">
+		<div id="transit" [class.disabled]="hasTransit === undefined" class="col-3 icon-lg">
 			<cdn-image cloudinaryId="opportunity-game/toolbar/job.svg" alt="Job toolbar icon"></cdn-image>
 		</div>	
-		<div *ngIf="hasJob === undefined" class="col-3 medium label no-pad">You don’t have transportation yet!</div>
-		<div *ngIf="hasJob === true" class="col-3 medium label no-pad">Bus pass</div>
+		<div *ngIf="hasTransit === undefined" class="col-3 medium label no-pad">You don’t have transportation yet!</div>
+		<div *ngIf="hasTransit === true" class="col-3 medium label no-pad">Bus pass</div>
 
 	</div>
 

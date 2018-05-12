@@ -109,6 +109,9 @@
 	}
 	.icon-lg { 
 		padding-right: 0;
+		&.disabled {
+			@include filter(opacity, .3);
+		}
 	}
 	.label {
 		color: $greyish-brown;

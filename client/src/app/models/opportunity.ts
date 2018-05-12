@@ -5,7 +5,14 @@ export interface Opportunity {
 
 	readonly actionCost: number;
 	readonly moneyCost: number;
+
+	readonly commCost: number;
+	readonly jobCost: number;
+	readonly englishCost: number;
+
 	readonly locationUnlocks: string[];
+	readonly actionReward: number;
+	readonly moneyReward: number;
 	readonly commReward: number;
 	readonly jobReward: number;
 	readonly englishReward: number;

@@ -28,55 +28,66 @@ var Opportunity = new keystone.List('Opportunity',
  * Model Fields
  * @main Opportunity
  */
-Opportunity.add({
-    name: { type: String, default: "Opportunity Name", label: "Name", required: true, initial: true },
-    description: { type: Types.Markdown, label: "Description", initial: true, required: true },
-
-    location: {
-        type: Types.Relationship,
-        ref: 'Location',
-        label: 'Location',
-        note: 'The Location(s) this opportunity is for.',
-        many: true,
-        required: true,
-        initial: true
-    },
-    moneyCost: { type: Number, default: 1, label: "Money Cost", required: true, initial: true },
-    actionCost: { type: Number, default: 1, label: "Action Cost", required: true, initial: true },
-  },
-
-  "Benefits", {
-    locationUnlocks: {
-        type: Types.Relationship,
-        ref: 'Location',
-        label: 'Unlocks Location(s)',
-        filters: {
-          unlockedAtStart: false
-        },
-        note: 'The Location(s) this opportunity unlocks.',
-        many: true
-    },
-    
-    commReward: { type: Number, default: 0, label: "Community Reward" },
-    jobReward: { type: Number, default: 0, label: "Job Reward" },
-    englishReward: { type: Number, default: 0, label: "English Reward" },
-    
-    achievement:
+Opportunity.add(
     {
-        "Transit": {type: Types.Boolean},
-        "Job": {type: Types.Boolean}
+        name: { type: String, default: "Opportunity Name", label: "Name", required: true, initial: true },
+        description: { type: Types.Markdown, label: "Description", initial: true, required: true },
+
+        location: {
+            type: Types.Relationship,
+            ref: 'Location',
+            label: 'Location',
+            note: 'The Location(s) this opportunity is for.',
+            many: true,
+            required: true,
+            initial: true
+        }
     },
-  	rewardFlavor: { type: String, label: "Reward Flavor for delayed reward(s)" },
-    triggerAmt: { type: Number, default: 0, label: "Trigger After Actions", note: 'Number of actions to wait before benefit.' },
-    effect: {
-        type: Types.Relationship,
-        ref: 'Event',
-        label: 'Duration Effect (Life and/or Opportunity Event)',
-        note: 'The event to show as duration effect (after x actions or rounds).',
-        many: false
+    "Costs", {
+
+        moneyCost: { type: Number, default: 0, label: "Money Cost" },
+        actionCost: { type: Number, default: 0, label: "Action Cost" },
+
+        commCost: { type: Number, default: 0, label: "Community Cost" },
+        jobCost: { type: Number, default: 0, label: "Job Cost" },
+        englishCost: { type: Number, default: 0, label: "English Cost" }
+
     },
-    effectTrigger: { type: Types.Select, options: 'actions, end of round', note: 'What triggers duration effect event?' },
-    effectWait: { type: Number, default: 0, label: "Actions to Wait", dependsOn: { effectTrigger: 'actions' }, note: 'Number of actions to wait before event.' },
+    "Benefits", {
+        locationUnlocks: {
+            type: Types.Relationship,
+            ref: 'Location',
+            label: 'Unlocks Location(s)',
+            filters: {
+              unlockedAtStart: false
+            },
+            note: 'The Location(s) this opportunity unlocks.',
+            many: true
+        },
+        
+        moneyReward: { type: Number, default: 0, label: "Money Reward" },
+        actionReward: { type: Number, default: 0, label: "Action Reward" },
+
+        commReward: { type: Number, default: 0, label: "Community Reward" },
+        jobReward: { type: Number, default: 0, label: "Job Reward" },
+        englishReward: { type: Number, default: 0, label: "English Reward" },
+        
+        achievement:
+        {
+            "Transit": {type: Types.Boolean},
+            "Job": {type: Types.Boolean}
+        },
+      	rewardFlavor: { type: String, label: "Reward Flavor for delayed reward(s)" },
+        triggerAmt: { type: Number, default: 0, label: "Trigger After Actions", note: 'Number of actions to wait before benefit.' },
+        effect: {
+            type: Types.Relationship,
+            ref: 'Event',
+            label: 'Duration Effect (Life and/or Opportunity Event)',
+            note: 'The event to show as duration effect (after x actions or rounds).',
+            many: false
+        },
+        effectTrigger: { type: Types.Select, options: 'actions, end of round', note: 'What triggers duration effect event?' },
+        effectWait: { type: Number, default: 0, label: "Actions to Wait", dependsOn: { effectTrigger: 'actions' }, note: 'Number of actions to wait before event.' },
   },
   
   {    
