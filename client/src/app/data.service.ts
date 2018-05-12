@@ -13,6 +13,7 @@ import { GameLocation } from './models/gamelocation';
 import { Event } from './models/event';
 import { PlayerData } from './models/playerdata';
 import { Opportunity } from './models/opportunity';
+import { Goal } from './models/goal';
 
 import * as _ from 'underscore';
 
@@ -44,10 +45,13 @@ export class DataService {
 
     public locationData: GameLocation[];
     public characterData: Character[];
+    public goalData: Goal[];
     public eventData: Event[];
+
     public isLoading: Subject<boolean> = new Subject<boolean>();
 
     public assignedCharIndex: number = 1;
+    public assignedGoal: Goal;
 
     baseUrl: string;
     index: any;
@@ -93,10 +97,11 @@ export class DataService {
 
     }
 
-    public changeCharacter(index: number) {
+    public changeCharacter(index: number, goal: Goal) {
 
-        // this.playerData.character[attribute] = value;
         this.assignedCharIndex = index;
+        this.assignedGoal = goal;
+        
         this.playerDataUpdate.emit(this.playerData);
 
     }
@@ -262,7 +267,8 @@ export class DataService {
 
     private assembleCharacterData(newData: any) {
         
-        this.characterData = newData;
+        this.characterData = newData.characters;
+        this.goalData = newData.goals;
 
         this.isLoading.next(false);
 

@@ -92,18 +92,41 @@ label {
 	}
 }
 
-
 #characters {
   float: none;
   margin: 0 auto;
 }
 
+#character-detail {
+	.portrait {
+		text-align: end;
+	}
+	.goals {
+		background-image: cdn-image('jce-banner');
+    background-size: contain;
+    background-repeat: no-repeat;
+		// min-width: 180px;
+
+		color: white;
+		font-size: large;
+		.row {
+			padding: 7%;
+		}
+		.no-pad { 
+			padding-top: 5%;
+		}
+		.slash { 
+			color: $greyish-brown;
+		}
+	}
+}
+
 .character {
-	@include transition(all, 1s, linear);
+	// @include transition(all, 1s, linear);
+	
 	&.selected {
-		// width: 100%!important;
-		// max-width: 100%!important;
 		@include flex(0, 0, 100%);
+		
 		.bio {
 			display: block;
 			@include transition(all, 1s, linear 2s);
@@ -114,6 +137,7 @@ label {
 			margin-right: auto;
 			margin-left: auto;
 		}
+
 	}
 	&.hidden {
 		width: 0;

@@ -22,12 +22,49 @@
 </div>
 
 <div id="character-detail" class="col-12 col-md-6 auto hidden">
-		<div *ngFor="let character of characters; let i = index;" id="detail-{{i}}" class="hidden row detail">
-			<div class="col-4 col-md-4"><cdn-image cloudinaryId="opportunity-game/characters/{{i+1}}.svg" width="150" autoFormat="false" alt="Character portrait #{{i+1}}" class="character-btn"></cdn-image></div>
-			<div class="bio col-8 col-md-8">{{character.bio}}</div>
+		<div *ngFor="let character of characters; let i = index;" id="detail-{{i}}" class="row detail hidden">
+			<div class="portrait col-6 col-md-4">
+				<cdn-image cloudinaryId="opportunity-game/characters/{{i+1}}.svg" width="150" autoFormat="false" alt="Character portrait #{{i+1}}" class="character-btn"></cdn-image>
+			</div>
+
+			<div class="goals bold col-6 col-md-8">
+				<div class="community row">
+
+					<div class="col-4">
+						<cdn-image cloudinaryId="opportunity-game/icons/community.svg" width="51" alt="Community goal icon" class=""></cdn-image>
+					</div>
+					<div class="col-5 no-pad">
+						0 <span class="slash">/</span> {{assignedGoal.commGoal}}
+					</div>
+
+				</div>
+
+				<div class="english row">
+					
+					<div class="col-4">
+						<cdn-image cloudinaryId="opportunity-game/icons/english.svg" width="51" alt="English goal icon" class=""></cdn-image>
+					</div>
+					<div class="col-5 no-pad">
+						0 <span class="slash">/</span> {{assignedGoal.englishGoal}}
+					</div>
+
+				</div>
+
+				<div class="job row">
+					
+					<div class="col-4">
+						<cdn-image cloudinaryId="opportunity-game/icons/job.svg" width="51" alt="Job goal icon" class=""></cdn-image>
+					</div>
+					<div class="col-5 no-pad">
+						0 <span class="slash">/</span> {{assignedGoal.jobGoal}}
+					</div>
+
+				</div>
+			</div>
+			<div class="bio medium col-10 auto">{{character.bio}}</div>
 		</div>
 		<div id="buttons">
-			<button id="back" class="vert-center" (click)="goBack()"><-</button>
+			<!-- <button id="back" class="vert-center" (click)="goBack()"><-</button> -->
 			<app-button label="Submit" route="/game/home" ariaLabel="Submit" class="green"></app-button>
 		</div>
 </div>
@@ -64,56 +101,56 @@
 
 		<div class="col-10 col-md-6">
 			<!-- Career -->
-			<div name="career_ranking" class="buttons row">
+			<div name="careerRating" class="buttons row">
 				<div class="col-4 container">
 
-					<input type="radio" name="career_ranking" value="1" (change)="onSelectionChange($event)"/>
+					<input type="radio" name="careerRating" value="1" (change)="onSelectionChange($event)"/>
 					<span class="radio">1</span>
 				</div>
 
 				<div class="col-4 container">
-					<input type="radio" name="career_ranking" value="2" (change)="onSelectionChange($event)"/>
+					<input type="radio" name="careerRating" value="2" (change)="onSelectionChange($event)"/>
 					<span class="radio">2</span>
 				</div>
 
 				<div class="col-4 container">
-					<input type="radio" name="career_ranking" value="3" (change)="onSelectionChange($event)"/>
+					<input type="radio" name="careerRating" value="3" (change)="onSelectionChange($event)"/>
 					<span class="radio">3</span>
 				</div>
 			</div>
 
 			<!-- Community Engagement -->
-			<div name="engagement_ranking" class="buttons row">
+			<div name="commRating" class="buttons row">
 				<div class="col-4 container">
-					<input type="radio" name="engagement_ranking" value="1" (change)="onSelectionChange($event)"/>
+					<input type="radio" name="commRating" value="1" (change)="onSelectionChange($event)"/>
 					<span class="radio">1</span>
 				</div>
 
 				<div class="col-4 container">
-					<input type="radio" name="engagement_ranking" value="2" (change)="onSelectionChange($event)"/>
+					<input type="radio" name="commRating" value="2" (change)="onSelectionChange($event)"/>
 					<span class="radio">2</span>
 				</div>
 
 				<div class="col-4 container">
-					<input type="radio" name="engagement_ranking" value="2" (change)="onSelectionChange($event)"/>
+					<input type="radio" name="commRating" value="2" (change)="onSelectionChange($event)"/>
 					<span class="radio">3</span>
 				</div>
 			</div>
 
 			<!-- Comfort and Health -->
-			<div name="health_ranking" class="buttons row">
+			<div name="healthRating" class="buttons row">
 				<div class="col-4 container">
-					<input type="radio" name="health_ranking" value="1" (change)="onSelectionChange($event)"/>
+					<input type="radio" name="healthRating" value="1" (change)="onSelectionChange($event)"/>
 					<span class="radio">1</span>
 				</div>
 
 				<div class="col-4 container">
-					<input type="radio" name="health_ranking" value="2" (change)="onSelectionChange($event)"/>
+					<input type="radio" name="healthRating" value="2" (change)="onSelectionChange($event)"/>
 					<span class="radio">2</span>
 				</div>
 
 				<div class="col-4 container">
-					<input type="radio" name="health_ranking" value="3" (change)="onSelectionChange($event)"/>
+					<input type="radio" name="healthRating" value="3" (change)="onSelectionChange($event)"/>
 					<span class="radio">3</span>
 				</div>
 			</div>
@@ -121,7 +158,7 @@
 	</div>
 
 	<div id="buttons">
-		<app-button id="submit-btn" label="Submit" ariaLabel="Click/tap to see character" clickData="true" (clickEvent)="assignCharacter()" class="green hidden col-centered"></app-button>
+		<app-button id="submit-btn-desktop" label="Submit" ariaLabel="Click/tap to see character" clickData="true" (clickEvent)="assignCharacter()" class="green hidden col-centered"></app-button>
 	</div>
 </div>
 
@@ -141,19 +178,19 @@
 			</div>
 		</div>
 
-		<div name="career_ranking" class="buttons row">
+		<div name="careerRating" class="buttons row">
 			<div class="col-4 container">
-				<input type="radio" name="career_ranking" value="0" (change)="onSelectionChange($event)"/>
+				<input type="radio" name="careerRating" value="1" (change)="onSelectionChange($event)"/>
 				<span class="radio">1</span>
 			</div>
 
 			<div class="col-4 container">
-				<input type="radio" name="career_ranking" value="1" (change)="onSelectionChange($event)"/>
+				<input type="radio" name="careerRating" value="2" (change)="onSelectionChange($event)"/>
 				<span class="radio">2</span>
 			</div>
 
 			<div class="col-4 container">
-				<input type="radio" name="career_ranking" value="2" (change)="onSelectionChange($event)"/>
+				<input type="radio" name="careerRating" value="3" (change)="onSelectionChange($event)"/>
 				<span class="radio">3</span>
 			</div>
 		</div>
@@ -167,19 +204,19 @@
 			<span class="bold">Community Engagement</span>
 			</div>
 		</div>
-		<div name="engagement_ranking" class="buttons row">
+		<div name="commRating" class="buttons row">
 			<div class="col-4 container">
-				<input type="radio" name="engagement_ranking" value="0" (change)="onSelectionChange($event)"/>
+				<input type="radio" name="commRating" value="1" (change)="onSelectionChange($event)"/>
 				<span class="radio">1</span>
 			</div>
 
 			<div class="col-4 container">
-				<input type="radio" name="engagement_ranking" value="1" (change)="onSelectionChange($event)"/>
+				<input type="radio" name="commRating" value="2" (change)="onSelectionChange($event)"/>
 				<span class="radio">2</span>
 			</div>
 
 			<div class="col-4 container">
-				<input type="radio" name="engagement_ranking" value="2" (change)="onSelectionChange($event)"/>
+				<input type="radio" name="commRating" value="3" (change)="onSelectionChange($event)"/>
 				<span class="radio">3</span>
 			</div>
 		</div>
@@ -193,25 +230,25 @@
 				<span class="bold">Comfort and Health</span>
 			</div>
 		</div>
-		<div name="health_ranking" class="buttons row">
+		<div name="healthRating" class="buttons row">
 			<div class="col-4 container">
-				<input type="radio" name="health_ranking" value="0" (change)="onSelectionChange($event)"/>
+				<input type="radio" name="healthRating" value="1" (change)="onSelectionChange($event)"/>
 				<span class="radio">1</span>
 			</div>
 
 			<div class="col-4 container">
-				<input type="radio" name="health_ranking" value="1" (change)="onSelectionChange($event)"/>
+				<input type="radio" name="healthRating" value="2" (change)="onSelectionChange($event)"/>
 				<span class="radio">2</span>
 			</div>
 
 			<div class="col-4 container">
-				<input type="radio" name="health_ranking" value="2" (change)="onSelectionChange($event)"/>
+				<input type="radio" name="healthRating" value="3" (change)="onSelectionChange($event)"/>
 				<span class="radio">3</span>
 			</div>
 		</div>
 	</div>
 	<div id="buttons">
-		<app-button id="submit-btn" label="Submit" ariaLabel="Click/tap to see character" clickData="true" (clickEvent)="assignCharacter()" class="green hidden col-centered"></app-button>
+		<app-button id="submit-btn-mobile" label="Submit" ariaLabel="Click/tap to see character" clickData="true" (clickEvent)="assignCharacter()" class="green hidden col-centered"></app-button>
 	</div>
 
 </div>
