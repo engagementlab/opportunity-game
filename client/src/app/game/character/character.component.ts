@@ -92,20 +92,19 @@ export class GameCharacterComponent implements OnInit {
 
   assignCharacter() {
 
-    this.assignedIndex = (Math.floor(Math.random() * (3 - 0 + 1)) + 0);
+    let assignedIndex = (Math.floor(Math.random() * (3 - 0 + 1)) + 0);
 
     document.getElementById('welcome').classList.remove('hidden');
     document.getElementById('logo').classList.add('hidden');
 
     document.getElementById('characters').classList.add('hidden');
     document.getElementById('character-detail').classList.remove('hidden')
-    document.querySelector('#character-detail #detail-'+this.assignedIndex).classList.remove('hidden');
+    document.querySelector('#character-detail #detail-'+assignedIndex).classList.remove('hidden');
 
     document.getElementById('questionnaire-desktop').style.display = 'none';
     document.getElementById('questionnaire-mobile').style.display = 'none';
-    // this._dataSvc.assignedCharIndex
 
-    this._dataSvc.changeCharacter(this.assignedIndex+1);
+    this._dataSvc.changeCharacter(assignedIndex+1);
 
 
 

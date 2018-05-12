@@ -18,7 +18,7 @@ export class GameToolbarComponent {
 
   public hasTransit: boolean;
   public hasJob: boolean;
-  public playerIndex: boolean = 2;
+  public playerIndex: number = 2;
 
   constructor(private _dataSvc: DataService) {
 

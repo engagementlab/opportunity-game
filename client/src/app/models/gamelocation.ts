@@ -16,4 +16,6 @@ export interface GameLocation {
 	
   opportunities: Opportunity[];
 
+  imageIndex: number;
+
 }
