@@ -17,7 +17,8 @@ $greyish-brown: #4a4a4a;
 $mq-breakpoints: (
     mobile:  320px,
     mobileLg:  360px,
-    tablet:  740px,
+    // Forces mobile width forever
+    tablet:  10000px,
     desktop: 980px,
     wide:    1300px,
 

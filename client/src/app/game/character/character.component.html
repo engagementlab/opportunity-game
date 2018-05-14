@@ -1,9 +1,9 @@
-<div id="bubble" class="col-10 auto hidden">
+<div id="bubble" class="col-10 col-centered hidden">
 	<div class="bubble">
-		<div class="content">
+		<!-- <div class="content"> -->
 			<!-- Choose your character. -->
 			Rank the following to help us<br />match you with your character.
-		</div>
+		<!-- </div> -->
 	</div>
 </div>
 
@@ -23,40 +23,40 @@
 
 <div id="character-detail" class="col-12 col-md-6 auto hidden">
 		<div *ngFor="let character of characters; let i = index;" id="detail-{{i}}" class="row detail hidden">
-			<div class="portrait col-6 col-md-4">
+			<div class="portrait col-3">
 				<cdn-image cloudinaryId="opportunity-game/characters/{{i+1}}.svg" width="150" autoFormat="false" alt="Character portrait #{{i+1}}" class="character-btn"></cdn-image>
 			</div>
 
-			<div class="goals bold col-6 col-md-8">
+			<div class="goals bold col-3">
 				<div class="community row">
 
-					<div class="col-4">
+					<div class="col-3">
 						<cdn-image cloudinaryId="opportunity-game/icons/community.svg" width="51" alt="Community goal icon" class=""></cdn-image>
 					</div>
-					<div class="col-5 no-pad">
-						0 <span class="slash">/</span> {{assignedGoal.commGoal}}
+					<div class="col-3 no-pad">
+						{{assignedGoal.commGoal}}
 					</div>
 
 				</div>
 
 				<div class="english row">
 					
-					<div class="col-4">
+					<div class="col-3">
 						<cdn-image cloudinaryId="opportunity-game/icons/english.svg" width="51" alt="English goal icon" class=""></cdn-image>
 					</div>
-					<div class="col-5 no-pad">
-						0 <span class="slash">/</span> {{assignedGoal.englishGoal}}
+					<div class="col-3 no-pad">
+						{{assignedGoal.englishGoal}}
 					</div>
 
 				</div>
 
 				<div class="job row">
 					
-					<div class="col-4">
+					<div class="col-3">
 						<cdn-image cloudinaryId="opportunity-game/icons/job.svg" width="51" alt="Job goal icon" class=""></cdn-image>
 					</div>
-					<div class="col-5 no-pad">
-						0 <span class="slash">/</span> {{assignedGoal.jobGoal}}
+					<div class="col-3 no-pad">
+						{{assignedGoal.jobGoal}}
 					</div>
 
 				</div>
@@ -65,11 +65,11 @@
 		</div>
 		<div id="buttons">
 			<!-- <button id="back" class="vert-center" (click)="goBack()"><-</button> -->
-			<app-button label="Submit" route="/game/home" ariaLabel="Submit" class="green"></app-button>
+			<app-button label="Start" route="/game/home" ariaLabel="Start Game" class="green"></app-button>
 		</div>
 </div>
 
-<div id="questionnaire-desktop" class="questionnaire hidden-mobile">
+<!-- <div id="questionnaire-desktop" class="questionnaire hidden-mobile">
 	
 	<div class="row">
 		<div id="labels" class="col-12 col-md-6">
@@ -100,56 +100,53 @@
 	</div>
 
 		<div class="col-10 col-md-6">
-			<!-- Career -->
 			<div name="careerRating" class="buttons row">
-				<div class="col-4 container">
+				<div class="col-2 container">
 
 					<input type="radio" name="careerRating" value="1" (change)="onSelectionChange($event)"/>
 					<span class="radio">1</span>
 				</div>
 
-				<div class="col-4 container">
+				<div class="col-2 container">
 					<input type="radio" name="careerRating" value="2" (change)="onSelectionChange($event)"/>
 					<span class="radio">2</span>
 				</div>
 
-				<div class="col-4 container">
+				<div class="col-2 container">
 					<input type="radio" name="careerRating" value="3" (change)="onSelectionChange($event)"/>
 					<span class="radio">3</span>
 				</div>
 			</div>
 
-			<!-- Community Engagement -->
 			<div name="commRating" class="buttons row">
-				<div class="col-4 container">
+				<div class="col-2 container">
 					<input type="radio" name="commRating" value="1" (change)="onSelectionChange($event)"/>
 					<span class="radio">1</span>
 				</div>
 
-				<div class="col-4 container">
+				<div class="col-2 container">
 					<input type="radio" name="commRating" value="2" (change)="onSelectionChange($event)"/>
 					<span class="radio">2</span>
 				</div>
 
-				<div class="col-4 container">
+				<div class="col-2 container">
 					<input type="radio" name="commRating" value="2" (change)="onSelectionChange($event)"/>
 					<span class="radio">3</span>
 				</div>
 			</div>
 
-			<!-- Comfort and Health -->
 			<div name="healthRating" class="buttons row">
-				<div class="col-4 container">
+				<div class="col-2 container">
 					<input type="radio" name="healthRating" value="1" (change)="onSelectionChange($event)"/>
 					<span class="radio">1</span>
 				</div>
 
-				<div class="col-4 container">
+				<div class="col-2 container">
 					<input type="radio" name="healthRating" value="2" (change)="onSelectionChange($event)"/>
 					<span class="radio">2</span>
 				</div>
 
-				<div class="col-4 container">
+				<div class="col-2 container">
 					<input type="radio" name="healthRating" value="3" (change)="onSelectionChange($event)"/>
 					<span class="radio">3</span>
 				</div>
@@ -160,9 +157,9 @@
 	<div id="buttons">
 		<app-button id="submit-btn-desktop" label="Submit" ariaLabel="Click/tap to see character" clickData="true" (clickEvent)="assignCharacter()" class="green hidden col-centered"></app-button>
 	</div>
-</div>
+</div> -->
 
-<div id="questionnaire-mobile" class="questionnaire hidden-desktop">
+<div id="questionnaire-mobile" class="questionnaire">
 	
 	<div id="labels" class="col-12 col-md-6">
 	</div>
@@ -170,7 +167,7 @@
 	<div class="col-10 col-md-6 auto">
 		<!-- Career -->
 		<div class="row">
-			<div class="col-3">
+			<div class="col-2">
 				<cdn-image cloudinaryId="opportunity-game/icons/job.svg" width="50" alt="Career Prospects"></cdn-image>
 			</div>
 			<div class="col-7">
@@ -178,18 +175,18 @@
 			</div>
 		</div>
 
-		<div name="careerRating" class="buttons row">
-			<div class="col-4 container">
+		<div name="careerRating" class="buttons bold row">
+			<div class="col-2 container">
 				<input type="radio" name="careerRating" value="1" (change)="onSelectionChange($event)"/>
 				<span class="radio">1</span>
 			</div>
 
-			<div class="col-4 container">
+			<div class="col-2 container">
 				<input type="radio" name="careerRating" value="2" (change)="onSelectionChange($event)"/>
 				<span class="radio">2</span>
 			</div>
 
-			<div class="col-4 container">
+			<div class="col-2 container">
 				<input type="radio" name="careerRating" value="3" (change)="onSelectionChange($event)"/>
 				<span class="radio">3</span>
 			</div>
@@ -197,25 +194,25 @@
 
 		<!-- Community Engagement -->
 		<div class="row">
-			<div class="col-3">
+			<div class="col-2">
 				<cdn-image cloudinaryId="opportunity-game/icons/community.svg" width="50" alt="Community Engagement"></cdn-image>
 			</div>
 			<div class="col-7">
 			<span class="bold">Community Engagement</span>
 			</div>
 		</div>
-		<div name="commRating" class="buttons row">
-			<div class="col-4 container">
+		<div name="commRating" class="buttons bold row">
+			<div class="col-2 container">
 				<input type="radio" name="commRating" value="1" (change)="onSelectionChange($event)"/>
 				<span class="radio">1</span>
 			</div>
 
-			<div class="col-4 container">
+			<div class="col-2 container">
 				<input type="radio" name="commRating" value="2" (change)="onSelectionChange($event)"/>
 				<span class="radio">2</span>
 			</div>
 
-			<div class="col-4 container">
+			<div class="col-2 container">
 				<input type="radio" name="commRating" value="3" (change)="onSelectionChange($event)"/>
 				<span class="radio">3</span>
 			</div>
@@ -223,25 +220,25 @@
 
 		<!-- Comfort and Health -->
 		<div class="row">
-			<div class="col-3">
+			<div class="col-2">
 				<cdn-image cloudinaryId="opportunity-game/icons/health_and_help.svg" width="50" alt="Comfort and Health"></cdn-image>
 			</div>
 			<div class="col-7">
 				<span class="bold">Comfort and Health</span>
 			</div>
 		</div>
-		<div name="healthRating" class="buttons row">
-			<div class="col-4 container">
+		<div name="healthRating" class="buttons bold row">
+			<div class="col-2 container">
 				<input type="radio" name="healthRating" value="1" (change)="onSelectionChange($event)"/>
 				<span class="radio">1</span>
 			</div>
 
-			<div class="col-4 container">
+			<div class="col-2 container">
 				<input type="radio" name="healthRating" value="2" (change)="onSelectionChange($event)"/>
 				<span class="radio">2</span>
 			</div>
 
-			<div class="col-4 container">
+			<div class="col-2 container">
 				<input type="radio" name="healthRating" value="3" (change)="onSelectionChange($event)"/>
 				<span class="radio">3</span>
 			</div>

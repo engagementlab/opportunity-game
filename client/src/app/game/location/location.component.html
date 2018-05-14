@@ -2,37 +2,37 @@
 
 	<div><app-button label="Back" ariaLabel="Back to Home" clickData="true" (clickEvent)="backToMap()" class="gold"></app-button></div>
 
-	 	<div id="list" class="col-sm-12 col-md-8">
-			<button *ngFor="let opportunity of currentLocation?.opportunities" (click)="viewOpportunity(opportunity._id)" class="col-sm-8 col-md-12 bold" id="listing_{{opportunity._id}}" [disabled]="opportunity.enabled !== undefined">
+	 	<div id="list" class="col-6">
+			<button *ngFor="let opportunity of currentLocation?.opportunities" (click)="viewOpportunity(opportunity._id)" class="col-6 bold" id="listing_{{opportunity._id}}" [disabled]="opportunity.enabled !== undefined">
 
 					<div class="name">
 						{{opportunity.name}}
 					</div>
 
 					<div class="achievement" *ngIf="opportunity.effect && opportunity.effectWait > 0">
-						<cdn-image cloudinaryId="opportunity-game/icons/duration.png" alt="Icon for Duration effect"></cdn-image>
+						<cdn-image cloudinaryId="opportunity-game/icons/gold_clock.svg" alt="Icon for Duration effect"></cdn-image>
 					</div>
 					<div class="reward" *ngIf="opportunity.locationUnlocks && opportunity.locationUnlocks.length > 0">
-						<cdn-image cloudinaryId="opportunity-game/icons/location-unlock.png" alt="Icon for Location unlock"></cdn-image>
+						<cdn-image cloudinaryId="opportunity-game/icons/map-opportunity.svg" width="75" alt="Icon for Location unlock"></cdn-image>
 					</div>
 
 					<!-- Rewards -->
 					<div class="reward" *ngIf="opportunity.commReward > 0">
-						<cdn-image cloudinaryId="opportunity-game/icons/community-clear.svg" alt="Icon for Community reward"></cdn-image>
+						<cdn-image cloudinaryId="opportunity-game/icons/community-opportunity.svg" width="75"  alt="Icon for Community reward"></cdn-image>
 					</div>
 					<div class="reward" *ngIf="opportunity.englishReward > 0">
-						<cdn-image cloudinaryId="opportunity-game/icons/english-clear.svg" alt="Icon for English reward"></cdn-image>
+						<cdn-image cloudinaryId="opportunity-game/icons/english-opportunity.svg" width="75"  alt="Icon for English reward"></cdn-image>
 					</div>
 					<div class="reward" *ngIf="opportunity.jobReward > 0">
-						<cdn-image cloudinaryId="opportunity-game/icons/job-clear.svg" alt="Icon for Job reward"></cdn-image>
+						<cdn-image cloudinaryId="opportunity-game/icons/training-opportunity.svg" width="75"  alt="Icon for Job reward"></cdn-image>
 					</div>
 					
 					<!-- Achievements -->
 					<div class="achievement" *ngIf="opportunity.givesTransit">
-						<cdn-image cloudinaryId="opportunity-game/toolbar/transit.svg" alt="Icon for Transit achievement"></cdn-image>
+						<cdn-image cloudinaryId="opportunity-game/icons/transit-opportunity.svg" width="75"  alt="Icon for Transit achievement"></cdn-image>
 					</div>
 					<div class="achievement" *ngIf="opportunity.givesJob">
-						<cdn-image cloudinaryId="opportunity-game/toolbar/job.svg" alt="Icon for Job achievement"></cdn-image>
+						<cdn-image cloudinaryId="opportunity-game/icons/job-opportunity.svg" width="75"  alt="Icon for Job achievement"></cdn-image>
 					</div>
 
 					<!-- Requires: {{opportunity.type}} -->
@@ -43,10 +43,7 @@
 		</div>
 
 		<div id="details" class="modal hidden">
-			<div *ngFor="let opportunity of currentLocation?.opportunities" class="opportunity col-8 col-centered medium vert-center hidden" id="detail_{{opportunity._id}}">
-
-					<div (click)="backToList(opportunity._id)" class="back btn"><--</div>
-
+			<div *ngFor="let opportunity of currentLocation?.opportunities" class="opportunity col-5 col-centered vert-center medium hidden" id="detail_{{opportunity._id}}">
 					<div>
 							Would you like to learn about <span class="bold">{{opportunity.name}}</span>? 
 					</div>
@@ -59,12 +56,19 @@
 							<cdn-image cloudinaryId="opportunity-game/icons/english.svg" alt="Icon for English reward"></cdn-image>
 						</div>
 						<div class="reward col-5 col-centered" *ngIf="opportunity.jobReward > 0">
-							<cdn-image cloudinaryId="opportunity-game/icons/job.svg" alt="Icon for Job reward"></cdn-image>
+							<cdn-image cloudinaryId="opportunity-game/icons/training-color.svg" alt="Icon for Job reward"></cdn-image>
+						</div>
+						<div class="footer">
+								This opportunity costs 
+								<span *ngIf="opportunity.actionCost > 0 && opportunity.moneyCost <= 0">{{opportunity.actionCost}} actions.</span>
+								<span *ngIf="opportunity.moneyCost > 0 && opportunity.actionCost <= 0">{{opportunity.moneyCost}} money.</span>
+								<span *ngIf="opportunity.moneyCost > 0 && opportunity.actionCost > 0">{{opportunity.actionCost}} actions & {{opportunity.moneyCost}} money.</span>
 						</div>
 					</div>
 
 					<div class="row">
 						<app-button label="Yes" ariaLabel="Click to learn about {{opportunity.name}}" clickData="true" (clickEvent)="selectOpportunity(opportunity, opportunity._id)" class="green col-centered"></app-button>
+						<app-button label="No" ariaLabel="Click to close {{opportunity.name}} window" clickData="true" (clickEvent)="backToList(opportunity._id)" class="orange col-centered"></app-button>
 					</div>
 
 			</div>

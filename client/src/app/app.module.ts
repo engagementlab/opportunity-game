@@ -39,11 +39,14 @@ import { GameToolbarComponent } from './game/toolbar/toolbar.component';
 import { GameEmblemComponent } from './game/emblem/emblem.component';
 import { GameEventComponent } from './game/event/event.component';
 
+import DeactivateGuard from './deactivate-guard';
+
 const appRoutes: Routes = [
   { path: '', redirectTo: 'game', pathMatch: 'full' },
   { 
     path: 'game',
-    component: GameComponent,
+    component: GameComponent,    
+    canDeactivate: [DeactivateGuard],
     children: [
       {path: '', redirectTo: 'start', pathMatch: 'full'}, 
       {path: 'start', component: GameStartComponent, data: {index: 0}}, 
@@ -97,7 +100,8 @@ const appRoutes: Routes = [
   ],
   providers: [
     DataService,
-    LoaderComponent
+    LoaderComponent,
+    DeactivateGuard
   ],
   bootstrap: [AppComponent]
 })

@@ -29,11 +29,12 @@
 	}
 
 	.filter {
-		@include mq($from: tablet) {
-			&:nth-child(even) {
-				margin-top: 15%;
-			}
-		}
+		// @include mq($from: tablet) {
+		// 	&:nth-child(even) {
+		// 		margin-top: 15%;
+		// 	}
+		// }
+		text-align: center;
 		@include mobile-only { 
 			 padding-top: 1%;
 		}
@@ -52,7 +53,6 @@
 #house {
 
 	min-height: 35%;
-	// width: 100%;
 	background-image: cdn-image('home-bg',  c_scale, w_1024);
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -66,10 +66,6 @@
   	position: absolute;
   	width: 45%;
   	transform: translate(35%, -100%);
-
-  	&::ng-deep img {
-  		// width: 68%;
-  	}
   }
 	@include mobile-only {
 		.mobile {
@@ -117,10 +113,10 @@
 
 .locations {
 	margin: auto;
-  height: 65vh;
-	@media(max-height: 680px) {
-		height: 58vh;
-	}
+  // height: 65vh;
+	// @media(max-height: 680px) {
+		height: 68vh;
+	// }
 	@include mobile-only {
 	  overflow: scroll;
 	}

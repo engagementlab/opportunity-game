@@ -4,9 +4,14 @@ label {
 	display: block;
 }
 
+.bubble {
+	// padding: 12%;
+	font-size: small;
+}
+
 .questionnaire {
 
-	overflow-y: scroll;
+	// overflow-y: scroll;
 
 	::ng-deep img {
 		max-width: 20%;
@@ -105,10 +110,9 @@ label {
 		background-image: cdn-image('jce-banner');
     background-size: contain;
     background-repeat: no-repeat;
-		// min-width: 180px;
 
 		color: white;
-		font-size: large;
+		font-size: x-large;
 		.row {
 			padding: 7%;
 		}

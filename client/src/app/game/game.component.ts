@@ -63,15 +63,6 @@ export class GameComponent implements OnInit {
         TweenLite.fromTo(document.getElementById('round-over'), 1, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, display:'block', ease: Back.easeOut});
       }
 
-      if(data.gotTransit) {
-        TweenLite.to(document.getElementById('achievement'), 1, {autoAlpha: 1, display:'block'});
-        TweenLite.to(document.getElementById('transit'), 1, {autoAlpha: 1, display:'block'});
-      }
-      else if(data.gotTransit) {
-        TweenLite.to(document.getElementById('achievement'), 1, {autoAlpha: 1, display:'block'});
-        TweenLite.to(document.getElementById('job'), 1, {autoAlpha: 1, display:'block'});
-      }
-
       this.newRound = data.round;
 
 

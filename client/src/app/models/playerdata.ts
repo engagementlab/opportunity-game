@@ -19,5 +19,6 @@ export interface PlayerData {
   newRound?: boolean;
   gotTransit?: boolean;
   gotJob?: boolean;
+  payday?: boolean;
 
 }

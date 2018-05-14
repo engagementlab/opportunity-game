@@ -3,10 +3,10 @@
 	<div id="house" class="row-lg">
 
 		<div class="col-12 col-lg-8 auto row">
-			<div class="col-5">
-			<div class="vert-center">
-				<cdn-image cloudinaryId="opportunity-game/char-{{playerIndex}}-home.svg" width="350" alt="Icon for Home"></cdn-image>
-			</div>
+			<div class="col-3">
+				<div class="vert-center">
+					<cdn-image cloudinaryId="opportunity-game/char-{{playerIndex}}-home.svg" width="350" alt="Icon for Home"></cdn-image>
+				</div>
 			</div>
 
 			<div class="col-7">
@@ -18,18 +18,16 @@
 			</div>
 		</div>
 
-	<!-- </div> -->
-
-	<div id="filters" class="row-sm row-lg col-12 col-lg-8 auto">
-	
-		<div *ngFor="let filter of filters" class="col-5 col-md-3 col-lg-3 col-centered filter btn" (click)="filterSelection(filter.key)">
-			<div class="content vert-center">
-				<cdn-image cloudinaryId="opportunity-game/icons/home-{{filter.key}}.svg" width="150" alt="Icon for {{filter.label}} filter"></cdn-image>
-				<div class="label bold">{{filter.label}}</div>
+		<div id="filters" class="row col-12 col-lg-8 auto">
+		
+			<div *ngFor="let filter of filters" class="col-3 col-centered filter btn" (click)="filterSelection(filter.key)">
+				<div class="content vert-center">
+					<cdn-image cloudinaryId="opportunity-game/icons/home-{{filter.key}}.svg" width="150" alt="Icon for {{filter.label}} filter"></cdn-image>
+					<div class="label bold">{{filter.label}}</div>
+				</div>
 			</div>
+		
 		</div>
-	
-	</div>
 
 </div>
 
@@ -39,7 +37,7 @@
 	<div id="category-label" class="bold">Category</div>
 
 	<div class="locations row col-md-10">
-		<div *ngFor="let location of locations" attr.data-categories="{{location.categoriesStr}}" class="col-6 col-md-3 location">
+		<div *ngFor="let location of locations" attr.data-categories="{{location.categoriesStr}}" class="col-3 col-md-3 location">
 
 			<div class="centered">
 								

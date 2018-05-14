@@ -62,10 +62,11 @@ export class GameLocationComponent implements OnInit {
       (<HTMLElement>el).style.display = 'none';
     });
 
-    detailsParent.style.display = 'block';
+    // detailsParent.style.display = 'block';
+    TweenLite.to(detailsParent, .5, {autoAlpha:1, display:'block'});
     TweenLite.to(document.getElementById('list'), .5, {autoAlpha:0, display:'none', oncomplete:() => {
 
-      TweenLite.fromTo(detailsChild, 2, {scale:0}, {scale:1, autoAlpha:1, display:'block', ease: Elastic.easeOut});
+      TweenLite.fromTo(detailsChild, 2, {autoAlpha:0}, {autoAlpha:1, delay:.5, display:'block', ease:Elastic.easeOut});
     
     }});
 
@@ -79,10 +80,10 @@ export class GameLocationComponent implements OnInit {
 
   backToList(modalId: string) { 
     
-    TweenLite.fromTo(document.getElementById('detail_'+modalId), 1, {scale:1}, {scale:0, autoAlpha:0, display:'none', ease: Back.easeIn, oncomplete:() => {
+    TweenLite.to(document.getElementById('detail_'+modalId), 1, {autoAlpha:0, display:'none', ease: Back.easeIn, oncomplete:() => {
 
       TweenLite.to(document.getElementById('list'), 1, {autoAlpha:1, display:'block'});
-      document.getElementById('details').style.display = 'none';
+      TweenLite.to(document.getElementById('details'), .5, {autoAlpha:0, display:'none'});
     
     }});
 

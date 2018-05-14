@@ -1,28 +1,52 @@
 @import "~sass/_variables";
 
+#achievement {
+
+	position: fixed;
+	bottom: 0;
+	max-width: 425px;
+	width: 100%;
+	z-index: 1;
+	background-color: $gold;
+	font-size: large;
+
+	#payday {
+		background-color: $hospital-green;
+	}
+	
+}
+
 #toolbar {
 
 	position: fixed;
 	bottom: 0;
-	left: 0;
-	right: 0;
+	max-width: 425px;
+	width: 100%;
+	z-index: 2;
 
 	background: black;
 	color: white;
 
-	@include mobile-only {
+	// @include mobile-only {
 		.flex {
 			width: 100%;
 			display: flex;
 			flex-wrap: wrap;
 		}	
-	}
+	// }
 
 	.icon {
 		padding-right: 0;
 		::ng-deep img {
     	max-height: 35px;
     	max-width: 40px;
+		}
+		svg {			
+    	max-height: 35px;
+    	max-width: 40px;
+    	path {
+	  	  transition: stroke 1s ease-in-out;
+	  	}
 		}
 	}
 	.icon-lg {
@@ -80,12 +104,22 @@
 		  @include transition(max-height, 150ms, cubic-bezier(0.64, 0.57, 0.67, 1.53));
 		}
 	}
-	@include mq($from: tablet) {
+/* 	@include mq($from: tablet) {
 		display: block;
 		min-width: 50%;
 		float: left;
 		#mobile-drawer {
 			display: inline;
+		}
+	} */
+
+	#money {
+		@include transition(color, 1s, ease-in-out)
+		&.payday {
+			color: $hospital-green;
+			#stroke {
+				stroke: $hospital-green;
+			}
 		}
 	}
 
@@ -99,10 +133,10 @@
 	}
 }
 #drawer { 
-	@include mq($from: tablet) {
+	/* @include mq($from: tablet) {
 		float: right;
 		display: flex;
-	}
+	} */
 	@include mobile-only {
 		max-height: 0;
 	  @include transition(max-height, 150ms, cubic-bezier(0.64, 0.57, 0.67, 1.53));

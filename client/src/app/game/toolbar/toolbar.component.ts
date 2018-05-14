@@ -7,7 +7,7 @@ import { PlayerData } from '../../models/playerdata';
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss']
 })
-export class GameToolbarComponent {
+export class GameToolbarComponent implements OnInit {
 
   round: number = 1;
   actions: number;
@@ -47,7 +47,35 @@ export class GameToolbarComponent {
 
       this.playerIndex = this._dataSvc.assignedCharIndex;
 
+      if(data.gotTransit || data.gotJob || data.payday) {
+        
+        if(data.gotJob)
+          document.getElementById('job-cheevo').classList.remove('hidden');
+        else if(data.gotTransit)
+          document.getElementById('transit-cheevo').classList.remove('hidden');
+        else if(data.payday) {
+          document.getElementById('payday').classList.remove('hidden');
+          document.getElementById('money').classList.add('payday');
+        }
+
+        let cheevoBanner = document.getElementById('achievement');
+        let bannerY = document.getElementById('toolbar').offsetHeight;
+        TweenLite.to(cheevoBanner, .5, {autoAlpha:1, bottom: bannerY+'px', ease:Back.easeOut});
+        TweenLite.to(cheevoBanner, .5, {bottom:0, delay:4, ease:Back.easeIn, onComplete:() => {
+          document.getElementById('job-cheevo').classList.remove('hidden');
+          document.getElementById('transit-cheevo').classList.remove('hidden');
+          document.getElementById('money').classList.remove('payday');
+        }});
+        TweenLite.to(cheevoBanner, .3, {autoAlpha:0, delay:4.2});
+
+      }
+
   	});
+
+   }
+    
+
+   ngOnInit() {  
 
    }
 

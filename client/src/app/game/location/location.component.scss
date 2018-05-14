@@ -9,39 +9,39 @@
 	}
 	
 	&.career {
-		background: cdn-image('locations/background/career', c_scale, w_1440);
+		background-image:  cdn-image('locations/background/career', c_scale, w_1440);
 		@include mobile-only {
-			background: cdn-image('locations/background/career_mobile');
+			background-image:  cdn-image('locations/background/career_mobile');
 		}
 	}
 	&.child-care {
-		background: cdn-image('locations/background/child-care', c_scale, w_1440);
+		background-image:  cdn-image('locations/background/child-care', c_scale, w_1440);
 		@include mobile-only {
-			background: cdn-image('locations/background/child-care_mobile');
+			background-image:  cdn-image('locations/background/child-care_mobile');
 		}
 	}
 	&.cultural-center {
-		background: cdn-image('locations/background/cultural-center', c_scale, w_1440);
+		background-image:  cdn-image('locations/background/cultural-center', c_scale, w_1440);
 		@include mobile-only {
-			background: cdn-image('locations/background/cultural-center_mobile');
+			background-image:  cdn-image('locations/background/cultural-center_mobile');
 		}
 	}
 	&.hospital {
-		background: cdn-image('locations/background/hospital', c_scale, w_1440);
+		background-image:  cdn-image('locations/background/hospital', c_scale, w_1440);
 		@include mobile-only {
-			background: cdn-image('locations/background/hospital_mobile');
+			background-image:  cdn-image('locations/background/hospital_mobile');
 		}
 	}
 	&.info-center {
-		background: cdn-image('locations/background/info-center', c_scale, w_1440);
+		background-image:  cdn-image('locations/background/info-center', c_scale, w_1440);
 		@include mobile-only {
-			background: cdn-image('locations/background/info-center_mobile');
+			background-image:  cdn-image('locations/background/info-center_mobile');
 		}
 	}
 	&.school {
-		background: cdn-image('locations/background/school', c_scale, w_1440);
+		background-image:  cdn-image('locations/background/school', c_scale, w_1440);
 		@include mobile-only {
-			background: cdn-image('locations/background/school_mobile');
+			background-image:  cdn-image('locations/background/school_mobile');
 		}
 	}
 }
@@ -51,10 +51,10 @@
 	padding-bottom: 5%;
 	margin: auto;
 
-  height: 65vh;
-	@media(max-height: 680px) {
+  height: 82vh;
+/* 	@media(max-height: 680px) {
 		height: 72vh;
-	}
+	} */
 
 	button {
 		@include box-shadow(4px, 4px, 0, #000000);
@@ -85,23 +85,12 @@
 	}
 	.reward {
 		float: right;
-		background-color: $white;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
   	&:after {
-  		content: "+";
-  		color: $hospital-green;
 			position: relative;
   		top: 37%;
 			left: 9%;
 			font-size: x-large;
   	}
-		::ng-deep img {
-    	position: absolute;
-    	width: 30px;
-    	transform: translate(-37%, 59%);
-		}
 	}
 	.achievement {
 		float: right;
@@ -129,11 +118,10 @@
 	@include box-shadow(4px, 4px, 0, #000000);
 	min-height: 250px;
 
-	.back {
-		width: 30px;
-		height: 30px;
-		background-color: $gold;
-    border-radius: 50%;
+	.footer {
+		font-size: small;
+    text-align: center;
+    width: 100%;
 	}
 
 	::ng-deep .app-button {

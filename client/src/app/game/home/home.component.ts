@@ -13,6 +13,7 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
 
   public playerIndex: number;
 
+  loaded: boolean;
   locations: any[];
   filters: object[] = 
   [
@@ -23,6 +24,10 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
   ];
   loadCategory: boolean;
   loadedCategory: boolean;
+
+  canDeactivate() {
+    return !this.loaded;
+  }
 
   constructor(private route: ActivatedRoute, private router: Router, private _dataSvc: DataService) {
 
@@ -52,6 +57,7 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
       
       TweenLite.fromTo(document.getElementById('house-bubble'), 1.5, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, delay:2, display:'block', ease:Elastic.easeOut});
 
+      this.loaded = true;
 
     });
     

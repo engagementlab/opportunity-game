@@ -95,8 +95,6 @@ export class GameCharacterComponent implements OnInit {
     document.getElementById('character-detail').classList.remove('hidden')
     document.querySelector('#character-detail #detail-'+index).classList.remove('hidden');
 
-    document.getElementById('questionnaire').style.display = 'none';
-
   }
 
   assignCharacter() {
@@ -123,6 +121,8 @@ export class GameCharacterComponent implements OnInit {
     // If no goal matched, assign random one
     this.assignedGoal = this.goals[assignedIndex];
 
+    let bubble = document.getElementById('bubble');
+    TweenLite.to(bubble, .3, {autoAlpha:0, scale:0, display:'hide', ease:Back.easeIn});
     document.getElementById('welcome').classList.remove('hidden');
     // document.getElementById('logo').classList.add('hidden');
 
@@ -130,7 +130,7 @@ export class GameCharacterComponent implements OnInit {
     document.getElementById('character-detail').classList.remove('hidden')
     document.querySelector('#character-detail #detail-'+assignedIndex).classList.remove('hidden');
 
-    document.getElementById('questionnaire-desktop').style.display = 'none';
+    // document.getElementById('questionnaire-desktop').style.display = 'none';
     document.getElementById('questionnaire-mobile').style.display = 'none';
 
     this._dataSvc.changeCharacter(assignedIndex+1, this.assignedGoal);

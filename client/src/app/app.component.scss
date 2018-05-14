@@ -1,6 +1,14 @@
 @import "~sass/_variables";
 
 /* Application-wide Styles */
+main {
+	max-width: 425px;
+	height: 100%;
+	margin: 0 auto;
+	right: 0;
+	left: 0;
+}
+
 #qa-build {
 	background-color: $yellow;
 	text-align: center;
