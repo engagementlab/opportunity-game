@@ -71,31 +71,6 @@ export class GameLocationComponent implements OnInit {
 
   }
 
-  getCosts(opportunity: Opportunity) {
-
-    let costs = [];
-
-    if(opportunity.actionCost > 0)
-      costs.push({icon: 'action', amt: opportunity.actionCost, has: opportunity.actionCost<=this.actions});
-    if(opportunity.moneyCost > 0)
-      costs.push({icon: 'money', amt: opportunity.moneyCost, has: opportunity.moneyCost<=this.money});
-    if(opportunity.commCost > 0)
-      costs.push({icon: 'community', amt: opportunity.commCost});
-    if(opportunity.jobCost > 0)
-      costs.push({icon: 'job', amt: opportunity.jobCost});
-    if(opportunity.englishCost > 0)
-      costs.push({icon: 'english', amt: opportunity.englishCost});
-    if(opportunity.requiresTransit === true)
-      costs.push({icon: 'transit'});
-    if(opportunity.requiresJob === true)
-      costs.push({icon: 'job'});
-
-    console.log(costs)
-
-    return costs;
-
-  }
-
   viewOpportunity(id: Opportunity["_id"]) {
 
     let detailsParent = document.getElementById('details');

@@ -192,7 +192,18 @@ export class DataService {
 
     public getLocationByKey(locationKey: string) {
 
-        return _.where(this.locationData, {key: locationKey})[0];
+        let currentLoc = _.where(this.locationData, {key: locationKey})[0];
+        if(currentLoc === undefined) return undefined;
+        
+        // Update costs
+        _.each(currentLoc.opportunities, (thisOpp) => {
+            thisOpp.costs = this.getCosts(thisOpp);
+            thisOpp.locked = _.some(thisOpp.costs, (opp) => {
+                                  return opp['has'] !== undefined && opp['has'] === false;
+                                });
+        });
+
+        return currentLoc;
 
     }
 
@@ -201,6 +212,15 @@ export class DataService {
         _.each(this.locationData, (loc) => { 
 
             let thisOpp = _.where(loc.opportunities, {_id: opportunity._id})[0];
+            // thisOpp.costs = this.getCosts(thisOpp);
+
+            // Update costs
+            _.each(loc.opportunities, (thisOpp) => {
+                thisOpp.costs = this.getCosts(thisOpp);
+                thisOpp.locked = _.some(thisOpp.costs, (opp) => {
+                                      return opp['has'] !== undefined && opp['has'] === false;
+                                    });
+            });
 
             if(thisOpp) {
                 thisOpp.enabled = false;
@@ -279,9 +299,76 @@ export class DataService {
         this.locationData = newData.locations;
         this.eventData = newData.events;
 
+        _.each(this.locationData, (loc) => {
+
+            _.each(loc.opportunities, (thisOpp) => {
+                thisOpp.reward = this.getReward(thisOpp);
+                thisOpp.costs = this.getCosts(thisOpp);
+                thisOpp.locked = _.some(thisOpp.costs, (opp) => {
+                                      return opp['has'] !== undefined && opp['has'] === false;
+                                    });
+            });
+
+        }); 
+
         this.isLoading.next(false);
 
     }
+
+
+    private getReward(opportunity: Opportunity) {
+
+        let rewardToShow = {icon: 'none', badges: []};
+
+        if(opportunity.commReward > 0)
+          rewardToShow = {icon: 'community-opportunity', badges: ['gold_levelup']};
+
+        else if(opportunity.jobReward > 0)
+          rewardToShow = {icon: 'training-opportunity', badges: ['gold_levelup']};
+
+        else if(opportunity.englishReward > 0)
+          rewardToShow = {icon: 'english-opportunity', badges: ['gold_levelup']};
+
+        else if(opportunity.locationUnlocks && opportunity.locationUnlocks.length > 0)
+          rewardToShow = {icon: 'map-opportunity', badges: ['gold_unlock']};
+
+        else if(opportunity.actionReward > 0)
+          rewardToShow.icon = 'action-cost';
+
+        else if(opportunity.moneyCost > 0)
+          rewardToShow.icon = 'money';
+
+        if((opportunity.effect && opportunity.effectWait > 0) || opportunity.triggerAmt > 0) {
+            rewardToShow.badges.push('gold_clock');
+        }
+
+        return rewardToShow;
+
+    }
+
+    private getCosts(opportunity: Opportunity) {
+
+        let costs = [];
+
+        if(opportunity.actionCost > 0)
+          costs.push({icon: 'action', amt: opportunity.actionCost, has: opportunity.actionCost<=this.playerData.actions});
+        if(opportunity.moneyCost > 0)
+          costs.push({icon: 'money', amt: opportunity.moneyCost, has: opportunity.moneyCost<=this.playerData.money});
+        if(opportunity.commCost > 0)
+          costs.push({icon: 'community', amt: opportunity.commCost, has: opportunity.commCost<=this.playerData.commLevel});
+        if(opportunity.jobCost > 0)
+          costs.push({icon: 'job', amt: opportunity.jobCost, has: opportunity.jobCost<=this.playerData.jobLevel});
+        if(opportunity.englishCost > 0)
+          costs.push({icon: 'english', amt: opportunity.englishCost, has: opportunity.englishCost<=this.playerData.englishLevel});
+        if(opportunity.requiresTransit === true)
+          costs.push({icon: 'transit', has: this.playerData.hasTransit});
+        if(opportunity.requiresJob === true)
+          costs.push({icon: 'job', has: this.playerData.hasJob});
+
+        return costs;
+
+    }
+
     
     public getCharacterData(): Observable<any> {
 

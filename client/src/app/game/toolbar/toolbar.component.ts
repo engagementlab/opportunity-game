@@ -62,8 +62,8 @@ export class GameToolbarComponent implements OnInit {
         let bannerY = document.getElementById('toolbar').offsetHeight;
         TweenLite.to(cheevoBanner, .5, {autoAlpha:1, bottom: bannerY+'px', ease:Back.easeOut});
         TweenLite.to(cheevoBanner, .5, {bottom:0, delay:4, ease:Back.easeIn, onComplete:() => {
-          document.getElementById('job-cheevo').classList.remove('hidden');
-          document.getElementById('transit-cheevo').classList.remove('hidden');
+          document.getElementById('job-cheevo').classList.add('hidden');
+          document.getElementById('transit-cheevo').classList.add('hidden');
           document.getElementById('money').classList.remove('payday');
         }});
         TweenLite.to(cheevoBanner, .3, {autoAlpha:0, delay:4.2});

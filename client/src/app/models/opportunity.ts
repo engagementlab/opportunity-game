@@ -32,5 +32,9 @@ export interface Opportunity {
 	readonly requiresTransit?: boolean;
 	readonly requiresJob?: boolean;
 
+	// Internal
+	reward: object;
+	costs: object[];
+	locked: boolean;
 
 }

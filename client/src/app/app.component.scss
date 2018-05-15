@@ -10,12 +10,16 @@ main {
 }
 
 #qa-build {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
 	background-color: $yellow;
 	text-align: center;
 	font-weight: bold;
-	font-size: large;
+	font-size: medium;
 
-	p {
+	span {
 		font-size: small;
 	}
 }
