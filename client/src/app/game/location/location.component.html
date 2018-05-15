@@ -1,9 +1,9 @@
-<div class="location {{currentLocation.image}}">
-
-	<div><app-button label="Back" ariaLabel="Back to Home" clickData="true" (clickEvent)="backToMap()" class="gold"></app-button></div>
+<div class="location {{currentLocation?.image}}">
+	
+	<div id="back" routerLink="/game/home" class="btn"><cdn-image cloudinaryId="opportunity-game/icons/home.svg" width="50" alt="Back to Home"></cdn-image></div>
 
 	 	<div id="list" class="col-6">
-			<button *ngFor="let opportunity of currentLocation?.opportunities" (click)="viewOpportunity(opportunity._id)" class="col-6 bold" id="listing_{{opportunity._id}}" [disabled]="opportunity.enabled !== undefined">
+			<button *ngFor="let opportunity of currentLocation?.opportunities" (click)="viewOpportunity(opportunity._id)" class="col-6 bold" id="listing_{{opportunity._id}}">
 
 					<div class="name">
 						{{opportunity.name}}
@@ -28,16 +28,16 @@
 					</div>
 					
 					<!-- Achievements -->
-					<div class="achievement" *ngIf="opportunity.givesTransit">
+					<div class="reward" *ngIf="opportunity.givesTransit">
 						<cdn-image cloudinaryId="opportunity-game/icons/transit-opportunity.svg" width="75"  alt="Icon for Transit achievement"></cdn-image>
 					</div>
-					<div class="achievement" *ngIf="opportunity.givesJob">
+					<div class="reward" *ngIf="opportunity.givesJob">
 						<cdn-image cloudinaryId="opportunity-game/icons/job-opportunity.svg" width="75"  alt="Icon for Job achievement"></cdn-image>
 					</div>
 
 					<!-- Requires: {{opportunity.type}} -->
-					<div class="costs">
-						<div class="{{cost.icon}} cost" *ngFor="let cost of getCosts(opportunity)">{{cost.amt}}</div>
+					<div class="costs row col-6">
+						<div class="{{cost.icon}} cost col-1" [class.notenough]="cost.has !== undefined && !cost.has" *ngFor="let cost of getCosts(opportunity)"><span *ngIf="cost.amt !== undefined">{{cost.amt}}</span></div>
 					</div>
 			</button>
 		</div>

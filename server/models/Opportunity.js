@@ -50,8 +50,12 @@ Opportunity.add(
 
         commCost: { type: Number, default: 0, label: "Community Cost" },
         jobCost: { type: Number, default: 0, label: "Job Cost" },
-        englishCost: { type: Number, default: 0, label: "English Cost" }
-
+        englishCost: { type: Number, default: 0, label: "English Cost" },
+        unlocked:
+        {
+            "Transit": {type: Types.Boolean},
+            "Job": {type: Types.Boolean}
+        }
     },
     "Benefits", {
         locationUnlocks: {
@@ -94,6 +98,8 @@ Opportunity.add(
     createdAt: { type: Date, default: Date.now, noedit: true, hidden: true }
   }
 );
+Opportunity.schema.add({requiresTransit: mongoose.Schema.Types.Boolean});
+Opportunity.schema.add({requiresJob: mongoose.Schema.Types.Boolean});
 Opportunity.schema.add({givesTransit: mongoose.Schema.Types.Boolean});
 Opportunity.schema.add({givesJob: mongoose.Schema.Types.Boolean});
 
@@ -102,6 +108,16 @@ Opportunity.schema.add({givesJob: mongoose.Schema.Types.Boolean});
  * =============
  */
 Opportunity.schema.pre('save', function(next) {
+
+    if(this.unlocked["Transit"])
+      this.requiresTransit = true;
+    else
+      this.requiresTransit = false;
+
+    if(this.unlocked["Job"])
+      this.requiresJob = true;
+    else
+      this.requiresJob = false;
 
     if(this.achievement["Transit"])
       this.givesTransit = true;

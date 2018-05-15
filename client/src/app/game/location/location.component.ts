@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { DataService } from '../../data.service';
 
 import { GameLocation } from '../../models/gamelocation';
+import { PlayerData } from '../../models/playerdata';
 import { Opportunity } from '../../models/opportunity';
 
 import * as _ from 'underscore';
@@ -18,14 +18,46 @@ import * as _ from 'underscore';
 export class GameLocationComponent implements OnInit {
 
 	currentLocation: GameLocation;
+
+  actions: number;
+  money: number;
+  commLevel: number;
+  jobLevel: number;
+  englishLevel: number;
+
+  public hasTransit: boolean;
+  public hasJob: boolean;
 	
-  constructor(private route: ActivatedRoute, private router: Router, private _location: Location, private _dataSvc: DataService) { 
+  constructor(private route: ActivatedRoute, private router: Router, private _dataSvc: DataService) {
 
-    this._dataSvc.locationDataUpdate.subscribe((data: GameLocation) => {
+    this.money = this._dataSvc.playerData.money;
+    this.actions = this._dataSvc.playerData.actions;
 
-      this.currentLocation = data;
+    this.commLevel = this._dataSvc.playerData.commLevel;
+    this.jobLevel = this._dataSvc.playerData.jobLevel;
+    this.englishLevel = this._dataSvc.playerData.englishLevel;
+
+    this._dataSvc.playerDataUpdate.subscribe((data: PlayerData) => {
+
+      this.money = data.money;
+      this.actions = data.actions;
+
+      this.commLevel = data.commLevel;
+      this.jobLevel = data.jobLevel;
+      this.englishLevel = data.englishLevel;
+
+      if(data.gotTransit)
+        this.hasTransit = true;
+      else if(data.gotJob)
+        this.hasJob = true;
 
     });
+ 
+      this._dataSvc.locationDataUpdate.subscribe((data: GameLocation) => {
+
+        this.currentLocation = data;
+
+      });
 
   }
 
@@ -44,9 +76,21 @@ export class GameLocationComponent implements OnInit {
     let costs = [];
 
     if(opportunity.actionCost > 0)
-      costs.push({icon: 'action', amt: opportunity.actionCost});
+      costs.push({icon: 'action', amt: opportunity.actionCost, has: opportunity.actionCost<=this.actions});
     if(opportunity.moneyCost > 0)
-      costs.push({icon: 'money', amt: opportunity.moneyCost});
+      costs.push({icon: 'money', amt: opportunity.moneyCost, has: opportunity.moneyCost<=this.money});
+    if(opportunity.commCost > 0)
+      costs.push({icon: 'community', amt: opportunity.commCost});
+    if(opportunity.jobCost > 0)
+      costs.push({icon: 'job', amt: opportunity.jobCost});
+    if(opportunity.englishCost > 0)
+      costs.push({icon: 'english', amt: opportunity.englishCost});
+    if(opportunity.requiresTransit === true)
+      costs.push({icon: 'transit'});
+    if(opportunity.requiresJob === true)
+      costs.push({icon: 'job'});
+
+    console.log(costs)
 
     return costs;
 
@@ -69,12 +113,6 @@ export class GameLocationComponent implements OnInit {
       TweenLite.fromTo(detailsChild, 2, {autoAlpha:0}, {autoAlpha:1, delay:.5, display:'block', ease:Elastic.easeOut});
     
     }});
-
-  }
-
-  backToMap() {
-
-      this._location.back();
 
   }
 

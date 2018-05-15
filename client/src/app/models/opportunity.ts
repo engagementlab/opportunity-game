@@ -29,6 +29,8 @@ export interface Opportunity {
 
 	readonly givesTransit?: boolean;
 	readonly givesJob?: boolean;
+	readonly requiresTransit?: boolean;
+	readonly requiresJob?: boolean;
 
 
 }

@@ -12,6 +12,18 @@
 
 }
 
+#back {
+	display: inline-block;
+  @include transition(all, 150ms, cubic-bezier(0.64, 0.57, 0.67, 1.53));
+ 
+  &:hover {
+    @include scale(1.2);
+  }
+  &:active {
+    @include scale(.8);
+  }
+}
+
 #home {
 	
 	height: 100%;

@@ -1,5 +1,17 @@
 @import "~sass/_variables";
 
+#back {
+	display: inline-block;
+  @include transition(all, 150ms, cubic-bezier(0.64, 0.57, 0.67, 1.53));
+ 
+  &:hover {
+    @include scale(1.2);
+  }
+  &:active {
+    @include scale(.8);
+  }
+}
+
 .location {
 	min-height: 480px;
 	height: 100%;
@@ -65,22 +77,42 @@
 		text-align: left;
 	}
 	.costs {
-		position: absolute;
-		width: 40%;
+		// width: 100%;
+    // display: flex;
 		bottom: 7%;
-		left: -5%;
-
+		text-align: right;
 		.cost {
-			display: inline-block;
-			width: 40px;
+			height: 40px;
+			background-repeat: no-repeat;
+			&.notenough {
+				color: red;
+			}
 		}
 		.money {
-			background: cdn-image('icons/money-cost', c_scale, w_15);
-			background-repeat: no-repeat;
+			background-image: cdn-image('icons/money-cost', c_scale, w_15);
+			span {
+				padding-left: 5%;
+		    display: flex;
+			}
 		}
 		.action {
-			background: cdn-image('icons/action-cost', c_scale, w_15);
-			background-repeat: no-repeat;
+			background-image: cdn-image('icons/action-cost', c_scale, w_15);
+			span {
+				padding-left: 25%;
+		    display: flex;
+			}
+		}
+		.community {
+			background-image: cdn-image('icons/community-clear', c_scale, w_15);
+		}
+		.english {
+			background-image: cdn-image('icons/english-clear', c_scale, w_15);
+		}
+		.job {
+			background-image: cdn-image('icons/job-clear', c_scale, w_15);
+		}
+		.transit {
+			background-image: cdn-image('icons/transit-clear', c_scale, w_15);
 		}
 	}
 	.reward {
@@ -92,12 +124,12 @@
 			font-size: x-large;
   	}
 	}
-	.achievement {
+	/* .achievement {
 		float: right;
 		::ng-deep img {
 			width: 30px;
 		}
-	}
+	} */
 }
 
 #details {

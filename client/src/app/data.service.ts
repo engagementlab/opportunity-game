@@ -67,8 +67,8 @@ export class DataService {
     public playerData: PlayerData = 
     {
         round: 1,
-        money: 30,
-        actions: 50,
+        money: 5,
+        actions: 5,
         
         commLevel: 0,
         jobLevel: 0,
