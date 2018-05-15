@@ -51,7 +51,8 @@ Location.add({
       ref: 'Opportunity',
       label: 'Opportunities',
       note: 'The opportunities for this location.',
-      many: true
+      many: true, 
+      filters: { location: ':_id' }
   },
 
 	createdAt: { type: Date, default: Date.now, noedit: true, hidden: true }
