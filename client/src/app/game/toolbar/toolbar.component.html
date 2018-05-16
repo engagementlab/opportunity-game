@@ -81,8 +81,17 @@
 
 </div>
 
-<div id="achievement" class="col-6 bold">
-		<div id="transit-cheevo" class="row hidden">
+<div id="achievement" class="col-6 bold">		
+		<div id="delayed-reward" class="row hidden reward">
+			<div class="col-1">
+				<cdn-image cloudinaryId="opportunity-game/icons/{{rewardOpportunity.reward.iconDetail}}.svg" alt="{{rewardOpportunity.name}} reward icon" *ngIf="rewardOpportunity !== undefined"></cdn-image>
+			</div>  
+			<div class="col-5" *ngIf="rewardOpportunity !== undefined">
+				{{rewardOpportunity.rewardFlavor}}
+			</div>
+		</div>
+
+		<div id="transit-cheevo" class="row hidden cheevo">
 				<div class="col-1">
 					<cdn-image cloudinaryId="opportunity-game/toolbar/transit-color.svg" alt="Public transit unlocked icon"></cdn-image>
 				</div>  
@@ -90,7 +99,7 @@
 					Public Transit unlocked!
 				</div>
 		</div>
-		<div id="job-cheevo" class="row hidden">
+		<div id="job-cheevo" class="row hidden cheevo">
 				<div class="col-1">
 					<cdn-image cloudinaryId="opportunity-game/toolbar/job-color.svg" alt="Job unlocked icon"></cdn-image>
 				</div>  

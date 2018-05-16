@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { DataService } from '../../data.service';
 import { PlayerData } from '../../models/playerdata';
+import { Opportunity } from '../../models/opportunity';
 
 @Component({
   selector: 'game-toolbar',
@@ -16,6 +17,9 @@ export class GameToolbarComponent implements OnInit {
   jobLevel: number;
   englishLevel: number;
 
+  cheevoBanner: HTMLElement;
+  rewardOpportunity: Opportunity;
+
   public hasTransit: boolean;
   public hasJob: boolean;
   public playerIndex: number = 2;
@@ -30,7 +34,7 @@ export class GameToolbarComponent implements OnInit {
     this.englishLevel = this._dataSvc.playerData.englishLevel;
 
     this._dataSvc.playerDataUpdate.subscribe((data: PlayerData) => {
-
+      
       if(this.commLevel < data.commLevel)
         this.showLvlUp('community', data.commLevel - this.commLevel);
       if(this.jobLevel < data.jobLevel)
@@ -64,24 +68,40 @@ export class GameToolbarComponent implements OnInit {
           document.getElementById('money').classList.add('payday');
         }
 
-        let cheevoBanner = document.getElementById('achievement');
         let bannerY = document.getElementById('toolbar').offsetHeight;
-        TweenLite.to(cheevoBanner, .5, {autoAlpha:1, bottom: bannerY+'px', ease:Back.easeOut});
-        TweenLite.to(cheevoBanner, .5, {bottom:0, delay:4, ease:Back.easeIn, onComplete:() => {
+        TweenLite.to(this.cheevoBanner, .5, {autoAlpha:1, bottom: bannerY+'px', ease:Back.easeOut});
+        TweenLite.to(this.cheevoBanner, .5, {bottom:0, delay:4, ease:Back.easeIn, onComplete:() => {
           document.getElementById('job-cheevo').classList.add('hidden');
           document.getElementById('transit-cheevo').classList.add('hidden');
           document.getElementById('money').classList.remove('payday');
         }});
-        TweenLite.to(cheevoBanner, .3, {autoAlpha:0, delay:4.2});
+        TweenLite.to(this.cheevoBanner, .3, {autoAlpha:0, delay:4.2});
 
       }
 
   	});
 
+    this._dataSvc.rewardTrigger.subscribe((opp: Opportunity) => {
+
+      this.rewardOpportunity = opp;
+
+      let bannerY = document.getElementById('toolbar').offsetHeight;
+      document.getElementById('delayed-reward').classList.remove('hidden');
+      TweenLite.to(this.cheevoBanner, .5, {autoAlpha:1, bottom: bannerY+'px', ease:Back.easeOut});
+      TweenLite.to(this.cheevoBanner, .5, {bottom:0, delay:4, ease:Back.easeIn, onComplete:() => {
+        document.getElementById('delayed-reward').classList.add('hidden');
+      }});
+      TweenLite.to(this.cheevoBanner, .3, {autoAlpha:0, delay:4.2});
+
+
+    });
+
    }
     
 
    ngOnInit() {  
+    
+    this.cheevoBanner = <HTMLElement>document.getElementById('achievement');
 
    }
 

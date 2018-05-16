@@ -7,11 +7,16 @@
 	max-width: 425px;
 	width: 100%;
 	z-index: 1;
-	background-color: $gold;
 	font-size: large;
 
 	#payday {
 		background-color: $hospital-green;
+	}
+	.cheevo {
+		background-color: $gold;
+	}
+	.reward {
+		background-color: $powder-pink;
 	}
 	
 }
@@ -77,11 +82,7 @@
 	.open {
 		display: flex!important;
 		max-height: 50px!important;
-		
-		// height: auto;
 	}
-
-  // @include transition('all', 150ms, cubic-bezier(0.64, 0.57, 0.67, 1.53));
 }
 
 #ellipses {

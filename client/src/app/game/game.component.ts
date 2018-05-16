@@ -32,7 +32,7 @@ export class GameComponent implements OnInit {
   jobLevel: number;
   englishLevel: number;
   assignedGoal: Goal;
-
+  
   sfxPath: string = 'https://res.cloudinary.com/engagement-lab-home/video/upload/v1000000/opportunity-game/sfx/';
 
   public getRouterOutletState(outlet) {
@@ -116,13 +116,14 @@ export class GameComponent implements OnInit {
 
     });
 
-    this._dataSvc.effectTrigger.subscribe((eventId: string) => {
+    this._dataSvc.effectTrigger.subscribe((eventId: string, type: string) => {
 
-        let effectEventSel = document.getElementById('effect-events');
-        let eventToShow =  document.getElementById(eventId);
-        
-        TweenLite.to(effectEventSel, 1, {autoAlpha: 1, display:'block'});
-        TweenLite.to(eventToShow, 1, {autoAlpha:1, display:'block'});
+      let eventToShow;
+      let effectEventSel = document.getElementById('effect-events');
+      eventToShow =  document.getElementById(eventId);
+      
+      TweenLite.to(effectEventSel, 1, {autoAlpha: 1, display:'block'});
+      TweenLite.to(eventToShow, 1, {autoAlpha:1, display:'block'});
 
     });
 
@@ -132,7 +133,7 @@ export class GameComponent implements OnInit {
 
     // let stars = document.querySelectorAll('.stars path');
     // console.log(stars)
-    // TweenMax.staggerFrom(stars, 10, {autoAlpha: 0, scale: 0});
+    // TweenMax.staggerFrom(stars, .5, {autoAlpha:0, scale:0, rotation:'-=359', delay:4, ease:Elastic.easeOut}, .2);
 
   }
 

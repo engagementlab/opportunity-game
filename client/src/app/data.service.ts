@@ -33,9 +33,7 @@ interface DurationEffect {
    triggerCount: number
 };
 interface DelayedReward {     
-    commReward: number,
-    jobReward: number,
-    englishReward: number,
+    opportunity: Opportunity,
     triggerWait: number,
     triggerCount: number
 };
@@ -67,6 +65,7 @@ export class DataService {
     locationDataUpdate = new EventEmitter();
     endRoundUpdate = new EventEmitter();
     effectTrigger = new EventEmitter();
+    rewardTrigger = new EventEmitter();
 
     public playerData: PlayerData = 
     {
@@ -110,19 +109,19 @@ export class DataService {
 
     }
 
-    public updateStats(moneyVal: number, actionVal: number = 0, commLevel: number = 0, jobLevel: number = 0, englishLevel: number = 0, triggerAmt: number = 0) {
+    public updateStats(opportunity: any) {
 
-        this.playerData.money += moneyVal;
-        this.playerData.actions += actionVal;
+        this.playerData.money -= opportunity.moneyCost;
+        this.playerData.actions -= opportunity.actionCost;
 
         // Trigger duration effects or delayed rewards? (if actions being removed)
-        if(actionVal < 0)
+        if(opportunity.actionCost > 0)
         { 
             for(let i = 0; i < this.durationEffectQueue.length; i++) {
                 let effect = this.durationEffectQueue[i];
     
                 if(effect.trigger === DurationEffectTrigger.actions) {
-                    effect.triggerCount -= actionVal;
+                    effect.triggerCount -= opportunity.actionCost;
     
                     if(effect.triggerCount >= effect.triggerWait) {
                         this.effectTrigger.emit(effect.id);
@@ -137,13 +136,16 @@ export class DataService {
             while(e < this.delayedRewardQueue.length) {
             
                 let reward = this.delayedRewardQueue[e];
-                reward.triggerCount -= actionVal;
+                reward.triggerWait -= opportunity.actionCost;
 
-                if(reward.triggerCount >= reward.triggerWait) {
+                if(reward.triggerWait <= 0) {
 
-                    this.playerData.commLevel += reward.commReward;
-                    this.playerData.jobLevel += reward.jobReward;
-                    this.playerData.englishLevel += reward.englishReward;
+                    this.playerData.commLevel += reward.opportunity.commReward;
+                    this.playerData.jobLevel += reward.opportunity.jobReward;
+                    this.playerData.englishLevel += reward.opportunity.englishReward;
+                    
+                    this.rewardTrigger.emit(reward.opportunity);
+                    this.playerDataUpdate.emit(this.playerData);
 
                     this.delayedRewardQueue.splice(e, 1);
                     break;
@@ -155,17 +157,16 @@ export class DataService {
         }
 
         // Reward now or later?
-        if(triggerAmt === 0) {
-            this.playerData.commLevel += commLevel;
-            this.playerData.jobLevel += jobLevel;
-            this.playerData.englishLevel += englishLevel;
+        if(opportunity.triggerAmt === 0) {
+            this.playerData.commLevel += opportunity.commReward;
+            this.playerData.jobLevel += opportunity.jobReward;
+            this.playerData.englishLevel += opportunity.englishReward;
         }
         else {
+
             let delayedReward: DelayedReward = {
-                                                    commReward: commLevel,
-                                                    jobReward: jobLevel,
-                                                    englishReward: englishLevel,
-                                                    triggerWait: triggerAmt, 
+                                                    opportunity: opportunity,
+                                                    triggerWait: opportunity.triggerAmt, 
                                                     triggerCount: 0
                                                };
             this.delayedRewardQueue.push(delayedReward);
@@ -216,7 +217,6 @@ export class DataService {
         _.each(this.locationData, (loc) => { 
 
             let thisOpp = _.where(loc.opportunities, {_id: opportunity._id})[0];
-            // thisOpp.costs = this.getCosts(thisOpp);
 
             // Update costs
             _.each(loc.opportunities, (thisOpp) => {
@@ -249,6 +249,7 @@ export class DataService {
     public startDurationEffect(effectId: string, trigger: string, triggerWait: number) {
 
         let triggerType = (trigger === 'actions') ? DurationEffectTrigger.actions : DurationEffectTrigger.rounds;
+
         let effect: DurationEffect = { id: effectId, trigger: triggerType, triggerWait: triggerWait, triggerCount: 0 };
         this.durationEffectQueue.push(effect);
 
@@ -324,19 +325,19 @@ export class DataService {
 
     private getReward(opportunity: Opportunity) {
 
-        let rewardToShow = {icon: 'none', badges: []};
+        let rewardToShow = {icon: 'none', iconDetail: 'none', badges: []};
 
         if(opportunity.commReward > 0)
-          rewardToShow = {icon: 'community-opportunity', badges: ['gold_levelup']};
+          rewardToShow = {icon: 'community-opportunity', iconDetail: 'community', badges: ['gold_levelup']};
 
         else if(opportunity.jobReward > 0)
-          rewardToShow = {icon: 'training-opportunity', badges: ['gold_levelup']};
+          rewardToShow = {icon: 'training-opportunity', iconDetail: 'training-color', badges: ['gold_levelup']};
 
         else if(opportunity.englishReward > 0)
-          rewardToShow = {icon: 'english-opportunity', badges: ['gold_levelup']};
+          rewardToShow = {icon: 'english-opportunity', iconDetail: 'english', badges: ['gold_levelup']};
 
         else if(opportunity.locationUnlocks && opportunity.locationUnlocks.length > 0)
-          rewardToShow = {icon: 'map-opportunity', badges: ['gold_unlock']};
+          rewardToShow = {icon: 'map-opportunity', iconDetail: 'map', badges: ['gold_unlock']};
 
         else if(opportunity.actionReward > 0)
           rewardToShow.icon = 'action-cost';

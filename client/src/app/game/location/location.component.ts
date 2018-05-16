@@ -117,21 +117,24 @@ export class GameLocationComponent implements OnInit {
     this._dataSvc.updateOpportunity(opportunity, this.route.snapshot.params.locationUrl);
     this.backToList(modalId);
 
-    if(opportunity.locationUnlocks !== undefined && opportunity.locationUnlocks.length > 0) {
+    if(opportunity.locationUnlocks !== undefined && opportunity.locationUnlocks.length > 0 && opportunity.triggerAmt === 0) {
       this._dataSvc.enableLocations(opportunity.locationUnlocks);
       return;
     }
     
-    this._dataSvc.updateStats(-opportunity.moneyCost, -opportunity.actionCost, opportunity.commReward, opportunity.jobReward, opportunity.englishReward, opportunity.triggerAmt);
+    this._dataSvc.updateStats(opportunity);
 
     if(opportunity.givesTransit)
       this._dataSvc.modifyPlayerData('hasTransit', true);
     else if(opportunity.givesJob)
       this._dataSvc.modifyPlayerData('hasJob', true);
     
-    // Duration effect?
-    if(opportunity.effect)
+    // Duration effect or delayed reward?
+    if(opportunity.effect) {
       this._dataSvc.startDurationEffect(opportunity.effect, opportunity.effectTrigger, opportunity.effectWait);
+      // if(opportunity.triggerAmt > 0)
+      //   this._dataSvc.startDurationEffect(opportunity._id, 'reward', opportunity.triggerAmt);
+    }
 
   }
 

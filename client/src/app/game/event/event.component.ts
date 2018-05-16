@@ -56,7 +56,7 @@ export class GameEventComponent implements OnInit {
  
   selectYes() {
   	
-  	this._dataSvc.updateStats(this.data.moneyCost, this.data.actionCost, this.data.commReward, this.data.jobReward, this.data.englishReward);
+  	this._dataSvc.updateStats(this.data);
   	this.removeEvent();
 
   }
