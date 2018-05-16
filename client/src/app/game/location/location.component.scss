@@ -169,8 +169,11 @@
 }
 
 #details {
+	.stars {
+		position: absolute;
+	}
 	.star {
-  @include transition(all, 150ms, cubic-bezier(0.64, 0.57, 0.67, 1.53));
+	  @include transition(all, 150ms, cubic-bezier(0.64, 0.57, 0.67, 1.53));
 
 		::ng-deep img {
 			max-width: 40px;

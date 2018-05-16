@@ -69,15 +69,24 @@
 	background-repeat: no-repeat;
 	background-size: cover;
 
-	.row {
-		@include mobile-only {
-			padding-top: 15%;
-		}
-	}
   .centered {
   	position: absolute;
   	width: 45%;
   	transform: translate(35%, -100%);
+  }
+  #goals {
+  	padding-left: 5%;
+	  .goal {
+	  	display: inline-flex;
+	  	span {
+	  		padding-top: 10%;
+	  	}	  	
+			@include mq($from: mobile, $until: mobileLg) {
+				::ng-deep img {
+					max-width: 35px!important;
+				}
+			}
+	  }
   }
 	@include mobile-only {
 		.mobile {

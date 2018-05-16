@@ -2,6 +2,8 @@ import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'
 
 import { DataService } from '../../data.service';
+import { Goal } from '../../models/goal';
+
 import * as _ from 'underscore';
 
 @Component({
@@ -25,11 +27,44 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
   loadCategory: boolean;
   loadedCategory: boolean;
 
+  commLevel: number;
+  jobLevel: number;
+  englishLevel: number;
+  assignedGoal: Goal;
+
   canDeactivate() {
     return !this.loaded;
   }
 
   constructor(private route: ActivatedRoute, private router: Router, private _dataSvc: DataService) {
+
+    this.commLevel = this._dataSvc.playerData.commLevel;
+    this.jobLevel = this._dataSvc.playerData.jobLevel;
+    this.englishLevel = this._dataSvc.playerData.englishLevel;
+
+
+    // DEBUG: If no goal, get data and assign one
+    if(this.assignedGoal === undefined) {
+      this._dataSvc.getCharacterData().subscribe(response => {
+
+        this.characters = this._dataSvc.characterData;
+        this.goals = this._dataSvc.goalData;
+
+        // Default 
+        this.assignedGoal = this.goals[0];
+
+      });
+    }
+    
+    this._dataSvc.playerDataUpdate.subscribe((data: PlayerData) => {
+
+      this.commLevel = data.commLevel;
+      this.jobLevel = data.jobLevel;
+      this.englishLevel = data.englishLevel;
+      
+      this.assignedGoal = this._dataSvc.assignedGoal;
+  
+    });
 
   }
 
