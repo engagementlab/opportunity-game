@@ -1,6 +1,6 @@
 <div id="toolbar" class="btn no-margin">
 
-	<div id="main" class="row no-margin" (click)="openDrawer()">
+	<div id="main" class="row no-margin" (click)="openDrawer();">
 		
 		<div class="flex">
 
@@ -27,22 +27,36 @@
 				<div>^</div>
 			</span>
 
-
 			<div id="mobile-drawer" class="flex">
 
-				<span id="community-lvl" [class.disabled]="commLevel === 0" class="col-2 icon-lg">
+				<span id="community-lvl" class="col-2 icon-lg">
 					<cdn-image cloudinaryId="opportunity-game/toolbar/community-lvl.svg" alt="Community level toolbar icon"></cdn-image>
 					<div class="badge bold">{{commLevel}}</div>
+					
+					<div class="notification">
+						<cdn-image cloudinaryId="opportunity-game/icons/community.svg" width="40" alt="Community level-up icon"></cdn-image>
+						<span class="amt bold"></span>
+					</div>
 				</span>
 
-				<span id="job-lvl" [class.disabled]="jobLevel === 0" class="col-2 icon-lg">
+				<span id="job-lvl" class="col-2 icon-lg">
 					<cdn-image cloudinaryId="opportunity-game/toolbar/job-lvl.svg" alt="Job level toolbar icon"></cdn-image>
 					<div class="badge bold">{{jobLevel}}</div>
+					
+					<div class="notification">
+						<cdn-image cloudinaryId="opportunity-game/icons/job.svg" width="40" alt="Job level-up icon"></cdn-image>
+						<span class="amt bold"></span>
+					</div>
 				</span>
 
-				<span id="english-lvl" [class.disabled]="englishLevel === 0" class="col-2 icon-lg">
+				<span id="english-lvl" class="col-2 icon-lg">
 					<cdn-image cloudinaryId="opportunity-game/toolbar/english-lvl.svg" alt="English level toolbar icon"></cdn-image> 
 					<div class="badge bold">{{englishLevel}}</div>
+
+					<div class="notification">
+						<cdn-image cloudinaryId="opportunity-game/icons/english.svg" width="40" alt="English level-up icon"></cdn-image>
+						<span class="amt bold"></span>
+					</div>
 				</span>
 			</div>
 		</div>

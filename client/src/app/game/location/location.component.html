@@ -30,7 +30,7 @@
 		<div id="details" class="modal hidden">
 			<div *ngFor="let opportunity of currentLocation?.opportunities" class="opportunity col-5 col-centered vert-center medium hidden" id="detail_{{opportunity._id}}">
 					<div>
-							Would you like to learn about <span class="bold">{{opportunity.name}}</span>?
+							Would you like to <span class="bold">{{opportunity.name | cleanString}}</span>?
 					</div>
 					<div class="row">
 						<!-- Rewards -->

@@ -52,7 +52,7 @@ export class GameCharacterComponent implements OnInit {
   }
 
   onSelectionChange(evt) {
-
+    
   	let category = evt.target.name;
   	let otherCategories = document.getElementsByClassName('buttons');
     let startBtnDesktop = document.getElementById('submit-btn-desktop');

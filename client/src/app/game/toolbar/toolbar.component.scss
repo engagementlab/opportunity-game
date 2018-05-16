@@ -104,14 +104,17 @@
 		  @include transition(max-height, 150ms, cubic-bezier(0.64, 0.57, 0.67, 1.53));
 		}
 	}
-/* 	@include mq($from: tablet) {
-		display: block;
-		min-width: 50%;
-		float: left;
-		#mobile-drawer {
-			display: inline;
+
+	.notification {
+		position: fixed;
+		display: flex;
+		vertical-align: top;
+		
+		.amt {
+			color: $gold;
+			font-size: xx-large;	
 		}
-	} */
+	}
 
 	#money {
 		@include transition(color, 1s, ease-in-out)

@@ -17,6 +17,7 @@
   ],
   "dependencies": {
     "angular-cloudinary": "^1.2.4",
-    "particles.js": "^2.0.0"
+    "particles.js": "^2.0.0",
+    "ion-sound": "ionsound#^3.0.7"
   }
 }

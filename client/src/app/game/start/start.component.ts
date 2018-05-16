@@ -7,34 +7,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameStartComponent implements OnInit {
 
-  constructor() { }
+    constructor() { }
 
-  ngOnInit() {
-  	/*particlesJS.load('parent', '../../assets/particles.json', function() {
-		  console.log('callback - particles.js config loaded');
-		});*/
-  }
+    ngOnInit() {
+    /*  	particlesJS.load('parent', '../../assets/particles.json', function() {
+    	  console.log('callback - particles.js config loaded');
+    	});*/
 
-  showCharacters() {
 
-    let parent = document.getElementById('parent');
-    let newBtn = document.getElementById('new');
-    let characters = document.getElementById('characters-parent');
-    let logo = document.getElementById('logo');
-    // let bubble = document.getElementById('bubble');
+    }
 
-    parent.classList.add('characters');
-    logo.classList.add('hidden-mobile');
+    showCharacters() {
 
-    let tl = new TimelineMax();
+        let parent = document.getElementById('parent');
+        let newBtn = document.getElementById('new');
+        let characters = document.getElementById('characters-parent');
+        let logo = document.getElementById('logo');
+        // let bubble = document.getElementById('bubble');
 
-    tl.to(newBtn, .5, {autoAlpha:0, display: 'none'});
-    tl.to(logo, .5, {scale:.7});
-    tl.fromTo(characters, .5, {autoAlpha:0}, {scale:1, autoAlpha:1, display:'block', ease:Sine.easeOut}, '+=.2');
-    // tl.to(logo, 1, { marginTop:'5%'}, '-=1');
-    
-    tl.play();
+        parent.classList.add('characters');
+        logo.classList.add('hidden-mobile');
 
-  }
+        let tl = new TimelineMax();
+
+        tl.to(newBtn, .5, {autoAlpha:0, display: 'none'});
+        tl.to(logo, .5, {scale:.7});
+        tl.fromTo(characters, .5, {autoAlpha:0}, {scale:1, autoAlpha:1, display:'block', ease:Sine.easeOut}, '+=.2');
+        // tl.to(logo, 1, { marginTop:'5%'}, '-=1');
+
+        tl.play();
+
+    }
 
 }

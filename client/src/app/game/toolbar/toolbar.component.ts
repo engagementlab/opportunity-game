@@ -31,13 +31,21 @@ export class GameToolbarComponent implements OnInit {
 
     this._dataSvc.playerDataUpdate.subscribe((data: PlayerData) => {
 
+      // console.log('playerDataUpdate', this.jobLevel < data.englishLevel)
+
+      if(this.commLevel < data.commLevel)
+        this.showLvlUp('community', data.commLevel - this.commLevel);
+      if(this.jobLevel < data.jobLevel)
+        this.showLvlUp('job', data.jobLevel - this.jobLevel);
+      if(this.englishLevel < data.englishLevel)
+        this.showLvlUp('english', data.englishLevel - this.englishLevel);
+
       this.money = data.money;
       this.actions = data.actions;
 
       this.commLevel = data.commLevel;
       this.jobLevel = data.jobLevel;
       this.englishLevel = data.englishLevel;
-
       this.round = data.round;
 
       if(data.gotTransit)
@@ -76,6 +84,21 @@ export class GameToolbarComponent implements OnInit {
     
 
    ngOnInit() {  
+
+   }
+
+   showLvlUp(stat: string, amount: number) {
+
+      let elem = document.querySelector('#'+stat+'-lvl .notification');
+      let elemAmt = <HTMLElement>document.querySelector('#'+stat+'-lvl .amt');
+
+      elemAmt.innerText = '+'+amount;
+      ion.sound.play('confirm');
+
+      TweenLite.to(elem, .5, {bottom:'6%', ease:Back.easeOut});
+      TweenLite.to(elem, .5, {autoAlpha:0, delay: 1.5, onComplete:() =>{
+        TweenLite.set(elem, {clearProps:'all'});
+      }});
 
    }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding, Inject } from '@angular/core';
+import { Component, OnInit, HostBinding, Inject, HostListener } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router'
 import { DOCUMENT } from "@angular/platform-browser";
 import { DataService } from '../data.service';
@@ -26,10 +26,26 @@ export class GameComponent implements OnInit {
   round: number = 1;
   newRound: number;
 
+  sfxPath: string = 'https://res.cloudinary.com/engagement-lab-home/video/upload/v1000000/opportunity-game/sfx/';
+
   public getRouterOutletState(outlet) {
     return outlet.isActivated ? outlet.activatedRoute : '';
   }
-  
+
+  @HostListener('document:click', ['$event.target'])
+  public onClick(targetElement) {
+      ion.sound({
+          sounds: [
+              {
+                  name: "confirm"
+              }
+          ],
+          volume: 1,
+          path: this.sfxPath,
+          preload: true
+      });
+  }
+
   getData() {
 
     this._dataSvc.getAllData().subscribe(response => {
