@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 
 import { DataService } from '../../data.service';
 import { Goal } from '../../models/goal';
+import { PlayerData } from '../../models/playerdata';
 
 import * as _ from 'underscore';
 
@@ -47,11 +48,8 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
     if(this.assignedGoal === undefined) {
       this._dataSvc.getCharacterData().subscribe(response => {
 
-        this.characters = this._dataSvc.characterData;
-        this.goals = this._dataSvc.goalData;
-
         // Default 
-        this.assignedGoal = this.goals[0];
+        this.assignedGoal = this._dataSvc.goalData[0];
 
       });
     }

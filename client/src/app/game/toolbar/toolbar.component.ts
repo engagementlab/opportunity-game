@@ -87,7 +87,7 @@ export class GameToolbarComponent implements OnInit {
 
    showLvlUp(stat: string, amount: number) {
 
-      let elem = document.querySelector('#'+stat+'-lvl .notification');
+      let elem = <HTMLElement>document.querySelector('#'+stat+'-lvl .notification');
       let elemAmt = <HTMLElement>document.querySelector('#'+stat+'-lvl .amt');
       let bottomAmt = document.getElementById('open-btn').classList.contains('open') ? '18%' : '6%';
 
