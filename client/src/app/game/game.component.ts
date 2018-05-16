@@ -7,6 +7,7 @@ import { TweenLite } from "gsap";
 
 import { PlayerData } from '../models/playerdata';
 import { Event } from '../models/event';
+import { Goal } from '../models/goal';
 
 import * as _ from 'underscore';
 
@@ -26,6 +27,11 @@ export class GameComponent implements OnInit {
   lastWellnessScore: number = 0;
   round: number = 1;
   newRound: number;
+
+  commLevel: number;
+  jobLevel: number;
+  englishLevel: number;
+  assignedGoal: Goal;
 
   sfxPath: string = 'https://res.cloudinary.com/engagement-lab-home/video/upload/v1000000/opportunity-game/sfx/';
 
@@ -48,6 +54,19 @@ export class GameComponent implements OnInit {
   }
 
   getData() {
+
+    this.commLevel = this._dataSvc.playerData.commLevel;
+    this.jobLevel = this._dataSvc.playerData.jobLevel;
+    this.englishLevel = this._dataSvc.playerData.englishLevel;
+
+    // DEBUG: If no goal, get data and assign one
+    if(this.assignedGoal === undefined) {
+      this._dataSvc.getCharacterData().subscribe(response => {
+
+        // Default 
+        this.assignedGoal = this._dataSvc.goalData[0];
+      });
+    }
 
     this._dataSvc.getAllData().subscribe(response => {
       
@@ -79,13 +98,21 @@ export class GameComponent implements OnInit {
 
       if(data.newRound) {
         this.currentWellnessScore = data.wellnessScore;
-        TweenLite.fromTo(document.getElementById('round-over'), 1, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, display:'block', ease: Back.easeOut});
+        let content = <HTMLElement>document.querySelector('#round-over #content');
+        content.style.visibility = 'hidden';
+        TweenLite.fromTo(document.getElementById('round-over'), 1, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, display:'block', ease: Sine.easeOut});
+        TweenLite.to(content, 1, {autoAlpha:1, delay:1});
       }
 
       this.newRound = data.round;
 
       this.playerIndex = this._dataSvc.assignedCharIndex;
 
+      this.commLevel = data.commLevel;
+      this.jobLevel = data.jobLevel;
+      this.englishLevel = data.englishLevel;
+      
+      this.assignedGoal = this._dataSvc.assignedGoal;
 
     });
 
@@ -123,6 +150,11 @@ export class GameComponent implements OnInit {
 
       // Update last score 
       this.lastWellnessScore = this.currentWellnessScore;
+
+      // Save goal amt
+      this._dataSvc.commGoalLast = this.commLevel;
+      this._dataSvc.jobGoalLast = this.jobLevel;
+      this._dataSvc.englishGoalLast = this.englishLevel;
 
       // Update round
       this.round = this.newRound;

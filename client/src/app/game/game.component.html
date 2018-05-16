@@ -19,26 +19,65 @@
 
 		<div class="row">
 			<div class="col-4 col-md-3 auto">
-				<cdn-image cloudinaryId="opportunity-game/characters/1.svg" width="150" autoFormat="false" alt="Character portrait"></cdn-image>
+				<!-- <cdn-image cloudinaryId="opportunity-game/characters/1.svg" width="150" autoFormat="false" alt="Character portrait"></cdn-image> -->
+				<cdn-image cloudinaryId="opportunity-game/icons/wellbeing.svg" width="150" alt="Wellbeing icon"></cdn-image>
 			</div>
-			<div class="bold">
+		</div>
+		<div class="row">
+
+			<div class="bold xx-large col-4 col-md-3 auto">
 				
-<!-- 				<div class="small">
+				<div class="small">
 					You earned <br />
 				</div>
-				<div class="round1 large">
-					+{{currentWellnessScore - lastWellnessScore}} wellbeing.
+				<div>
+					+{{currentWellnessScore - lastWellnessScore}} wellbeing
 				</div>
-				<div class="round2 large">
-					+{{currentWellnessScore - lastWellnessScore}} wellbeing.
-				</div>
-				<div class="round3 large">
-					{{currentWellnessScore}} wellbeing overall.
-				</div> -->
-
 			</div>
 		</div>
 
+		<div class="goals bold col-4 auto">
+			<div class="community row">
+
+				<div class="col-2">
+					<cdn-image cloudinaryId="opportunity-game/icons/community.svg" width="51" alt="Community goal icon" class=""></cdn-image>
+				</div>
+				<div class="col-2 no-pad">
+					{{commLevel}} <span class="slash">/</span> {{assignedGoal?.commGoal}}
+				</div>
+				<div *ngIf="commLevel >  _dataSvc.commGoalLast" class="col-1 no-pad gold">
+					+{{commLevel -  _dataSvc.commGoalLast}}
+				</div>
+
+			</div>
+
+			<div class="job row">
+				
+				<div class="col-2">
+					<cdn-image cloudinaryId="opportunity-game/icons/training-color.svg" width="51" alt="Job goal icon" class=""></cdn-image>
+				</div>
+				<div class="col-2 no-pad">
+					{{jobLevel}} <span class="slash">/</span> {{assignedGoal?.jobGoal}}
+				</div>
+				<div *ngIf="jobLevel >  _dataSvc.jobGoalLast" class="col-1 no-pad gold">
+					+{{jobLevel -  _dataSvc.jobGoalLast}}
+				</div>
+			</div>
+
+			<div class="english row">
+				
+				<div class="col-2">
+					<cdn-image cloudinaryId="opportunity-game/icons/english.svg" width="51" alt="English goal icon" class=""></cdn-image>
+				</div>
+				<div class="col-2 no-pad">
+					{{englishLevel}} <span class="slash">/</span> {{assignedGoal?.englishGoal}}
+				</div>
+				<div *ngIf="englishLevel >  _dataSvc.englishGoalLast" class="col-1 no-pad gold">
+					+{{englishLevel -  _dataSvc.englishGoalLast}}
+				</div>
+
+			</div>
+		</div>
 		<!-- EFFECT EVENTS -->
 <!-- 		<div id="effect-events">
 			<div *ngFor="let event of effectEvents" id="{{event._id}}">
@@ -46,11 +85,11 @@
 			</div>
 		</div> -->
 
-		<div class="col-12 auto round1">
-			<app-button label="Go to Round 2" ariaLabel="Click/tap to go to round 2" clickData="true" (clickEvent)="nextRound()" class="gold"></app-button>
+		<div class="col-6 auto round1">
+			<app-button label="Go to Round 2" ariaLabel="Click/tap to go to round 2" clickData="true" (clickEvent)="nextRound()" class="gold large"></app-button>
 		</div>
-		<div class="col-12 auto round2">
-			<app-button label="Go to Round 3" ariaLabel="Click/tap to go to round 3" clickData="true" (clickEvent)="nextRound()" class="gold"></app-button>
+		<div class="col-6 auto round2">
+			<app-button label="Go to Round 3" ariaLabel="Click/tap to go to round 3" clickData="true" (clickEvent)="nextRound()" class="gold large"></app-button>
 		</div>
 		<div class="col-12 auto round3">
 			<app-button label="Go to Survey" ariaLabel="Click/tap to go to post-game survery" href="/" class="gold"></app-button>

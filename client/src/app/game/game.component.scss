@@ -41,6 +41,31 @@
 #round-over {
 	position: fixed;
 	top: 0;
+	z-index: 10;
+	.goals {
+		background-image: cdn-image('jce-banner');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-x: 10%;
+
+		color: white;
+		font-size: large;
+		.row {
+			padding: 7%;
+			&:nth-child(3) {
+				margin-top: 7%;
+			}
+		}
+		.no-pad { 
+			padding-top: 5%;
+		}
+		.slash { 
+			color: $greyish-brown;
+		}
+		.gold {
+			color: $gold;
+		}
+	}
 }
 
 #achievement {

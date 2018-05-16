@@ -53,6 +53,10 @@ export class DataService {
     public assignedCharIndex: number = 1;
     public assignedGoal: Goal;
 
+    public commGoalLast: number = 0;
+    public jobGoalLast: number = 0;
+    public englishGoalLast: number = 0;
+
     baseUrl: string;
     index: any;
 
@@ -290,6 +294,8 @@ export class DataService {
         this.characterData = newData.characters;
         this.goalData = newData.goals;
 
+        this.assignedGoal = this.goalData[0];
+
         this.isLoading.next(false);
 
     }
@@ -371,6 +377,9 @@ export class DataService {
 
     
     public getCharacterData(): Observable<any> {
+
+        if(this.characterData !== undefined)            
+            return Observable.of(this.characterData).map((d:any) => d);
 
         this.isLoading.next(true);
         
