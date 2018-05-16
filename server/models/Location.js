@@ -34,7 +34,8 @@ var Location = new keystone.List('Location',
  * @main Location
  */
 Location.add({
-	name: { type: String, default: "Location Name", hidden: true, required: true, initial: true },
+  name: { type: String, default: "Location Name", hidden: true, required: true, initial: true },
+	enabled: { type: Boolean, initial: true, default: true  },
 	intro: { type: Types.Markdown, label: "Flavor Text", initial: true, required: true },
 	image: { type: Types.Select, label: 'Image Type', options: 'career, child-care, cultural-center, hospital, info-center, school', required: true, initial: true },
   

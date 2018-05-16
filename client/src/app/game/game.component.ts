@@ -129,6 +129,11 @@ export class GameComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    // let stars = document.querySelectorAll('.stars path');
+    // console.log(stars)
+    // TweenMax.staggerFrom(stars, 10, {autoAlpha: 0, scale: 0});
+
   }
 
   nextRound() {
