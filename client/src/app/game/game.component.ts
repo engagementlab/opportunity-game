@@ -79,7 +79,7 @@ export class GameComponent implements OnInit {
 
   }
 
-  constructor(private router: Router, private _dataSvc: DataService) { 
+  constructor(private router: Router, public _dataSvc: DataService) { 
 
     this.getData();
 
