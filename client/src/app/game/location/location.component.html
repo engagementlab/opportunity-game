@@ -1,6 +1,8 @@
 <div class="location {{currentLocation?.image}}">
 	
-	<div id="back" routerLink="/game/home" class="btn"><cdn-image cloudinaryId="opportunity-game/icons/home.svg" width="50" alt="Back to Home"></cdn-image></div>
+	<div id="back" routerLink="/game/home" class="btn">
+		<cdn-image cloudinaryId="opportunity-game/icons/home.svg" width="50" alt="Back to Home"></cdn-image>
+	</div>
 
 	 	<div id="list" class="col-6">
 			<button *ngFor="let opportunity of currentLocation?.opportunities" (click)="viewOpportunity(opportunity._id)" class="col-6 bold" id="listing_{{opportunity._id}}">
@@ -33,23 +35,37 @@
 							Would you like to <span class="bold">{{opportunity.name | cleanString}}</span>?
 					</div>
 					<div class="row">
+						<div class="stars col-1 col-centered">
+							<div *ngFor="let i of opportunity.stars" class="star nudge{{i.nudge}}">
+								<cdn-image cloudinaryId="opportunity-game/icons/star-{{i.index}}.svg" alt="Icon for Job reward"></cdn-image>
+							</div>
+						</div>
+
 						<!-- Rewards -->
-						<div class="reward col-5 col-centered" *ngIf="opportunity.commReward > 0">
+						<div class="reward col-2 col-centered no-pad" *ngIf="opportunity.commReward > 0">
 							<cdn-image cloudinaryId="opportunity-game/icons/community.svg" alt="Icon for Community reward"></cdn-image>
 						</div>
-						<div class="reward col-5 col-centered" *ngIf="opportunity.englishReward > 0">
+						<div class="reward col-2 no-pad" *ngIf="opportunity.englishReward > 0">
 							<cdn-image cloudinaryId="opportunity-game/icons/english.svg" alt="Icon for English reward"></cdn-image>
 						</div>
-						<div class="reward col-5 col-centered" *ngIf="opportunity.jobReward > 0">
+						<div class="reward col-2 col-centered no-pad" *ngIf="opportunity.jobReward > 0">
 							<cdn-image cloudinaryId="opportunity-game/icons/training-color.svg" alt="Icon for Job reward"></cdn-image>
 						</div>
-						<div class="footer">
-								This opportunity costs 
-								<span *ngIf="opportunity.actionCost > 0 && opportunity.moneyCost <= 0">{{opportunity.actionCost}} actions.</span>
-								<span *ngIf="opportunity.moneyCost > 0 && opportunity.actionCost <= 0">{{opportunity.moneyCost}} money.</span>
-								<span *ngIf="opportunity.moneyCost > 0 && opportunity.actionCost > 0">{{opportunity.actionCost}} actions & {{opportunity.moneyCost}} money.</span>
-								<span class="bold" *ngIf="opportunity.locked === true"><br/>You don't have the requirements to learn more!</span>
+
+						<div class="stars col-1 col-centered">
+							<div *ngFor="let i of opportunity.stars" class="star nudge{{i.nudge}}">
+								<cdn-image cloudinaryId="opportunity-game/icons/star-{{i.index}}.svg" alt="Icon for Job reward"></cdn-image>
+							</div>
 						</div>
+						
+					</div>
+
+					<div class="footer">
+							This opportunity costs 
+							<span *ngIf="opportunity.actionCost > 0 && opportunity.moneyCost <= 0">{{opportunity.actionCost}} actions.</span>
+							<span *ngIf="opportunity.moneyCost > 0 && opportunity.actionCost <= 0">{{opportunity.moneyCost}} money.</span>
+							<span *ngIf="opportunity.moneyCost > 0 && opportunity.actionCost > 0">{{opportunity.actionCost}} actions & {{opportunity.moneyCost}} money.</span>
+							<span class="bold" *ngIf="opportunity.locked === true"><br/>You don't have the requirements to learn more!</span>
 					</div>
 
 					<div class="row" *ngIf="opportunity.locked === false">

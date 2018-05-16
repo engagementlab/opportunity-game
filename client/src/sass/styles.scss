@@ -129,17 +129,22 @@ button {
 // Global round selectors 
 div {
   &.round-1 {
-    .round2, .round3 {
+    .round2, .round3, .round4 {
       display: none;
     }
   }
   &.round-2 {
-    .round1, .round3 {
+    .round1, .round3, .round4 {
       display: none;
     }
   }
   &.round-3 {
-    .round1, .round2 {
+    .round1, .round2, .round4 {
+      display: none;
+    }
+  }
+  &.round-4 {
+    .round1, .round2, .round3 {
       display: none;
     }
   }

@@ -12,11 +12,17 @@
 
 .full-screen {
   background: white;
-	position: absolute;
+	/* position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100vh; */
+	max-width: 425px;
+  height: 100%;
+  margin: 0 auto;
+  right: 0;
+  left: 0;
+  
 	#content {
 		text-align: center;
 		.small {
@@ -30,6 +36,11 @@
 
 #game {
 	height: 97vh;
+}
+
+#round-over {
+	position: fixed;
+	top: 0;
 }
 
 #achievement {

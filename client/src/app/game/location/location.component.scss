@@ -169,11 +169,46 @@
 }
 
 #details {
-	.content {
-		text-align: center;
-		.reward {
+	.star {
+  @include transition(all, 150ms, cubic-bezier(0.64, 0.57, 0.67, 1.53));
+
+		::ng-deep img {
+			max-width: 40px;
+		}
+		&.nudge1 {
+			margin-left: -40px;
 			::ng-deep img {
-	    	max-width: 80px;
+				width: 20px;
+			}
+		}
+		&.nudge2 {
+			margin-left: 10px;
+			::ng-deep img {
+				width: 25px;
+			}
+		}
+		&.nudge3 {
+			margin-left: 35px;
+			::ng-deep img {
+				width: 15px;
+			}
+		}
+		&.nudge4 {
+			margin-left: 0px;
+			::ng-deep img {
+				width: 20px;
+			}
+		}
+		&.nudge5 {
+			margin-left: -20px;
+			::ng-deep img {
+				width: 10px;
+			}
+		}
+		&.nudge6 {
+			margin-left: -34px;
+			::ng-deep img {
+				width: 15px;
 			}
 		}
 	}
@@ -192,6 +227,11 @@
     width: 100%;
 	}
 
+	.reward {
+		::ng-deep img {
+    	max-width: 120px;
+		}
+	}
 	::ng-deep .app-button {
 		padding: 20%;
 	}

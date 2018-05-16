@@ -20,6 +20,7 @@ export class GameComponent implements OnInit {
 
   public lifeEvents: Event[];
   public effectEvents: Event[];
+  public playerIndex: number;
   
   currentWellnessScore: number;
   lastWellnessScore: number = 0;
@@ -53,6 +54,8 @@ export class GameComponent implements OnInit {
       this.lifeEvents = _.filter(this._dataSvc.eventData, (e) => {return e.type === 'random'});
       this.effectEvents = _.filter(this._dataSvc.eventData, (e) => {return e.type === 'effect'});
 
+      this.playerIndex = this._dataSvc.assignedCharIndex;
+
     });
 
   }
@@ -80,6 +83,8 @@ export class GameComponent implements OnInit {
       }
 
       this.newRound = data.round;
+
+      this.playerIndex = this._dataSvc.assignedCharIndex;
 
 
     });

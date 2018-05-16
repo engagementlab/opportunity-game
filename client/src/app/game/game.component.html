@@ -8,20 +8,22 @@
 	<game-toolbar></game-toolbar>
 </div>
 
-<div id="round-over" class="full-screen col-6 round-{{round}} hidden">
+<div id="round-over" class="col-6 round-{{round}} full-screen hidden">
 	
-	<div id="content" class="col-6 auto">
-		<h1 class="round1">ROUND {{round}} OVER</h1>
-		<h1 class="round2">ROUND {{round}} OVER</h1>
-		<h1 class="round3">GAME END!</h1>
+	<div id="content">
+	
+		<h1 class="round1"><cdn-image cloudinaryId="opportunity-game/round1.svg" width="250" autoFormat="false" alt="Round 1 over image"></cdn-image></h1>
+		<h1 class="round2"><cdn-image cloudinaryId="opportunity-game/round2.svg" width="250" autoFormat="false" alt="Round 2 over image"></cdn-image></h1>
+		<h1 class="round3"><cdn-image cloudinaryId="opportunity-game/round3.svg" width="250" autoFormat="false" alt="Round 3 over image"></cdn-image></h1>
+		<h1 class="round4"><cdn-image cloudinaryId="opportunity-game/round4.svg" width="250" autoFormat="false" alt="Round 4 over image"></cdn-image></h1>
 
 		<div class="row">
 			<div class="col-4 col-md-3 auto">
 				<cdn-image cloudinaryId="opportunity-game/characters/1.svg" width="150" autoFormat="false" alt="Character portrait"></cdn-image>
 			</div>
-			<div class="col-8 col-md-8 bold auto">
+			<div class="bold">
 				
-				<div class="small">
+<!-- 				<div class="small">
 					You earned <br />
 				</div>
 				<div class="round1 large">
@@ -32,17 +34,17 @@
 				</div>
 				<div class="round3 large">
 					{{currentWellnessScore}} wellbeing overall.
-				</div>
+				</div> -->
 
 			</div>
 		</div>
 
 		<!-- EFFECT EVENTS -->
-		<div id="effect-events">
+<!-- 		<div id="effect-events">
 			<div *ngFor="let event of effectEvents" id="{{event._id}}">
 				<game-event [data]="event" [buttons]="false" type="effect"></game-event>
 			</div>
-		</div>
+		</div> -->
 
 		<div class="col-12 auto round1">
 			<app-button label="Go to Round 2" ariaLabel="Click/tap to go to round 2" clickData="true" (clickEvent)="nextRound()" class="gold"></app-button>

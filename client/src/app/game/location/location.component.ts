@@ -52,12 +52,16 @@ export class GameLocationComponent implements OnInit {
         this.hasJob = true;
 
     });
- 
-      this._dataSvc.locationDataUpdate.subscribe((data: GameLocation) => {
 
-        this.currentLocation = data;
+    this._dataSvc.locationDataUpdate.subscribe((data: GameLocation) => {
 
+      this.currentLocation = data;
+      _.each(data.opportunities, (thisOpp) => {
+          thisOpp.stars = this.getStars();
       });
+
+
+    });
 
   }
 
@@ -66,8 +70,14 @@ export class GameLocationComponent implements OnInit {
   	let url = this.route.snapshot.params.locationUrl;
   	this.currentLocation = this._dataSvc.getLocationByKey(url);
 
-    if(this.currentLocation === undefined)
+    if(this.currentLocation === undefined) {
       this.router.navigateByUrl('/game/home');
+      return;
+    }
+
+    _.each(this.currentLocation.opportunities, (thisOpp) => {
+        thisOpp.stars = this.getStars();
+    });
 
   }
 
@@ -81,11 +91,11 @@ export class GameLocationComponent implements OnInit {
       (<HTMLElement>el).style.display = 'none';
     });
 
-    // detailsParent.style.display = 'block';
     TweenLite.to(detailsParent, .5, {autoAlpha:1, display:'block'});
     TweenLite.to(document.getElementById('list'), .5, {autoAlpha:0, display:'none', oncomplete:() => {
 
       TweenLite.fromTo(detailsChild, 2, {autoAlpha:0}, {autoAlpha:1, delay:.5, display:'block', ease:Elastic.easeOut});
+      
     
     }});
 
@@ -123,6 +133,16 @@ export class GameLocationComponent implements OnInit {
     if(opportunity.effect)
       this._dataSvc.startDurationEffect(opportunity.effect, opportunity.effectTrigger, opportunity.effectWait);
 
+  }
+
+  getStars() {
+
+    let stars = [];
+
+    for(let i = 0; i < 3; i++) {
+      stars.push({index: Math.random() >= 0.5 ? 1 : 2, nudge: (Math.floor(Math.random() * (6 - 0 + 1)) + 0)});
+    }
+    return stars;
   }
 
 }

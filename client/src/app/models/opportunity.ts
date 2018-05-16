@@ -36,5 +36,6 @@ export interface Opportunity {
 	reward: object;
 	costs: object[];
 	locked: boolean;
+	stars: object[];
 
 }
