@@ -113,9 +113,6 @@ export class GameLocationComponent implements OnInit {
   }
 
   selectOpportunity(opportunity: Opportunity, modalId: string) {
-    
-    this._dataSvc.updateStats(opportunity);
-    this._dataSvc.updateOpportunity(opportunity, this.route.snapshot.params.locationUrl);
 
     this.backToList(modalId);
 
@@ -123,6 +120,9 @@ export class GameLocationComponent implements OnInit {
       this._dataSvc.modifyPlayerData('hasTransit', true);
     else if(opportunity.givesJob)
       this._dataSvc.modifyPlayerData('hasJob', true);
+    
+    this._dataSvc.updateStats(opportunity);
+    this._dataSvc.updateOpportunity(opportunity, this.route.snapshot.params.locationUrl); 
     
     // Duration effect or delayed reward?
     if(opportunity.effect) {

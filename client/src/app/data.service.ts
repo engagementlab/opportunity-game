@@ -197,9 +197,6 @@ export class DataService {
 
         this.playerDataUpdate.emit(this.playerData);
 
-        this.playerData.gotJob = false;
-        this.playerData.gotTransit = false;
-
     }
 
     public getLocationByKey(locationKey: string) {

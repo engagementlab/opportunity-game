@@ -59,7 +59,7 @@ export class GameToolbarComponent implements OnInit {
 
       this.playerIndex = this._dataSvc.assignedCharIndex;
 
-      if(data.gotTransit || data.gotJob || data.round) {
+      if(data.gotTransit || data.gotJob) {
         
         if(data.gotJob)
           document.getElementById('job-cheevo').classList.add('show');
@@ -82,7 +82,7 @@ export class GameToolbarComponent implements OnInit {
       setTimeout(() => {
         document.getElementById('money').classList.remove('payday');
       }, 2000);
-      
+
     });
 
     this._dataSvc.rewardTrigger.subscribe((opp: Opportunity) => {
@@ -113,10 +113,11 @@ export class GameToolbarComponent implements OnInit {
     let bannerY = -document.getElementById('toolbar').offsetHeight;
     let notifications = Array.from(document.querySelectorAll('#notifications .row.show'));
 
+    // TweenMax.fromTo(notifications[0], .4, {bottom:bannerY, display:'inline-flex'}, {bottom:0, delay: 4, ease:Elastic.easeOut});
     TweenMax.staggerFromTo(notifications, .4, {autoAlpha:0, bottom:bannerY}, {autoAlpha:1, bottom:0, display:'inline-flex', ease:Back.easeOut}, .4, () => {
 
       _.each(notifications, (n, i) => {
-        n.style.zIndex = i;
+        (<HTMLElement>n).style.zIndex = i+'';
         
         setTimeout(() => {n.classList.add('remove');  }, 2000*(i+1));
         setTimeout(() => {n.remove();  }, 2700*(i+1));
