@@ -71,7 +71,7 @@ export class DataService {
     public playerData: PlayerData = 
     {
         round: 1,
-        money: environment.dev ? 20 : 5,
+        money: (environment.dev === undefined && environment.dev === true) ? 20 : 5,
         actions: 5,
         
         commLevel: 0,
