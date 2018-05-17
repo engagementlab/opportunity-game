@@ -3,6 +3,8 @@ import { DataService } from '../../data.service';
 import { PlayerData } from '../../models/playerdata';
 import { Opportunity } from '../../models/opportunity';
 
+import * as _ from 'underscore';
+
 @Component({
   selector: 'game-toolbar',
   templateUrl: './toolbar.component.html',
@@ -60,9 +62,9 @@ export class GameToolbarComponent implements OnInit {
       if(data.gotTransit || data.gotJob || data.round) {
         
         if(data.gotJob)
-          document.getElementById('job-cheevo').classList.remove('hidden');
+          document.getElementById('job-cheevo').classList.add('show');
         else if(data.gotTransit)
-          document.getElementById('transit-cheevo').classList.remove('hidden');
+          document.getElementById('transit-cheevo').classList.add('show');
 
         this.showNotification();
 
@@ -72,24 +74,27 @@ export class GameToolbarComponent implements OnInit {
 
     this._dataSvc.paydayTrigger.subscribe(() => {
 
-      document.getElementById('payday').classList.remove('hidden');
+      document.getElementById('payday').classList.add('show');
       document.getElementById('money').classList.add('payday');
       
       this.showNotification();
 
+      setTimeout(() => {
+        document.getElementById('money').classList.remove('payday');
+      }, 2000);
+      
     });
 
     this._dataSvc.rewardTrigger.subscribe((opp: Opportunity) => {
 
       this.rewardOpportunities.push(opp);
 
-      let bannerY = document.getElementById('toolbar').offsetHeight;
-      // document.getElementById('delayed-reward').classList.remove('hidden');
-      TweenLite.to(this.cheevoBanner, .5, {autoAlpha:1, bottom: bannerY+'px', ease:Back.easeOut});
-      TweenLite.to(this.cheevoBanner, .5, {bottom:0, delay:4, ease:Back.easeIn, onComplete:() => {
-        // document.getElementById('delayed-reward').classList.add('hidden');
-      }});
-      TweenLite.to(this.cheevoBanner, .3, {autoAlpha:0, delay:4.2});
+      setTimeout(() => {
+
+        document.getElementById('reward_'+opp._id).classList.add('show');
+        this.showNotification();
+
+      }, 1000);
 
 
     });
@@ -105,19 +110,20 @@ export class GameToolbarComponent implements OnInit {
 
    showNotification() {
 
-      let bannerY = document.getElementById('toolbar').offsetHeight;
-      TweenLite.to(this.cheevoBanner, .5, {autoAlpha:1, bottom: bannerY+'px', ease:Back.easeOut});
-      TweenLite.to(this.cheevoBanner, .5, {bottom:0, delay:4, ease:Back.easeIn, onComplete:() => {
-        document.getElementById('job-cheevo').classList.add('hidden');
-        document.getElementById('transit-cheevo').classList.add('hidden');
-        // document.getElementById('delayed-reward').classList.add('hidden');
-        document.getElementById('money').classList.remove('payday');
-      }});
-      TweenLite.to(this.cheevoBanner, .3, {autoAlpha:0, delay:4.2});
+    let bannerY = -document.getElementById('toolbar').offsetHeight;
+    let notifications = Array.from(document.querySelectorAll('#notifications .row.show'));
 
-      // let elem2 = document.querySelector('#toolbar #job-cheevo');
-      // elem2.classList.add('remove');
-      // setTimeout(() => {elem2.remove()}, 700);
+    TweenMax.staggerFromTo(notifications, .4, {autoAlpha:0, bottom:bannerY}, {autoAlpha:1, bottom:0, display:'inline-flex', ease:Back.easeOut}, .4, () => {
+
+      _.each(notifications, (n, i) => {
+        n.style.zIndex = i;
+        
+        setTimeout(() => {n.classList.add('remove');  }, 2000*(i+1));
+        setTimeout(() => {n.remove();  }, 2700*(i+1));
+
+      });
+
+    });
 
    }
 
@@ -144,7 +150,36 @@ export class GameToolbarComponent implements OnInit {
     document.getElementById('mobile-drawer').classList.toggle('open');
     document.getElementById('drawer').classList.toggle('open');
     document.getElementById('open-btn').classList.toggle('open');
+    // document.getElementById('transit-cheevo').classList.remove('hidden');
 
+
+    // let elem2 = document.getElementById('transit-cheevo');
+    // elem2.style.zIndex = 6;
+    // // let job = document.getElementById('job-cheevo');
+    
+    // let bannerY = -document.getElementById('toolbar').offsetHeight;
+    // // TweenLite.fromTo(elem2, .5, {autoAlpha:0, bottom:bannerY}, {autoAlpha:1, bottom:0, display:'inline-flex', ease:Back.easeOut});
+    // // // TweenLite.fromTo(job, .5, {autoAlpha:0, bottom:bannerY}, {autoAlpha:1, bottom:0, delay: 1.5, display:'inline-flex', ease:Back.easeOut});
+    
+    // // setTimeout(() => {elem2.classList.add('remove');  }, 4000);
+    // // setTimeout(() => {elem2.remove();  }, 4700);
+
+    // let notifications = Array.from(document.querySelectorAll('#notifications .row'));
+
+    // // TweenLite.fromTo(n, .5, {autoAlpha:0, bottom:bannerY}, {autoAlpha:1, bottom:0, display:'inline-flex', ease:Back.easeOut});
+    // TweenMax.staggerFromTo(notifications, .5, {autoAlpha:0, bottom:bannerY}, {autoAlpha:1, bottom:0, display:'inline-flex', ease:Back.easeOut}, .4, () => {
+
+    //   _.each(notifications, (n, i) => {
+    //     n.style.zIndex = i;
+        
+    //     setTimeout(() => {n.classList.add('remove');  }, 2000*(i+1));
+    //     setTimeout(() => {n.remove();  }, 2700*(i+1));
+
+    //   });
+
+    // });
+
+      // this.showNotification();
    }
 
 }

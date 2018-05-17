@@ -28,6 +28,7 @@ $grid-gutter-width: 30px !default;
 body {
 	font-family: 'Cabin', sans-serif;
 	font-size: 16px;
+  overflow-x: hidden;
 }
 
 h1, h2 {

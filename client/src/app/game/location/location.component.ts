@@ -102,7 +102,7 @@ export class GameLocationComponent implements OnInit {
   }
 
   backToList(modalId: string) { 
-    
+
     TweenLite.to(document.getElementById('detail_'+modalId), 1, {autoAlpha:0, display:'none', ease: Back.easeIn, oncomplete:() => {
 
       TweenLite.to(document.getElementById('list'), 1, {autoAlpha:1, display:'block'});
@@ -119,11 +119,6 @@ export class GameLocationComponent implements OnInit {
 
     this.backToList(modalId);
 
-    if(opportunity.locationUnlocks !== undefined && opportunity.locationUnlocks.length > 0 && opportunity.triggerAmt === 0) {
-      this._dataSvc.enableLocations(opportunity.locationUnlocks);
-      return;
-    }
-
     if(opportunity.givesTransit)
       this._dataSvc.modifyPlayerData('hasTransit', true);
     else if(opportunity.givesJob)
@@ -134,6 +129,11 @@ export class GameLocationComponent implements OnInit {
       this._dataSvc.startDurationEffect(opportunity.effect, opportunity.effectTrigger, opportunity.effectWait);
       // if(opportunity.triggerAmt > 0)
       //   this._dataSvc.startDurationEffect(opportunity._id, 'reward', opportunity.triggerAmt);
+    }
+
+    if(opportunity.locationUnlocks !== undefined && opportunity.locationUnlocks.length > 0 && opportunity.triggerAmt === 0) {
+      this._dataSvc.enableLocations(opportunity.locationUnlocks);
+      return;
     }
 
   }
