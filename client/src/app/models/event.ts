@@ -11,5 +11,11 @@ export interface Event {
 	readonly commReward: number;
 	readonly jobReward: number;
 	readonly englishReward: number;
+	readonly actionReward: number;
+	readonly moneyReward: number;
+
+	triggerAmt: number;
+	reward: object;
+	available?: boolean;
 
 }

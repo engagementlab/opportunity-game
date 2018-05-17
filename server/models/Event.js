@@ -40,6 +40,10 @@ Event.add({
     commReward: { type: Number, default: 0, label: "Community Reward", initial: true },
     jobReward: { type: Number, default: 0, label: "Job Reward", initial: true },
     englishReward: { type: Number, default: 0, label: "English Reward", initial: true },
+
+    moneyReward: { type: Number, default: 0, label: "Money Reward" },
+    actionReward: { type: Number, default: 0, label: "Action Reward" },
+
     
     createdAt: { type: Date, default: Date.now, noedit: true, hidden: true }
   }

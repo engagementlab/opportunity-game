@@ -2,6 +2,37 @@
 	
 	<router-outlet #o="outlet"></router-outlet>
 
+	<div id="life-events" class="modal events hidden">
+		<div *ngFor="let event of lifeEvents" class="event col-5 auto vert-center medium hidden" id="event_{{event._id}}">
+			<div>
+				<span class="bold">{{event.flavor | cleanString}}</span>
+			</div>
+
+			<div class="reward col-2 col-centered no-pad">
+				<div class="icon">
+					<cdn-image cloudinaryId="opportunity-game/icons/{{event.reward?.icon}}.svg" alt="Icon for Reward"></cdn-image>
+				</div>
+			</div>
+
+			<div class="footer">
+				This event costs 
+				<span *ngIf="event.actionCost > 0 && event.moneyCost <= 0">{{event.actionCost}} actions.</span>
+				<span *ngIf="event.moneyCost > 0 && event.actionCost <= 0">{{event.moneyCost}} money.</span>
+				<span *ngIf="event.moneyCost > 0 && event.actionCost > 0">{{event.actionCost}} actions & {{event.moneyCost}} money.</span>
+				<span class="bold" *ngIf="event.available === false"><br/>You don't have the requirements to say yes!</span>
+			</div>
+
+			<div class="row" *ngIf="event.available === true">
+				<app-button label="Yes" ariaLabel="Click/tap to learn accept {{event.name}}" clickData="true" (clickEvent)="selectYes(event._id)" class="green large col-centered"></app-button>
+				<app-button label="No" ariaLabel="Click/tap to close {{event.name}} window" clickData="true" (clickEvent)="selectNo(event._id)" class="orange large col-centered"></app-button>
+			</div>
+			<div class="row" *ngIf="event.available == false">
+				<app-button label="Ok" ariaLabel="Click/tap to close {{event.name}} window" clickData="true" (clickEvent)="selectNo(event._id)" class="orange large col-centered"></app-button>
+			</div>
+
+		</div>
+	</div>
+
 </div>
 
 <div id="toolbar-parent" class="hide">
@@ -12,13 +43,13 @@
 	
 	<div id="content">
 	
-		<h1 class="round1"><cdn-image cloudinaryId="opportunity-game/round1.svg" width="250" autoFormat="false" alt="Round 1 over image"></cdn-image></h1>
-		<h1 class="round2"><cdn-image cloudinaryId="opportunity-game/round2.svg" width="250" autoFormat="false" alt="Round 2 over image"></cdn-image></h1>
-		<h1 class="round3"><cdn-image cloudinaryId="opportunity-game/round3.svg" width="250" autoFormat="false" alt="Round 3 over image"></cdn-image></h1>
-		<h1 class="round4"><cdn-image cloudinaryId="opportunity-game/round4.svg" width="250" autoFormat="false" alt="Round 4 over image"></cdn-image></h1>
+		<h1 class="round1 col-xs-2 auto"><cdn-image cloudinaryId="opportunity-game/round1.svg" width="250" autoFormat="false" alt="Round 1 over image"></cdn-image></h1>
+		<h1 class="round2 col-xs-2 auto"><cdn-image cloudinaryId="opportunity-game/round2.svg" width="250" autoFormat="false" alt="Round 2 over image"></cdn-image></h1>
+		<h1 class="round3 col-xs-2 auto"><cdn-image cloudinaryId="opportunity-game/round3.svg" width="250" autoFormat="false" alt="Round 3 over image"></cdn-image></h1>
+		<h1 class="round4 col-xs-2 auto"><cdn-image cloudinaryId="opportunity-game/round4.svg" width="250" autoFormat="false" alt="Round 4 over image"></cdn-image></h1>
 
 		<div class="row">
-			<div class="col-4 col-md-3 auto">
+			<div class="col-4 col-md-3 col-xs-2 auto">
 				<div class="stars">
 					<svg viewBox="0 0 308 156" width="308" height="156">
 					  <g fill="none" fill-rule="evenodd" transform="matrix(0.9999999999999999, 0, 0, 0.9999999999999999, 0, 0)">
@@ -51,7 +82,7 @@
 				<cdn-image id="icon" cloudinaryId="opportunity-game/icons/wellbeing.svg" width="150" alt="Wellbeing icon"></cdn-image>
 			</div>
 		</div>
-		<div class="row">
+		<!-- <div class="row">
 
 			<div class="bold xx-large col-4 col-md-3 auto">
 				
@@ -63,7 +94,7 @@
 				</div>
 			</div>
 		</div>
-
+ -->
 		<div class="goals bold col-4 auto">
 			<div class="community row">
 
@@ -127,14 +158,12 @@
 
 </div>
 
-<!-- DELAYED REWARDS -->
-
 <!-- LIFE EVENTS -->
-<div id="life-events" class="modal hide">
-	<div *ngFor="let event of lifeEvents" id="{{event._id}}" class="hide">
+<!-- <div id="life-events" class="modal hide">
+	<div *ngFor="" id="{{event._id}}" class="hide">
 		<game-event [data]="event" [type]="life" [buttons]="true"></game-event>
 	</div>
-</div>
+</div> -->
 
 <!-- EFFECT EVENTS -->
 <div id="effect-events" class="modal hide">

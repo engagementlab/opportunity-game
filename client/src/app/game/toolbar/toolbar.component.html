@@ -1,5 +1,43 @@
 <div id="toolbar" class="btn no-margin">
 
+	<div id="achievement" class="col-6 bold">
+			<div id="delayed-reward" class="row reward hidden" *ngFor="let opportunity of rewardOpportunities; let i = index;">
+				<div class="col-1">
+					<cdn-image cloudinaryId="opportunity-game/icons/{{opportunity.reward.iconDetail}}.svg" alt="{{opportunity.name}} reward icon"></cdn-image>
+				</div>  
+				<div class="col-5">
+					{{opportunity.rewardFlavor}}
+				</div>
+			</div>
+
+			<div id="transit-cheevo" class="row cheevo hidden">
+					<div class="col-1">
+						<cdn-image cloudinaryId="opportunity-game/toolbar/transit-color.svg" alt="Public transit unlocked icon"></cdn-image>
+					</div>  
+					<div class="col-5">
+						Public Transit unlocked!
+					</div>
+			</div>
+			<div id="job-cheevo" class="row cheevo hidden">
+					<div class="col-1">
+						<cdn-image cloudinaryId="opportunity-game/toolbar/job-color.svg" alt="Job unlocked icon"></cdn-image>
+					</div>  
+					<div class="col-3">
+						Job started!
+					</div>
+			</div>
+			<div id="payday" class="row hidden">
+					<div class="col-2">
+						PAY DAY!
+					</div>  
+					<div class="col-4">
+						You earned +5 cash
+					</div>
+			</div>
+
+	</div>
+
+
 	<div id="main" class="row no-margin" (click)="openDrawer();">
 		
 		<div class="flex">
@@ -80,41 +118,3 @@
 	</div>
 
 </div>
-
-<div id="achievement" class="col-6 bold">		
-		<div id="delayed-reward" class="row hidden reward">
-			<div class="col-1">
-				<cdn-image cloudinaryId="opportunity-game/icons/{{rewardOpportunity.reward.iconDetail}}.svg" alt="{{rewardOpportunity.name}} reward icon" *ngIf="rewardOpportunity !== undefined"></cdn-image>
-			</div>  
-			<div class="col-5" *ngIf="rewardOpportunity !== undefined">
-				{{rewardOpportunity.rewardFlavor}}
-			</div>
-		</div>
-
-		<div id="transit-cheevo" class="row hidden cheevo">
-				<div class="col-1">
-					<cdn-image cloudinaryId="opportunity-game/toolbar/transit-color.svg" alt="Public transit unlocked icon"></cdn-image>
-				</div>  
-				<div class="col-5">
-					Public Transit unlocked!
-				</div>
-		</div>
-		<div id="job-cheevo" class="row hidden cheevo">
-				<div class="col-1">
-					<cdn-image cloudinaryId="opportunity-game/toolbar/job-color.svg" alt="Job unlocked icon"></cdn-image>
-				</div>  
-				<div class="col-3">
-					Job started!
-				</div>
-		</div>
-		<div id="payday" class="row hidden">
-				<div class="col-2">
-					PAY DAY!
-				</div>  
-				<div class="col-4">
-					You earned +5 cash
-				</div>
-		</div>
-
-</div>
-

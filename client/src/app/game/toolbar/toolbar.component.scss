@@ -2,12 +2,21 @@
 
 #achievement {
 
-	position: fixed;
-	bottom: 0;
+	/* position: fixed;
+	bottom: 0; */
 	max-width: 425px;
 	width: 100%;
 	z-index: 1;
 	font-size: large;
+
+	.row {
+		position: inherit;
+		@include transition(all, .7s, ease-in);
+		&.remove {			
+      transform: translateX(100%);
+      opacity: 0;
+		}
+	}
 
 	#payday {
 		background-color: $hospital-green;

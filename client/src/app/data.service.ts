@@ -66,11 +66,12 @@ export class DataService {
     endRoundUpdate = new EventEmitter();
     effectTrigger = new EventEmitter();
     rewardTrigger = new EventEmitter();
+    paydayTrigger = new EventEmitter();
 
     public playerData: PlayerData = 
     {
         round: 1,
-        money: 5,
+        money: environment.dev ? 20 : 5,
         actions: 5,
         
         commLevel: 0,
@@ -144,6 +145,9 @@ export class DataService {
                     this.playerData.jobLevel += reward.opportunity.jobReward;
                     this.playerData.englishLevel += reward.opportunity.englishReward;
                     
+                    this.playerData.money += reward.opportunity.moneyReward;         
+                    this.playerData.actions += reward.opportunity.actionReward;
+                    
                     this.rewardTrigger.emit(reward.opportunity);
                     this.playerDataUpdate.emit(this.playerData);
 
@@ -161,6 +165,9 @@ export class DataService {
             this.playerData.commLevel += opportunity.commReward;
             this.playerData.jobLevel += opportunity.jobReward;
             this.playerData.englishLevel += opportunity.englishReward;
+            
+            this.playerData.money += opportunity.moneyReward;            
+            this.playerData.actions += opportunity.actionReward;
         }
         else {
 
@@ -212,6 +219,42 @@ export class DataService {
 
     }
 
+    public getUpdatedEvents() {
+
+        // Update availability
+        _.each(this.eventData, (thisEvt) => {
+            let canBuy = false;
+            if(thisEvt.moneyCost > 0 && thisEvt.actionCost > 0)
+                canBuy = (this.playerData.money >= thisEvt.moneyCost && this.playerData.actions >= thisEvt.actionCost);
+            else if(thisEvt.moneyCost > 0 && thisEvt.actionCost < 1)
+                canBuy = (this.playerData.money >= thisEvt.moneyCost);
+            else if(thisEvt.actionCost > 0 && thisEvt.moneyCost < 1)
+                canBuy = (this.playerData.actions >= thisEvt.actionCost);
+            
+            thisEvt.available = canBuy;
+            thisEvt.reward = this.getEventReward(thisEvt);
+            thisEvt.triggerAmt = 0;
+
+        });
+
+        return this.eventData;
+
+    }
+
+    public getEventById(id: string) {
+        
+        return _.findWhere(this.eventData, { _id: id } );
+
+    }
+
+    public removeEvent(id: string) {
+        
+        this.eventData = _.without(this.eventData, _.findWhere(this.eventData, {
+                          _id: id
+                        }));
+
+    }
+
     public updateOpportunity(opportunity: Opportunity, locationKey: string) {
 
         _.each(this.locationData, (loc) => { 
@@ -255,10 +298,16 @@ export class DataService {
 
     }
 
+    public showPayday() {
+
+        this.paydayTrigger.emit();
+
+    }
+
     private endRound() {
 
-        this.playerData.money = 5;
-        this.playerData.actions = 5;
+        this.playerData.money += environment.dev ? 20 : 5;
+        this.playerData.actions += 5;
 
         this.playerData.wellnessScore = this.calcWellness();
         this.playerData.newRound = true;
@@ -322,6 +371,28 @@ export class DataService {
 
     }
 
+    private getEventReward(evt: Event) {
+
+        let rewardToShow = {icon: 'none'};
+
+        if(evt.commReward > 0)
+          rewardToShow.icon = 'community';
+
+        else if(evt.jobReward > 0)
+          rewardToShow.icon = 'training-color';
+
+        else if(evt.englishReward > 0)
+          rewardToShow.icon = 'english';
+
+        else if(evt.actionReward > 0)
+          rewardToShow.icon = 'action-cost';
+
+        else if(evt.moneyCost > 0)
+          rewardToShow.icon = 'money';
+
+        return rewardToShow;
+
+    }
 
     private getReward(opportunity: Opportunity) {
 
@@ -375,7 +446,6 @@ export class DataService {
         return costs;
 
     }
-
     
     public getCharacterData(): Observable<any> {
 

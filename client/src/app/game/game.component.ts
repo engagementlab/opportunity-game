@@ -70,7 +70,7 @@ export class GameComponent implements OnInit {
 
     this._dataSvc.getAllData().subscribe(response => {
       
-      this.lifeEvents = _.filter(this._dataSvc.eventData, (e) => {return e.type === 'random'});
+      this.lifeEvents = _.filter(this._dataSvc.eventData, (e) => {return e.type === 'life'});
       this.effectEvents = _.filter(this._dataSvc.eventData, (e) => {return e.type === 'effect'});
 
       this.playerIndex = this._dataSvc.assignedCharIndex;
@@ -97,11 +97,15 @@ export class GameComponent implements OnInit {
     this._dataSvc.playerDataUpdate.subscribe((data: PlayerData) => {
 
       if(data.newRound) {
+        
         this.currentWellnessScore = data.wellnessScore;
+        this.lifeEvents = this._dataSvc.getUpdatedEvents();
+        
         let content = <HTMLElement>document.querySelector('#round-over #content');
         content.style.visibility = 'hidden';
         TweenLite.fromTo(document.getElementById('round-over'), 1, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, display:'block', ease: Sine.easeOut});
         TweenLite.to(content, 1, {autoAlpha:1, delay:1});
+
       }
 
       this.newRound = data.round;
@@ -145,11 +149,10 @@ export class GameComponent implements OnInit {
       // Dice roll for random event
       if(Math.round(Math.random()) == 1) {
         
-        let lifeEventSel = document.querySelector('#life-events');
-        let allEvents = lifeEventSel.children;
+        let allEvents = document.querySelectorAll('#life-events .event');
         let eventIndex = Math.floor(Math.random() * ((allEvents.length-1) - 0 + 1));
         
-        TweenLite.to(lifeEventSel, 1, {autoAlpha: 1, display:'block'});
+        TweenLite.to(document.getElementById('life-events'), 1, {autoAlpha: 1, display:'block'});
         TweenLite.to(allEvents[eventIndex], 1, {autoAlpha:1, display:'block'});
 
       }
@@ -161,15 +164,44 @@ export class GameComponent implements OnInit {
       this._dataSvc.commGoalLast = this.commLevel;
       this._dataSvc.jobGoalLast = this.jobLevel;
       this._dataSvc.englishGoalLast = this.englishLevel;
+      this._dataSvc.showPayday();
 
       // Update round
       this.round = this.newRound;
+
 
   }
 
   closeCheevo() {
 
       TweenLite.to(document.getElementById('achievement'), 1, {autoAlpha: 0, display:'none'});
+
+  }
+
+  removeEvent(eventId: string) {
+
+    let thisEl = document.getElementById('event_'+eventId);
+    TweenLite.to(thisEl, 1, {autoAlpha: 0, display:'none', oncomplete: () => {
+      
+      thisEl.parentNode.removeChild(thisEl);
+
+      TweenLite.to(document.getElementById('life-events'), 1, {autoAlpha: 0, display:'none'});
+      this._dataSvc.removeEvent(eventId);
+
+    }});
+    
+  }
+
+  selectNo(eventId: string) {
+
+    this.removeEvent(eventId);
+
+  }
+ 
+  selectYes(eventId: string) {
+    
+    this._dataSvc.updateStats(this._dataSvc.getEventById(eventId));
+    this.removeEvent(eventId);
 
   }
 

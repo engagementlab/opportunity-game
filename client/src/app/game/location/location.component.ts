@@ -56,10 +56,10 @@ export class GameLocationComponent implements OnInit {
     this._dataSvc.locationDataUpdate.subscribe((data: GameLocation) => {
 
       this.currentLocation = data;
+
       _.each(data.opportunities, (thisOpp) => {
           thisOpp.stars = this.getStars();
       });
-
 
     });
 
@@ -113,16 +113,16 @@ export class GameLocationComponent implements OnInit {
   }
 
   selectOpportunity(opportunity: Opportunity, modalId: string) {
-
+    
+    this._dataSvc.updateStats(opportunity);
     this._dataSvc.updateOpportunity(opportunity, this.route.snapshot.params.locationUrl);
+
     this.backToList(modalId);
 
     if(opportunity.locationUnlocks !== undefined && opportunity.locationUnlocks.length > 0 && opportunity.triggerAmt === 0) {
       this._dataSvc.enableLocations(opportunity.locationUnlocks);
       return;
     }
-    
-    this._dataSvc.updateStats(opportunity);
 
     if(opportunity.givesTransit)
       this._dataSvc.modifyPlayerData('hasTransit', true);

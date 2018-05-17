@@ -18,7 +18,7 @@ export class GameToolbarComponent implements OnInit {
   englishLevel: number;
 
   cheevoBanner: HTMLElement;
-  rewardOpportunity: Opportunity;
+  rewardOpportunities: Opportunity[] = [];
 
   public hasTransit: boolean;
   public hasJob: boolean;
@@ -34,7 +34,7 @@ export class GameToolbarComponent implements OnInit {
     this.englishLevel = this._dataSvc.playerData.englishLevel;
 
     this._dataSvc.playerDataUpdate.subscribe((data: PlayerData) => {
-      
+
       if(this.commLevel < data.commLevel)
         this.showLvlUp('community', data.commLevel - this.commLevel);
       if(this.jobLevel < data.jobLevel)
@@ -57,39 +57,37 @@ export class GameToolbarComponent implements OnInit {
 
       this.playerIndex = this._dataSvc.assignedCharIndex;
 
-      if(data.gotTransit || data.gotJob || data.payday) {
+      if(data.gotTransit || data.gotJob || data.round) {
         
         if(data.gotJob)
           document.getElementById('job-cheevo').classList.remove('hidden');
         else if(data.gotTransit)
           document.getElementById('transit-cheevo').classList.remove('hidden');
-        else if(data.payday) {
-          document.getElementById('payday').classList.remove('hidden');
-          document.getElementById('money').classList.add('payday');
-        }
 
-        let bannerY = document.getElementById('toolbar').offsetHeight;
-        TweenLite.to(this.cheevoBanner, .5, {autoAlpha:1, bottom: bannerY+'px', ease:Back.easeOut});
-        TweenLite.to(this.cheevoBanner, .5, {bottom:0, delay:4, ease:Back.easeIn, onComplete:() => {
-          document.getElementById('job-cheevo').classList.add('hidden');
-          document.getElementById('transit-cheevo').classList.add('hidden');
-          document.getElementById('money').classList.remove('payday');
-        }});
-        TweenLite.to(this.cheevoBanner, .3, {autoAlpha:0, delay:4.2});
+        this.showNotification();
 
       }
 
   	});
 
+    this._dataSvc.paydayTrigger.subscribe(() => {
+
+      document.getElementById('payday').classList.remove('hidden');
+      document.getElementById('money').classList.add('payday');
+      
+      this.showNotification();
+
+    });
+
     this._dataSvc.rewardTrigger.subscribe((opp: Opportunity) => {
 
-      this.rewardOpportunity = opp;
+      this.rewardOpportunities.push(opp);
 
       let bannerY = document.getElementById('toolbar').offsetHeight;
-      document.getElementById('delayed-reward').classList.remove('hidden');
+      // document.getElementById('delayed-reward').classList.remove('hidden');
       TweenLite.to(this.cheevoBanner, .5, {autoAlpha:1, bottom: bannerY+'px', ease:Back.easeOut});
       TweenLite.to(this.cheevoBanner, .5, {bottom:0, delay:4, ease:Back.easeIn, onComplete:() => {
-        document.getElementById('delayed-reward').classList.add('hidden');
+        // document.getElementById('delayed-reward').classList.add('hidden');
       }});
       TweenLite.to(this.cheevoBanner, .3, {autoAlpha:0, delay:4.2});
 
@@ -105,6 +103,24 @@ export class GameToolbarComponent implements OnInit {
 
    }
 
+   showNotification() {
+
+      let bannerY = document.getElementById('toolbar').offsetHeight;
+      TweenLite.to(this.cheevoBanner, .5, {autoAlpha:1, bottom: bannerY+'px', ease:Back.easeOut});
+      TweenLite.to(this.cheevoBanner, .5, {bottom:0, delay:4, ease:Back.easeIn, onComplete:() => {
+        document.getElementById('job-cheevo').classList.add('hidden');
+        document.getElementById('transit-cheevo').classList.add('hidden');
+        // document.getElementById('delayed-reward').classList.add('hidden');
+        document.getElementById('money').classList.remove('payday');
+      }});
+      TweenLite.to(this.cheevoBanner, .3, {autoAlpha:0, delay:4.2});
+
+      // let elem2 = document.querySelector('#toolbar #job-cheevo');
+      // elem2.classList.add('remove');
+      // setTimeout(() => {elem2.remove()}, 700);
+
+   }
+
    showLvlUp(stat: string, amount: number) {
 
       let elem = <HTMLElement>document.querySelector('#'+stat+'-lvl .notification');
@@ -113,7 +129,6 @@ export class GameToolbarComponent implements OnInit {
 
       elemAmt.innerText = '+'+amount;
       ion.sound.play('confirm');
-
 
       elem.style.visibility = 'visible';
       TweenLite.to(elem, .5, {bottom:bottomAmt, ease:Back.easeOut});
