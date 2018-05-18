@@ -63,9 +63,9 @@ export class GameToolbarComponent implements OnInit {
 
       if(data.gotTransit || data.gotJob) {
         
-        if(data.gotJob)
+        if(data.gotJob && document.getElementById('job-cheevo') !== undefined)
           document.getElementById('job-cheevo').classList.add('show');
-        else if(data.gotTransit)
+        else if(data.gotTransit && document.getElementById('transit-cheevo') !== undefined)
           document.getElementById('transit-cheevo').classList.add('show');
 
         this.showNotification();
@@ -132,7 +132,11 @@ export class GameToolbarComponent implements OnInit {
         (<HTMLElement>n).style.zIndex = i+'';
         
         setTimeout(() => {n.classList.add('remove');  }, 2000*(i+1));
-        setTimeout(() => {n.remove();  }, 2700*(i+1));
+
+        if(n.classList.contains('reward'))
+          setTimeout(() => {n.remove();  }, 2700*(i+1));
+        else
+          setTimeout(() => {(<HTMLElement>n).style.display = 'none'; }, 2700*(i+1));
 
       });
 
