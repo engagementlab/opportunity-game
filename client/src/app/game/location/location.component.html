@@ -5,27 +5,33 @@
 	</div>
 
 	 	<div id="list" class="col-6">
-			<button *ngFor="let opportunity of currentLocation?.opportunities" (click)="viewOpportunity(opportunity._id)" class="col-6 bold" id="listing_{{opportunity._id}}">
+			<button *ngFor="let opportunity of currentLocation?.opportunities" (click)="viewOpportunity(opportunity._id, opportunity.enabled)" class="col-6 bold" 
+				[class.unlocked]="opportunity.enabled === undefined" id="listing_{{opportunity._id}}">
 
-					<div class="name">
-						{{opportunity.name}}
+				<div class="name">
+					{{opportunity.name}}
+				</div>
+
+				<!-- Rewards -->
+				<div class="reward">
+					<div class="badge" *ngFor="let badge of opportunity.reward.badges">
+						<cdn-image cloudinaryId="opportunity-game/icons/{{badge}}.svg" width="25" alt="Icon for Badge"></cdn-image>
+					</div>
+					<div class="icon">
+						<cdn-image cloudinaryId="opportunity-game/icons/{{opportunity.reward.icon}}.svg" width="75" alt="Icon for Reward" *ngIf="opportunity.enabled === undefined"></cdn-image>
+						<cdn-image cloudinaryId="opportunity-game/icons/{{opportunity.reward.icon}}-used.svg" width="75" alt="Icon for Reward" *ngIf="opportunity.enabled === false"></cdn-image>
 					</div>
 
-					<!-- Rewards -->
-					<div class="reward">
-						<div class="badge" *ngFor="let badge of opportunity.reward.badges">
-							<cdn-image cloudinaryId="opportunity-game/icons/{{badge}}.svg" width="25" alt="Icon for Badge"></cdn-image>
-						</div>
-						<div class="icon">
-							<cdn-image cloudinaryId="opportunity-game/icons/{{opportunity.reward.icon}}.svg" width="75" alt="Icon for Reward"></cdn-image>
-						</div>
+				</div>
 
-					</div>
+				<!-- Requires: {{opportunity.type}} -->
+				<div class="costs row col-6" *ngIf="opportunity.enabled === undefined">
+					<div class="{{cost.icon}} cost col-1" [class.notenough]="cost.has !== undefined && !cost.has" *ngFor="let cost of opportunity.costs"><span *ngIf="cost.amt !== undefined">{{cost.amt}}</span></div>
+				</div>
+				<div class="costs used row col-6" *ngIf="opportunity.enabled === false">
+					<div>You have already used this opportunity.</div>
+				</div>
 
-					<!-- Requires: {{opportunity.type}} -->
-					<div class="costs row col-6">
-						<div class="{{cost.icon}} cost col-1" [class.notenough]="cost.has !== undefined && !cost.has" *ngFor="let cost of opportunity.costs"><span *ngIf="cost.amt !== undefined">{{cost.amt}}</span></div>
-					</div>
 			</button>
 		</div>
 

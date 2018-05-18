@@ -64,23 +64,26 @@
 	margin: auto;
 
   height: 82vh;
-/* 	@media(max-height: 680px) {
-		height: 72vh;
-	} */
 
 	button {
-		@include box-shadow(4px, 4px, 0, #000000);
+		cursor: auto;
 		margin-top: 6%;
 		min-height: 125px;
+		&.unlocked {
+			@include box-shadow(4px, 4px, 0, #000000);
+			cursor: pointer;
+		}
 	}
 	.name {
 		text-align: left;
 	}
 	.costs {
-		// width: 100%;
-    // display: flex;
 		bottom: 7%;
 		text-align: right;
+		&.used {
+			color: $pinkish-grey;
+			font-size: x-small;
+		}
 		.cost {
 			height: 40px;
 			background-repeat: no-repeat;

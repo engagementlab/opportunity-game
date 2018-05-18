@@ -148,7 +148,7 @@ export class DataService {
                     this.playerData.money += reward.opportunity.moneyReward;         
                     this.playerData.actions += reward.opportunity.actionReward;
                     
-                    this.rewardTrigger.emit(reward.opportunity);
+                    this.rewardTrigger.emit({type: 'opportunity', opp: reward.opportunity});
                     this.playerDataUpdate.emit(this.playerData);
 
                     this.delayedRewardQueue.splice(e, 1);
@@ -283,6 +283,9 @@ export class DataService {
 
             if(thisLoc)
                 thisLoc.enabled = true;
+
+            this.rewardTrigger.emit({type: 'location', location: thisLoc});
+
         }); 
     }
 
@@ -313,19 +316,6 @@ export class DataService {
         this.playerDataUpdate.emit(this.playerData);
 
         this.playerData.newRound = false;
-
-        // DEBUG ONLY
-         _.each(this.locationData, (loc) => {
-
-            _.each(loc.opportunities, (thisOpp) => {
-
-            if(!thisOpp.enabled)
-                thisOpp.enabled = undefined;
-
-            }); 
-
-            this.locationDataUpdate.emit(loc);
-        }); 
 
     }
 
@@ -395,7 +385,19 @@ export class DataService {
 
         let rewardToShow = {icon: 'none', iconDetail: 'none', badges: []};
 
-        if(opportunity.commReward > 0)
+        if(opportunity.givesTransit)
+          rewardToShow = {icon: 'transit-opportunity', iconDetail: 'transit', badges: []};
+        
+        else if(opportunity.givesJob)
+          rewardToShow = {icon: 'job-opportunity', iconDetail: 'job', badges: []};
+
+        else if(opportunity.moneyReward > 0)
+          rewardToShow = {icon: 'money-opportunity', iconDetail: 'money', badges: []};
+
+        else if(opportunity.actionReward > 0)
+          rewardToShow = {icon: 'action-opportunity', iconDetail: 'action', badges: []};
+
+        else if(opportunity.commReward > 0)
           rewardToShow = {icon: 'community-opportunity', iconDetail: 'community', badges: ['gold_levelup']};
 
         else if(opportunity.jobReward > 0)
@@ -406,12 +408,6 @@ export class DataService {
 
         else if(opportunity.locationUnlocks && opportunity.locationUnlocks.length > 0)
           rewardToShow = {icon: 'map-opportunity', iconDetail: 'map', badges: ['gold_unlock']};
-
-        else if(opportunity.actionReward > 0)
-          rewardToShow.icon = 'action-cost';
-
-        else if(opportunity.moneyCost > 0)
-          rewardToShow.icon = 'money';
 
         if((opportunity.effect && opportunity.effectWait > 0) || opportunity.triggerAmt > 0) {
             rewardToShow.badges.push('gold_clock');

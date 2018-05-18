@@ -1,14 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="29" height="31" viewBox="0 0 29 31">
-    <g fill="none" fill-rule="evenodd">
-        <path fill="#FFF" d="M1.294 1.294v14.557h5.042l5.042 4.907v-4.907h13.446V1.294z"/>
-        <path stroke="#000" d="M1.294 1.294V15.85h5.042l5.042 4.908V15.85h13.446V1.294z"/>
-        <path fill="#FFF" d="M14.53 18.94v8.557h6.996v3.209l3.119-3.209h3.12v-8.556z"/>
-        <path stroke="#000" d="M27.765 18.941v8.557h-3.12l-3.12 3.208v-3.208H14.53V18.94z"/>
-        <path fill="#FFF" d="M8.647 8.647a1.47 1.47 0 1 1-2.94 0 1.47 1.47 0 0 1 2.94 0"/>
-        <path stroke="#000" d="M8.647 8.647a1.47 1.47 0 1 1-2.94 0 1.47 1.47 0 0 1 2.94 0z"/>
-        <path fill="#FFF" d="M14.53 8.647a1.47 1.47 0 1 1-2.941 0 1.47 1.47 0 0 1 2.94 0"/>
-        <path stroke="#000" d="M14.53 8.647a1.47 1.47 0 1 1-2.941 0 1.47 1.47 0 0 1 2.94 0z"/>
-        <path fill="#FFF" d="M20.412 8.647a1.47 1.47 0 1 1-2.941 0 1.47 1.47 0 0 1 2.94 0"/>
-        <path stroke="#000" d="M20.412 8.647a1.47 1.47 0 1 1-2.941 0 1.47 1.47 0 0 1 2.94 0z"/>
-    </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150"><defs><style>.cls-1{fill:#fff;stroke:#000;stroke-miterlimit:10;stroke-width:2.67px;}</style></defs><title>portland_icon</title><g id="Layer_1" data-name="Layer 1"><polygon class="cls-1" points="30.8 21.53 30.8 71.03 47.94 71.03 65.08 87.71 65.08 71.03 110.8 71.03 110.8 21.53 30.8 21.53"/><polygon class="cls-1" points="120.8 81.53 120.8 110.62 110.19 110.62 99.58 121.53 99.58 110.62 75.8 110.62 75.8 81.53 120.8 81.53"/><circle class="cls-1" cx="50.8" cy="46.53" r="5"/><circle class="cls-1" cx="70.8" cy="46.53" r="5"/><circle class="cls-1" cx="90.8" cy="46.53" r="5"/></g></svg>

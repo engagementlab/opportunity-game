@@ -1,14 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="138" height="155" viewBox="0 0 138 155">
-    <g fill="none" fill-rule="evenodd">
-        <path fill="#F05822" d="M2.165 2.166v73.503h25.46l25.46 24.778V75.669h67.892V2.166z"/>
-        <path stroke="#020303" stroke-width="3" d="M2.165 2.166v73.503h25.46l25.46 24.778V75.669h67.892V2.166z"/>
-        <path fill="#A3D39F" d="M135.828 91.275v43.204h-15.753l-15.753 16.202v-16.202H68.997V91.275z"/>
-        <path stroke="#020303" stroke-width="3" d="M135.828 91.275v43.204h-15.753l-15.753 16.202v-16.202H68.997V91.275z"/>
-        <path fill="#EFAFCE" d="M39.294 39.294a7.427 7.427 0 1 1-14.853-.001 7.427 7.427 0 0 1 14.853.001"/>
-        <path stroke="#020303" stroke-width="3" d="M39.294 39.294a7.427 7.427 0 1 1-14.853-.001 7.427 7.427 0 0 1 14.853.001z"/>
-        <path fill="#A3D39F" d="M68.997 39.294a7.427 7.427 0 1 1-14.853-.001 7.427 7.427 0 0 1 14.853.001"/>
-        <path stroke="#020303" stroke-width="3" d="M68.997 39.294a7.427 7.427 0 1 1-14.853-.001 7.427 7.427 0 0 1 14.853.001z"/>
-        <path fill="#DBA826" d="M98.7 39.294a7.427 7.427 0 1 1-14.853-.001 7.427 7.427 0 0 1 14.853.001"/>
-        <path stroke="#020303" stroke-width="3" d="M98.7 39.294a7.427 7.427 0 1 1-14.853-.001 7.427 7.427 0 0 1 14.853.001z"/>
-    </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 201 201"><defs><style>.cls-1{fill:#f15822;}.cls-1,.cls-2,.cls-3,.cls-4{stroke:#010101;stroke-miterlimit:10;stroke-width:4px;}.cls-2{fill:#f0b0cf;}.cls-3{fill:#a3d4a0;}.cls-4{fill:#dca927;}</style></defs><title>portland_icon</title><g id="Layer_1" data-name="Layer 1"><polygon class="cls-1" points="30.2 29.76 30.2 103.99 55.91 103.99 81.63 129.02 81.63 103.99 150.2 103.99 150.2 29.76 30.2 29.76"/><polygon class="cls-2" points="165.2 119.76 165.2 163.39 149.29 163.39 133.38 179.76 133.38 163.39 97.7 163.39 97.7 119.76 165.2 119.76"/><circle class="cls-2" cx="60.2" cy="67.26" r="7.5"/><circle class="cls-3" cx="90.2" cy="67.26" r="7.5"/><circle class="cls-4" cx="120.2" cy="67.26" r="7.5"/></g></svg>

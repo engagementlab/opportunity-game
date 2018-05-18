@@ -81,7 +81,9 @@ export class GameLocationComponent implements OnInit {
 
   }
 
-  viewOpportunity(id: Opportunity["_id"]) {
+  viewOpportunity(id: Opportunity["_id"], enabled: boolean) {
+
+    if(enabled === false) return;
 
     let detailsParent = document.getElementById('details');
     let allDetails = document.querySelector('#details').querySelectorAll('.opportunity');
@@ -131,10 +133,8 @@ export class GameLocationComponent implements OnInit {
       //   this._dataSvc.startDurationEffect(opportunity._id, 'reward', opportunity.triggerAmt);
     }
 
-    if(opportunity.locationUnlocks !== undefined && opportunity.locationUnlocks.length > 0 && opportunity.triggerAmt === 0) {
+    if(opportunity.locationUnlocks !== undefined && opportunity.locationUnlocks.length > 0 && opportunity.triggerAmt === 0)
       this._dataSvc.enableLocations(opportunity.locationUnlocks);
-      return;
-    }
 
   }
 

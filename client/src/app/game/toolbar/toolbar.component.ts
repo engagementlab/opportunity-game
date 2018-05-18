@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { DataService } from '../../data.service';
 import { PlayerData } from '../../models/playerdata';
+import { GameLocation } from '../../models/gamelocation';
 import { Opportunity } from '../../models/opportunity';
 
 import * as _ from 'underscore';
@@ -21,6 +22,7 @@ export class GameToolbarComponent implements OnInit {
 
   cheevoBanner: HTMLElement;
   rewardOpportunities: Opportunity[] = [];
+  rewardLocations: GameLocation[] = [];
 
   public hasTransit: boolean;
   public hasJob: boolean;
@@ -85,16 +87,26 @@ export class GameToolbarComponent implements OnInit {
 
     });
 
-    this._dataSvc.rewardTrigger.subscribe((opp: Opportunity) => {
+    this._dataSvc.rewardTrigger.subscribe((data: {type: string, opp: Opportunity, location: GameLocation}) => {
 
-      this.rewardOpportunities.push(opp);
+      let elemId: string;
+
+      if(data.type === 'opportunity') {
+        this.rewardOpportunities.push(data.opp);
+        elemId = data.opp._id;
+      }
+      else if(data.type === 'location') {
+        this.rewardLocations.push(data.location);
+        elemId = data.location._id;
+      }
 
       setTimeout(() => {
 
-        document.getElementById('reward_'+opp._id).classList.add('show');
+        document.getElementById('reward_'+elemId).classList.add('show');
         this.showNotification();
 
       }, 1000);
+
 
 
     });
@@ -151,36 +163,7 @@ export class GameToolbarComponent implements OnInit {
     document.getElementById('mobile-drawer').classList.toggle('open');
     document.getElementById('drawer').classList.toggle('open');
     document.getElementById('open-btn').classList.toggle('open');
-    // document.getElementById('transit-cheevo').classList.remove('hidden');
-
-
-    // let elem2 = document.getElementById('transit-cheevo');
-    // elem2.style.zIndex = 6;
-    // // let job = document.getElementById('job-cheevo');
     
-    // let bannerY = -document.getElementById('toolbar').offsetHeight;
-    // // TweenLite.fromTo(elem2, .5, {autoAlpha:0, bottom:bannerY}, {autoAlpha:1, bottom:0, display:'inline-flex', ease:Back.easeOut});
-    // // // TweenLite.fromTo(job, .5, {autoAlpha:0, bottom:bannerY}, {autoAlpha:1, bottom:0, delay: 1.5, display:'inline-flex', ease:Back.easeOut});
-    
-    // // setTimeout(() => {elem2.classList.add('remove');  }, 4000);
-    // // setTimeout(() => {elem2.remove();  }, 4700);
-
-    // let notifications = Array.from(document.querySelectorAll('#notifications .row'));
-
-    // // TweenLite.fromTo(n, .5, {autoAlpha:0, bottom:bannerY}, {autoAlpha:1, bottom:0, display:'inline-flex', ease:Back.easeOut});
-    // TweenMax.staggerFromTo(notifications, .5, {autoAlpha:0, bottom:bannerY}, {autoAlpha:1, bottom:0, display:'inline-flex', ease:Back.easeOut}, .4, () => {
-
-    //   _.each(notifications, (n, i) => {
-    //     n.style.zIndex = i;
-        
-    //     setTimeout(() => {n.classList.add('remove');  }, 2000*(i+1));
-    //     setTimeout(() => {n.remove();  }, 2700*(i+1));
-
-    //   });
-
-    // });
-
-      // this.showNotification();
    }
 
 }

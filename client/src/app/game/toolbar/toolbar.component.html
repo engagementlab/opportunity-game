@@ -9,6 +9,14 @@
 					{{opportunity.rewardFlavor}}
 				</div>
 			</div>
+			<div class="row reward" id="reward_{{location._id}}" *ngFor="let location of rewardLocations; let i = index;">
+				<div class="col-1">
+					<cdn-image cloudinaryId="opportunity-game/icons/map.svg" alt="{{location.name}} unlocked icon"></cdn-image>
+				</div>  
+				<div class="col-5">
+					{{location.name}} unlocked
+				</div>
+			</div>
 
 			<div id="transit-cheevo" class="row cheevo hidden">
 					<div class="col-1">
