@@ -96,16 +96,20 @@ export class GameToolbarComponent implements OnInit {
         elemId = data.opp._id;
       }
       else if(data.type === 'location') {
-        this.rewardLocations.push(data.location);
-        elemId = data.location._id;
+        Array.prototype.push.apply(this.rewardLocations, data.location);
+        // this.rewardLocations.push(data.location);
+        // elemId = data.location._id;
       }
 
       setTimeout(() => {
 
-        document.getElementById('reward_'+elemId).classList.add('show');
+        _.each(this.rewardLocations, (location) => {
+          if(document.getElementById('reward_'+location._id) !== null)
+            document.getElementById('reward_'+location._id).classList.add('show');
+        })
         this.showNotification();
 
-      }, 1000);
+      }, 100);
 
 
 
@@ -123,9 +127,8 @@ export class GameToolbarComponent implements OnInit {
    showNotification() {
 
     let bannerY = -document.getElementById('toolbar').offsetHeight;
-    let notifications = Array.from(document.querySelectorAll('#notifications .row.show'));
+    let notifications = Array.from(document.querySelectorAll('#notifications .row.show:not(.done)'));
 
-    // TweenMax.fromTo(notifications[0], .4, {bottom:bannerY, display:'inline-flex'}, {bottom:0, delay: 4, ease:Elastic.easeOut});
     TweenMax.staggerFromTo(notifications, .4, {autoAlpha:0, bottom:bannerY}, {autoAlpha:1, bottom:0, display:'inline-flex', ease:Back.easeOut}, .4, () => {
 
       _.each(notifications, (n, i) => {
@@ -134,9 +137,15 @@ export class GameToolbarComponent implements OnInit {
         setTimeout(() => {n.classList.add('remove');  }, 2000*(i+1));
 
         if(n.classList.contains('reward'))
-          setTimeout(() => {n.remove();  }, 2700*(i+1));
+          setTimeout(() => {
+            // console.log(this.rewardLocations.indexOf(n))
+            (<HTMLElement>n).style.display = 'none';
+            (<HTMLElement>n).classList.remove('show');
+            (<HTMLElement>n).classList.add('done');
+            // this.rewardLocations.splice(this.rewardLocations.length, 1);
+          }, 2700*(i+1));
         else
-          setTimeout(() => {(<HTMLElement>n).style.display = 'none'; }, 2700*(i+1));
+          setTimeout(() => {/*(<HTMLElement>n).style.display = 'none';*/ }, 2700*(i+1));
 
       });
 

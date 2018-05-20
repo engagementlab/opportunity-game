@@ -277,16 +277,19 @@ export class DataService {
 
     public enableLocations(locationIds: string[]) {
 
+        let enabledLocations = [];
         _.each(locationIds, (id) => { 
 
             let thisLoc = _.where(this.locationData, {_id: id})[0];
 
-            if(thisLoc)
+            if(thisLoc) {
                 thisLoc.enabled = true;
-
-            this.rewardTrigger.emit({type: 'location', location: thisLoc});
+                enabledLocations.push(thisLoc);
+            }
 
         }); 
+
+        this.rewardTrigger.emit({type: 'location', location: enabledLocations});
     }
 
     public startDurationEffect(effectId: string, trigger: string, triggerWait: number) {

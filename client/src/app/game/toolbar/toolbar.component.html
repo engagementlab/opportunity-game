@@ -1,7 +1,7 @@
 <div id="toolbar" class="btn no-margin">
 
 	<div id="notifications" class="col-6 bold">
-			<div class="row reward" id="reward_{{opportunity._id}}" *ngFor="let opportunity of rewardOpportunities; let i = index;">
+			<div class="row reward" id="reward_{{opportunity._id}}" *ngFor="let opportunity of rewardOpportunities; let i = index; ">
 				<div class="col-1">
 					<cdn-image cloudinaryId="opportunity-game/icons/{{opportunity.reward.iconDetail}}.svg" alt="{{opportunity.name}} reward icon"></cdn-image>
 				</div>  

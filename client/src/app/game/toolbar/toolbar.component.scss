@@ -13,6 +13,7 @@
 	.row {
 		position: inherit;
 		bottom: 0;
+		display: none;
 		@include transition(all, .7s, ease-in);
 		&.remove {			
       transform: translateX(100%);
