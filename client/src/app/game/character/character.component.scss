@@ -5,13 +5,11 @@ label {
 }
 
 .bubble {
-	// padding: 12%;
+	width: 100%;
 	font-size: small;
 }
 
 .questionnaire {
-
-	// overflow-y: scroll;
 
 	::ng-deep img {
 		max-width: 20%;
@@ -103,6 +101,15 @@ label {
 }
 
 #character-detail {
+	h3 {
+		color: $gold;
+		text-align: center;
+		font-size: larger;
+		padding-bottom: 5%;
+	}
+	.name {
+		text-align: center;
+	}	
 	.portrait {
 		text-align: end;
 	}
@@ -111,10 +118,11 @@ label {
     background-size: contain;
     background-repeat: no-repeat;
 
-		color: white;
 		font-size: x-large;
+		color: $gold;
+
 		.row {
-			padding: 7%;
+			margin-left: 1%;
 		}
 		.no-pad { 
 			padding-top: 5%;
@@ -126,8 +134,7 @@ label {
 }
 
 .character {
-	// @include transition(all, 1s, linear);
-	
+
 	&.selected {
 		@include flex(0, 0, 100%);
 		

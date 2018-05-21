@@ -1,9 +1,6 @@
 <div id="bubble" class="col-10 col-centered hidden">
 	<div class="bubble">
-		<!-- <div class="content"> -->
-			<!-- Choose your character. -->
 			Rank the following to help us<br />match you with your character.
-		<!-- </div> -->
 	</div>
 </div>
 
@@ -22,47 +19,56 @@
 </div>
 
 <div id="character-detail" class="col-12 col-md-6 auto hidden">
-		<div *ngFor="let character of characters; let i = index;" id="detail-{{i}}" class="row detail hidden">
-			<div class="portrait col-3">
-				<cdn-image cloudinaryId="opportunity-game/characters/{{i+1}}.svg" width="150" autoFormat="false" alt="Character portrait #{{i+1}}" class="character-btn"></cdn-image>
+		<div *ngFor="let character of characters; let i = index;" id="detail-{{i}}" class="detail hidden">
+			<div class="name no-margin"><h1>{{character.name}}</h1></div>
+			
+			<div class="row">
+				<div class="portrait no-pad col-3">
+					<cdn-image cloudinaryId="opportunity-game/characters/{{i+1}}.svg" width="150" autoFormat="false" alt="Character portrait #{{i+1}}" class="character-btn"></cdn-image>
+				</div>
+
+				<div class="col-3">
+					<h3 class="no-margin">GOALS</h3>
+					<div class="goals bold">
+						<div class="community row">
+
+							<div class="col-3">
+								<cdn-image cloudinaryId="opportunity-game/icons/community.svg" width="51" alt="Community goal icon" class=""></cdn-image>
+							</div>
+							<div class="col-3 no-pad">
+								{{assignedGoal.commGoal}}
+							</div>
+
+						</div>
+
+						<div class="job row">
+							
+							<div class="col-3">
+								<cdn-image cloudinaryId="opportunity-game/icons/training-color.svg" width="51" alt="Job goal icon" class=""></cdn-image>
+							</div>
+							<div class="col-3 no-pad">
+								{{assignedGoal.jobGoal}}
+							</div>
+
+						</div>
+
+						<div class="english row">
+							
+							<div class="col-3">
+								<cdn-image cloudinaryId="opportunity-game/icons/english.svg" width="51" alt="English goal icon" class=""></cdn-image>
+							</div>
+							<div class="col-3 no-pad">
+								{{assignedGoal.englishGoal}}
+							</div>
+
+						</div>
+					</div>
+				</div>
 			</div>
 
-			<div class="goals bold col-3">
-				<div class="community row">
-
-					<div class="col-3">
-						<cdn-image cloudinaryId="opportunity-game/icons/community.svg" width="51" alt="Community goal icon" class=""></cdn-image>
-					</div>
-					<div class="col-3 no-pad">
-						{{assignedGoal.commGoal}}
-					</div>
-
-				</div>
-
-				<div class="english row">
-					
-					<div class="col-3">
-						<cdn-image cloudinaryId="opportunity-game/icons/english.svg" width="51" alt="English goal icon" class=""></cdn-image>
-					</div>
-					<div class="col-3 no-pad">
-						{{assignedGoal.englishGoal}}
-					</div>
-
-				</div>
-
-				<div class="job row">
-					
-					<div class="col-3">
-						<cdn-image cloudinaryId="opportunity-game/icons/job.svg" width="51" alt="Job goal icon" class=""></cdn-image>
-					</div>
-					<div class="col-3 no-pad">
-						{{assignedGoal.jobGoal}}
-					</div>
-
-				</div>
-			</div>
 			<div class="bio medium col-10 auto">{{character.bio}}</div>
 		</div>
+
 		<div id="buttons">
 			<!-- <button id="back" class="vert-center" (click)="goBack()"><-</button> -->
 			<app-button label="Start" route="/game/home" ariaLabel="Start Game" class="green"></app-button>

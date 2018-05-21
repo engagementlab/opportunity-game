@@ -162,24 +162,12 @@ div {
 
   color: white;
   text-align: center;
-  display:table-cell;
+  // display:table-cell;
   vertical-align:middle;
   width: 100%;
   font-size: smaller;
-  
-  @include mq($from: tablet) {
-    display: block;
-    font-size: large;
-    background: cdn-image('speech-bubble-desktop', c_scale, w_600);
-    background-repeat: no-repeat;
-    background-position: bottom;
-    background-size: contain;
-  }
-
-  background: cdn-image('speech-bubble', c_scale, w_600);
-  background-repeat: no-repeat;
-  background-position: bottom;
-  background-size: contain;
+  background: black;
+  border-radius: 57px;
   padding: 8%;
 
   .content {
