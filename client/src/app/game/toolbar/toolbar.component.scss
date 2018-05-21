@@ -41,32 +41,52 @@
 	width: 100%;
 	z-index: 2;
 
-	// @include mobile-only {
-		.flex {
-			width: 100%;
-			display: flex;
-			flex-wrap: wrap;
-		}	
-	// }
+	.flex {
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+	}	
+
+	#stats {
+		font-size: x-small;
+		min-width: 53px;
+	}
 
 	.icon {
 		padding-right: 0;
 		::ng-deep img {
     	max-height: 35px;
-    	max-width: 40px;
+    	max-width: 15px;
 		}
 		svg {			
     	max-height: 35px;
-    	max-width: 40px;
+    	max-width: 15px;
     	path {
 	  	  transition: stroke 1s ease-in-out;
 	  	}
 		}
 	}
 	.icon-lg {
-		::ng-deep img {
-    	max-width: 40px;
+		width: 30%;
+		min-height: 55px;
+		display: inline-block;
+		background-repeat: no-repeat;
+		
+		.amt {
+			position: fixed;
+			font-size: xx-large;	
 		}
+
+		&.community {
+			background-image: cdn-image('toolbar/community-lvl', c_scale, w_55);
+		}
+		&.english {
+			background-image: cdn-image('toolbar/english-lvl', c_scale, w_55);
+		}
+		&.training {
+			background-image: cdn-image('toolbar/job-lvl', c_scale, w_55);
+		}
+
 		&.disabled {
 			@include filter(opacity, 50%);
 			.badge {
@@ -74,15 +94,14 @@
 			}
 		}
 		.badge {
+			display: inline-block;
 			width: 15px;
 			height: 15px;
-	    position: absolute;
 		  background-color: $gold;
 		  border-radius: 50%;
 			top: 0;
 			left: 0;
-			transform: translate(250%, 150%);
-
+			transform: translate(38px, 200%);
 		}
 	}
 	.open {
@@ -117,18 +136,6 @@
 		}
 	}
 
-	.notification {
-		visibility: hidden;
-		position: fixed;
-		display: flex;
-		vertical-align: top;
-		
-		.amt {
-			color: $gold;
-			font-size: xx-large;	
-		}
-	}
-
 	#money {
 		@include transition(color, 1s, ease-in-out)
 		&.payday {
@@ -140,8 +147,11 @@
 	}
 
 	#open-btn {
+    position: absolute;
+		right: 5%;
+		padding-top: 8%;
 		&.open {
-			div {
+			::ng-deep img {
 				@include transform(rotate(180deg));
 			  @include transition(transform, 150ms, ease-in-out);	
 			}
@@ -149,10 +159,6 @@
 	}
 }
 #drawer { 
-	/* @include mq($from: tablet) {
-		float: right;
-		display: flex;
-	} */
 	background: black;
 	@include mobile-only {
 		max-height: 0;

@@ -32,7 +32,8 @@
 
 #filters {
 
-	height: 35%;
+  height: 45%;
+  overflow-y: scroll;
 
 	@include mq($from: mobile, $until: mobileLg) {
 		padding-bottom: 10%;
@@ -76,7 +77,7 @@
   }
   #goals {
   	padding-left: 5%;
-  	text-align: center;
+
 	  .goal {
 	  	display: inline-flex;
 	  	font-size: x-large;

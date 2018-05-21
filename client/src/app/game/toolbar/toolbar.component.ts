@@ -164,19 +164,19 @@ export class GameToolbarComponent implements OnInit {
 
    showLvlUp(stat: string, amount: number) {
 
-      let elem = <HTMLElement>document.querySelector('#'+stat+'-lvl .notification');
+      let elem = <HTMLElement>document.querySelector('#'+stat+'-lvl');
       let elemAmt = <HTMLElement>document.querySelector('#'+stat+'-lvl .amt');
       let bottomAmt = document.getElementById('open-btn').classList.contains('open') ? '18%' : '6%';
 
       elemAmt.innerText = '+'+amount;
       ion.sound.play('confirm');
-
-      elem.style.visibility = 'visible';
-      TweenLite.to(elem, .5, {bottom:bottomAmt, ease:Back.easeOut});
-      TweenLite.to(elem, .5, {autoAlpha:0, delay: 1.5, onComplete:() =>{
-        TweenLite.set(elem, {clearProps:'all'});
-        elem.style.visibility = 'hidden';
-      }});
+      
+      TweenLite.to(elem, .2, {scale:1.4, ease:Elastic.easeOut});
+      TweenLite.to(elem, .2, {scale:1, delay: .3});
+      
+      TweenLite.fromTo(elemAmt, .5, {autoAlpha:0}, {autoAlpha:1});
+      TweenLite.fromTo(elemAmt, 1, {scale:.4}, {scale:1.4, ease:Back.easeOut});
+      TweenLite.to(elemAmt, .3, {autoAlpha:0, delay:1});
 
    }
 
