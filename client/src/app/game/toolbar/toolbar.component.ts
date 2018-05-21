@@ -93,23 +93,32 @@ export class GameToolbarComponent implements OnInit {
 
       if(data.type === 'opportunity') {
         this.rewardOpportunities.push(data.opp);
-        elemId = data.opp._id;
+
+        setTimeout(() => {
+
+          _.each(this.rewardOpportunities, (opp) => {
+            if(document.getElementById('reward_'+opp._id) !== null)
+              document.getElementById('reward_'+opp._id).classList.add('show');
+          })
+          this.showNotification();
+
+        }, 100);
       }
       else if(data.type === 'location') {
         Array.prototype.push.apply(this.rewardLocations, data.location);
         // this.rewardLocations.push(data.location);
-        // elemId = data.location._id;
+        elemId = data.location._id;
+
+        setTimeout(() => {
+
+          _.each(this.rewardLocations, (location) => {
+            if(document.getElementById('loc_'+location._id) !== null)
+              document.getElementById('loc_'+location._id).classList.add('show');
+          })
+          this.showNotification();
+
+        }, 100);
       }
-
-      setTimeout(() => {
-
-        _.each(this.rewardLocations, (location) => {
-          if(document.getElementById('reward_'+location._id) !== null)
-            document.getElementById('reward_'+location._id).classList.add('show');
-        })
-        this.showNotification();
-
-      }, 100);
 
 
 
@@ -145,7 +154,7 @@ export class GameToolbarComponent implements OnInit {
             // this.rewardLocations.splice(this.rewardLocations.length, 1);
           }, 2700*(i+1));
         else
-          setTimeout(() => {/*(<HTMLElement>n).style.display = 'none';*/ }, 2700*(i+1));
+          setTimeout(() => { (<HTMLElement>n).style.display = 'none'; }, 2700*(i+1));
 
       });
 

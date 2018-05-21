@@ -73,16 +73,7 @@
 								  </g>
 								</svg>
 						</div>
-						<!-- Rewards -->
-	<!-- 					<div class="reward" *ngIf="opportunity.commReward > 0">
-							<cdn-image cloudinaryId="opportunity-game/icons/community.svg" alt="Icon for Community reward"></cdn-image>
-						</div>
-						<div class="reward col-2 no-pad" *ngIf="opportunity.englishReward > 0">
-							<cdn-image cloudinaryId="opportunity-game/icons/english.svg" alt="Icon for English reward"></cdn-image>
-						</div>
-						<div class="reward col-2 col-centered no-pad" *ngIf="opportunity.jobReward > 0">
-							<cdn-image cloudinaryId="opportunity-game/icons/training-color.svg" alt="Icon for Job reward"></cdn-image>
-						</div> -->
+						<!-- Reward -->
 						<div class="reward col-2 col-centered no-pad">
 							<div class="badge" *ngFor="let badge of opportunity.reward.badges">
 								<cdn-image cloudinaryId="opportunity-game/icons/{{badge}}.svg" width="25" alt="Icon for Badge"></cdn-image>
