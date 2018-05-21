@@ -76,11 +76,19 @@
   }
   #goals {
   	padding-left: 5%;
+  	text-align: center;
 	  .goal {
 	  	display: inline-flex;
-	  	span {
-	  		padding-top: 10%;
-	  	}	  	
+	  	font-size: x-large;
+	  	.of {
+	  		font-size: x-small;
+	  		text-transform: uppercase;
+	  	}
+	  	.goal-end {
+	  		font-size: xx-large; 
+				-webkit-text-stroke: 1px $gold; 
+				text-stroke: 1px $gold;
+	  	}
 			@include mq($from: mobile, $until: mobileLg) {
 				::ng-deep img {
 					max-width: 35px!important;
