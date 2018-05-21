@@ -39,4 +39,32 @@ export class GameEventComponent implements OnInit {
 
   }
 
+  removeEvent(eventId: string) {
+
+    let thisEl = document.getElementById(eventId).parentElement;
+    TweenLite.to(thisEl, 1, {autoAlpha: 0, display:'none', oncomplete: () => {
+      
+      thisEl.parentNode.removeChild(thisEl);
+
+      TweenLite.to(document.getElementById('effect-events'), 1, {autoAlpha: 0, display:'none'});
+      this._dataSvc.removeEvent(eventId);
+
+    }});
+    
+  }
+
+
+  selectNo(eventId: string) {
+
+    this.removeEvent(eventId);
+
+  }
+ 
+  selectYes(eventId: string) {
+    
+    this._dataSvc.updateStats(this._dataSvc.getEventById(eventId));
+    this.removeEvent(eventId);
+
+  }
+
 }

@@ -26,7 +26,9 @@
 
 				<!-- Requires: {{opportunity.type}} -->
 				<div class="costs row col-6" *ngIf="opportunity.enabled === undefined">
-					<div class="{{cost.icon}} cost col-1" [class.notenough]="cost.has !== undefined && !cost.has" *ngFor="let cost of opportunity.costs"><span *ngIf="cost.amt !== undefined">{{cost.amt}}</span></div>
+					<div class="{{cost.icon}} cost col-1" [class.notenough]="cost.has !== undefined && !cost.has" *ngFor="let cost of opportunity.costs">
+						<span *ngIf="cost.amt !== undefined">{{cost.amt}}</span>
+					</div>
 				</div>
 				<div class="costs used row col-6" *ngIf="opportunity.enabled === false">
 					<div>You have already used this opportunity.</div>
@@ -79,7 +81,7 @@
 								<cdn-image cloudinaryId="opportunity-game/icons/{{badge}}.svg" width="25" alt="Icon for Badge"></cdn-image>
 							</div>
 							<div class="icon">
-								<cdn-image cloudinaryId="opportunity-game/icons/{{opportunity.reward.iconDetail}}.svg" alt="Icon for Reward"></cdn-image>
+								<cdn-image cloudinaryId="opportunity-game/icons/{{opportunity.reward.icon}}.svg" alt="Icon for Reward"></cdn-image>
 							</div>
 
 						</div>
@@ -87,10 +89,15 @@
 					</div>
 
 					<div class="footer">
-							This opportunity costs 
-							<span *ngIf="opportunity.actionCost > 0 && opportunity.moneyCost <= 0">{{opportunity.actionCost}} actions.</span>
-							<span *ngIf="opportunity.moneyCost > 0 && opportunity.actionCost <= 0">{{opportunity.moneyCost}} money.</span>
-							<span *ngIf="opportunity.moneyCost > 0 && opportunity.actionCost > 0">{{opportunity.actionCost}} actions & {{opportunity.moneyCost}} money.</span>
+							<div class="bold medium">YOU NEED AT LEAST:</div> 
+							<div class="costs row col-5 auto" *ngIf="opportunity.enabled === undefined">
+								<div *ngFor="let cost of opportunity.costs" class="cost {{cost.icon}} auto">
+									<!-- <cdn-image cloudinaryId="opportunity-game/icons/{{cost.icon}}.svg" alt="Icon for {{cost.icon}}" width="48"></cdn-image> -->
+									<div *ngIf="cost.amt !== undefined && cost.isLvl === undefined" class="text bold">{{cost.amt}}</div>
+									<div *ngIf="cost.isLvl === true" class="badge text bold">{{cost.amt}}</div>
+								</div>
+							</div>
+							
 							<span class="bold" *ngIf="opportunity.locked === true"><br/>You don't have the requirements to learn more!</span>
 					</div>
 

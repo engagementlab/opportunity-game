@@ -137,5 +137,5 @@ Opportunity.schema.pre('save', function(next) {
  * Model Registration
  */
 Opportunity.defaultSort = '-createdAt';
-Opportunity.defaultColumns = 'name, location, type';
+Opportunity.defaultColumns = 'name, location, type, effect';
 Opportunity.register();

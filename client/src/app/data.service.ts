@@ -123,8 +123,10 @@ export class DataService {
     
                 if(effect.trigger === DurationEffectTrigger.actions) {
                     effect.triggerCount -= opportunity.actionCost;
+                    console.log(effect.triggerCount, opportunity.actionCost)
     
-                    if(effect.triggerCount >= effect.triggerWait) {
+                    if(effect.triggerCount <= effect.triggerWait) {
+                        console.log('this.effectTrigger', effect.id)
                         this.effectTrigger.emit(effect.id);
     
                         this.durationEffectQueue.splice(i, 1);
@@ -153,6 +155,7 @@ export class DataService {
 
                     this.delayedRewardQueue.splice(e, 1);
                     break;
+
                 }
 
                 e++;
@@ -162,12 +165,14 @@ export class DataService {
 
         // Reward now or later?
         if(opportunity.triggerAmt === 0) {
+
             this.playerData.commLevel += opportunity.commReward;
             this.playerData.jobLevel += opportunity.jobReward;
             this.playerData.englishLevel += opportunity.englishReward;
             
             this.playerData.money += opportunity.moneyReward;            
             this.playerData.actions += opportunity.actionReward;
+
         }
         else {
 
@@ -429,11 +434,11 @@ export class DataService {
         if(opportunity.moneyCost > 0)
           costs.push({icon: 'money', amt: opportunity.moneyCost, has: opportunity.moneyCost<=this.playerData.money});
         if(opportunity.commCost > 0)
-          costs.push({icon: 'community', amt: opportunity.commCost, has: opportunity.commCost<=this.playerData.commLevel});
+          costs.push({icon: 'community', amt: opportunity.commCost, has: opportunity.commCost<=this.playerData.commLevel, isLvl: true});
         if(opportunity.jobCost > 0)
-          costs.push({icon: 'job', amt: opportunity.jobCost, has: opportunity.jobCost<=this.playerData.jobLevel});
+          costs.push({icon: 'training', amt: opportunity.jobCost, has: opportunity.jobCost<=this.playerData.jobLevel, isLvl: true});
         if(opportunity.englishCost > 0)
-          costs.push({icon: 'english', amt: opportunity.englishCost, has: opportunity.englishCost<=this.playerData.englishLevel});
+          costs.push({icon: 'english', amt: opportunity.englishCost, has: opportunity.englishCost<=this.playerData.englishLevel, isLvl: true});
         if(opportunity.requiresTransit === true)
           costs.push({icon: 'transit', has: this.playerData.hasTransit});
         if(opportunity.requiresJob === true)

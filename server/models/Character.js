@@ -30,20 +30,9 @@ var Character = new keystone.List('Character',
  * @main Character
  */
 Character.add({
-		name: { type: String, default: "Character Name", required: true, initial: true },
-		bio: { type: Types.Text, label: "Bio", initial: true, required: true }
-	},
-
-  "Questionnaire Filters", {
-		filter1: { type: Number, label: "Career", note: "Can be 1-3 (unique)", initial: true, required: true },
-		filter2: { type: Number, label: "Community", note: "Can be 1-3 (unique)", initial: true, required: true },
-		filter3: { type: Number, label: "Health", note: "Can be 1-3 (unique)", initial: true, required: true }
-	},
-	
-	{
-		createdAt: { type: Date, default: Date.now, noedit: true, hidden: true } 
-	}
-);
+	name: { type: String, default: "Character Name", required: true, initial: true },
+	bio: { type: Types.Text, label: "Bio", initial: true, required: true }
+});
 
 /**
  * Model Registration

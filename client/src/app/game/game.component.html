@@ -138,12 +138,6 @@
 			</div>
 		</div>
 		<!-- EFFECT EVENTS -->
-<!-- 		<div id="effect-events">
-			<div *ngFor="let event of effectEvents" id="{{event._id}}">
-				<game-event [data]="event" [buttons]="false" type="effect"></game-event>
-			</div>
-		</div> -->
-
 		<div class="col-6 auto round1">
 			<app-button label="Go to Round 2" ariaLabel="Click/tap to go to round 2" clickData="true" (clickEvent)="nextRound()" class="gold large"></app-button>
 		</div>
@@ -166,8 +160,6 @@
 </div> -->
 
 <!-- EFFECT EVENTS -->
-<div id="effect-events" class="modal hide">
-	<div *ngFor="let event of effectEvents" id="{{event._id}}" class="hide">
-		<game-event [data]="event" type="effect"></game-event>
-	</div>
+<div id="effect-events" class="col-6 full-screen hidden">
+	<game-event [data]="event" [buttons]="true" type="effect" class="event hidden" *ngFor="let event of effectEvents"></game-event>
 </div>

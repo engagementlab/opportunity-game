@@ -125,6 +125,7 @@ export class GameComponent implements OnInit {
       let eventToShow;
       let effectEventSel = document.getElementById('effect-events');
       eventToShow =  document.getElementById(eventId);
+      console.log('eventToShow', eventToShow)
       
       TweenLite.to(effectEventSel, 1, {autoAlpha: 1, display:'block'});
       TweenLite.to(eventToShow, 1, {autoAlpha:1, display:'block'});

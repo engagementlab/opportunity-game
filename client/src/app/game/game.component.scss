@@ -11,10 +11,6 @@
 .event {
 	text-align: center;
   font-size: large;
-  background: white;
-  -webkit-box-shadow: 4px 4px 0 #000000;
-  box-shadow: 4px 4px 0 #000000;
-  min-height: 250px;
 }
 
 .hide {
@@ -28,12 +24,10 @@
 }
 
 .full-screen {
+	position: fixed;
+	top: 0;
+	z-index: 10;
   background: white;
-	/* position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh; */
 	max-width: 425px;
   height: 100%;
   margin: 0 auto;
@@ -49,6 +43,15 @@
 			font-size: large;
 		}
 	}
+
+	&#effect-events {
+	  background: rgba(217, 217, 217, .8);
+	  .event {
+	  	display: contents;	  	
+			max-width: 425px;
+		  height: 100%;
+	  }
+	}
 }
 
 #game {
@@ -56,9 +59,6 @@
 }
 
 #round-over {
-	position: fixed;
-	top: 0;
-	z-index: 10;
 
 	.col-xs-2 {
 		-webkit-box-flex: 0;

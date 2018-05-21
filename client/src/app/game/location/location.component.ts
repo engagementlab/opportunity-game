@@ -126,12 +126,9 @@ export class GameLocationComponent implements OnInit {
     this._dataSvc.updateStats(opportunity);
     this._dataSvc.updateOpportunity(opportunity, this.route.snapshot.params.locationUrl); 
     
-    // Duration effect or delayed reward?
-    if(opportunity.effect) {
+    // Duration effect?
+    if(opportunity.effect)
       this._dataSvc.startDurationEffect(opportunity.effect, opportunity.effectTrigger, opportunity.effectWait);
-      // if(opportunity.triggerAmt > 0)
-      //   this._dataSvc.startDurationEffect(opportunity._id, 'reward', opportunity.triggerAmt);
-    }
 
     if(opportunity.locationUnlocks !== undefined && opportunity.locationUnlocks.length > 0 && opportunity.triggerAmt === 0)
       this._dataSvc.enableLocations(opportunity.locationUnlocks);

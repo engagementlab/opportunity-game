@@ -130,7 +130,7 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
         continue;
       }
 
-      if (x[i].dataset.categories.indexOf(category) > -1) 
+      if (x[i].dataset.categories !== undefined && x[i].dataset.categories.indexOf(category) > -1) 
         x[i].classList.add("show");
 
     }

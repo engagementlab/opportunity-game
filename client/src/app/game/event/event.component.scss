@@ -4,16 +4,11 @@
 
 	font-size: large;
 	text-align: center;
+	margin: 0 auto;
 	
 	&.inner-modal {
 		background: white;
-
-		position: fixed;
-		left: 50%;
-		top: 50%;
-		min-height: 300px;
-		transform: translate(-50%, -50%);
-
+		min-height: 250px;
 		@include box-shadow(4px, 4px, 0, #000000);
 	}
 
