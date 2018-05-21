@@ -89,9 +89,19 @@
 		font-size: large;
 		.row {
 			padding: 7%;
+	  	font-size: x-large;
 			&:nth-child(3) {
 				margin-top: 7%;
 			}
+
+	  	.of {
+	  		font-size: x-small;
+	  		text-transform: uppercase;
+	  	}
+	  	.goal-end {
+	  		font-size: xx-large;
+	  		color: $gold;
+	  	}
 		}
 		.no-pad { 
 			padding-top: 5%;

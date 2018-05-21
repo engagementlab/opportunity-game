@@ -82,19 +82,7 @@
 				<cdn-image id="icon" cloudinaryId="opportunity-game/icons/wellbeing.svg" width="150" alt="Wellbeing icon"></cdn-image>
 			</div>
 		</div>
-		<!-- <div class="row">
 
-			<div class="bold xx-large col-4 col-md-3 auto">
-				
-				<div class="small">
-					You earned <br />
-				</div>
-				<div>
-					+{{currentWellnessScore - lastWellnessScore}} wellbeing
-				</div>
-			</div>
-		</div>
- -->
 		<div class="goals bold col-4 auto">
 			<div class="community row">
 
@@ -102,9 +90,9 @@
 					<cdn-image cloudinaryId="opportunity-game/icons/community.svg" width="51" alt="Community goal icon" class=""></cdn-image>
 				</div>
 				<div class="col-2 no-pad">
-					{{commLevel}} <span class="slash">/</span> {{assignedGoal?.commGoal}}
+					{{commLevel}} <span class="of">of</span> <span class="goal-end">{{assignedGoal?.commGoal}}</span>
 				</div>
-				<div *ngIf="commLevel >  _dataSvc.commGoalLast" class="col-1 no-pad gold">
+				<div *ngIf="commLevel >  _dataSvc.commGoalLast" class="col-1 no-pad">
 					+{{commLevel -  _dataSvc.commGoalLast}}
 				</div>
 
@@ -116,7 +104,7 @@
 					<cdn-image cloudinaryId="opportunity-game/icons/training-color.svg" width="51" alt="Job goal icon" class=""></cdn-image>
 				</div>
 				<div class="col-2 no-pad">
-					{{jobLevel}} <span class="slash">/</span> {{assignedGoal?.jobGoal}}
+					{{jobLevel}} <span class="of">of</span> <span class="goal-end">{{assignedGoal?.jobGoal}}</span>
 				</div>
 				<div *ngIf="jobLevel >  _dataSvc.jobGoalLast" class="col-1 no-pad gold">
 					+{{jobLevel -  _dataSvc.jobGoalLast}}
@@ -129,7 +117,7 @@
 					<cdn-image cloudinaryId="opportunity-game/icons/english.svg" width="51" alt="English goal icon" class=""></cdn-image>
 				</div>
 				<div class="col-2 no-pad">
-					{{englishLevel}} <span class="slash">/</span> {{assignedGoal?.englishGoal}}
+					{{englishLevel}} <span class="of">of</span> <span class="goal-end">{{assignedGoal?.englishGoal}}</span>
 				</div>
 				<div *ngIf="englishLevel >  _dataSvc.englishGoalLast" class="col-1 no-pad gold">
 					+{{englishLevel -  _dataSvc.englishGoalLast}}

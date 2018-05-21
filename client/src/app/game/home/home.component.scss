@@ -42,11 +42,6 @@
 	}
 
 	.filter {
-		// @include mq($from: tablet) {
-		// 	&:nth-child(even) {
-		// 		margin-top: 15%;
-		// 	}
-		// }
 		text-align: center;
 		@include mobile-only { 
 			 padding-top: 1%;
