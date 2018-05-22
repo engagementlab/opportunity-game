@@ -97,6 +97,16 @@ export class GameComponent implements OnInit {
 
     this._dataSvc.playerDataUpdate.subscribe((data: PlayerData) => {
 
+      this.newRound = data.round;
+
+      this.playerIndex = this._dataSvc.assignedCharIndex;
+
+      this.commLevel = data.commLevel;
+      this.jobLevel = data.jobLevel;
+      this.englishLevel = data.englishLevel;
+      
+      this.assignedGoal = this._dataSvc.assignedGoal;
+
       if(data.newRound) {
         
         this.currentWellnessScore = data.wellnessScore;
@@ -109,16 +119,6 @@ export class GameComponent implements OnInit {
         TweenLite.to(content, 1, {autoAlpha:1, delay:3.1});
 
       }
-
-      this.newRound = data.round;
-
-      this.playerIndex = this._dataSvc.assignedCharIndex;
-
-      this.commLevel = data.commLevel;
-      this.jobLevel = data.jobLevel;
-      this.englishLevel = data.englishLevel;
-      
-      this.assignedGoal = this._dataSvc.assignedGoal;
 
     });
 

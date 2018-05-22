@@ -56,6 +56,8 @@
 
 #game {
 	height: 97vh;
+	border-left: 4px solid black;
+	border-right: 4px solid black;
 }
 
 #round-over {
@@ -112,6 +114,24 @@
 		.gold {
 			color: $gold;
 		}
+	}
+
+	#play-again {
+		font-size: large;
+		text-transform: uppercase;
+		vertical-align: middle;
+    display: inline-flex;
+    
+	  align-items: center;
+	  justify-content: center;
+	  @include transition(all, 150ms, cubic-bezier(0.64, 0.57, 0.67, 1.53));
+
+	  &:hover {
+	    @include scale(1.1);
+	  }
+	  &:active {
+	    @include scale(.9);
+	  }
 	}
 }
 

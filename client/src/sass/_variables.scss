@@ -29,7 +29,7 @@ $mq-breakpoints: (
     mobileLandscape: 480px
 );
 
-$mq-show-breakpoints: (mobile, mobileLg, mobileLandscape, tablet, desktop, wide);
+// $mq-show-breakpoints: (mobile, mobileLg, mobileLandscape, tablet, desktop, wide);
 
 // Mixins 
 @import '~sass-mq/_mq';

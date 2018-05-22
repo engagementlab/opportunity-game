@@ -7,6 +7,7 @@
 
 #parent {
 
+	border-bottom: 4px solid black;
 	transition: background-image 1s ease-in-out;
 	@include mq($from: tablet) {
 		background-image: cdn-image('confetti');
