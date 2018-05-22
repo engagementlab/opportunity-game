@@ -68,7 +68,7 @@ export class GameComponent implements OnInit {
         // Default
         this.character = this._dataSvc.characterData[0];
         this.assignedGoal = this._dataSvc.goalData[0];
-      console.log(this.character.image)
+
       });
     }
 
@@ -103,7 +103,7 @@ export class GameComponent implements OnInit {
       this.newRound = data.round;
 
       this.character = this._dataSvc.assignedChar;
-      
+
       this.commLevel = data.commLevel;
       this.jobLevel = data.jobLevel;
       this.englishLevel = data.englishLevel;
@@ -114,7 +114,7 @@ export class GameComponent implements OnInit {
         
         this.currentWellnessScore = data.wellnessScore;
         this.lifeEvents = this._dataSvc.getUpdatedEvents();
-        this.wonGame = (data.round === 4) && data.metGoals;
+        this.wonGame = data.metGoals;
         
         let content = <HTMLElement>document.querySelector('#round-over #content');
         content.style.visibility = 'hidden';
