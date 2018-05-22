@@ -133,7 +133,7 @@ export class GameCharacterComponent implements OnInit {
     // document.getElementById('questionnaire-desktop').style.display = 'none';
     document.getElementById('questionnaire-mobile').style.display = 'none';
 
-    this._dataSvc.changeCharacter(assignedIndex+1, this.assignedGoal);
+    this._dataSvc.changeCharacter(assignedIndex, this.assignedGoal);
 
 
 
