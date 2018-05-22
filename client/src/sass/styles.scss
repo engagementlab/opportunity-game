@@ -10,6 +10,11 @@ $grid-gutter-width: 30px !default;
 
 @import '~bootstrap-4-grid/scss/grid.scss';
 
+body {
+  background: cdn-image('outer-bg', f_auto);
+  // background-repeat: no-repeat;
+}
+
 ::-webkit-scrollbar {
     width: 0px;  /* remove scrollbar space */
     background: transparent;  /* optional: just make scrollbar invisible */

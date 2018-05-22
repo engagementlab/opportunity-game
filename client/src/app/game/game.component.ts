@@ -160,14 +160,17 @@ export class GameComponent implements OnInit {
       // Update round
       this.round = this.newRound;
 
-      // Dice roll for random event
-      if(Math.round(Math.random()) == 1) {
+      // Dice roll for random event if any left
+      let allEvents = document.querySelectorAll('#life-events .event');
+      if(allEvents.length > 1 && Math.round(Math.random()) == 1) {
         
-        let allEvents = document.querySelectorAll('#life-events .event');
         let eventIndex = Math.floor(Math.random() * ((allEvents.length-1) - 0 + 1));
+        let eventEl = allEvents[eventIndex];
         
+        if(eventEl === undefined) return;
+
         TweenLite.to(document.getElementById('life-events'), 1, {autoAlpha: 1, display:'block'});
-        TweenLite.to(allEvents[eventIndex], 1, {autoAlpha:1, display:'block'});
+        TweenLite.to(eventEl, 1, {autoAlpha:1, display:'block'});
 
       }
 

@@ -57,6 +57,7 @@ export class GameEventComponent implements OnInit {
   selectNo(eventId: string) {
 
     this.removeEvent(eventId);
+    this._dataSvc.removeEvent(eventId);  
 
   }
  
