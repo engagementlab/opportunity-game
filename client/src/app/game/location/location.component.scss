@@ -122,7 +122,7 @@
 		    display: flex;
 			}
 			&.notenough {
-				background-image: cdn-image('icons/action-locked', c_scale, w_15);
+				background-image: cdn-image('icons/action-cost', c_scale, w_15, f_auto, o_50);
 			}
 		}
 		.community {

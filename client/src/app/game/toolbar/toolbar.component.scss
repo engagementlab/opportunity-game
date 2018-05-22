@@ -75,6 +75,7 @@
 		.amt {
 			position: fixed;
 			font-size: xx-large;	
+			z-index: 30;
 		}
 
 		&.community {
@@ -150,10 +151,12 @@
     position: absolute;
 		right: 5%;
 		padding-top: 8%;
+		::ng-deep img {
+		  @include transition(transform, 500ms, cubic-bezier(0.64, 0.57, 0.67, 1.53));
+		}
 		&.open {
 			::ng-deep img {
 				@include transform(rotate(180deg));
-			  @include transition(transform, 150ms, ease-in-out);	
 			}
 		}
 	}

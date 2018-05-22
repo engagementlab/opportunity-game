@@ -103,8 +103,8 @@ export class GameLocationComponent implements OnInit {
 
   }
 
-  backToList(modalId: string) { 
-
+  backToList(modalId: string) {
+    
     TweenLite.to(document.getElementById('detail_'+modalId), 1, {autoAlpha:0, display:'none', ease: Back.easeIn, oncomplete:() => {
 
       TweenLite.to(document.getElementById('list'), 1, {autoAlpha:1, display:'block'});

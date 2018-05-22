@@ -103,8 +103,8 @@ export class GameComponent implements OnInit {
         
         let content = <HTMLElement>document.querySelector('#round-over #content');
         content.style.visibility = 'hidden';
-        TweenLite.fromTo(document.getElementById('round-over'), 1, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, display:'block', ease: Sine.easeOut});
-        TweenLite.to(content, 1, {autoAlpha:1, delay:1});
+        TweenLite.fromTo(document.getElementById('round-over'), 3, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, display:'block', ease: Sine.easeOut});
+        TweenLite.to(content, 1, {autoAlpha:1, delay:3.1});
 
       }
 
@@ -124,8 +124,10 @@ export class GameComponent implements OnInit {
 
       let eventToShow;
       let effectEventSel = document.getElementById('effect-events');
-      eventToShow =  document.getElementById(eventId);
-      console.log('eventToShow', eventToShow)
+      eventToShow = document.getElementById(eventId);
+
+      if(eventToShow === undefined) 
+        return;
       
       TweenLite.to(effectEventSel, 1, {autoAlpha: 1, display:'block'});
       TweenLite.to(eventToShow, 1, {autoAlpha:1, display:'block'});
@@ -196,6 +198,7 @@ export class GameComponent implements OnInit {
   selectNo(eventId: string) {
 
     this.removeEvent(eventId);
+    this._dataSvc.removeEvent(eventId);
 
   }
  

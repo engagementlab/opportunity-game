@@ -32,7 +32,7 @@
 
 #filters {
 
-  height: 45%;
+  height: 50%;
   overflow-y: scroll;
 
 	@include mq($from: mobile, $until: mobileLg) {
@@ -74,7 +74,7 @@
   	padding-left: 5%;
 
 	  .goal {
-	  	display: inline-flex;
+	  	display: flex;
 	  	font-size: x-large;
 	  	.of {
 	  		font-size: x-small;

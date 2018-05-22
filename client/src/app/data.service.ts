@@ -123,10 +123,8 @@ export class DataService {
     
                 if(effect.trigger === DurationEffectTrigger.actions) {
                     effect.triggerCount -= opportunity.actionCost;
-                    console.log(effect.triggerCount, opportunity.actionCost)
-    
+                    
                     if(effect.triggerCount <= effect.triggerWait) {
-                        console.log('this.effectTrigger', effect.id)
                         this.effectTrigger.emit(effect.id);
     
                         this.durationEffectQueue.splice(i, 1);
@@ -317,7 +315,21 @@ export class DataService {
         this.playerData.money += environment.dev ? 20 : 5;
         this.playerData.actions += 5;
 
-        this.playerData.wellnessScore = this.calcWellness();
+        // DEBUG ONLY
+        if(environment.dev) {
+            _.each(this.locationData, (loc) => {
+                _.each(loc.opportunities, (thisOpp) => {
+
+                  thisOpp.enabled = undefined;
+                  thisOpp.locked = undefined;
+
+                }); 
+
+                this.locationDataUpdate.emit(loc);
+            }); 
+        }
+
+        // this.playerData.wellnessScore = this.calcWellness();
         this.playerData.newRound = true;
 
         this.playerData.round++;
