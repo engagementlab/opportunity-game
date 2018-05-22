@@ -91,7 +91,8 @@ export class DataService {
 
         newRound: false,
         gotTransit: false,
-        gotJob: false
+        gotJob: false,
+        metGoals: false
 
     };
 
@@ -329,20 +330,21 @@ export class DataService {
             }); 
         }
 
-        // this.playerData.wellnessScore = this.calcWellness();
         this.playerData.newRound = true;
-
+        this.playerData.metGoals = this.metGoals();
         this.playerData.round++;
+
         this.playerDataUpdate.emit(this.playerData);
 
         this.playerData.newRound = false;
 
     }
 
-    private calcWellness() {
+    private metGoals() {
 
-        let jceLvl = 2 * (this.playerData.jobLevel + this.playerData.commLevel + this.playerData.englishLevel);
-        return jceLvl + this.playerData.money;
+        return (this.playerData.commLevel >= this.assignedGoal.commGoal) && 
+               (this.playerData.jobLevel >= this.assignedGoal.jobGoal) &&
+               (this.playerData.englishLevel >= this.assignedGoal.englishGoal);
 
     }
 

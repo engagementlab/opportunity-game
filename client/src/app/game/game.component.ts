@@ -31,6 +31,7 @@ export class GameComponent implements OnInit {
   commLevel: number;
   jobLevel: number;
   englishLevel: number;
+  wonGame: boolean;
   assignedGoal: Goal;
   
   sfxPath: string = 'https://res.cloudinary.com/engagement-lab-home/video/upload/v1000000/opportunity-game/sfx/';
@@ -100,6 +101,7 @@ export class GameComponent implements OnInit {
         
         this.currentWellnessScore = data.wellnessScore;
         this.lifeEvents = this._dataSvc.getUpdatedEvents();
+        this.wonGame = (data.round === 4) && data.metGoals;
         
         let content = <HTMLElement>document.querySelector('#round-over #content');
         content.style.visibility = 'hidden';
@@ -146,8 +148,17 @@ export class GameComponent implements OnInit {
 
   nextRound() {
 
-      this.router.navigateByUrl('/game/home');
-      TweenLite.to(document.getElementById('round-over'), 1, {autoAlpha: 0, display:'none'});
+    this.router.navigateByUrl('/game/home');
+    TweenLite.to(document.getElementById('round-over'), 1, {autoAlpha: 0, display:'none', onComplete:() => {
+
+      // Save goal amt
+      this._dataSvc.commGoalLast = this.commLevel;
+      this._dataSvc.jobGoalLast = this.jobLevel;
+      this._dataSvc.englishGoalLast = this.englishLevel;
+      this._dataSvc.showPayday();
+
+      // Update round
+      this.round = this.newRound;
 
       // Dice roll for random event
       if(Math.round(Math.random()) == 1) {
@@ -160,19 +171,8 @@ export class GameComponent implements OnInit {
 
       }
 
-      // Update last score 
-      this.lastWellnessScore = this.currentWellnessScore;
-
-      // Save goal amt
-      this._dataSvc.commGoalLast = this.commLevel;
-      this._dataSvc.jobGoalLast = this.jobLevel;
-      this._dataSvc.englishGoalLast = this.englishLevel;
-      this._dataSvc.showPayday();
-
-      // Update round
-      this.round = this.newRound;
-
-
+    }});
+    
   }
 
   closeCheevo() {

@@ -20,5 +20,6 @@ export interface PlayerData {
   gotTransit?: boolean;
   gotJob?: boolean;
   payday?: boolean;
+  metGoals?: boolean;
 
 }

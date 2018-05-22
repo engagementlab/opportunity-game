@@ -20,7 +20,7 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
   locations: any[];
   filters: object[] = 
   [
-      {key: 'training', label: 'Jobs & Training'},
+      {key: 'job', label: 'Jobs & Training'},
       {key: 'community', label: 'Community'},
       {key: 'english', label: 'English Language'},
       {key: 'health_and_help', label: 'Health & Help'}

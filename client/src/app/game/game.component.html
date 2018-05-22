@@ -46,7 +46,10 @@
 		<h1 class="round1 col-xs-2 auto"><cdn-image cloudinaryId="opportunity-game/round1.svg" width="250" autoFormat="false" alt="Round 1 over image"></cdn-image></h1>
 		<h1 class="round2 col-xs-2 auto"><cdn-image cloudinaryId="opportunity-game/round2.svg" width="250" autoFormat="false" alt="Round 2 over image"></cdn-image></h1>
 		<h1 class="round3 col-xs-2 auto"><cdn-image cloudinaryId="opportunity-game/round3.svg" width="250" autoFormat="false" alt="Round 3 over image"></cdn-image></h1>
-		<h1 class="round4 col-xs-2 auto"><cdn-image cloudinaryId="opportunity-game/round4.svg" width="250" autoFormat="false" alt="Round 4 over image"></cdn-image></h1>
+		<h1 class="round4 col-xs-2 auto">
+			<cdn-image cloudinaryId="opportunity-game/round4-lost.svg" width="250" autoFormat="false" alt="Round 4 over image" *ngIf="wonGame === false"></cdn-image>
+			<cdn-image cloudinaryId="opportunity-game/round4-won.svg" width="250" autoFormat="false" alt="Round 4 over image" *ngIf="wonGame === true"></cdn-image>
+		</h1>
 
 		<div class="row">
 			<div class="col-4 col-md-3 col-xs-2 auto">
@@ -89,7 +92,7 @@
 				<div class="col-2">
 					<cdn-image cloudinaryId="opportunity-game/icons/community.svg" width="51" alt="Community goal icon" class=""></cdn-image>
 				</div>
-				<div class="col-2 no-pad">
+				<div class="col-3 no-pad">
 					{{commLevel}} <span class="of">of</span> <span class="goal-end">{{assignedGoal?.commGoal}}</span>
 				</div>
 				<div *ngIf="commLevel >  _dataSvc.commGoalLast" class="col-1 no-pad">
@@ -103,7 +106,7 @@
 				<div class="col-2">
 					<cdn-image cloudinaryId="opportunity-game/icons/training-color.svg" width="51" alt="Job goal icon" class=""></cdn-image>
 				</div>
-				<div class="col-2 no-pad">
+				<div class="col-3 no-pad">
 					{{jobLevel}} <span class="of">of</span> <span class="goal-end">{{assignedGoal?.jobGoal}}</span>
 				</div>
 				<div *ngIf="jobLevel >  _dataSvc.jobGoalLast" class="col-1 no-pad gold">
@@ -116,7 +119,7 @@
 				<div class="col-2">
 					<cdn-image cloudinaryId="opportunity-game/icons/english.svg" width="51" alt="English goal icon" class=""></cdn-image>
 				</div>
-				<div class="col-2 no-pad">
+				<div class="col-3 no-pad">
 					{{englishLevel}} <span class="of">of</span> <span class="goal-end">{{assignedGoal?.englishGoal}}</span>
 				</div>
 				<div *ngIf="englishLevel >  _dataSvc.englishGoalLast" class="col-1 no-pad gold">
