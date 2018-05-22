@@ -13,7 +13,7 @@
 <div id="characters" class="col-10 hidden">
 	<div class="row">
 		<div *ngFor="let character of characters; let i = index;" class="col-5 col-md-3 col-centered character" (click)="chooseCharacter(i)">
-			<cdn-image cloudinaryId="opportunity-game/characters/{{i+1}}.svg" height="164" autoFormat="false" alt="Character portrait #{{i+1}}" class="character-btn"></cdn-image>
+			<cdn-image cloudinaryId="opportunity-game/characters/{{character.image}}.svg" height="164" autoFormat="false" alt="Character portrait #{{i+1}}" class="character-btn"></cdn-image>
 		</div>
 	</div>
 </div>
@@ -24,7 +24,7 @@
 			
 			<div class="row">
 				<div class="portrait no-pad col-3">
-					<cdn-image cloudinaryId="opportunity-game/characters/{{i+1}}.svg" width="150" autoFormat="false" alt="Character portrait #{{i+1}}" class="character-btn"></cdn-image>
+					<cdn-image cloudinaryId="opportunity-game/characters/{{character.image}}.svg" width="150" autoFormat="false" alt="Character portrait for {{character.name}}" class="character-btn"></cdn-image>
 				</div>
 
 				<div class="col-3">

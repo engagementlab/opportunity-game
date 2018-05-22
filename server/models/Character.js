@@ -31,12 +31,13 @@ var Character = new keystone.List('Character',
  */
 Character.add({
 	name: { type: String, default: "Character Name", required: true, initial: true },
-	bio: { type: Types.Text, label: "Bio", initial: true, required: true }
+	bio: { type: Types.Text, label: "Bio", initial: true, required: true },
+  image: { type: Types.Select, options: '1, 2, 3, 4', label: "Image Index", initial: true, required: true }
 });
 
 /**
  * Model Registration
  */
 Character.defaultSort = '-createdAt';
-Character.defaultColumns = 'name, filter1, filter2, filter3';
+Character.defaultColumns = 'name, image';
 Character.register();

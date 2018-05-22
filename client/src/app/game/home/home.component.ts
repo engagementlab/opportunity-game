@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 
 import { DataService } from '../../data.service';
 import { Goal } from '../../models/goal';
+import { Character } from '../../models/character';
 import { PlayerData } from '../../models/playerdata';
 
 import * as _ from 'underscore';
@@ -14,7 +15,7 @@ import * as _ from 'underscore';
 })
 export class GameHomeComponent implements OnInit, AfterViewChecked {
 
-  public playerIndex: number;
+  public character: Character;
 
   loaded: boolean;
   locations: any[];
@@ -43,15 +44,9 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
     this.jobLevel = this._dataSvc.playerData.jobLevel;
     this.englishLevel = this._dataSvc.playerData.englishLevel;
 
-    // DEBUG: If no goal, get data and assign one
-    if(this.assignedGoal === undefined) {
-      this._dataSvc.getCharacterData().subscribe(response => {
+  }
 
-        // Default 
-        this.assignedGoal = this._dataSvc.goalData[0];
-
-      });
-    }
+  ngOnInit() {
     
     this._dataSvc.playerDataUpdate.subscribe((data: PlayerData) => {
 
@@ -60,12 +55,9 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
       this.englishLevel = data.englishLevel;
       
       this.assignedGoal = this._dataSvc.assignedGoal;
+      this.character = this._dataSvc.assignedChar;
   
     });
-
-  }
-
-  ngOnInit() {
 
     this._dataSvc.getAllData().subscribe(response => {
 
@@ -84,14 +76,24 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
       });
 
       this.loadCategory = true;
-
-      this.playerIndex = this._dataSvc.assignedCharIndex;
+      this.character = this._dataSvc.assignedChar;
       
       TweenLite.fromTo(document.getElementById('house-bubble'), 1.5, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, delay:2, display:'block', ease:Elastic.easeOut});
 
       this.loaded = true;
 
     });
+
+    // DEBUG: If no goal, get data and assign one
+    if(this.assignedGoal === undefined) {
+      this._dataSvc.getCharacterData().subscribe(response => {
+        
+        // Default 
+        this.assignedGoal = this._dataSvc.assignedGoal;
+        this.character = this._dataSvc.assignedChar;
+
+      });
+    }
     
   }
 

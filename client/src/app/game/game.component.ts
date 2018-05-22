@@ -8,6 +8,7 @@ import { TweenLite } from "gsap";
 import { PlayerData } from '../models/playerdata';
 import { Event } from '../models/event';
 import { Goal } from '../models/goal';
+import { Character } from '../models/character';
 
 import * as _ from 'underscore';
 
@@ -21,7 +22,7 @@ export class GameComponent implements OnInit {
 
   public lifeEvents: Event[];
   public effectEvents: Event[];
-  public playerIndex: number;
+  public character: Character;
   
   currentWellnessScore: number;
   lastWellnessScore: number = 0;
@@ -64,8 +65,10 @@ export class GameComponent implements OnInit {
     if(this.assignedGoal === undefined) {
       this._dataSvc.getCharacterData().subscribe(response => {
 
-        // Default 
+        // Default
+        this.character = this._dataSvc.characterData[0];
         this.assignedGoal = this._dataSvc.goalData[0];
+      console.log(this.character.image)
       });
     }
 
@@ -74,7 +77,7 @@ export class GameComponent implements OnInit {
       this.lifeEvents = _.filter(this._dataSvc.eventData, (e) => {return e.type === 'life'});
       this.effectEvents = _.filter(this._dataSvc.eventData, (e) => {return e.type === 'effect'});
 
-      this.playerIndex = this._dataSvc.assignedCharIndex;
+      this.character = this._dataSvc.assignedChar;
 
     });
 
@@ -84,7 +87,7 @@ export class GameComponent implements OnInit {
 
     this.getData();
 
-  	router.events.subscribe((val) =>  {
+    router.events.subscribe((val) =>  {
 
       if(val instanceof NavigationEnd) {
         
@@ -99,8 +102,8 @@ export class GameComponent implements OnInit {
 
       this.newRound = data.round;
 
-      this.playerIndex = this._dataSvc.assignedCharIndex;
-
+      this.character = this._dataSvc.assignedChar;
+      
       this.commLevel = data.commLevel;
       this.jobLevel = data.jobLevel;
       this.englishLevel = data.englishLevel;

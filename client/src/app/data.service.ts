@@ -48,7 +48,7 @@ export class DataService {
 
     public isLoading: Subject<boolean> = new Subject<boolean>();
 
-    public assignedCharIndex: number = 1;
+    public assignedChar: Character;
     public assignedGoal: Goal;
 
     public commGoalLast: number = 0;
@@ -104,7 +104,7 @@ export class DataService {
 
     public changeCharacter(index: number, goal: Goal) {
 
-        this.assignedCharIndex = index;
+        this.assignedChar = this.characterData[index];
         this.assignedGoal = goal;
         
         this.playerDataUpdate.emit(this.playerData);
@@ -354,6 +354,7 @@ export class DataService {
         this.goalData = newData.goals;
 
         this.assignedGoal = this.goalData[0];
+        this.assignedChar = this.characterData[0];
 
         this.isLoading.next(false);
 

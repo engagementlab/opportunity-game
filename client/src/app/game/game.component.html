@@ -82,7 +82,9 @@
 					  </g>
 					</svg>
 				</div>
-				<cdn-image id="icon" cloudinaryId="opportunity-game/icons/wellbeing.svg" width="150" alt="Wellbeing icon"></cdn-image>
+				<cdn-image *ngIf="round < 4" id="icon" cloudinaryId="opportunity-game/icons/wellbeing.svg" width="150" alt="Wellbeing icon"></cdn-image>
+				<cdn-image *ngIf="round === 4 && wonGame === true" id="icon" cloudinaryId="opportunity-game/characters/{{character?.image}}_win.svg" width="150" alt="Player icon"></cdn-image>
+				<cdn-image *ngIf="round === 4 && wonGame === false" id="icon" cloudinaryId="opportunity-game/characters/{{character?.image}}_lose.svg" width="150" alt="Player icon"></cdn-image>
 			</div>
 		</div>
 

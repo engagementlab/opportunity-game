@@ -26,8 +26,7 @@ export class GameToolbarComponent implements OnInit {
 
   public hasTransit: boolean;
   public hasJob: boolean;
-  public playerIndex: number = 2;
-
+  
   constructor(private _dataSvc: DataService) {
 
     this.money = this._dataSvc.playerData.money;
@@ -59,9 +58,7 @@ export class GameToolbarComponent implements OnInit {
       else if(data.gotJob)
         this.hasJob = true;
 
-      this.playerIndex = this._dataSvc.assignedCharIndex;
-
-      if(data.gotTransit || data.gotJob) {
+     if(data.gotTransit || data.gotJob) {
         
         if(data.gotJob && document.getElementById('job-cheevo') !== undefined)
           document.getElementById('job-cheevo').classList.add('show');
