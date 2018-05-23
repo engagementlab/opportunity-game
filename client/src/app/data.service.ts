@@ -386,6 +386,15 @@ export class DataService {
             });
 
         }); 
+        _.each(this.eventData, (thisEvt) => {
+            thisEvt.reward = this.getReward(thisEvt);
+            thisEvt.costs = this.getCosts(thisEvt);
+            // console.log(thisEvt.costs)
+            thisEvt.locked = _.some(thisEvt.costs, (evt) => {
+                                  return evt['has'] !== undefined && evt['has'] === false;
+                                });
+        });
+
 
         this.isLoading.next(false);
 
@@ -414,7 +423,7 @@ export class DataService {
 
     }
 
-    private getReward(opportunity: Opportunity) {
+    private getReward(opportunity: any) {
 
         let rewardToShow = {icon: 'none', iconDetail: 'none', badges: []};
 
@@ -450,7 +459,7 @@ export class DataService {
 
     }
 
-    private getCosts(opportunity: Opportunity) {
+    private getCosts(opportunity: any) {
 
         let costs = [];
 

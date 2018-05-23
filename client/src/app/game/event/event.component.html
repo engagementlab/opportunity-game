@@ -1,42 +1,37 @@
 <div class="game-event col-5 vert-center medium inner-modal hidden" id="{{data._id}}">
 
-	<h2 *ngIf="type === 'effect'" [class.small]="buttons === false">Opportunity Event</h2>
-	<h2 *ngIf="type === 'life'">Life Event</h2>
+	<h2 *ngIf="data.type === 'effect'" class="small">Opportunity: {{data.name}}</h2>
+	<h2 *ngIf="data.type === 'life'">Life Event</h2>
 
-	<b>{{data.flavor}}</b>
+	<div>
+		<span class="bold">{{data.flavor}}</span>
+	</div>
 
-	<div class="items row">
-		<div class="{{item.icon}} {{item.type}} col-1 col-centered" *ngFor="let item of getCostsAndRewards()">
-
-			<span *ngIf="item.type === 'cost'">
-				{{item.amt}}
-			</span>
-			<span *ngIf="item.type === 'reward'">
-				
-			</span>
-
+	<div class="reward col-2 col-centered no-pad">
+		<div class="icon">
+			<cdn-image cloudinaryId="opportunity-game/icons/{{data.reward?.icon}}.svg" alt="Icon for Reward"></cdn-image>
 		</div>
 	</div>
 
-	<div *ngIf="buttons === true || type === 'life'" class="row">
-		<app-button label="Yes" ariaLabel="Click/tap to accept this offer" clickData="true" (clickEvent)="selectYes(data._id)" class="green col-centered col-3"></app-button>
-		<app-button label="No" ariaLabel="Click/tap to deny this offer" clickData="true" (clickEvent)="selectNo(data._id)" class="orange col-centered col-3"></app-button>
-	</div>
-
-<!-- 
 	<div class="footer">
-			This opportunity costs 
-			<span *ngIf="opportunity.actionCost > 0 && opportunity.moneyCost <= 0">{{opportunity.actionCost}} actions.</span>
-			<span *ngIf="opportunity.moneyCost > 0 && opportunity.actionCost <= 0">{{opportunity.moneyCost}} money.</span>
-			<span *ngIf="opportunity.moneyCost > 0 && opportunity.actionCost > 0">{{opportunity.actionCost}} actions & {{opportunity.moneyCost}} money.</span>
-			<span class="bold" *ngIf="opportunity.locked === true"><br/>You don't have the requirements to learn more!</span>
+		<div class="bold medium" *ngIf="data.costs.length > 0">YOU NEED AT LEAST:</div> 
+		<div class="costs row col-5 auto">
+			<div *ngFor="let cost of data.costs" class="cost {{cost.icon}} auto">
+				<div *ngIf="cost.amt !== undefined && cost.isLvl === undefined" class="text bold">{{cost.amt}}</div>
+				<div *ngIf="cost.isLvl === true" class="badge text bold">{{cost.amt}}</div>
+			</div>
+		</div>
+		
+		<span class="bold" *ngIf="data.costs.length < 1">This event is free!</span>
+		<span class="bold" *ngIf="data.locked === true"><br/>You don't have the requirements to say yes!</span>
 	</div>
 
-	<div class="row" *ngIf="opportunity.locked === false">
-		<app-button label="Yes" ariaLabel="Click to learn about {{opportunity.name}}" clickData="true" (clickEvent)="selectOpportunity(opportunity, opportunity._id)" class="green col-centered"></app-button>
-		<app-button label="No" ariaLabel="Click to close {{opportunity.name}} window" clickData="true" (clickEvent)="backToList(opportunity._id)" class="orange col-centered"></app-button>
+	<div class="row" *ngIf="data.locked === false">
+		<app-button label="Yes" ariaLabel="Click/tap to learn accept {{data.name}}" clickData="true" (clickEvent)="selectYes(data._id)" class="green large col-centered"></app-button>
+		<app-button label="No" ariaLabel="Click/tap to close {{data.name}} window" clickData="true" (clickEvent)="selectNo(data._id)" class="orange large col-centered"></app-button>
 	</div>
-	<div class="row" *ngIf="opportunity.locked === true">
-		<app-button label="Close" ariaLabel="Click to close {{opportunity.name}} window" clickData="true" (clickEvent)="backToList(opportunity._id)" class="orange col-centered"></app-button>
-	</div> -->
+	<div class="row" *ngIf="data.locked === true">
+		<app-button label="Ok" ariaLabel="Click/tap to close {{data.name}} window" clickData="true" (clickEvent)="selectNo(data._id)" class="orange large col-centered"></app-button>
+	</div>
+
 </div>

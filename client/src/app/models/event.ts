@@ -17,5 +17,7 @@ export interface Event {
 	triggerAmt: number;
 	reward: object;
 	available?: boolean;
+	costs: object[];
+	locked: boolean;
 
 }

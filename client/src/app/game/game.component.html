@@ -3,34 +3,7 @@
 	<router-outlet #o="outlet"></router-outlet>
 
 	<div id="life-events" class="modal events hidden">
-		<div *ngFor="let event of lifeEvents" class="event col-5 auto vert-center medium hidden" id="event_{{event._id}}">
-			<div>
-				<span class="bold">{{event.flavor | cleanString}}</span>
-			</div>
-
-			<div class="reward col-2 col-centered no-pad">
-				<div class="icon">
-					<cdn-image cloudinaryId="opportunity-game/icons/{{event.reward?.icon}}.svg" alt="Icon for Reward"></cdn-image>
-				</div>
-			</div>
-
-			<div class="footer">
-				This event costs 
-				<span *ngIf="event.actionCost > 0 && event.moneyCost <= 0">{{event.actionCost}} actions.</span>
-				<span *ngIf="event.moneyCost > 0 && event.actionCost <= 0">{{event.moneyCost}} money.</span>
-				<span *ngIf="event.moneyCost > 0 && event.actionCost > 0">{{event.actionCost}} actions & {{event.moneyCost}} money.</span>
-				<span class="bold" *ngIf="event.available === false"><br/>You don't have the requirements to say yes!</span>
-			</div>
-
-			<div class="row" *ngIf="event.available === true">
-				<app-button label="Yes" ariaLabel="Click/tap to learn accept {{event.name}}" clickData="true" (clickEvent)="selectYes(event._id)" class="green large col-centered"></app-button>
-				<app-button label="No" ariaLabel="Click/tap to close {{event.name}} window" clickData="true" (clickEvent)="selectNo(event._id)" class="orange large col-centered"></app-button>
-			</div>
-			<div class="row" *ngIf="event.available == false">
-				<app-button label="Ok" ariaLabel="Click/tap to close {{event.name}} window" clickData="true" (clickEvent)="selectNo(event._id)" class="orange large col-centered"></app-button>
-			</div>
-
-		</div>
+		<game-event [data]="event" type="effect" class="event" *ngFor="let event of lifeEvents"></game-event>
 	</div>
 
 </div>
@@ -149,14 +122,7 @@
 
 </div>
 
-<!-- LIFE EVENTS -->
-<!-- <div id="life-events" class="modal hide">
-	<div *ngFor="" id="{{event._id}}" class="hide">
-		<game-event [data]="event" [type]="life" [buttons]="true"></game-event>
-	</div>
-</div> -->
-
 <!-- EFFECT EVENTS -->
 <div id="effect-events" class="col-6 full-screen hidden">
-	<game-event [data]="event" [buttons]="true" type="effect" class="event" *ngFor="let event of effectEvents"></game-event>
+	<game-event [data]="event" type="effect" class="event" *ngFor="let event of effectEvents"></game-event>
 </div>

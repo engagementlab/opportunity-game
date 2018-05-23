@@ -19,6 +19,64 @@
 		}
 	}
 
+	.footer {
+		font-size: small;
+    text-align: center;
+    width: 100%;
+	}
+
+	.cost {
+		display: block;
+		min-width: 50px;
+		min-height: 45px;
+		text-align: right;
+		background-repeat: no-repeat;
+
+		&.money {
+			background-image: cdn-image('icons/money', c_scale, w_55);
+		}
+		&.action {
+			background-image: cdn-image('icons/action', c_scale, w_55)
+		}
+		&.community {
+			background-image: cdn-image('icons/community', c_scale, w_55);
+		}
+		&.english {
+			background-image: cdn-image('icons/english', c_scale, w_55);
+		}
+		&.training {
+			background-image: cdn-image('icons/training-color', c_scale, w_55);
+		}
+		&.job {
+			background-image: cdn-image('icons/job', c_scale, w_55);
+		}
+		&.transit {
+			background-image: cdn-image('icons/transit', c_scale, w_55);
+		}
+
+		.text {
+			vertical-align: top;
+	    display: inline-flex;
+	    padding-top: 5%;
+	    margin-left: -18%;
+	    font-size: xx-large;
+		}
+		.badge {
+			width: 15px;
+			height: 15px;
+			float: none;
+			padding-right: 0;
+		  background-color: $gold;
+		  border-radius: 50%;
+		  font-size: x-small;;
+	    text-align: center;
+	    display: block;
+	    left: 75%;
+		}
+	}
+	::ng-deep .app-button {
+		padding: 20%;
+	}
 }
 
 .items {

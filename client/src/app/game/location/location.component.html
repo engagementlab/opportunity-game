@@ -89,15 +89,15 @@
 					</div>
 
 					<div class="footer">
-							<div class="bold medium">YOU NEED AT LEAST:</div> 
+							<div class="bold medium" *ngIf="opportunity.costs.length > 0">YOU NEED AT LEAST:</div> 
 							<div class="costs row col-5 auto" *ngIf="opportunity.enabled === undefined">
 								<div *ngFor="let cost of opportunity.costs" class="cost {{cost.icon}} auto">
-									<!-- <cdn-image cloudinaryId="opportunity-game/icons/{{cost.icon}}.svg" alt="Icon for {{cost.icon}}" width="48"></cdn-image> -->
 									<div *ngIf="cost.amt !== undefined && cost.isLvl === undefined" class="text bold">{{cost.amt}}</div>
 									<div *ngIf="cost.isLvl === true" class="badge text bold">{{cost.amt}}</div>
 								</div>
 							</div>
 							
+							<span class="bold" *ngIf="opportunity.costs.length < 1">This opportunity is free!</span>
 							<span class="bold" *ngIf="opportunity.locked === true"><br/>You don't have the requirements to learn more!</span>
 					</div>
 

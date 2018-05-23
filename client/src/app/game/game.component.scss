@@ -11,6 +11,12 @@
 .event {
 	text-align: center;
   font-size: large;
+  &.life {
+  	
+		background: white;
+		min-height: 250px;
+		@include box-shadow(4px, 4px, 0, #000000);
+  }
 }
 
 .hide {
