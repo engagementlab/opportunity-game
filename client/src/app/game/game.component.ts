@@ -115,7 +115,7 @@ export class GameComponent implements OnInit {
       if(data.newRound) {
         
         this.currentWellnessScore = data.wellnessScore;
-        this.lifeEvents = this._dataSvc.getUpdatedEvents();
+        this.lifeEvents = _.filter(this._dataSvc.getUpdatedEvents(), (e) => {return e.type === 'life'});
         this.wonGame = data.metGoals;
         
         let content = <HTMLElement>document.querySelector('#round-over #content');
@@ -135,11 +135,9 @@ export class GameComponent implements OnInit {
       _.each(events, (event, i) => {
 
         let eventToShow;
-
         eventToShow = document.getElementById(event.id);
         // Only ever show one event at once
-        if(eventToShow === undefined || i > 0) {
-          console.log(eventToShow)
+        if(eventToShow === undefined || eventToShow === null || i > 0) {
           if(eventToShow !== undefined)
             eventToShow.classList.add('queue');
         }
@@ -177,7 +175,7 @@ export class GameComponent implements OnInit {
       this.round = this.newRound;
 
       // Dice roll for random event if any left
-      let allEvents = document.querySelectorAll('#life-events .event');
+      let allEvents = document.querySelectorAll('#life-events .game-event');
       if(allEvents.length > 1 && Math.round(Math.random()) == 1) {
         
         let eventIndex = Math.floor(Math.random() * ((allEvents.length-1) - 0 + 1));

@@ -11,6 +11,7 @@ import { TweenLite } from "gsap";
 export class GameEventComponent implements OnInit {
 	
   @Input() data: Event;
+  @Input() type: string;
   
   constructor(private _dataSvc: DataService) { }
 
@@ -22,8 +23,7 @@ export class GameEventComponent implements OnInit {
     let thisEl = document.getElementById(eventId);
       
     // Close events only if others not showing
-    let otherEvents = document.querySelectorAll('#effect-events .game-event.queue');
-    // debugger;
+    let otherEvents = document.querySelectorAll('#' + this.type + '-events .game-event.queue');
     if(otherEvents && otherEvents.length > 0) {
       TweenLite.to(thisEl, 1, {left:'100%', autoAlpha:0, ease:Back.easeIn, onComplete: () => {
         thisEl.remove();
@@ -36,9 +36,9 @@ export class GameEventComponent implements OnInit {
 
     else {
       TweenLite.to(thisEl, 1, {autoAlpha: 0, display:'none', onComplete: () => {
-        thisEl.parentNode.removeChild(thisEl);
+        thisEl.remove();
         this._dataSvc.removeEvent(eventId);
-        TweenLite.to(document.getElementById('effect-events'), 1, {autoAlpha: 0, display:'none'});
+        TweenLite.to(document.getElementById(this.type + '-events'), 1, {autoAlpha: 0, display:'none'});
       }});
     }
 
