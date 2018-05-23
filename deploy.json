@@ -33,7 +33,7 @@
       "user": "node",
       "host": "104.236.109.221",
       "repo": "git@github.com:engagementgamelab/opportunity-game.git",
-      "ref": "origin/master",
+      "ref": "origin/production",
       "path": "/srv/opportunity-game",
       "pre-deploy-local" : "echo 'NPM linking opportunity-game and restarting app.';",
       "post-deploy": "cd client ; nvm use ; npm i ; npm run build ; pm2 restart 'opportunity-game-client' ; cd ../server ; nvm use ; npm i ; pm2 restart 'opportunity-game-server'"
