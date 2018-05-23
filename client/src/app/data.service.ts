@@ -119,19 +119,20 @@ export class DataService {
         // Trigger duration effects or delayed rewards? (if actions being removed)
         if(opportunity.actionCost > 0)
         { 
-            for(let i = 0; i < this.durationEffectQueue.length; i++) {
+            let i = 0;
+            let effectsToRemove = [];
+            while(i < this.durationEffectQueue.length) {
                 let effect = this.durationEffectQueue[i];
     
                 if(effect.trigger === DurationEffectTrigger.actions) {
-                    effect.triggerCount -= opportunity.actionCost;
-                    
-                    if(effect.triggerCount <= effect.triggerWait) {
-                        this.effectTrigger.emit(effect.id);
-    
-                        this.durationEffectQueue.splice(i, 1);
-                        break;
+                    effect.triggerCount += opportunity.actionCost;
+
+                    if(effect.triggerCount >= effect.triggerWait) {
+                        effectsToRemove.push(effect);
                     }
                 }
+
+                i++;
             }
 
             let e = 0;
@@ -160,6 +161,10 @@ export class DataService {
                 e++;
             
             }
+
+            // Remove used effects
+            this.effectTrigger.emit(effectsToRemove);
+            this.durationEffectQueue = _.difference(this.durationEffectQueue, effectsToRemove);
         }
 
         // Reward now or later?
@@ -307,13 +312,18 @@ export class DataService {
 
     public showPayday() {
 
-        this.paydayTrigger.emit();
+        // Only if player has job
+        if(this.playerData.hasJob === true)
+            this.paydayTrigger.emit();
 
     }
 
     private endRound() {
 
-        this.playerData.money += environment.dev ? 20 : 5;
+        // Only if player has job
+        if(this.playerData.hasJob === true)
+            this.playerData.money += environment.dev ? 20 : 5;
+        
         this.playerData.actions += 5;
 
         // DEBUG ONLY

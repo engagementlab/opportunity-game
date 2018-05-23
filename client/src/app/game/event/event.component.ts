@@ -41,15 +41,29 @@ export class GameEventComponent implements OnInit {
 
   removeEvent(eventId: string) {
 
-    let thisEl = document.getElementById(eventId).parentElement;
-    TweenLite.to(thisEl, 1, {autoAlpha: 0, display:'none', oncomplete: () => {
+    let thisEl = document.getElementById(eventId);
       
-      thisEl.parentNode.removeChild(thisEl);
+    // Close events only if others not showing
+    let otherEvents = document.querySelectorAll('#effect-events .game-event.queue');
+    // debugger;
+    if(otherEvents && otherEvents.length > 0) {
+      TweenLite.to(thisEl, 1, {left:'100%', autoAlpha:0, ease:Back.easeIn, onComplete: () => {
+        thisEl.remove();
+        this._dataSvc.removeEvent(eventId);
 
-      TweenLite.to(document.getElementById('effect-events'), 1, {autoAlpha: 0, display:'none'});
-      this._dataSvc.removeEvent(eventId);
+        otherEvents[0].classList.remove('queue');
+        TweenLite.fromTo(otherEvents[0], 1, {left:'-100%', autoAlpha:0}, {left:0, autoAlpha:1, display:'block', ease:Back.easeOut});
+      }});
+    }
 
-    }});
+    else {
+      TweenLite.to(thisEl, 1, {autoAlpha: 0, display:'none', onComplete: () => {
+        thisEl.parentNode.removeChild(thisEl);
+        this._dataSvc.removeEvent(eventId);
+        TweenLite.to(document.getElementById('effect-events'), 1, {autoAlpha: 0, display:'none'});
+      }});
+    }
+
     
   }
 
@@ -57,7 +71,7 @@ export class GameEventComponent implements OnInit {
   selectNo(eventId: string) {
 
     this.removeEvent(eventId);
-    this._dataSvc.removeEvent(eventId);  
+    // this._dataSvc.removeEvent(eventId);  
 
   }
  

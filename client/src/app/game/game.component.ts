@@ -23,6 +23,8 @@ export class GameComponent implements OnInit {
   public lifeEvents: Event[];
   public effectEvents: Event[];
   public character: Character;
+
+  eventsQueue: HTMLElement[] = [];
   
   currentWellnessScore: number;
   lastWellnessScore: number = 0;
@@ -125,17 +127,28 @@ export class GameComponent implements OnInit {
 
     });
 
-    this._dataSvc.effectTrigger.subscribe((eventId: string, type: string) => {
+    this._dataSvc.effectTrigger.subscribe((events: any[]) => {
 
-      let eventToShow;
+      if(!events || events.length < 1) return;
+
       let effectEventSel = document.getElementById('effect-events');
-      eventToShow = document.getElementById(eventId);
+      _.each(events, (event, i) => {
 
-      if(eventToShow === undefined) 
-        return;
-      
-      TweenLite.to(effectEventSel, 1, {autoAlpha: 1, display:'block'});
-      TweenLite.to(eventToShow, 1, {autoAlpha:1, display:'block'});
+        let eventToShow;
+
+        eventToShow = document.getElementById(event.id);
+        // Only ever show one event at once
+        if(eventToShow === undefined || i > 0) {
+          console.log(eventToShow)
+          if(eventToShow !== undefined)
+            eventToShow.classList.add('queue');
+        }
+        else {
+          TweenLite.to(effectEventSel, 1, {autoAlpha: 1, display:'block'});
+          TweenLite.to(eventToShow, 1, {autoAlpha:1, display:'block'});
+        }
+
+      });
 
     });
 
