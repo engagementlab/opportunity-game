@@ -8,8 +8,8 @@
 	</div>
 
 	<div class="reward col-2 col-centered no-pad">
-		<div class="icon">
-			<cdn-image cloudinaryId="opportunity-game/icons/{{data.reward?.icon}}.svg" alt="Icon for Reward"></cdn-image>
+		<div class="icon" *ngIf="data.reward !== undefined">
+			<cdn-image cloudinaryId="opportunity-game/icons/{{data.reward.icon}}.svg" alt="Icon for Reward"></cdn-image>
 		</div>
 	</div>
 
