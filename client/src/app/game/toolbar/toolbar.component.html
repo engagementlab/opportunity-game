@@ -106,11 +106,11 @@
 		<div *ngIf="hasTransit === undefined" class="col-2 medium label no-pad">You don’t have transportation yet!</div>
 		<div *ngIf="hasTransit === true" class="col-2 medium label no-pad">Bus pass</div>
 
-		<div id="transit" [class.disabled]="hasTransit === undefined" class="col-1 icon-lg">
+		<div id="transit" [class.disabled]="hasJob === undefined" class="col-1 icon-lg">
 			<cdn-image cloudinaryId="opportunity-game/toolbar/job.svg" alt="Job toolbar icon"></cdn-image>
 		</div>	
-		<div *ngIf="hasTransit === undefined" class="col-2 medium label no-pad">You don’t have a job yet!</div>
-		<div *ngIf="hasTransit === true" class="col-2 medium label no-pad">Part-time Job</div>
+		<div *ngIf="hasJob === undefined" class="col-2 medium label no-pad">You don’t have a job yet!</div>
+		<div *ngIf="hasJob === true" class="col-2 medium label no-pad">Part-time Job</div>
 
 	</div>
 

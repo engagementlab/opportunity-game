@@ -177,7 +177,7 @@ export class GameComponent implements OnInit {
       this.round = this.newRound;
 
       // Dice roll for random event if any left
-      let allEvents = document.querySelectorAll('#life-events .event');
+      let allEvents = document.querySelectorAll('#life-events .game-event');
       if(allEvents.length > 1 && Math.round(Math.random()) == 1) {
         
         let eventIndex = Math.floor(Math.random() * ((allEvents.length-1) - 0 + 1));
