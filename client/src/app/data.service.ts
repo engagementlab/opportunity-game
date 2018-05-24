@@ -322,7 +322,7 @@ export class DataService {
 
         // Only if player has job
         if(this.playerData.hasJob === true)
-            this.playerData.money += environment.dev ? 20 : 5;
+            this.playerData.money += environment.dev ? 20 : 3;
         
         this.playerData.actions += 5;
 
