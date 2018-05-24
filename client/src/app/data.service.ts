@@ -71,7 +71,7 @@ export class DataService {
     public playerData: PlayerData = 
     {
         round: 1,
-        money: (environment.dev === undefined && environment.dev === true) ? 20 : 3,
+        money: (environment.dev === undefined && environment.dev === true) ? 20 : 5,
         actions: 5,
         
         commLevel: 0,
@@ -322,7 +322,7 @@ export class DataService {
 
         // Only if player has job
         if(this.playerData.hasJob === true)
-            this.playerData.money += environment.dev ? 20 : 3;
+            this.playerData.money += environment.dev ? 20 : 5;
         
         this.playerData.actions += 5;
 
