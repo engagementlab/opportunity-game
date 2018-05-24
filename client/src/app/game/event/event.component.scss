@@ -5,7 +5,16 @@
 	font-size: large;
 	text-align: center;
 	margin: 0 auto;
-	
+	@include transition(all, 1s, cubic-bezier(0.600, -0.280, 0.735, 0.045));
+	@include transform(scale(1) translateY(-50%));
+	top: 50%;
+	opacity: 1;
+
+	&.hidden {
+		@include transform(scale(0) translateY(0%));
+		top: 0%;
+		opacity: 0;
+	}
 	&.inner-modal {
 		background: white;
 		min-height: 250px;

@@ -142,8 +142,10 @@ export class GameComponent implements OnInit {
             eventToShow.classList.add('queue');
         }
         else {
-          TweenLite.to(effectEventSel, 1, {autoAlpha: 1, display:'block'});
-          TweenLite.to(eventToShow, 1, {autoAlpha:1, display:'block'});
+          TweenLite.to(effectEventSel, 2, {autoAlpha:1, display:'block'});
+          // TweenLite.fromTo(, 1.5, {autoAlpha:0, delay:2.2}, {autoAlpha:1, display:'block'});
+          eventToShow.style.display = 'block';
+          eventToShow.classList.remove('hidden');
         }
 
       });
