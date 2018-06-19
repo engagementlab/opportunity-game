@@ -1,0 +1,33 @@
+@import "~sass/_variables";
+
+#wellbeing {
+	position: fixed;
+	right: 5%;
+
+	#icon {
+		::ng-deep img {
+			position: relative;
+			height: 10px;
+			top: -4px;
+		}
+	}
+
+	#bar {
+		float: right;
+		display: block;
+		width: 171px;
+		height: 10px;
+		background: black;
+		border: 1px solid black;
+		border-radius: 10px;
+
+		#inner {
+			display: block;
+			width: 100px;
+			height: 8px;
+			background-image: cdn-image('toolbar/wellbeing-fill');
+			background-repeat: repeat-x;
+			@include transition(width, .7s, ease-in);
+		}
+	}
+}

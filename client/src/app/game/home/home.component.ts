@@ -24,7 +24,7 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
       {key: 'community', label: 'Community'},
       {key: 'job', label: 'Jobs & Training'},
       {key: 'english', label: 'English Language'},
-      {key: 'health', label: 'Health'}
+      {key: 'health', label: 'Health'},
       {key: 'help', label: 'Help'},
       {key: 'discover', label: 'Discover'}
   ];
