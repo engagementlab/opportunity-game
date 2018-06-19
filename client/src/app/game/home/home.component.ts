@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'
 
 import { DataService } from '../../data.service';
@@ -21,40 +21,34 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
   locations: any[];
   filters: object[] = 
   [
-      {key: 'job', label: 'Jobs & Training'},
       {key: 'community', label: 'Community'},
+      {key: 'job', label: 'Jobs & Training'},
       {key: 'english', label: 'English Language'},
-      {key: 'health_and_help', label: 'Health & Help'}
+      {key: 'health', label: 'Health'}
+      {key: 'help', label: 'Help'},
+      {key: 'discover', label: 'Discover'}
   ];
   loadCategory: boolean;
   loadedCategory: boolean;
-
-  commLevel: number;
-  jobLevel: number;
-  englishLevel: number;
-  assignedGoal: Goal;
+  @ViewChild('map') mapContainer: ElementRef;
 
   canDeactivate() {
     return !this.loaded;
   }
 
   constructor(private route: ActivatedRoute, private router: Router, private _dataSvc: DataService) {
-
-    this.commLevel = this._dataSvc.playerData.commLevel;
-    this.jobLevel = this._dataSvc.playerData.jobLevel;
-    this.englishLevel = this._dataSvc.playerData.englishLevel;
-
   }
 
   ngOnInit() {
+
+    // Cross-browser horsegarbage
+    window.setTimeout(() => {
+      let pageY: number = this.mapContainer.nativeElement.offsetHeight;
+      this.mapContainer.nativeElement.scrollTop = pageY;
+    }, 2000);
     
     this._dataSvc.playerDataUpdate.subscribe((data: PlayerData) => {
 
-      this.commLevel = data.commLevel;
-      this.jobLevel = data.jobLevel;
-      this.englishLevel = data.englishLevel;
-      
-      this.assignedGoal = this._dataSvc.assignedGoal;
       this.character = this._dataSvc.assignedChar;
   
     });

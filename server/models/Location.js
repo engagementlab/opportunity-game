@@ -45,7 +45,9 @@ Location.add({
             "Community": {type: Types.Boolean},
             "Job": {type: Types.Boolean},
             "English": {type: Types.Boolean},
-            "Health and Help": {type: Types.Boolean},
+            "Health": {type: Types.Boolean},
+            "Help": {type: Types.Boolean},
+            "Discover": {type: Types.Boolean}
         },
   opportunities: {
       type: Types.Relationship,

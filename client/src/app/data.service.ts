@@ -366,7 +366,8 @@ export class DataService {
         this.assignedGoal = this.goalData[0];
         this.assignedChar = this.characterData[0];
 
-        this.isLoading.next(false);
+        this.isLoading.next(false);        
+        // this.playerDataUpdate.emit(this.playerData);
 
     }
 

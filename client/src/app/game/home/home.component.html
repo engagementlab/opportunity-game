@@ -1,52 +1,37 @@
 <div id="home">
 
-	<div id="house" class="row-lg">
+	<div #map id="filters" class="row auto">
+	
+		<div *ngFor="let filter of filters" class="filter btn" (click)="filterSelection(filter.key)">
+			<!-- <div class="content vert-center"> -->
+				<cdn-image cloudinaryId="opportunity-game/home/{{filter.key}}.svg" width="1000" alt="Image for {{filter.label}} filter"></cdn-image>
+				<!-- <div class="label bold">{{filter.label}}</div> -->
+			<!-- </div> -->
+		</div>
 
-		<div class="col-12 col-lg-8 auto row">
+		<div id="house" class="row-lg">
 
-			<div class="col-4 auto row">
-				<div id="house-bubble" class="bubble">
-						<span class="round1">Explore locations in Portland to reach your goals.</span>
-						<span class="round2">Leveling up skills will unlock more opportunities!</span>
-						<span class="round3">Having a job and transportation will unlock more opportunities.</span>
-						<span class="round4">Keep exploring to reach your goals!</span>
-				</div>
-			</div>
-			<div class="row auto">
-				<div class="col-3">
+			<div class="col-12 col-lg-8 auto row">
+				<div class="col-2">
 					<div class="vert-center">
 						<cdn-image *ngIf="character !== undefined" cloudinaryId="opportunity-game/characters/char-{{character?.image}}-home.svg" width="350" alt="Icon for Home"></cdn-image>
 					</div>
 				</div>
-				<div id="goals" class="no-margin medium bold col-3 auto">
-					<div class="goal">
-						<cdn-image cloudinaryId="opportunity-game/icons/community.svg" width="40" alt="Community level-up icon"></cdn-image>
-						<span>{{commLevel}} <span class="of">of</span> <span class="goal-end">{{assignedGoal?.commGoal}}</span></span>
-					</div>
-					<div class="goal">
-						<cdn-image cloudinaryId="opportunity-game/icons/training-color.svg" width="40" alt="Job level-up icon"></cdn-image>
-						<span>{{jobLevel}} <span class="of">of</span> <span class="goal-end">{{assignedGoal?.jobGoal}}</span></span>
-					</div>
-					<div class="goal">
-						<cdn-image cloudinaryId="opportunity-game/icons/english.svg" width="40" alt="English level-up icon"></cdn-image>
-						<span>{{englishLevel}} <span class="of">of</span> <span class="goal-end">{{assignedGoal?.englishGoal}}</span></span>
+		
+				<div class="col-4">
+					<div id="house-bubble" class="bubble">
+						<span class="round1">Select a category to view its locations. If you are not sure where to start, try DISCOVER.</span>
+						<span class="round2">Leveling up skills will unlock more opportunities!</span>
+						<span class="round3">Having a job and transportation will unlock more opportunities.</span>
+						<span class="round4">Keep exploring to reach your goals!</span>
 					</div>
 				</div>
-			</div>
-		</div>		
+			</div>	
 
-	</div>
-
-		<div id="filters" class="row col-12 col-lg-8 auto">
-		
-			<div *ngFor="let filter of filters" class="col-3 col-centered filter btn" (click)="filterSelection(filter.key)">
-				<div class="content vert-center">
-					<cdn-image cloudinaryId="opportunity-game/icons/home-{{filter.key}}.svg" width="150" alt="Icon for {{filter.label}} filter"></cdn-image>
-					<div class="label bold">{{filter.label}}</div>
-				</div>
-			</div>
-		
 		</div>
+
+	
+	</div>
 
 </div>
 
