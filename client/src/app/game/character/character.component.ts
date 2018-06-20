@@ -18,6 +18,7 @@ export class GameCharacterComponent implements OnInit {
 
 	categoryData = new Map<string, HTMLInputElement>();
   showBtn: boolean;
+  wellbeingGoal: number;
 
   constructor(private _dataSvc: DataService) {
 
@@ -100,6 +101,7 @@ export class GameCharacterComponent implements OnInit {
   assignCharacter() {
 
     let assignedIndex = (Math.floor(Math.random() * (3 - 0 + 1)) + 0);
+    this.wellnessGoal = this._dataSvc.playerData.wellnessGoal;
 
     // Find goal for player matching at least two of their rankings
     this.goals.forEach((goal) => {

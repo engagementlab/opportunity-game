@@ -117,7 +117,7 @@ export class DataService {
 
         this.playerData.money -= opportunity.moneyCost;
         this.playerData.actions -= opportunity.actionCost;
-        this.playerData.wellnessScore += 5;
+        this.playerData.wellnessScore = this.calcWellness();
 
         // Trigger duration effects or delayed rewards? (if actions being removed)
         if(opportunity.actionCost > 0)
