@@ -18,6 +18,7 @@ export interface Event {
 	reward: object;
 	available?: boolean;
 	costs: object[];
+	reqs: object[];
 	locked: boolean;
 
 }
