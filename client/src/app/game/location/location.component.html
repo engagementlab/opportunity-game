@@ -1,7 +1,7 @@
 <div class="location {{currentLocation?.image}}">
 	
-	<div id="back" routerLink="/game/home" class="btn">
-		<cdn-image cloudinaryId="opportunity-game/icons/home.svg" width="50" alt="Back to Home"></cdn-image>
+	<div id="back" (click)="backToCategory()" class="btn">
+		<cdn-image cloudinaryId="opportunity-game/icons/back.svg" width="50" alt="Back to Category"></cdn-image>
 	</div>
 
 	 	<div id="list" class="col-6">
@@ -29,6 +29,9 @@
 					<div class="{{cost.icon}} cost col-1" [class.notenough]="cost.has !== undefined && !cost.has" *ngFor="let cost of opportunity.costs">
 						<span *ngIf="cost.amt !== undefined">{{cost.amt}}</span>
 					</div>
+					<div class="{{cost.icon}} cost col-1" [class.notenough]="cost.has !== undefined && !cost.has" *ngFor="let cost of opportunity.reqs">
+						<span *ngIf="cost.amt !== undefined">{{cost.amt}}</span>
+					</div>
 				</div>
 				<div class="costs used row col-6" *ngIf="opportunity.enabled === false">
 					<div>You have already used this opportunity.</div>
@@ -40,45 +43,13 @@
 		<div id="details" class="modal hidden">
 			<div *ngFor="let opportunity of currentLocation?.opportunities" class="opportunity col-5 col-centered vert-center medium hidden" id="detail_{{opportunity._id}}">
 					<div>
-							Would you like to <span class="bold">{{opportunity.name | cleanString}}</span>?
+						<span class="bold">{{opportunity.name | cleanString}}</span>
 					</div>
-					<div class="row">
-						<!-- <div class="stars col-1 col-centered">
-							<div *ngFor="let i of opportunity.stars" class="star nudge{{i.nudge}}">
-								<cdn-image cloudinaryId="opportunity-game/icons/star-{{i.index}}.svg" alt="Icon for Job reward"></cdn-image>
-							</div>
-						</div> -->
-
-						<div class="stars">
-							<svg viewBox="0 0 308 156" width="308" height="156">
-								  <g fill="none" fill-rule="evenodd" transform="matrix(0.9999999999999999, 0, 0, 0.9999999999999999, 0, -7.105427357601002e-15)">
-								    <path stroke="#DDA812" stroke-width="3" d="M 203.131 95.782 L 212.131 104.782 M 212.131 95.782 L 203.131 104.782 M 239.131 111.782 L 248.131 120.782 M 248.131 111.782 L 239.131 120.782"></path>
-								    <path fill="#DDA812" d="M 243.131 92.36 C 243.131 79.728 236.815 73.413 224.183 73.413 C 236.815 73.413 243.131 67.096 243.131 54.464 C 243.131 67.096 249.446 73.414 262.078 73.414 C 249.446 73.414 243.131 79.728 243.131 92.36"></path>
-								    <path stroke="#DDA812" stroke-width="3" d="M 243.131 92.36 C 243.131 79.728 236.815 73.413 224.183 73.413 C 236.815 73.413 243.131 67.096 243.131 54.464 C 243.131 67.096 249.446 73.414 262.078 73.414 C 249.446 73.414 243.131 79.728 243.131 92.36 Z"></path>
-								    <g transform="matrix(1, 0, 0, 1, 207.01767, 128.780991)">
-								      <mask id="b" fill="#fff">
-								        <path id="" d="M.165.684h24.316V25H.165z" transform="matrix(1, 0, 0, 1, 0, 0)"></path>
-								      </mask>
-								      <path fill="#DDA812" d="M12.323 25c0-8.105-4.053-12.158-12.158-12.158 8.105 0 12.158-4.053 12.158-12.158 0 8.105 4.053 12.158 12.158 12.158-8.105 0-12.158 4.053-12.158 12.158" mask="url(#b)"></path>
-								    </g>
-								    <g transform="matrix(1, 0, 0, 1, 207.01767, 128.780991)">
-								      <mask id="d" fill="#fff">
-								        <path id="" d="M.165.684h24.316V25H.165z" transform="matrix(1, 0, 0, 1, 0, 0)"></path>
-								      </mask>
-								      <path stroke="#DDA812" stroke-width="3" d="M12.323 25c0-8.105-4.053-12.158-12.158-12.158 8.105 0 12.158-4.053 12.158-12.158 0 8.105 4.053 12.158 12.158 12.158-8.105 0-12.158 4.053-12.158 12.158z" mask="url(#d)"></path>
-								    </g>
-								    <path stroke="#DDA812" stroke-width="3" d="M 49.326 53.465 L 40.326 44.465 M 40.326 53.465 L 49.326 44.465"></path>
-								    <path fill="#DDA812" d="M 77.326 57.886 C 77.326 70.518 83.643 76.833 96.275 76.833 C 83.643 76.833 77.327 83.15 77.327 95.782 C 77.327 83.15 71.011 76.832 58.379 76.832 C 71.011 76.832 77.327 70.518 77.327 57.886"></path>
-								    <path stroke="#DDA812" stroke-width="3" d="M 77.326 57.886 C 77.326 70.518 83.643 76.833 96.275 76.833 C 83.643 76.833 77.327 83.15 77.327 95.782 C 77.327 83.15 71.011 76.832 58.379 76.832 C 71.011 76.832 77.327 70.518 77.327 57.886 Z"></path>
-								    <path fill="#DDA812" d="M 67.116 3.465 C 67.116 11.57 71.169 15.623 79.274 15.623 C 71.169 15.623 67.116 19.676 67.116 27.781 C 67.116 19.676 63.063 15.623 54.958 15.623 C 63.063 15.622 67.116 11.57 67.116 3.465"></path>
-								    <path stroke="#DDA812" stroke-width="3" d="M 67.116 3.465 C 67.116 11.57 71.169 15.623 79.274 15.623 C 71.169 15.623 67.116 19.676 67.116 27.781 C 67.116 19.676 63.063 15.623 54.958 15.623 C 63.063 15.622 67.116 11.57 67.116 3.465 Z"></path>
-								  </g>
-								</svg>
-						</div>
+					<div class="row reward-bg">
 						<!-- Reward -->
 						<div class="reward col-2 col-centered no-pad">
-							<div class="badge" *ngFor="let badge of opportunity.reward.badges">
-								<cdn-image cloudinaryId="opportunity-game/icons/{{badge}}.svg" width="25" alt="Icon for Badge"></cdn-image>
+							<div class="badge" *ngIf="opportunity.triggerAmt > 0">
+								<cdn-image cloudinaryId="opportunity-game/icons/gold_clock.svg" width="25" alt="Icon for Delay"></cdn-image>
 							</div>
 							<div class="icon">
 								<cdn-image cloudinaryId="opportunity-game/icons/{{opportunity.reward.icon}}.svg" alt="Icon for Reward"></cdn-image>
@@ -87,13 +58,28 @@
 						</div>
 						
 					</div>
+					<div class="delay bold" *ngIf="opportunity.triggerAmt > 0">
+						This takes {{opportunity.triggerAmt}} Actions to complete
+					</div>
 
 					<div class="footer">
-							<div class="bold medium" *ngIf="opportunity.costs.length > 0">YOU NEED AT LEAST:</div> 
-							<div class="costs row col-5 auto" *ngIf="opportunity.enabled === undefined">
-								<div *ngFor="let cost of opportunity.costs" class="cost {{cost.icon}} auto">
-									<div *ngIf="cost.amt !== undefined && cost.isLvl === undefined" class="text bold">{{cost.amt}}</div>
-									<div *ngIf="cost.isLvl === true" class="badge text bold">{{cost.amt}}</div>
+							<!-- costs -->
+							<div class="costs auto" *ngIf="opportunity.costs.length > 0">
+								<div class="bold medium" *ngIf="opportunity.costs.length > 0">COST</div> 
+								<div class="auto" *ngIf="opportunity.enabled === undefined">
+									<div *ngFor="let cost of opportunity.costs" class="cost {{cost.icon}} auto">
+										<div *ngIf="cost.amt !== undefined && cost.isLvl === undefined" class="text bold">{{cost.amt}}</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- requirements -->
+							<div class="reqs auto">
+								<div class="bold medium" *ngIf="opportunity.reqs.length > 0">REQUIRED</div> 
+								<div class="auto" *ngIf="opportunity.enabled === undefined">
+									<div *ngFor="let cost of opportunity.reqs" class="cost {{cost.icon}} auto">
+										<div *ngIf="cost.isLvl === true" class="badge text bold">{{cost.amt}}</div>
+									</div>
 								</div>
 							</div>
 							
@@ -101,11 +87,11 @@
 							<span class="bold" *ngIf="opportunity.locked === true"><br/>You don't have the requirements to learn more!</span>
 					</div>
 
-					<div class="row" *ngIf="opportunity.locked === false">
+					<div class="row buttons" *ngIf="opportunity.locked === false">
 						<app-button label="Yes" ariaLabel="Click to learn about {{opportunity.name}}" clickData="true" (clickEvent)="selectOpportunity(opportunity, opportunity._id)" class="green col-centered"></app-button>
 						<app-button label="No" ariaLabel="Click to close {{opportunity.name}} window" clickData="true" (clickEvent)="backToList(opportunity._id)" class="orange col-centered"></app-button>
 					</div>
-					<div class="row" *ngIf="opportunity.locked === true">
+					<div class="row buttons" *ngIf="opportunity.locked === true">
 						<app-button label="Close" ariaLabel="Click to close {{opportunity.name}} window" clickData="true" (clickEvent)="backToList(opportunity._id)" class="orange col-centered"></app-button>
 					</div>
 

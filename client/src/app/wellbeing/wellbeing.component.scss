@@ -1,11 +1,14 @@
 @import "~sass/_variables";
 
 #wellbeing {
-	position: fixed;
-	right: 5%;
+
+	position: absolute;
+	z-index: 20;
+	left: 51vw;
 
 	#icon {
 		::ng-deep img {
+			// float: left;
 			position: relative;
 			height: 10px;
 			top: -4px;
@@ -21,10 +24,17 @@
 		border: 1px solid black;
 		border-radius: 10px;
 
+		@include mobile-only {
+			width: 158px;
+		}
+		@include mq($until: 320px) {
+			width: 139px;
+		}
+
 		#inner {
 			display: block;
-			width: 100px;
 			height: 8px;
+			width: 0px;
 			background-image: cdn-image('toolbar/wellbeing-fill');
 			background-repeat: repeat-x;
 			@include transition(width, .7s, ease-in);

@@ -14,6 +14,7 @@ export interface PlayerData {
   hasJob?: boolean;
   
   wellnessScore?: number;
+  wellnessGoal?: number;
   
   // Internal flags
   newRound?: boolean;

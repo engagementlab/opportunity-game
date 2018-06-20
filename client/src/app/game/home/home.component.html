@@ -1,14 +1,9 @@
-<app-wellbeing></app-wellbeing> 
-
 <div id="home">
 
 	<div #map id="filters" class="row auto">
 	
 		<div *ngFor="let filter of filters" class="filter btn" (click)="filterSelection(filter.key)">
-			<!-- <div class="content vert-center"> -->
-				<cdn-image cloudinaryId="opportunity-game/home/{{filter.key}}.svg" width="1000" alt="Image for {{filter.label}} filter"></cdn-image>
-				<!-- <div class="label bold">{{filter.label}}</div> -->
-			<!-- </div> -->
+			<cdn-image cloudinaryId="opportunity-game/home/{{filter.key}}.svg" width="1000" alt="Image for {{filter.label}} filter"></cdn-image>
 		</div>
 
 		<div id="house" class="row-lg">

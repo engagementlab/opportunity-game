@@ -11,7 +11,8 @@ const keystone = require('keystone'),
       mongoose = keystone.get('mongoose'),
       Bluebird = require('bluebird'),
       Location = keystone.list('Location'),
-      Event = keystone.list('Event');
+      Event = keystone.list('Event'),
+      GameConfig = keystone.list('GameConfig');
 
 mongoose.Promise = require('bluebird');
 
@@ -21,10 +22,12 @@ var buildData = (params, res) => {
                     .populate('opportunities')
                     .exec();
     let events = Event.model.find({}).exec();
+    let config = GameConfig.model.findOne({}).exec();
 
     Bluebird.props({
         locationData: locations,
-        eventData: events
+        eventData: events,
+        configData: config
     })
     .then(results => {
         let arrResponseLocations = [];
@@ -43,7 +46,7 @@ var buildData = (params, res) => {
             }
         );
 
-        return res.status(200).json({status: 200, data: {locations: arrResponseLocations, events: results.eventData}});
+        return res.status(200).json({status: 200, data: {locations: arrResponseLocations, events: results.eventData, config: results.configData}});
 
     }).catch(err => {
         console.log(err);

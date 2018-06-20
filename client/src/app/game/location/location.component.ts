@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 import { DataService } from '../../data.service';
 
@@ -28,7 +29,7 @@ export class GameLocationComponent implements OnInit {
   public hasTransit: boolean;
   public hasJob: boolean;
 	
-  constructor(private route: ActivatedRoute, private router: Router, private _dataSvc: DataService) {
+  constructor(private route: ActivatedRoute, private router: Router, private location: Location, private _dataSvc: DataService) {
 
     this.money = this._dataSvc.playerData.money;
     this.actions = this._dataSvc.playerData.actions;
@@ -111,6 +112,12 @@ export class GameLocationComponent implements OnInit {
       TweenLite.to(document.getElementById('details'), .5, {autoAlpha:0, display:'none'});
     
     }});
+
+  }
+
+  backToCategory() {
+    
+    this.location.back();
 
   }
 

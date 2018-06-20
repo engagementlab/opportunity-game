@@ -90,6 +90,7 @@
 	}
 	.name {
 		text-align: left;
+		width: 70%;
 	}
 	.costs {
 		bottom: 7%;
@@ -140,7 +141,7 @@
 		.training {
 			background-image: cdn-image('icons/training-clear', c_scale, w_15);
 			&.notenough {
-				background-image: cdn-image('icons/training-locked', c_scale, w_15);
+				background-image: cdn-image('icons/training-clear', c_scale, w_40, o_40, f_auto);
 			}
 		}
 		.job {
@@ -225,6 +226,9 @@
 			}
 		}
 	}
+	.delay {
+		font-size: x-small;
+	}
 }
 
 .opportunity {
@@ -238,7 +242,31 @@
 	.footer {
 		font-size: small;
     text-align: center;
+    margin: 0;
     width: 100%;
+    padding-top: 5%;
+    .costs {
+  		float: left;
+    	width: 50%;
+    }
+    .reqs {
+    	float: left;
+    	width: 50%;
+    }
+  	.cost {
+  		float: left;
+  	}
+	}
+
+	.buttons {
+		width: 100%;
+	}
+
+	.reward-bg {
+		background-image: cdn-image('stars', c_scale, w_55);
+		background-size: 73%;
+    background-repeat: no-repeat;
+    background-position: center;
 	}
 
 	.reward {

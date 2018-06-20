@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewChecked, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'
 
 import { DataService } from '../../data.service';
@@ -78,12 +78,11 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
 
     });
 
-    // DEBUG: If no goal, get data and assign one
-    if(this.assignedGoal === undefined) {
+    // DEBUG: If no character, get data and assign one
+    if(this.character === undefined) {
       this._dataSvc.getCharacterData().subscribe(response => {
         
         // Default 
-        this.assignedGoal = this._dataSvc.assignedGoal;
         this.character = this._dataSvc.assignedChar;
 
       });
