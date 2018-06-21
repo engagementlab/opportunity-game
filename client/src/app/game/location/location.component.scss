@@ -58,20 +58,6 @@
 	}
 }
 
-.badge {
-	position: relative;
-	display: inline-block;
-	width: 25px;
-	top: 30px;
-  padding-right: 30px;
-  z-index: 1;
-  float: left;
-  left: 9%;
-	::ng-deep img {
-		width: 25px;
-	}
-}
-
 #list {
 	overflow: scroll;
 	padding-bottom: 5%;
@@ -100,67 +86,74 @@
 			font-size: x-small;
 		}
 		.cost {
+			padding: 0;
 			height: 40px;
 			background-repeat: no-repeat;
+			
+			&:nth-child(n+2) {
+				margin-left: 1%;
+			}
+
 			&.notenough {
 				color: #999;
 			}
-		}
-		.money {
-			background-image: cdn-image('icons/money-cost', c_scale, w_15);
 			span {
-				padding-left: 5%;
-		    display: flex;
+				font-size: x-large;
+				position: absolute;
+				right: 0;
+				top: 15%;
 			}
-			&.notenough {
-				background-image: cdn-image('icons/cost-locked', c_scale, w_15);
+			&.money {
+				background-image: cdn-image('icons/money', c_scale, w_15);
+				&.notenough {
+					background-image: cdn-image('icons/cost-locked', c_scale, w_15);
+				}
 			}
-		}
-		.action {
-			background-image: cdn-image('icons/action-cost', c_scale, w_15);
-			span {
-				padding-left: 25%;
-		    display: flex;
+			&.action {
+				background-image: cdn-image('icons/action', c_scale, w_15);
+				
+				&.notenough {
+					background-image: cdn-image('icons/action-cost', c_scale, w_15);
+				}
 			}
-			&.notenough {
-				background-image: cdn-image('icons/action-cost', c_scale, w_15, f_auto, o_50);
+			&.community {
+				background-image: cdn-image('icons/community', c_scale, w_15);
+				&.notenough {
+					background-image: cdn-image('icons/community-clear', c_scale, w_15);
+				}
 			}
-		}
-		.community {
-			background-image: cdn-image('icons/community-clear', c_scale, w_15);
-			&.notenough {
-				background-image: cdn-image('icons/community-locked', c_scale, w_15);
+			&.english {
+				background-image: cdn-image('icons/english', c_scale, w_15);
+				&.notenough {
+					background-image: cdn-image('icons/english-clear', c_scale, w_15);
+				}
 			}
-		}
-		.english {
-			background-image: cdn-image('icons/english-clear', c_scale, w_15);
-			&.notenough {
-				background-image: cdn-image('icons/language-locked', c_scale, w_15);
+			&.training {
+				background-image: cdn-image('icons/training-color', c_scale, w_15);
+				&.notenough {
+					background-image: cdn-image('icons/training-clear', c_scale, w_40);
+				}
 			}
-		}
-		.training {
-			background-image: cdn-image('icons/training-clear', c_scale, w_15);
-			&.notenough {
-				background-image: cdn-image('icons/training-clear', c_scale, w_40, o_40, f_auto);
+			&.job {
+				background-image: cdn-image('icons/job', c_scale, w_15);
+				&.notenough {
+					background-image: cdn-image('icons/job-clear', c_scale, w_15);
+				}
 			}
-		}
-		.job {
-			background-image: cdn-image('icons/job-clear', c_scale, w_15);
-			&.notenough {
-				background-image: cdn-image('icons/job-locked', c_scale, w_15);
-			}
-		}
-		.transit {
-			background-image: cdn-image('icons/transit-clear', c_scale, w_15);
-			&.notenough {
-				background-image: cdn-image('icons/transit-locked', c_scale, w_15);
+			&.transit {
+				background-image: cdn-image('icons/transit', c_scale, w_15);
+				&.notenough {
+					background-image: cdn-image('icons/transit-clear', c_scale, w_15);
+				}
 			}
 		}
 	}
 	.reward {
 		width: 75px;
 		max-height: 80px;
-		float: right;
+		position: absolute;
+		right: 0;
+		bottom: 62%;
   	&:after {
 			position: relative;
   		top: 37%;
@@ -172,6 +165,20 @@
 	    top: 20%;
 	    z-index: 0;
   	}
+
+		.badge {
+			position: relative;
+			width: 25px;
+			top: 52px;
+		  padding-right: 30px;
+		  float: left;
+		  left: 9%;
+
+			::ng-deep img {
+				width: 25px;
+			}
+		}
+
 		::ng-deep img {
 			max-height: 80px;
 		}
@@ -229,6 +236,20 @@
 	.delay {
 		font-size: x-small;
 	}
+	.reward {
+		.badge {
+			position: relative;
+			width: 25px;
+			top: 90px;
+		  padding-right: 30px;
+		  float: left;
+		  left: 9%;
+
+			::ng-deep img {
+				width: 25px;
+			}
+		}
+	}
 }
 
 .opportunity {
@@ -256,6 +277,19 @@
   	.cost {
   		float: left;
   	}
+  	.badge {
+			display: inline-block;
+			position: relative;
+			width: 15px;
+			top: 30px;
+
+		  z-index: 1;
+		  float: left;
+		  left: 9%;
+
+		  background-color: $gold;
+		  border-radius: 50%;
+		}
 	}
 
 	.buttons {
@@ -314,18 +348,6 @@
 	    padding-top: 5%;
 	    margin-left: -18%;
 	    font-size: xx-large;
-		}
-		.badge {
-			width: 15px;
-			height: 15px;
-			float: none;
-			padding-right: 0;
-		  background-color: $gold;
-		  border-radius: 50%;
-		  font-size: x-small;;
-	    text-align: center;
-	    display: block;
-	    left: 75%;
 		}
 	}
 	::ng-deep .app-button {
