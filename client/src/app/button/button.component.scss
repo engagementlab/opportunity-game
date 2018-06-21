@@ -37,6 +37,10 @@ a.btn {
   &.gold {
     background-color: $gold;
   }
+  &.white {
+    background-color: white;
+    padding: 13%;
+  }
   &.green {
     background-color: $hospital-green;
   }

@@ -1,0 +1,83 @@
+<section id="tutorial">
+
+	<div id="screen0" class="col-6 hidden">
+
+		<p id="intro">Mateo has just arrived in Portland and he is ready to discover all the city has to offer!</p>
+
+		<h2>To win the game ...</h2>
+
+		<div class="row">
+			<div class="col-3 no-pad col-centered">
+				<cdn-image cloudinaryId="opportunity-game/icons/wellbeing.svg" width="120" alt="Wellbeing goal icon"></cdn-image>
+			</div>
+			
+			<div class="col-3 no-pad col-centered">
+				<p id="perc">100%</p>
+				<div id="bar">		
+					<div id="inner"></div>
+				</div>
+
+			</div>
+		</div>
+
+		<p>You must help Mateo complete his <span class="orange">wellbeing</span> goal before running out of:</p>
+
+		<div class="row">
+			<div class="col-3 no-pad col-centered">
+				<cdn-image cloudinaryId="opportunity-game/icons/money.svg" width="120" alt="Money icon"></cdn-image>
+				<div>Money</div>
+			</div>
+			<div class="col-3 no-pad col-centered">
+				<cdn-image cloudinaryId="opportunity-game/icons/action.svg" width="120" alt="Action icon"></cdn-image>
+				<div>Actions</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div id="screen1" class="col-6 hidden">
+
+		<p>Mateo would also like to learn three different <span class="gold">skills</span>:</p>
+
+		<div class="row">
+			<div class="col-2 no-pad col-centered">
+				<cdn-image cloudinaryId="opportunity-game/icons/training-color.svg" width="120" alt="Training icon"></cdn-image>
+				<div>Train for<br />a job</div>
+			</div>
+			<div class="col-2 no-pad col-centered">
+				<cdn-image cloudinaryId="opportunity-game/icons/community.svg" width="120" alt="Community icon"></cdn-image>
+				<div>Connect<br />with others</div>
+			</div>
+			<div class="col-2 no-pad col-centered">
+				<cdn-image cloudinaryId="opportunity-game/icons/english.svg" width="120" alt="English icon"></cdn-image>
+				<div>Learn<br />English</div>
+			</div>
+		</div>
+
+		<p id="intro">Advancing these skills will help you discover new opportunities and increase wellbeing.</p>
+
+	</div>
+
+	<div id="screen2" class="col-6 hidden">
+		<p id="intro">One more thing before you go...</p>
+
+		<p>You can make Mateo's journey easier by obtaining:</p>
+
+		<div class="row">
+			<div class="col-3 no-pad col-centered">
+				<cdn-image cloudinaryId="opportunity-game/icons/transit.svg" width="120" alt="Transit icon"></cdn-image>
+				<div>A bus pass</div>
+			</div>
+			<div class="col-3 no-pad col-centered">
+				<cdn-image cloudinaryId="opportunity-game/icons/job.svg" width="120" alt="Job icon"></cdn-image>
+				<div>A job</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="buttons" class="hidden">
+		<app-button id="continue-btn" label="continue" ariaLabel="Click/tap for next screen" clickData="true" (clickEvent)="nextScreen()" class="white col-centered"></app-button>
+		<app-button id="start-btn" label="Begin your Journey" ariaLabel="Click/tap to start" clickData="true" (clickEvent)="close()" class="green hidden col-centered"></app-button>
+	</div>
+	
+</section>

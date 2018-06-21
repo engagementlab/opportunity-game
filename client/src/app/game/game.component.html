@@ -1,5 +1,11 @@
 <app-wellbeing></app-wellbeing> 
 
+<div id="tutorial-parent" class="hidden">
+
+	<game-tutorial></game-tutorial>
+	
+</div>
+
 <div id="game" [@slideAnimation]="getRouterOutletState(o)" class="round-{{round}}">
 	
 	<router-outlet #o="outlet"></router-outlet>
