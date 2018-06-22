@@ -24,8 +24,6 @@ export class WellbeingComponent implements OnInit {
 
     	this.currentWellnessScore = (data.wellnessScore / data.wellnessGoal);
     	this.wellnessFill.style.width = (this.currentWellnessScore * data.wellnessGoal) + "%";
-      console.log(this.currentWellnessScore)
-      console.log(this.currentWellnessScore * data.wellnessGoal)
 
     });
 

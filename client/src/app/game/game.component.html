@@ -16,110 +16,36 @@
 	<game-toolbar></game-toolbar>
 </div>
 
-<div id="round-over" class="col-6 round-{{round}} full-screen hidden">
+<div id="game-over" class="col-6 full-screen hidden">
 	
 	<div id="content">
 	
-		<h1 class="round1 col-xs-2 auto"><cdn-image cloudinaryId="opportunity-game/round1.svg" width="250" autoFormat="false" alt="Round 1 over image"></cdn-image></h1>
-		<h1 class="round2 col-xs-2 auto"><cdn-image cloudinaryId="opportunity-game/round2.svg" width="250" autoFormat="false" alt="Round 2 over image"></cdn-image></h1>
-		<h1 class="round3 col-xs-2 auto"><cdn-image cloudinaryId="opportunity-game/round3.svg" width="250" autoFormat="false" alt="Round 3 over image"></cdn-image></h1>
-		<h1 class="round4 col-xs-2 auto">
-			<cdn-image cloudinaryId="opportunity-game/round4-lost.svg" width="250" autoFormat="false" alt="Round 4 over image" *ngIf="wonGame === false"></cdn-image>
-			<cdn-image cloudinaryId="opportunity-game/round4-won.svg" width="250" autoFormat="false" alt="Round 4 over image" *ngIf="wonGame === true"></cdn-image>
-		</h1>
+		<h1 class="col-xs-2 auto" *ngIf="wonGame === true"><cdn-image cloudinaryId="opportunity-game/game-won.svg" width="350" alt="Game won image"></cdn-image></h1>
+		<h1 class="col-xs-2 auto" *ngIf="wonGame === false"><cdn-image cloudinaryId="opportunity-game/game-lost.svg" width="350" alt="Game lost image"></cdn-image></h1>
+
+		<div class="col-6 auto character" [class.won]="wonGame === true">
+			<cdn-image *ngIf="wonGame === true" cloudinaryId="opportunity-game/characters/{{character?.image}}_win.svg" width="450" alt="Image of happy character"></cdn-image>
+			<cdn-image *ngIf="wonGame === false" cloudinaryId="opportunity-game/characters/{{character?.image}}_lose.svg" width="450" alt="Image of sad character"></cdn-image>
+		</div>
 
 		<div class="row">
-			<div class="col-4 col-md-3 col-xs-2 auto">
-				<div class="stars">
-					<svg viewBox="0 0 308 156" width="308" height="156">
-					  <g fill="none" fill-rule="evenodd" transform="matrix(0.9999999999999999, 0, 0, 0.9999999999999999, 0, 0)">
-					    <path stroke="#DDA812" stroke-width="3" d="M 203.131 95.782 L 212.131 104.782 M 212.131 95.782 L 203.131 104.782 M 239.131 111.782 L 248.131 120.782 M 248.131 111.782 L 239.131 120.782"></path>
-					    <path fill="#DDA812" d="M 243.131 92.36 C 243.131 79.728 236.815 73.413 224.183 73.413 C 236.815 73.413 243.131 67.096 243.131 54.464 C 243.131 67.096 249.446 73.414 262.078 73.414 C 249.446 73.414 243.131 79.728 243.131 92.36"></path>
-					    <path stroke="#DDA812" stroke-width="3" d="M 243.131 92.36 C 243.131 79.728 236.815 73.413 224.183 73.413 C 236.815 73.413 243.131 67.096 243.131 54.464 C 243.131 67.096 249.446 73.414 262.078 73.414 C 249.446 73.414 243.131 79.728 243.131 92.36 Z"></path>
-
-							<g id="left">				    
-					    <g transform="matrix(1, 0, 0, 1, 207.01767, 128.780991)">
-					      <mask id="b" fill="#fff">
-					        <path id="" d="M.165.684h24.316V25H.165z" transform="matrix(1, 0, 0, 1, 0, 0)"></path>
-					      </mask>
-					      <path fill="#DDA812" d="M12.323 25c0-8.105-4.053-12.158-12.158-12.158 8.105 0 12.158-4.053 12.158-12.158 0 8.105 4.053 12.158 12.158 12.158-8.105 0-12.158 4.053-12.158 12.158" mask="url(#b)"></path>
-					    </g>
-					    <g transform="matrix(1, 0, 0, 1, 207.01767, 128.780991)">
-					      <mask id="d" fill="#fff">
-					        <path id="" d="M.165.684h24.316V25H.165z" transform="matrix(1, 0, 0, 1, 0, 0)"></path>
-					      </mask>
-					      <path stroke="#DDA812" stroke-width="3" d="M12.323 25c0-8.105-4.053-12.158-12.158-12.158 8.105 0 12.158-4.053 12.158-12.158 0 8.105 4.053 12.158 12.158 12.158-8.105 0-12.158 4.053-12.158 12.158z" mask="url(#d)"></path>
-					    </g>
-					    <path stroke="#DDA812" stroke-width="3" d="M 53.051 53.465 L 44.051 44.465 M 44.051 53.465 L 53.051 44.465"></path>
-					    <path fill="#DDA812" d="M 81.051 57.886 C 81.051 70.518 87.368 76.833 100 76.833 C 87.368 76.833 81.052 83.15 81.052 95.782 C 81.052 83.15 74.736 76.832 62.104 76.832 C 74.736 76.832 81.052 70.518 81.052 57.886"></path>
-					    <path stroke="#DDA812" stroke-width="3" d="M 81.051 57.886 C 81.051 70.518 87.368 76.833 100 76.833 C 87.368 76.833 81.052 83.15 81.052 95.782 C 81.052 83.15 74.736 76.832 62.104 76.832 C 74.736 76.832 81.052 70.518 81.052 57.886 Z"></path>
-					    <path fill="#DDA812" d="M 70.841 3.465 C 70.841 11.57 74.894 15.623 82.999 15.623 C 74.894 15.623 70.841 19.676 70.841 27.781 C 70.841 19.676 66.788 15.623 58.683 15.623 C 66.788 15.622 70.841 11.57 70.841 3.465"></path>
-					    <path stroke="#DDA812" stroke-width="3" d="M 70.841 3.465 C 70.841 11.57 74.894 15.623 82.999 15.623 C 74.894 15.623 70.841 19.676 70.841 27.781 C 70.841 19.676 66.788 15.623 58.683 15.623 C 66.788 15.622 70.841 11.57 70.841 3.465 Z"></path>
-						  </g>
-					  </g>
-					</svg>
-				</div>
-				<cdn-image *ngIf="round < 4" id="icon" cloudinaryId="opportunity-game/icons/wellbeing.svg" width="150" alt="Wellbeing icon"></cdn-image>
-				<cdn-image *ngIf="round === 4 && wonGame === true" id="icon" cloudinaryId="opportunity-game/characters/{{character?.image}}_win.svg" width="150" alt="Player icon"></cdn-image>
-				<cdn-image *ngIf="round === 4 && wonGame === false" id="icon" cloudinaryId="opportunity-game/characters/{{character?.image}}_lose.svg" width="150" alt="Player icon"></cdn-image>
+			<div class="col-3 no-pad col-centered">
+				<cdn-image *ngIf="wonGame === true" cloudinaryId="opportunity-game/icons/wellbeing.svg" width="120" alt="Wellbeing goal icon"></cdn-image>
+				<cdn-image *ngIf="wonGame === false" cloudinaryId="opportunity-game/icons/wellbeing-sad.svg" width="120" alt="Wellbeing goal icon"></cdn-image>
 			</div>
-		</div>
-
-		<div class="goals bold col-4 auto">
-			<div class="community row">
-
-				<div class="col-2">
-					<cdn-image cloudinaryId="opportunity-game/icons/community.svg" width="51" alt="Community goal icon" class=""></cdn-image>
-				</div>
-				<div class="col-3 no-pad">
-					{{commLevel}} <span class="of">of</span> <span class="goal-end">{{assignedGoal?.commGoal}}</span>
-				</div>
-				<div *ngIf="commLevel >  _dataSvc.commGoalLast" class="col-1 no-pad">
-					+{{commLevel -  _dataSvc.commGoalLast}}
-				</div>
-
-			</div>
-
-			<div class="job row">
-				
-				<div class="col-2">
-					<cdn-image cloudinaryId="opportunity-game/icons/training-color.svg" width="51" alt="Job goal icon" class=""></cdn-image>
-				</div>
-				<div class="col-3 no-pad">
-					{{jobLevel}} <span class="of">of</span> <span class="goal-end">{{assignedGoal?.jobGoal}}</span>
-				</div>
-				<div *ngIf="jobLevel >  _dataSvc.jobGoalLast" class="col-1 no-pad gold">
-					+{{jobLevel -  _dataSvc.jobGoalLast}}
-				</div>
-			</div>
-
-			<div class="english row">
-				
-				<div class="col-2">
-					<cdn-image cloudinaryId="opportunity-game/icons/english.svg" width="51" alt="English goal icon" class=""></cdn-image>
-				</div>
-				<div class="col-3 no-pad">
-					{{englishLevel}} <span class="of">of</span> <span class="goal-end">{{assignedGoal?.englishGoal}}</span>
-				</div>
-				<div *ngIf="englishLevel >  _dataSvc.englishGoalLast" class="col-1 no-pad gold">
-					+{{englishLevel -  _dataSvc.englishGoalLast}}
+			
+			<div class="col-3 no-pad col-centered">
+				<div id="perc">{{currentWellnessScore}}%</div>
+				<div id="bar">		
+					<div id="inner"></div>
 				</div>
 
 			</div>
 		</div>
-		<!-- EFFECT EVENTS -->
-		<div class="col-6 auto round1">
-			<app-button label="Go to Round 2" ariaLabel="Click/tap to go to round 2" clickData="true" (clickEvent)="nextRound()" class="gold large"></app-button>
-		</div>
-		<div class="col-6 auto round2">
-			<app-button label="Go to Round 3" ariaLabel="Click/tap to go to round 3" clickData="true" (clickEvent)="nextRound()" class="gold large"></app-button>
-		</div>
-		<div class="col-6 auto round3">
-			<app-button label="Go to Round 4" ariaLabel="Click/tap to go to round 4" clickData="true" (clickEvent)="nextRound()" class="gold large"></app-button>
-		</div>
-		<div class="col-12 auto round4">
+
+		<div class="col-6 auto">
 			<app-button label="Share Your Input" ariaLabel="Click/tap to go to post-game survery" href="/" class="gold"></app-button>
-			<div id="play-again" class="btn col-6" routerLink="start"><cdn-image cloudinaryId="opportunity-game/icons/arrow-back.svg" width="20" alt="Play again arrow icon" class=""></cdn-image>Play Again</div>
+			<div id="play-again" class="btn col-6" (click)="startOver()"><cdn-image cloudinaryId="opportunity-game/icons/arrow-back.svg" width="20" alt="Play again arrow icon" class=""></cdn-image>Play Again</div>
 		</div>
 
 	</div>

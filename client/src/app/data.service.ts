@@ -90,7 +90,7 @@ export class DataService {
             health_ranking: 0
         },
 
-        newRound: false,
+        gameEnded: false,
         gotTransit: false,
         gotJob: false,
         sawTutorial: false,
@@ -194,7 +194,7 @@ export class DataService {
         this.playerDataUpdate.emit(this.playerData);
 
         if(this.playerData.actions <= 0)
-            this.endRound();
+            this.endGame();
 
     }
 
@@ -324,16 +324,14 @@ export class DataService {
 
     }
 
-    private endRound() {
+    private endGame() {
 
         // Only if player has job
         if(this.playerData.hasJob === true)
             this.playerData.money += environment.dev ? 20 : 3;
         
-        this.playerData.actions += 5;
-
         // DEBUG ONLY
-        if(environment.dev) {
+        /*if(environment.dev) {
             _.each(this.locationData, (loc) => {
                 _.each(loc.opportunities, (thisOpp) => {
 
@@ -344,15 +342,10 @@ export class DataService {
 
                 this.locationDataUpdate.emit(loc);
             }); 
-        }
+        }*/
 
-        this.playerData.newRound = true;
-        this.playerData.metGoals = this.metGoals();
-        this.playerData.round++;
-
+        this.playerData.gameEnded = true;
         this.playerDataUpdate.emit(this.playerData);
-
-        this.playerData.newRound = false;
 
     }
 

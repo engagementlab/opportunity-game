@@ -23,18 +23,18 @@ export class GameComponent implements OnInit {
   public lifeEvents: Event[];
   public effectEvents: Event[];
   public character: Character;
+  public wonGame: boolean = false;
+  public currentWellnessScore: number = 0;
 
   eventsQueue: HTMLElement[] = [];
   
-  currentWellnessScore: number;
   lastWellnessScore: number = 0;
   round: number = 1;
-  newRound: number;
+  gameEnded: number;
 
   commLevel: number;
   jobLevel: number;
   englishLevel: number;
-  wonGame: boolean;
   assignedGoal: Goal;
   
   sfxPath: string = 'https://res.cloudinary.com/engagement-lab-home/video/upload/v1000000/opportunity-game/sfx/';
@@ -104,32 +104,30 @@ export class GameComponent implements OnInit {
 
     this._dataSvc.playerDataUpdate.subscribe((data: PlayerData) => {
 
-      this.newRound = data.round;
-
       this.character = this._dataSvc.assignedChar;
 
       this.commLevel = data.commLevel;
       this.jobLevel = data.jobLevel;
       this.englishLevel = data.englishLevel;
-      
-      this.assignedGoal = this._dataSvc.assignedGoal;
 
-      if(data.newRound) {
+      if(data.gameEnded) {
         
-        this.currentWellnessScore = data.wellnessScore;
+        this.currentWellnessScore = (data.wellnessScore / data.wellnessGoal) * data.wellnessGoal;
+        this.wonGame = data.wellnessScore === data.wellnessGoal;
+        (<HTMLElement>document.querySelector('#game-over #inner')).style.width = this.currentWellnessScore + "%";
+
         this.lifeEvents = _.filter(this._dataSvc.getUpdatedEvents(), (e) => {return e.type === 'life'});
-        this.wonGame = data.metGoals;
         
-        let content = <HTMLElement>document.querySelector('#round-over #content');
+        let content = <HTMLElement>document.querySelector('#game-over #content');
         content.style.visibility = 'hidden';
-        TweenLite.fromTo(document.getElementById('round-over'), 3, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, display:'block', ease: Sine.easeOut});
+        TweenLite.fromTo(document.getElementById('game-over'), 3, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, display:'block', ease: Sine.easeOut});
         TweenLite.to(content, 1, {autoAlpha:1, delay:3.1});
 
       }
 
     });
 
-    this._dataSvc.effectTrigger.subscribe((events: any[]) => {
+   /* this._dataSvc.effectTrigger.subscribe((events: any[]) => {
 
       if(!events || events.length < 1) return;
 
@@ -150,7 +148,7 @@ export class GameComponent implements OnInit {
 
       });
 
-    });
+    });*/
 
   }
 
@@ -164,17 +162,7 @@ export class GameComponent implements OnInit {
 
   nextRound() {
 
-    this.router.navigateByUrl('/game/home');
-    TweenLite.to(document.getElementById('round-over'), 1, {autoAlpha: 0, display:'none', onComplete:() => {
-
-      // Save goal amt
-      this._dataSvc.commGoalLast = this.commLevel;
-      this._dataSvc.jobGoalLast = this.jobLevel;
-      this._dataSvc.englishGoalLast = this.englishLevel;
-      this._dataSvc.showPayday();
-
-      // Update round
-      this.round = this.newRound;
+    TweenLite.to(document.getElementById('game-over'), 1, {autoAlpha: 0, display:'none', onComplete:() => {
 
       // Dice roll for random event if any left
       let allEvents = document.querySelectorAll('#life-events .game-event');
@@ -225,6 +213,12 @@ export class GameComponent implements OnInit {
     
     this._dataSvc.updateStats(this._dataSvc.getEventById(eventId));
     this.removeEvent(eventId);
+
+  }
+
+  startOver() {
+
+    window.location = '/';
 
   }
 
