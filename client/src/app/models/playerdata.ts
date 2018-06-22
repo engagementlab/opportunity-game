@@ -23,4 +23,7 @@ export interface PlayerData {
   payday?: boolean;
   metGoals?: boolean;
 
+  sawTutorial?: boolean;
+  sawCityIntro?: boolean;
+
 }

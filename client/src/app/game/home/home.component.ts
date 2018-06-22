@@ -78,7 +78,7 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
         TweenLite.fromTo(document.getElementById('city-tutorial'), 1, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, delay:1, display:'block', 
          onComplete:() => {
             let scroll = {val: 0};
-            TweenMax.to(scroll, 5, {val:this.mapContainer.nativeElement.scrollHeight, delay:2, ease:Ease.easeOut, onUpdate:() => {
+            TweenMax.to(scroll, 5, {val:this.mapContainer.nativeElement.scrollHeight, delay:2, ease:Sine.easeOut, onUpdate:() => {
                this.mapContainer.nativeElement.scrollTop = scroll.val;
             }});
         }});
@@ -94,7 +94,7 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
         if(!this._dataSvc.playerData.sawCityIntro) {
           TweenLite.fromTo(document.getElementById('city'), 1, {autoAlpha:0}, {autoAlpha:1, delay:1, display:'block', 
            onComplete:() => {
-              TweenMax.to(scroll, 5, {val:scrollTarget, ease:Ease.easeOut, onUpdate:() => {
+              TweenMax.to(scroll, 5, {val:scrollTarget, ease:Sine.easeOut, onUpdate:() => {
                  this.mapContainer.nativeElement.scrollTop = scroll.val;
                  this._dataSvc.playerData.sawCityIntro = true;
               }});
@@ -103,7 +103,7 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
         else {
           houseDelay = 3;
           document.getElementById('city').style.display = 'block';
-          TweenMax.to(scroll, 2, {val:scrollTarget, ease:Ease.easeOut, onUpdate:() => {
+          TweenMax.to(scroll, 2, {val:scrollTarget, ease:Sine.easeOut, onUpdate:() => {
              this.mapContainer.nativeElement.scrollTop = scroll.val;
           }});
         }
