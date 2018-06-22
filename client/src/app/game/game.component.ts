@@ -218,7 +218,7 @@ export class GameComponent implements OnInit {
 
   startOver() {
 
-    window.location = '/';
+    window.location.href = '/';
 
   }
 
