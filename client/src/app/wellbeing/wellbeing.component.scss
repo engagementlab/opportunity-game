@@ -8,7 +8,6 @@
 
 	#icon {
 		::ng-deep img {
-			// float: left;
 			position: relative;
 			height: 10px;
 			top: -4px;
@@ -21,7 +20,7 @@
 		width: 171px;
 		height: 10px;
 		background: black;
-		border: 1px solid black;
+		border: 1px solid white;
 		border-radius: 10px;
 
 		@include mobile-only {

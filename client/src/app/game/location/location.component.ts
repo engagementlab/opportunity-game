@@ -139,6 +139,8 @@ export class GameLocationComponent implements OnInit {
 
     if(opportunity.locationUnlocks !== undefined && opportunity.locationUnlocks.length > 0 && opportunity.triggerAmt === 0)
       this._dataSvc.enableLocations(opportunity.locationUnlocks);
+    
+    this._dataSvc.playerData.sawTutorial = true;
 
   }
 

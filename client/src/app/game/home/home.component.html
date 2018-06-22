@@ -2,8 +2,16 @@
 
 	<div #map id="filters" class="row auto">
 	
-		<div *ngFor="let filter of filters" class="filter btn" (click)="filterSelection(filter.key)">
-			<cdn-image cloudinaryId="opportunity-game/home/{{filter.key}}.svg" width="1000" alt="Image for {{filter.label}} filter"></cdn-image>
+		<!-- Categories -->
+	  <div id="city" class="hidden">
+			<div *ngFor="let filter of filters" class="filter btn" (click)="filterSelection(filter.key)">
+				<cdn-image cloudinaryId="opportunity-game/home/{{filter.key}}.svg" width="1000" alt="Image for {{filter.label}} filter"></cdn-image>
+			</div>
+		</div>
+
+		<!-- Tutorial -->
+	  <div id="city-tutorial" class="filter btn hidden" (click)="filterSelection('discover')">
+			<cdn-image cloudinaryId="opportunity-game/home/tutorial.svg" width="1000" alt="Image for tutorials screen"></cdn-image>
 		</div>
 
 		<div id="house" class="row-lg">
@@ -17,10 +25,7 @@
 		
 				<div class="col-4">
 					<div id="house-bubble" class="bubble">
-						<span class="round1">Select a category to view its locations. If you are not sure where to start, try DISCOVER.</span>
-						<span class="round2">Leveling up skills will unlock more opportunities!</span>
-						<span class="round3">Having a job and transportation will unlock more opportunities.</span>
-						<span class="round4">Keep exploring to reach your goals!</span>
+						<span class="round1">Go to DISCOVER to learn more.</span>
 					</div>
 				</div>
 			</div>	

@@ -36,6 +36,11 @@
   height: 87%;
   overflow-y: scroll;
 
+  #city, #city-tutorial {
+		position: relative;
+	  width: 100%;
+	}
+
 	.filter {
 		text-align: center;
 		width: 100%;
@@ -43,6 +48,7 @@
 			margin: 0;
 			padding: 0;
 		}
+
 		::ng-deep .cdn-image {
 			display: block;
 		}
@@ -54,6 +60,8 @@
 
 #house {
 
+	position: relative;
+	visibility: hidden;
 	min-height: 20%;
 
   .centered {
@@ -69,8 +77,6 @@
 		.desktop {
 			display: none;
 		}
-	}
-	@include mq($from: tablet) {
 	}
 
 }

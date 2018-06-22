@@ -10,7 +10,6 @@ import { environment } from '../environments/environment';
 
 import { Character } from './models/character';
 import { GameLocation } from './models/gamelocation';
-// import { GameConfig } from './models/gameconfig';
 import { Event } from './models/event';
 import { PlayerData } from './models/playerdata';
 import { Opportunity } from './models/opportunity';
@@ -94,7 +93,8 @@ export class DataService {
         newRound: false,
         gotTransit: false,
         gotJob: false,
-        metGoals: false
+        sawTutorial: false
+        sawCityIntro: false
 
     };
 

@@ -79,7 +79,8 @@ Location.schema.pre('save', function(next) {
        health_and_help: cleanedObj['health_and_help'],
        english: cleanedObj['english'],
        job: cleanedObj['job'],
-       community: cleanedObj['community']
+       community: cleanedObj['community'],
+       discover: cleanedObj['discover']
     };
 
     this.categories = savedObj;
