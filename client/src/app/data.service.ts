@@ -93,7 +93,7 @@ export class DataService {
         newRound: false,
         gotTransit: false,
         gotJob: false,
-        sawTutorial: false
+        sawTutorial: false,
         sawCityIntro: false
 
     };
