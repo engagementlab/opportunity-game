@@ -1,7 +1,7 @@
 <div class="game-event col-5 vert-center medium inner-modal hidden" id="{{data._id}}">
 
-	<h2 *ngIf="data.type === 'effect'" class="small">Opportunity: {{data.name}}</h2>
-	<h2 *ngIf="data.type === 'life'">Life Event</h2>
+<!-- 	<h2 *ngIf="data.type === 'effect'" class="small">Opportunity: {{data.name}}</h2>
+	<h2 *ngIf="data.type === 'life'">Life Event</h2> -->
 
 	<div>
 		<span class="bold">{{data.flavor}}</span>
@@ -14,14 +14,26 @@
 	</div>
 
 	<div class="footer">
-		<div class="bold medium" *ngIf="data.costs.length > 0">YOU NEED AT LEAST:</div> 
-		<div class="costs row col-5 auto">
+		<!-- <div class="bold medium" *ngIf="data.costs.length > 0">YOU NEED AT LEAST:</div>  -->
+<!-- 		<div class="costs row col-5 auto">
 			<div *ngFor="let cost of data.costs" class="cost {{cost.icon}} auto">
 				<div *ngIf="cost.amt !== undefined && cost.isLvl === undefined" class="text bold">{{cost.amt}}</div>
 				<div *ngIf="cost.isLvl === true" class="badge text bold">{{cost.amt}}</div>
 			</div>
+		</div> -->
+
+		<!-- costs -->
+		<div class="costs" *ngIf="data.costs.length > 0">
+			<div class="bold medium" *ngIf="data.costs.length > 0">COST</div> 
+			<div class="items">
+				<div *ngFor="let cost of data.costs" class="cost {{cost.icon}}">
+					<div *ngIf="cost.amt !== undefined && cost.isLvl === undefined" class="text bold">{{cost.amt}}</div>
+				</div>
+			</div>
 		</div>
-		
+	</div>
+
+	<div class="col-6 auto small">
 		<span class="bold" *ngIf="data.costs.length < 1">This event is free!</span>
 		<span class="bold" *ngIf="data.locked === true"><br/>You don't have the requirements to say yes!</span>
 	</div>

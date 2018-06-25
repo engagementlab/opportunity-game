@@ -57,6 +57,7 @@ export class DataService {
 
     baseUrl: string;
     index: any;
+    actionsUntilLifeEvent: number = 6;
 
     durationEffectQueue = [];
     delayedRewardQueue = [];
@@ -65,6 +66,7 @@ export class DataService {
     locationDataUpdate = new EventEmitter();
     endRoundUpdate = new EventEmitter();
     effectTrigger = new EventEmitter();
+    lifeEventTrigger = new EventEmitter();
     rewardTrigger = new EventEmitter();
     paydayTrigger = new EventEmitter();
 
@@ -118,6 +120,13 @@ export class DataService {
         this.playerData.money -= opportunity.moneyCost;
         this.playerData.actions -= opportunity.actionCost;
         this.playerData.wellnessScore = this.calcWellness();
+
+        this.actionsUntilLifeEvent -= opportunity.actionCost;
+        if(this.actionsUntilLifeEvent === 0)
+        {
+            this.actionsUntilLifeEvent = 6;
+            this.lifeEventTrigger.emit();
+        }
 
         // Trigger duration effects or delayed rewards? (if actions being removed)
         if(opportunity.actionCost > 0)
@@ -206,7 +215,6 @@ export class DataService {
             this.playerData.gotJob = true;
 
         this.playerData[key] = value;
-
         this.playerDataUpdate.emit(this.playerData);
 
     }
@@ -374,7 +382,6 @@ export class DataService {
         this.assignedChar = this.characterData[0];
 
         this.isLoading.next(false);
-        // this.playerDataUpdate.emit(this.playerData);
 
     }
 

@@ -126,7 +126,7 @@ export class GameComponent implements OnInit {
 
     });
 
-   /* this._dataSvc.effectTrigger.subscribe((events: any[]) => {
+    this._dataSvc.effectTrigger.subscribe((events: any[]) => {
 
       if(!events || events.length < 1) return;
 
@@ -147,7 +147,26 @@ export class GameComponent implements OnInit {
 
       });
 
-    });*/
+    });
+
+    this._dataSvc.lifeEventTrigger.subscribe(() => {
+
+      debugger;
+
+      // Show only if any left
+      let allEvents = document.querySelectorAll('#life-events .game-event');
+      if(allEvents.length > 0) {
+  
+        let eventIndex = Math.floor(Math.random() * ((allEvents.length-1) - 0 + 1));
+        let eventEl = allEvents[eventIndex];
+        
+        if(eventEl === undefined) return;
+
+        TweenLite.to(document.getElementById('life-events'), 1, {autoAlpha: 1, display:'block'});
+        TweenLite.to(eventEl, 1, {autoAlpha:1, display:'block'});
+        
+      }
+    });
 
   }
 
@@ -159,31 +178,9 @@ export class GameComponent implements OnInit {
 
   }
 
-  nextRound() {
-
-    TweenLite.to(document.getElementById('game-over'), 1, {autoAlpha: 0, display:'none', onComplete:() => {
-
-      // Dice roll for random event if any left
-      let allEvents = document.querySelectorAll('#life-events .game-event');
-      if(allEvents.length > 1 && Math.round(Math.random()) == 1) {
-        
-        let eventIndex = Math.floor(Math.random() * ((allEvents.length-1) - 0 + 1));
-        let eventEl = allEvents[eventIndex];
-        
-        if(eventEl === undefined) return;
-
-        TweenLite.to(document.getElementById('life-events'), 1, {autoAlpha: 1, display:'block'});
-        TweenLite.to(eventEl, 1, {autoAlpha:1, display:'block'});
-
-      }
-
-    }});
-    
-  }
-
   closeCheevo() {
 
-      TweenLite.to(document.getElementById('achievement'), 1, {autoAlpha: 0, display:'none'});
+    TweenLite.to(document.getElementById('achievement'), 1, {autoAlpha: 0, display:'none'});
 
   }
 
