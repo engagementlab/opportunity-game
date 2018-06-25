@@ -135,8 +135,8 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
       }
     }
 
-    TweenLite.fromTo(document.getElementById('house'), 1, {autoAlpha:0, left:'-100%'}, {autoAlpha:1, left:0, delay:houseDelay ease:Back.easeOut});
-    TweenLite.fromTo(document.getElementById('house-bubble'), 1.5, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, delay:houseDelay+1 display:'block', ease:Elastic.easeOut});
+    TweenLite.fromTo(document.getElementById('house'), 1, {autoAlpha:0, left:'-100%'}, {autoAlpha:1, left:0, delay:houseDelay, ease:Back.easeOut});
+    TweenLite.fromTo(document.getElementById('house-bubble'), 1.5, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, delay:houseDelay+1, display:'block', ease:Elastic.easeOut});
 
   }
 

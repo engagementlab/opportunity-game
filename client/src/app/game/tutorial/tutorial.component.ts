@@ -3,6 +3,7 @@ import { Router } from '@angular/router'
 import { DOCUMENT } from '@angular/platform-browser';
 
 import { DataService } from '../../data.service';
+import { Character } from '../../models/character';
 
 @Component({
   selector: 'game-tutorial',
