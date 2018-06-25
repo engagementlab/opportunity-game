@@ -40,13 +40,6 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
   }
 
   ngOnInit() {
-
-    // Cross-browser horsegarbage
-    // window.setTimeout(() => {
-    //   let pageY: number = this.mapContainer.nativeElement.offsetHeight;
-    //   this.mapContainer.nativeElement.scrollTop = pageY;
-
-    // }, 2000);
     
     this._dataSvc.playerDataUpdate.subscribe((data: PlayerData) => {
 
@@ -73,46 +66,9 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
       this.loadCategory = true;
       this.character = this._dataSvc.assignedChar;
 
-      // City animation
-      if(!this._dataSvc.playerData.sawTutorial) {
-        TweenLite.fromTo(document.getElementById('city-tutorial'), 1, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, delay:1, display:'block', 
-         onComplete:() => {
-            let scroll = {val: 0};
-            TweenMax.to(scroll, 5, {val:this.mapContainer.nativeElement.scrollHeight, delay:2, ease:Sine.easeOut, onUpdate:() => {
-               this.mapContainer.nativeElement.scrollTop = scroll.val;
-            }});
-        }});
-
-        TweenLite.fromTo(document.getElementById('house'), 1, {autoAlpha:0, left:'-100%'}, {autoAlpha:1, left:0, delay:4, display:'block', ease:Back.easeOut});
-        TweenLite.fromTo(document.getElementById('house-bubble'), 1.5, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, delay:4.5, display:'block', ease:Elastic.easeOut});
-      }
-      else {
-        let scroll = {val: 0};
-        let scrollTarget = this.mapContainer.nativeElement.scrollHeight;
-        let houseDelay = 5;
-
-        if(!this._dataSvc.playerData.sawCityIntro) {
-          TweenLite.fromTo(document.getElementById('city'), 1, {autoAlpha:0}, {autoAlpha:1, delay:1, display:'block', 
-           onComplete:() => {
-              TweenMax.to(scroll, 5, {val:scrollTarget, ease:Sine.easeOut, onUpdate:() => {
-                 this.mapContainer.nativeElement.scrollTop = scroll.val;
-                 this._dataSvc.playerData.sawCityIntro = true;
-              }});
-          }});
-        }
-        else {
-          houseDelay = 3;
-          document.getElementById('city').style.display = 'block';
-          TweenMax.to(scroll, 2, {val:scrollTarget, ease:Sine.easeOut, onUpdate:() => {
-             this.mapContainer.nativeElement.scrollTop = scroll.val;
-          }});
-        }
-
-        TweenLite.fromTo(document.getElementById('house'), 1, {autoAlpha:0, left:'-100%'}, {autoAlpha:1, left:0, delay:houseDelay, ease:Back.easeOut});
-        TweenLite.fromTo(document.getElementById('house-bubble'), 1.5, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, delay:houseDelay+1, display:'block', ease:Elastic.easeOut});
-      }
-
       this.loaded = true;
+
+      this.screenAnimation();
 
     });
 
@@ -139,6 +95,48 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
       this.filterSelection(categoryId);
 
     this.loadedCategory = true;
+
+  }
+
+  screenAnimation() {
+    
+    let houseDelay = 2;
+
+    // City animation
+    if(!this._dataSvc.playerData.sawTutorial) {
+      TweenLite.fromTo(document.getElementById('city-tutorial'), 1, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, delay:1, display:'block', 
+       onComplete:() => {
+          let scroll = {val: 0};
+          TweenMax.to(scroll, 5, {val:this.mapContainer.nativeElement.scrollHeight, delay:2, ease:Sine.easeOut, onUpdate:() => {
+             this.mapContainer.nativeElement.scrollTop = scroll.val;
+          }});
+      }});
+    }
+    else {
+      let scroll = {val: 0};
+      let scrollTarget = this.mapContainer.nativeElement.scrollHeight;
+
+      if(!this._dataSvc.playerData.sawCityIntro) {
+        houseDelay = 7;
+        TweenLite.fromTo(document.getElementById('city'), 1, {autoAlpha:0}, {autoAlpha:1, delay:1, display:'block', 
+         onComplete:() => {
+            TweenMax.to(scroll, 5, {val:scrollTarget, ease:Sine.easeOut, onUpdate:() => {
+               this.mapContainer.nativeElement.scrollTop = scroll.val;
+               this._dataSvc.playerData.sawCityIntro = true;
+            }});
+        }});
+      }
+      else {
+        houseDelay = 5;
+        document.getElementById('city').style.display = 'block';
+        TweenMax.to(scroll, 2, {val:scrollTarget, ease:Sine.easeOut, onUpdate:() => {
+           this.mapContainer.nativeElement.scrollTop = scroll.val;
+        }});
+      }
+    }
+
+    TweenLite.fromTo(document.getElementById('house'), 1, {autoAlpha:0, left:'-100%'}, {autoAlpha:1, left:0, delay:houseDelay ease:Back.easeOut});
+    TweenLite.fromTo(document.getElementById('house-bubble'), 1.5, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, delay:houseDelay+1 display:'block', ease:Elastic.easeOut});
 
   }
 

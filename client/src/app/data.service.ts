@@ -108,6 +108,8 @@ export class DataService {
 
         this.assignedChar = this.characterData[index];
         this.assignedGoal = goal;
+
+        debugger;
         
         this.playerDataUpdate.emit(this.playerData);
 

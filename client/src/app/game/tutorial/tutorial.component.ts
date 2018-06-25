@@ -2,6 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router'
 import { DOCUMENT } from '@angular/platform-browser';
 
+import { DataService } from '../../data.service';
+
 @Component({
   selector: 'game-tutorial',
   templateUrl: './tutorial.component.html',
@@ -9,11 +11,20 @@ import { DOCUMENT } from '@angular/platform-browser';
 })
 export class TutorialComponent implements OnInit {
 
+  public character: Character;
+
 	currentScreen: number = 0;
 
-  constructor(@Inject(DOCUMENT) private document: Document, private router: Router) { }
+  constructor(@Inject(DOCUMENT) private document: Document, private router: Router, private _dataSvc: DataService) { }
 
   ngOnInit() {
+
+    this._dataSvc.playerDataUpdate.subscribe(response => {
+      
+      // Default 
+      this.character = this._dataSvc.assignedChar;
+
+    });
 
   }
 

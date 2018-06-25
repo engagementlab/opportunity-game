@@ -10,6 +10,9 @@
   &:active {
     @include scale(.8);
   }
+  ::ng-deep img {
+  	padding: 15%;
+  }
 }
 
 .location {
@@ -149,11 +152,10 @@
 		}
 	}
 	.reward {
-		width: 75px;
-		max-height: 80px;
 		position: absolute;
-		right: 0;
+		left: 75%;
 		bottom: 62%;
+		
   	&:after {
 			position: relative;
   		top: 37%;
@@ -164,6 +166,8 @@
   		position: absolute;
 	    top: 20%;
 	    z-index: 0;
+			min-width: 75px;
+			min-height: 80px;
   	}
 
 		.badge {

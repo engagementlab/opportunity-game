@@ -69,7 +69,6 @@ export class GameComponent implements OnInit {
 
         // Default
         this.character = this._dataSvc.characterData[0];
-        this.assignedGoal = this._dataSvc.goalData[0];
 
       });
     }
