@@ -58,6 +58,7 @@ export class DataService {
     baseUrl: string;
     index: any;
     actionsUntilLifeEvent: number = 6;
+    actionsUntilPayday: number = 5;
 
     durationEffectQueue = [];
     delayedRewardQueue = [];
@@ -122,10 +123,18 @@ export class DataService {
         this.playerData.wellnessScore = this.calcWellness();
 
         this.actionsUntilLifeEvent -= opportunity.actionCost;
+        this.actionsUntilPayday -= opportunity.actionCost;
+
         if(this.actionsUntilLifeEvent === 0)
         {
             this.actionsUntilLifeEvent = 6;
             this.lifeEventTrigger.emit();
+        }
+        if(this.actionsUntilPayday === 0)
+        {
+            this.actionsUntilPayday = 5;
+            this.playerData.money += 5;
+            this.showPayday();
         }
 
         // Trigger duration effects or delayed rewards? (if actions being removed)
@@ -327,7 +336,7 @@ export class DataService {
     public showPayday() {
 
         // Only if player has job
-        if(this.playerData.hasJob === true)
+        // if(this.playerData.hasJob === true)
             this.paydayTrigger.emit();
 
     }

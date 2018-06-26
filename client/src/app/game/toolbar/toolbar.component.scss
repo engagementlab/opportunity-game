@@ -146,9 +146,6 @@
 		@include transition(color, 1s, ease-in-out)
 		&.payday {
 			color: $hospital-green;
-			#stroke {
-				stroke: $hospital-green;
-			}
 		}
 	}
 
