@@ -336,7 +336,7 @@ export class DataService {
     public showPayday() {
 
         // Only if player has job
-        // if(this.playerData.hasJob === true)
+        if(this.playerData.hasJob === true)
             this.paydayTrigger.emit();
 
     }
