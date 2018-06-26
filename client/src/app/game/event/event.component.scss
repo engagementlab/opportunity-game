@@ -5,6 +5,7 @@
 	font-size: large;
 	text-align: center;
 	margin: 0 auto;
+	color: black;
 	
 	&.inner-modal {
 		background: white;
@@ -20,13 +21,28 @@
 	}
 
 	.footer {
+		display: flex;
+		flex-direction: row;		
+		justify-content: space-evenly;
+
 		font-size: small;
     text-align: center;
     width: 100%;
+
+    .costs {
+    	// width: 50%;
+	
+	    .items {
+				display: flex;
+				flex-direction: row;
+	    }
+   
+    }
 	}
 
 	.cost {
 		display: block;
+		float: left;
 		min-width: 50px;
 		min-height: 45px;
 		text-align: right;
@@ -75,11 +91,12 @@
 		}
 	}
 	::ng-deep .app-button {
-		padding: 20%;
+    padding: 5%;
+    max-height: 50px;
 	}
 }
 
-.items {
+/* .items {
 
 	font-size: x-large;
 	padding-top: 5%;
@@ -120,4 +137,4 @@
 		background-image: cdn-image('icons/english', c_scale, w_35);
 		background-repeat: no-repeat;
 	}
-}
+} */

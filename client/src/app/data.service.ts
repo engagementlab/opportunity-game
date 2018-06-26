@@ -57,6 +57,8 @@ export class DataService {
 
     baseUrl: string;
     index: any;
+    actionsUntilLifeEvent: number = 6;
+    actionsUntilPayday: number = 5;
 
     durationEffectQueue = [];
     delayedRewardQueue = [];
@@ -65,20 +67,22 @@ export class DataService {
     locationDataUpdate = new EventEmitter();
     endRoundUpdate = new EventEmitter();
     effectTrigger = new EventEmitter();
+    lifeEventTrigger = new EventEmitter();
     rewardTrigger = new EventEmitter();
     paydayTrigger = new EventEmitter();
 
     public playerData: PlayerData = 
     {
         round: 1,
-        money: (environment.dev === undefined && environment.dev === true) ? 20 : 5,
-        actions: 5,
+        money: 0,
+        actions: 0,
         
         commLevel: 0,
         jobLevel: 0,
         englishLevel: 0,
         
-        wellnessScore: 5,
+        wellnessScore: 0,
+        wellnessGoal: 0,
 
         hasTransit: false,
         hasJob: false,
@@ -89,10 +93,11 @@ export class DataService {
             health_ranking: 0
         },
 
-        newRound: false,
+        gameEnded: false,
         gotTransit: false,
         gotJob: false,
-        metGoals: false
+        sawTutorial: false,
+        sawCityIntro: false
 
     };
 
@@ -115,6 +120,22 @@ export class DataService {
 
         this.playerData.money -= opportunity.moneyCost;
         this.playerData.actions -= opportunity.actionCost;
+        this.playerData.wellnessScore = this.calcWellness();
+
+        this.actionsUntilLifeEvent -= opportunity.actionCost;
+        this.actionsUntilPayday -= opportunity.actionCost;
+
+        if(this.actionsUntilLifeEvent === 0)
+        {
+            this.actionsUntilLifeEvent = 6;
+            this.lifeEventTrigger.emit();
+        }
+        if(this.actionsUntilPayday === 0)
+        {
+            this.actionsUntilPayday = 5;
+            this.playerData.money += 5;
+            this.showPayday();
+        }
 
         // Trigger duration effects or delayed rewards? (if actions being removed)
         if(opportunity.actionCost > 0)
@@ -191,7 +212,7 @@ export class DataService {
         this.playerDataUpdate.emit(this.playerData);
 
         if(this.playerData.actions <= 0)
-            this.endRound();
+            this.endGame();
 
     }
 
@@ -203,7 +224,6 @@ export class DataService {
             this.playerData.gotJob = true;
 
         this.playerData[key] = value;
-
         this.playerDataUpdate.emit(this.playerData);
 
     }
@@ -216,8 +236,9 @@ export class DataService {
         // Update costs
         _.each(currentLoc.opportunities, (thisOpp) => {
             thisOpp.costs = this.getCosts(thisOpp);
-            thisOpp.locked = _.some(thisOpp.costs, (opp) => {
-                                  return opp['has'] !== undefined && opp['has'] === false;
+            thisOpp.reqs = this.getReqs(thisOpp);
+            thisOpp.locked = _.some(thisOpp.costs.concat(thisOpp.reqs), (opp) => {
+                                      return opp['has'] !== undefined && opp['has'] === false;
                                 });
         });
 
@@ -270,6 +291,8 @@ export class DataService {
             // Update costs
             _.each(loc.opportunities, (thisOpp) => {
                 thisOpp.costs = this.getCosts(thisOpp);
+                thisOpp.reqs = this.getReqs(thisOpp);
+
                 thisOpp.locked = _.some(thisOpp.costs, (opp) => {
                                       return opp['has'] !== undefined && opp['has'] === false;
                                     });
@@ -318,16 +341,14 @@ export class DataService {
 
     }
 
-    private endRound() {
+    private endGame() {
 
         // Only if player has job
         if(this.playerData.hasJob === true)
             this.playerData.money += environment.dev ? 20 : 3;
         
-        this.playerData.actions += 5;
-
         // DEBUG ONLY
-        if(environment.dev) {
+        /*if(environment.dev) {
             _.each(this.locationData, (loc) => {
                 _.each(loc.opportunities, (thisOpp) => {
 
@@ -338,17 +359,20 @@ export class DataService {
 
                 this.locationDataUpdate.emit(loc);
             }); 
-        }
+        }*/
 
-        this.playerData.newRound = true;
-        this.playerData.metGoals = this.metGoals();
-        this.playerData.round++;
-
+        this.playerData.gameEnded = true;
         this.playerDataUpdate.emit(this.playerData);
 
-        this.playerData.newRound = false;
+    }
+
+    private calcWellness() {
+
+        let jceLvl = 2 * (this.playerData.jobLevel + this.playerData.commLevel + this.playerData.englishLevel);
+        return jceLvl + this.playerData.money;
 
     }
+
 
     private metGoals() {
 
@@ -372,6 +396,12 @@ export class DataService {
 
     private assembleData(newData: any) {
 
+        // Default config values
+        this.playerData.money = newData.config.startingMoney;
+        this.playerData.actions = newData.config.startingActions;
+        this.playerData.wellnessGoal = newData.config.wellnessGoal;
+        this.playerDataUpdate.emit(this.playerData);
+
         this.locationData = newData.locations;
         this.eventData = newData.events;
 
@@ -380,7 +410,9 @@ export class DataService {
             _.each(loc.opportunities, (thisOpp) => {
                 thisOpp.reward = this.getReward(thisOpp);
                 thisOpp.costs = this.getCosts(thisOpp);
-                thisOpp.locked = _.some(thisOpp.costs, (opp) => {
+                thisOpp.reqs = this.getReqs(thisOpp);
+
+                thisOpp.locked = _.some(thisOpp.costs.concat(thisOpp.reqs), (opp) => {
                                       return opp['has'] !== undefined && opp['has'] === false;
                                     });
             });
@@ -389,8 +421,9 @@ export class DataService {
         _.each(this.eventData, (thisEvt) => {
             thisEvt.reward = this.getReward(thisEvt);
             thisEvt.costs = this.getCosts(thisEvt);
-            // console.log(thisEvt.costs)
-            thisEvt.locked = _.some(thisEvt.costs, (evt) => {
+            thisEvt.reqs = this.getReqs(thisEvt);
+
+            thisEvt.locked = _.some(thisEvt.costs.concat(thisEvt.reqs), (evt) => {
                                   return evt['has'] !== undefined && evt['has'] === false;
                                 });
         });
@@ -467,18 +500,27 @@ export class DataService {
           costs.push({icon: 'action', amt: opportunity.actionCost, has: opportunity.actionCost<=this.playerData.actions});
         if(opportunity.moneyCost > 0)
           costs.push({icon: 'money', amt: opportunity.moneyCost, has: opportunity.moneyCost<=this.playerData.money});
-        if(opportunity.commCost > 0)
-          costs.push({icon: 'community', amt: opportunity.commCost, has: opportunity.commCost<=this.playerData.commLevel, isLvl: true});
-        if(opportunity.jobCost > 0)
-          costs.push({icon: 'training', amt: opportunity.jobCost, has: opportunity.jobCost<=this.playerData.jobLevel, isLvl: true});
-        if(opportunity.englishCost > 0)
-          costs.push({icon: 'english', amt: opportunity.englishCost, has: opportunity.englishCost<=this.playerData.englishLevel, isLvl: true});
-        if(opportunity.requiresTransit === true)
-          costs.push({icon: 'transit', has: this.playerData.hasTransit});
-        if(opportunity.requiresJob === true)
-          costs.push({icon: 'job', has: this.playerData.hasJob});
 
         return costs;
+
+    }
+
+    private getReqs(opportunity: any) {
+
+        let reqs = [];
+
+        if(opportunity.commCost > 0)
+          reqs.push({icon: 'community', amt: opportunity.commCost, has: opportunity.commCost<=this.playerData.commLevel, isLvl: true});
+        if(opportunity.jobCost > 0)
+          reqs.push({icon: 'training', amt: opportunity.jobCost, has: opportunity.jobCost<=this.playerData.jobLevel, isLvl: true});
+        if(opportunity.englishCost > 0)
+          reqs.push({icon: 'english', amt: opportunity.englishCost, has: opportunity.englishCost<=this.playerData.englishLevel, isLvl: true});
+        if(opportunity.requiresTransit === true)
+          reqs.push({icon: 'transit', has: this.playerData.hasTransit});
+        if(opportunity.requiresJob === true)
+          reqs.push({icon: 'job', has: this.playerData.hasJob});
+
+        return reqs;
 
     }
     

@@ -144,11 +144,9 @@ export class GameToolbarComponent implements OnInit {
 
         if(n.classList.contains('reward'))
           setTimeout(() => {
-            // console.log(this.rewardLocations.indexOf(n))
             (<HTMLElement>n).style.display = 'none';
             (<HTMLElement>n).classList.remove('show');
             (<HTMLElement>n).classList.add('done');
-            // this.rewardLocations.splice(this.rewardLocations.length, 1);
           }, 2400*(i+1));
         else
           setTimeout(() => { (<HTMLElement>n).style.display = 'none'; }, 2400*(i+1));
@@ -178,10 +176,10 @@ export class GameToolbarComponent implements OnInit {
    }
 
    openDrawer() {
-    
-    document.getElementById('mobile-drawer').classList.toggle('open');
-    document.getElementById('drawer').classList.toggle('open');
-    document.getElementById('open-btn').classList.toggle('open');
+      
+      document.getElementById('mobile-drawer').classList.toggle('open');
+      document.getElementById('drawer').classList.toggle('open');
+      document.getElementById('open-btn').classList.toggle('open');
     
    }
 

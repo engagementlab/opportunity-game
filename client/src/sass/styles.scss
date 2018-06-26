@@ -1,5 +1,5 @@
 // src/sass/styles.scss
-@import url('https://fonts.googleapis.com/css?family=Cabin:400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Cabin:400,500,700,400i');
 @import './variables';
 
 // GRID OVERRIDES
@@ -55,6 +55,9 @@ button {
 .medium {
   font-family: 'Cabin', sans-serif;
   font-weight: 500;
+}
+.small {
+  font-size: small;
 }
 .xx-large {
   font-size: xx-large;
@@ -130,6 +133,8 @@ button {
   height: 100%;
   margin-top: -15%;
   background: rgba(217, 217, 217, .8);
+  z-index: 2;
+  position: relative;
 }
 
 .badge {
@@ -167,7 +172,6 @@ div {
 
   color: white;
   text-align: center;
-  // display:table-cell;
   vertical-align:middle;
   width: 100%;
   font-size: smaller;

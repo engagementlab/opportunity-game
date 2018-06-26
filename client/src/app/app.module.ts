@@ -39,6 +39,9 @@ import { GameToolbarComponent } from './game/toolbar/toolbar.component';
 import { GameEmblemComponent } from './game/emblem/emblem.component';
 import { GameEventComponent } from './game/event/event.component';
 import { RepeatEndDirective } from './utils/repeat-end.directive';
+import { WellbeingComponent } from './wellbeing/wellbeing.component';
+import { RemoveTagsPipe } from './utils/remove-tags.pipe';
+import { TutorialComponent } from './game/tutorial/tutorial.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'game', pathMatch: 'full' },
@@ -80,7 +83,10 @@ const appRoutes: Routes = [
     
     CleanStringPipe,
     KeysPipe,
-    RepeatEndDirective
+    RepeatEndDirective,
+    WellbeingComponent,
+    RemoveTagsPipe,
+    TutorialComponent
   ],
   imports: [
     RouterModule.forRoot(

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="9px" viewBox="0 0 20 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>60E83B32-8618-4EA0-971D-A500A3635523</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <polygon id="path-1" points="0 0.336 19.999 0.336 19.999 5.5349 0 5.5349"></polygon>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icons" transform="translate(-383.000000, -877.000000)">
+            <g id="Group" transform="translate(383.000000, 877.000000)">
+                <g id="Group-3" transform="translate(0.000000, -0.336000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Clip-2"></g>
+                    <path d="M0,0.3359 L0,3.8019 C5,3.8019 5,5.5349 10.001,5.5349 C15,5.5349 15,3.8019 19.999,3.8019 L19.999,0.3359 L0,0.3359 Z" id="Fill-1" fill="#EFAECE" mask="url(#mask-2)"></path>
+                </g>
+                <path d="M10.001,5.1986 C5.001,5.1986 5.001,3.4656 0,3.4656 L0,8.6636 L19.999,8.6636 L19.999,3.4656 C15,3.4656 15,5.1986 10.001,5.1986" id="Fill-4" fill="#F05822"></path>
+            </g>
+        </g>
+    </g>
+</svg>

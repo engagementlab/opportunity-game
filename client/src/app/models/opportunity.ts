@@ -35,6 +35,7 @@ export interface Opportunity {
 	// Internal
 	reward: object;
 	costs: object[];
+	reqs: object[];
 	locked: boolean;
 	stars: object[];
 

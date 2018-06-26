@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 import { DataService } from '../../data.service';
 
@@ -28,7 +29,7 @@ export class GameLocationComponent implements OnInit {
   public hasTransit: boolean;
   public hasJob: boolean;
 	
-  constructor(private route: ActivatedRoute, private router: Router, private _dataSvc: DataService) {
+  constructor(private route: ActivatedRoute, private router: Router, private location: Location, private _dataSvc: DataService) {
 
     this.money = this._dataSvc.playerData.money;
     this.actions = this._dataSvc.playerData.actions;
@@ -114,6 +115,12 @@ export class GameLocationComponent implements OnInit {
 
   }
 
+  backToCategory() {
+    
+    this.location.back();
+
+  }
+
   selectOpportunity(opportunity: Opportunity, modalId: string) {
 
     this.backToList(modalId);
@@ -132,6 +139,8 @@ export class GameLocationComponent implements OnInit {
 
     if(opportunity.locationUnlocks !== undefined && opportunity.locationUnlocks.length > 0 && opportunity.triggerAmt === 0)
       this._dataSvc.enableLocations(opportunity.locationUnlocks);
+    
+    this._dataSvc.playerData.sawTutorial = true;
 
   }
 

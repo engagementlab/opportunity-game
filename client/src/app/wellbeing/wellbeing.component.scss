@@ -1,0 +1,42 @@
+@import "~sass/_variables";
+
+#wellbeing {
+
+	position: absolute;
+	z-index: 20;
+	left: 51vw;
+
+	#icon {
+		::ng-deep img {
+			position: relative;
+			height: 10px;
+			top: -4px;
+		}
+	}
+
+	#bar {
+		float: right;
+		display: block;
+		width: 171px;
+		height: 10px;
+		background: black;
+		border: 1px solid white;
+		border-radius: 10px;
+
+		@include mobile-only {
+			width: 158px;
+		}
+		@include mq($until: 320px) {
+			width: 139px;
+		}
+
+		#inner {
+			display: block;
+			height: 8px;
+			width: 0px;
+			background-image: cdn-image('toolbar/wellbeing-fill');
+			background-repeat: repeat-x;
+			@include transition(width, .7s, ease-in);
+		}
+	}
+}

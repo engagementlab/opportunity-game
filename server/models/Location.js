@@ -45,7 +45,9 @@ Location.add({
             "Community": {type: Types.Boolean},
             "Job": {type: Types.Boolean},
             "English": {type: Types.Boolean},
-            "Health and Help": {type: Types.Boolean},
+            "Health": {type: Types.Boolean},
+            "Help": {type: Types.Boolean},
+            "Discover": {type: Types.Boolean}
         },
   opportunities: {
       type: Types.Relationship,
@@ -74,10 +76,12 @@ Location.schema.pre('save', function(next) {
     });
 
     let savedObj = {
-       health_and_help: cleanedObj['health_and_help'],
+       health: cleanedObj['health'],
+       help: cleanedObj['help'],
        english: cleanedObj['english'],
        job: cleanedObj['job'],
-       community: cleanedObj['community']
+       community: cleanedObj['community'],
+       discover: cleanedObj['discover']
     };
 
     this.categories = savedObj;

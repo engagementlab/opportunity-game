@@ -18,6 +18,7 @@ export class GameCharacterComponent implements OnInit {
 
 	categoryData = new Map<string, HTMLInputElement>();
   showBtn: boolean;
+  wellbeingGoal: number;
 
   constructor(private _dataSvc: DataService) {
 
@@ -100,6 +101,7 @@ export class GameCharacterComponent implements OnInit {
   assignCharacter() {
 
     let assignedIndex = (Math.floor(Math.random() * (3 - 0 + 1)) + 0);
+    this.wellbeingGoal = this._dataSvc.playerData.wellnessGoal;
 
     // Find goal for player matching at least two of their rankings
     this.goals.forEach((goal) => {
@@ -123,19 +125,21 @@ export class GameCharacterComponent implements OnInit {
 
     let bubble = document.getElementById('bubble');
     TweenLite.to(bubble, .3, {autoAlpha:0, scale:0, display:'hide', ease:Back.easeIn});
-    document.getElementById('welcome').classList.remove('hidden');
-    // document.getElementById('logo').classList.add('hidden');
 
-    // document.getElementById('characters').classList.add('hidden');
+    document.getElementById('welcome').classList.remove('hidden');
     document.getElementById('character-detail').classList.remove('hidden')
     document.querySelector('#character-detail #detail-'+assignedIndex).classList.remove('hidden');
-
-    // document.getElementById('questionnaire-desktop').style.display = 'none';
     document.getElementById('questionnaire-mobile').style.display = 'none';
 
     this._dataSvc.changeCharacter(assignedIndex, this.assignedGoal);
 
+  }
 
+  openTutorial() {
+
+    TweenLite.fromTo(document.getElementById('tutorial-parent'), 1.2, {autoAlpha:0}, {autoAlpha:1, delay: 1, display:'block'});
+    TweenLite.fromTo(document.getElementById('screen0'), 1, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:'0%', delay: 1.8, display:'block', ease:Back.easeOut});      
+    TweenLite.fromTo(document.querySelector('#tutorial #buttons'), 1, {scale:0}, {scale:1, delay: 3.3, display:'block', ease:Elastic.easeOut});
 
   }
 

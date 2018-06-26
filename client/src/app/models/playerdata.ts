@@ -14,12 +14,16 @@ export interface PlayerData {
   hasJob?: boolean;
   
   wellnessScore?: number;
+  wellnessGoal?: number;
   
   // Internal flags
-  newRound?: boolean;
+  gameEnded?: boolean;
   gotTransit?: boolean;
   gotJob?: boolean;
   payday?: boolean;
   metGoals?: boolean;
+
+  sawTutorial?: boolean;
+  sawCityIntro?: boolean;
 
 }

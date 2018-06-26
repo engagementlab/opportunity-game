@@ -1,0 +1,72 @@
+@import "~sass/_variables";
+
+#tutorial {
+	position: absolute;
+  width: 100%;
+  max-width: 425px;
+  height: 120vh;
+  z-index: 25;
+	background: black;
+	color: white;
+	@include mq($until: 320px) {
+		height: 160vh;
+	}
+
+	.col-2, .col-3 {
+		text-align: center;
+	}
+	h2 {
+		text-transform: uppercase;
+		font-size: xx-large;
+	}
+	p {
+		color: white;
+		font-size: x-large;
+		font-weight: 700;
+		.orange {
+			color: $bright-orange;
+	  }
+	  .gold {
+			color: $gold;
+	  }
+	  &#perc {
+	  	margin: 0;
+	  }
+	}
+	p#intro {
+		font-style: italic;
+		font-weight: 400;
+		color: $pinkish-grey;
+	}
+
+	#bar {
+		display: block;
+		width: 143px;
+		height: 28px;
+		background: black;
+		border: 2px solid white;
+		border-radius: 20px;
+
+		#inner {
+			display: block;
+			position: relative;
+			top: 3px;
+			left: 2%;
+			height: 18px;
+			width: 96%;
+			border-radius: 20px;
+			background-size: contain;
+			background-image: cdn-image('toolbar/wellbeing-fill');
+			background-repeat: repeat-x;
+			@include transition(width, .7s, ease-in);
+		}
+	}
+
+	#buttons {
+	  float: none;
+	  margin: 0 auto;
+	  font-size: xx-large;
+	  text-align: center;
+	}
+
+}

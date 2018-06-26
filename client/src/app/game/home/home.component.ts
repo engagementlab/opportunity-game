@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'
 
 import { DataService } from '../../data.service';
@@ -21,40 +21,28 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
   locations: any[];
   filters: object[] = 
   [
-      {key: 'job', label: 'Jobs & Training'},
       {key: 'community', label: 'Community'},
+      {key: 'job', label: 'Jobs & Training'},
       {key: 'english', label: 'English Language'},
-      {key: 'health_and_help', label: 'Health & Help'}
+      {key: 'health', label: 'Health'},
+      {key: 'help', label: 'Help'},
+      {key: 'discover', label: 'Discover'}
   ];
   loadCategory: boolean;
   loadedCategory: boolean;
-
-  commLevel: number;
-  jobLevel: number;
-  englishLevel: number;
-  assignedGoal: Goal;
+  @ViewChild('map') mapContainer: ElementRef;
 
   canDeactivate() {
     return !this.loaded;
   }
 
   constructor(private route: ActivatedRoute, private router: Router, private _dataSvc: DataService) {
-
-    this.commLevel = this._dataSvc.playerData.commLevel;
-    this.jobLevel = this._dataSvc.playerData.jobLevel;
-    this.englishLevel = this._dataSvc.playerData.englishLevel;
-
   }
 
   ngOnInit() {
     
     this._dataSvc.playerDataUpdate.subscribe((data: PlayerData) => {
 
-      this.commLevel = data.commLevel;
-      this.jobLevel = data.jobLevel;
-      this.englishLevel = data.englishLevel;
-      
-      this.assignedGoal = this._dataSvc.assignedGoal;
       this.character = this._dataSvc.assignedChar;
   
     });
@@ -77,19 +65,18 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
 
       this.loadCategory = true;
       this.character = this._dataSvc.assignedChar;
-      
-      TweenLite.fromTo(document.getElementById('house-bubble'), 1.5, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, delay:2, display:'block', ease:Elastic.easeOut});
 
       this.loaded = true;
 
+      this.screenAnimation();
+
     });
 
-    // DEBUG: If no goal, get data and assign one
-    if(this.assignedGoal === undefined) {
+    // DEBUG: If no character, get data and assign one
+    if(this.character === undefined) {
       this._dataSvc.getCharacterData().subscribe(response => {
         
         // Default 
-        this.assignedGoal = this._dataSvc.assignedGoal;
         this.character = this._dataSvc.assignedChar;
 
       });
@@ -108,6 +95,48 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
       this.filterSelection(categoryId);
 
     this.loadedCategory = true;
+
+  }
+
+  screenAnimation() {
+    
+    let houseDelay = 2;
+
+    // City animation
+    if(!this._dataSvc.playerData.sawTutorial) {
+      TweenLite.fromTo(document.getElementById('city-tutorial'), 1, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, delay:1, display:'block', 
+       onComplete:() => {
+          let scroll = {val: 0};
+          TweenMax.to(scroll, 5, {val:this.mapContainer.nativeElement.scrollHeight, delay:2, ease:Sine.easeOut, onUpdate:() => {
+             this.mapContainer.nativeElement.scrollTop = scroll.val;
+          }});
+      }});
+    }
+    else {
+      let scroll = {val: 0};
+      let scrollTarget = this.mapContainer.nativeElement.scrollHeight;
+
+      if(!this._dataSvc.playerData.sawCityIntro) {
+        houseDelay = 7;
+        TweenLite.fromTo(document.getElementById('city'), 1, {autoAlpha:0}, {autoAlpha:1, delay:1, display:'block', 
+         onComplete:() => {
+            TweenMax.to(scroll, 5, {val:scrollTarget, ease:Sine.easeOut, onUpdate:() => {
+               this.mapContainer.nativeElement.scrollTop = scroll.val;
+               this._dataSvc.playerData.sawCityIntro = true;
+            }});
+        }});
+      }
+      else {
+        houseDelay = 5;
+        document.getElementById('city').style.display = 'block';
+        TweenMax.to(scroll, 2, {val:scrollTarget, ease:Sine.easeOut, onUpdate:() => {
+           this.mapContainer.nativeElement.scrollTop = scroll.val;
+        }});
+      }
+    }
+
+    TweenLite.fromTo(document.getElementById('house'), 1, {autoAlpha:0, left:'-100%'}, {autoAlpha:1, left:0, delay:houseDelay, ease:Back.easeOut});
+    TweenLite.fromTo(document.getElementById('house-bubble'), 1.5, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, delay:houseDelay+1, display:'block', ease:Elastic.easeOut});
 
   }
 
