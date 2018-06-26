@@ -282,8 +282,8 @@
 			display: flex;
 			flex-direction: row;
     }
-    .costs, .reqs {
-    	// width: 50%;
+    .reqs {
+    	margin-left: 5%;
     }
   	.badge {
 			display: inline-block;
@@ -302,6 +302,9 @@
 
 	.buttons {
 		width: 100%;
+		display: flex;
+		flex-direction: row;		
+		justify-content: center;
 	}
 
 	.reward-bg {
@@ -357,8 +360,5 @@
 	    margin-left: -18%;
 	    font-size: xx-large;
 		}
-	}
-	::ng-deep .app-button {
-		padding: 20%;
 	}
 }
