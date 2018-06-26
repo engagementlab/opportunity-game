@@ -305,6 +305,10 @@
 		display: flex;
 		flex-direction: row;		
 		justify-content: center;
+
+	 ::ng-deep .btn {
+			padding: 20%;
+		}
 	}
 
 	.reward-bg {
@@ -313,7 +317,6 @@
     background-repeat: no-repeat;
     background-position: center;
 	}
-
 	.reward {
 		::ng-deep img {
     	max-width: 120px;
@@ -324,34 +327,13 @@
 	    left: 17%;
 		}
 	}
+
 	.cost {
 		display: block;
 		min-width: 50px;
 		min-height: 45px;
 		text-align: right;
 		background-repeat: no-repeat;
-
-		// &.money {
-		// 	background-image: cdn-image('icons/money', c_scale, w_55);
-		// }
-		// &.action {
-		// 	background-image: cdn-image('icons/action', c_scale, w_55)
-		// }
-		// &.community {
-		// 	background-image: cdn-image('icons/community', c_scale, w_55);
-		// }
-		// &.english {
-		// 	background-image: cdn-image('icons/english', c_scale, w_55);
-		// }
-		// &.training {
-		// 	background-image: cdn-image('icons/training-color', c_scale, w_55);
-		// }
-		// &.job {
-		// 	background-image: cdn-image('icons/job', c_scale, w_55);
-		// }
-		// &.transit {
-		// 	background-image: cdn-image('icons/transit', c_scale, w_55);
-		// }
 
 		.text {
 			vertical-align: top;

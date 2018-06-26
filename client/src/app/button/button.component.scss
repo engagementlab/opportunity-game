@@ -10,8 +10,9 @@ a.btn {
   text-decoration: none;
 
   letter-spacing: 2px;
-  padding: 20%;
-  max-height: 50px;
+  padding: 7%;
+  // padding-top: 2%;
+  // max-height: 50px;
 
   flex: 1 1 auto;
   text-align: center;
@@ -36,7 +37,6 @@ a.btn {
   }
   &.white {
     background-color: white;
-    padding: 13%;
   }
   &.green {
     background-color: $hospital-green;
