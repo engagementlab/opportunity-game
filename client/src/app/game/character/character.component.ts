@@ -137,9 +137,15 @@ export class GameCharacterComponent implements OnInit {
 
   openTutorial() {
 
-    TweenLite.fromTo(document.getElementById('tutorial-parent'), 1.2, {autoAlpha:0}, {autoAlpha:1, delay: 1, display:'block'});
-    TweenLite.fromTo(document.getElementById('screen0'), 1, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:'0%', delay: 1.8, display:'block', ease:Back.easeOut});      
-    TweenLite.fromTo(document.querySelector('#tutorial #buttons'), 1, {scale:0}, {scale:1, delay: 3.3, display:'block', ease:Elastic.easeOut});
+    let scroll  = {val: 0};
+
+    TweenLite.fromTo(document.getElementById('tutorial-parent'), .7, {autoAlpha:0}, {autoAlpha:1, display:'block'});
+    TweenLite.fromTo(document.getElementById('screen0'), .7, {autoAlpha:0, left:'-100%'}, {autoAlpha:1, left:0, delay: 1, display:'block', ease:Back.easeOut});      
+    TweenLite.fromTo(document.querySelector('#tutorial #buttons'), 1, {scale:0}, {scale:1, delay:2, display:'block', ease:Elastic.easeOut});
+
+    TweenMax.to(scroll, 2, {val:97, ease:Sine.easeOut, delay:2, onUpdate:() => {
+      document.querySelector('#tutorial #inner').style.width = scroll.val + '%';
+    }});
 
   }
 

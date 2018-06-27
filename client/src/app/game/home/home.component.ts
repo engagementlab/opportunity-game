@@ -148,6 +148,7 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
     let x, i;
     let showAll = (category === "all");
     let label = _.where(this.filters, {key: category})[0]['label'];
+    let locationsShown = [];
 
     x = document.getElementsByClassName("location");
 
@@ -165,8 +166,9 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
         continue;
       }
 
-      if (x[i].dataset.categories !== undefined && x[i].dataset.categories.indexOf(category) > -1) 
+      if (x[i].dataset.categories !== undefined && x[i].dataset.categories.indexOf(category) > -1)
         x[i].classList.add("show");
+        // locationsShown.push(x[i]);
 
     }
 

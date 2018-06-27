@@ -69,6 +69,11 @@
 	border-right: 4px solid black;
 }
 
+#tutorial-parent {
+	position: relative;
+	z-index: 100;
+}
+
 #game-over {
 
 	.character {

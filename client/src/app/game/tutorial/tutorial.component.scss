@@ -22,30 +22,47 @@
 	p {
 		color: white;
 		font-size: x-large;
-		font-weight: 700;
+		font-weight: bold;	
+		text-align: center;
+		margin-left: 5%;
+		margin-right: 5%;
+		letter-spacing: 0.9px;
+	
 		.orange {
 			color: $bright-orange;
 	  }
 	  .gold {
 			color: $gold;
 	  }
-	  &#perc {
-	  	margin: 0;
-	  }
 	}
-	p#intro {
-		font-style: italic;
-		font-weight: 400;
-		color: $pinkish-grey;
-	}
+	#perc {
+  	font-size: 4em;
+  	margin: 0;
+  	p {
+  		font-size: .3em;
+	    margin: 0;
+  	}
+  }
+
+  #bar-parent {
+		svg {			
+			display: block;
+	  	margin-right: auto;
+			margin-left: auto;
+			margin-top: 5%;
+		}
+  }
 
 	#bar {
 		display: block;
-		width: 143px;
+		width: 176px;
 		height: 28px;
 		background: black;
 		border: 2px solid white;
 		border-radius: 20px;
+  	margin-right: auto;
+		margin-left: auto;
+		margin-top: 5%;
 
 		#inner {
 			display: block;
@@ -53,12 +70,11 @@
 			top: 3px;
 			left: 2%;
 			height: 18px;
-			width: 96%;
+			width: 0;
 			border-radius: 20px;
 			background-size: contain;
 			background-image: cdn-image('toolbar/wellbeing-fill');
 			background-repeat: repeat-x;
-			@include transition(width, .7s, ease-in);
 		}
 	}
 
@@ -67,6 +83,16 @@
 	  margin: 0 auto;
 	  font-size: xx-large;
 	  text-align: center;
+	  margin-top: 5%;
+
+	  ::ng-deep a {
+	  	padding-top: 2%;
+	  	max-height: 50px;
+	  }
+
+	  #start-btn {
+	  	font-size: x-large;
+	  }
 	}
 
 }

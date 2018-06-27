@@ -47,7 +47,6 @@
 	<div *ngFor="let location of discoverLocations" attr.data-categories="{{location.categoriesStr}}" class="location col-6 col-centered">
 		<a routerLink="/game/location/{{location.key}}">
 			<cdn-image cloudinaryId="opportunity-game/locations/discover-{{location.imageIndex}}.svg" width="600" alt="Icon for {{location.name}}"></cdn-image>
-			<div class="name bold">{{location.name}}</div>
 		</a>
 	</div>
 
