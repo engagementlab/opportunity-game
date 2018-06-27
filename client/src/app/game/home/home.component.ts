@@ -19,6 +19,7 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
 
   loaded: boolean;
   locations: any[];
+  discoverLocations: any[];
   filters: object[] = 
   [
       {key: 'community', label: 'Community'},
@@ -50,8 +51,9 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
     this._dataSvc.getAllData().subscribe(response => {
 
       let locationImgIndex: number = 1;
-      this.locations = this._dataSvc.locationData;
-      
+      this.locations = _.reject(this._dataSvc.locationData, { categoriesStr: 'discover' });
+      this.discoverLocations = _.where(this._dataSvc.locationData, { categoriesStr: 'discover' });
+
       // Assign image index
       _.each(this.locations, (l) => {
 
@@ -62,6 +64,7 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
         
         l.imageIndex = locationImgIndex;
       });
+      _.each(this.discoverLocations, (l, i) => { l.imageIndex = i+1; });
 
       this.loadCategory = true;
       this.character = this._dataSvc.assignedChar;
@@ -147,8 +150,9 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
     let label = _.where(this.filters, {key: category})[0]['label'];
 
     x = document.getElementsByClassName("location");
-    document.getElementById('map').classList.remove('hidden');
-    document.getElementById('home').classList.add('hidden');
+
+    TweenLite.fromTo(document.getElementById('home'), .7, {autoAlpha:1, left:0}, {autoAlpha:0, left:'-100%', display:'none', ease:Back.easeIn});
+    TweenLite.fromTo(document.getElementById('map'), .7, {autoAlpha:1, left:'100%'}, {autoAlpha:1, left:0, delay:.7, display:'block', ease:Back.easeOut});
 
     document.getElementById('category-label').innerHTML = label;
     
@@ -177,14 +181,13 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
   }
 
   backToHome() { 
-
-    document.getElementById('map').classList.add('hidden');
-    document.getElementById('home').classList.remove('hidden');
+    
+    TweenLite.fromTo(document.getElementById('map'), .7, {autoAlpha:1, left:0}, {autoAlpha:0, left:'100%', display:'none', ease:Back.easeIn});
+    TweenLite.fromTo(document.getElementById('home'), .7, {autoAlpha:0, left:'-100%'}, {autoAlpha:1, left:0, delay:.7, display:'block', ease:Back.easeOut});
 
     const params = { ...this.route.snapshot.queryParams };
     delete params.cat;
     this.router.navigate([], { queryParams: params });
-    
 
   }
 

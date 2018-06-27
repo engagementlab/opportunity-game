@@ -43,10 +43,18 @@
 
 	<div id="category-label" class="bold">Category</div>
 
-	<div class="locations row col-md-10">
-		<div *ngFor="let location of locations" attr.data-categories="{{location.categoriesStr}}" class="col-3 col-md-3 location">
+	<!-- Discover locations -->
+	<div *ngFor="let location of discoverLocations" attr.data-categories="{{location.categoriesStr}}" class="location col-6 col-centered">
+		<a routerLink="/game/location/{{location.key}}">
+			<cdn-image cloudinaryId="opportunity-game/locations/discover-{{location.imageIndex}}.svg" width="600" alt="Icon for {{location.name}}"></cdn-image>
+			<div class="name bold">{{location.name}}</div>
+		</a>
+	</div>
 
-			<div class="centered">
+	<div class="locations row">
+		<div *ngFor="let location of locations" attr.data-categories="{{location.categoriesStr}}" class="location col-3">
+
+			<div>
 								
 				<a *ngIf="location.unlockedAtStart === undefined || location.unlockedAtStart === true || location.enabled === true"
 				routerLink="/game/location/{{location.key}}">
@@ -60,8 +68,9 @@
 				</span>
 
 			</div>
-				
+
 		</div>
 
 	</div>
+
 </div>

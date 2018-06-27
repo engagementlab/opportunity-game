@@ -89,12 +89,12 @@
 
 				<div class="col-6 auto small">
 					<span class="bold" *ngIf="opportunity.costs.length < 1">This opportunity is free!</span>
-					<span class="bold" *ngIf="opportunity.locked === true"><br/>You don't have the requirements to learn more!</span>
+					<span class="bold" *ngIf="opportunity.locked === true"><br/>Come back when you have these requirements.</span>
 				</div>
 
 				<div class="row no-margin buttons" *ngIf="opportunity.locked === false">
-					<app-button label="Yes" ariaLabel="Click to learn about {{opportunity.name}}" clickData="true" (clickEvent)="selectOpportunity(opportunity, opportunity._id)" class="green col-centered"></app-button>
-					<app-button label="No" ariaLabel="Click to close {{opportunity.name}} window" clickData="true" (clickEvent)="backToList(opportunity._id)" class="orange col-centered"></app-button>
+					<app-button label="Yes" ariaLabel="Click to learn about {{opportunity.name}}" clickData="true" (clickEvent)="selectOpportunity(opportunity, opportunity._id)" class="green"></app-button>
+					<app-button label="No" ariaLabel="Click to close {{opportunity.name}} window" clickData="true" (clickEvent)="backToList(opportunity._id)" class="orange"></app-button>
 				</div>
 				<div class="no-margin buttons" *ngIf="opportunity.locked === true">
 					<app-button label="Close" ariaLabel="Click to close {{opportunity.name}} window" clickData="true" (clickEvent)="backToList(opportunity._id)" class="orange"></app-button>

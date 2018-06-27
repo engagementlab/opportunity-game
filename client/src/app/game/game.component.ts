@@ -92,7 +92,7 @@ export class GameComponent implements OnInit {
 
       if(val instanceof NavigationEnd) {
         
-        if(val.url === "/game/home") {
+        if(val.url.indexOf("/game/home") > -1) {
           TweenLite.to(document.getElementById('toolbar-parent'), 1, {autoAlpha: 1, display:'block'});
           TweenLite.to(document.getElementById('wellbeing'), 1, {autoAlpha: 1, display:'block'});
         }
