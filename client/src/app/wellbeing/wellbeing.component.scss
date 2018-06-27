@@ -4,7 +4,7 @@
 
 	position: absolute;
 	z-index: 20;
-	left: 51vw;
+	left: 43vw;
 
 	#icon {
 		::ng-deep img {
@@ -14,26 +14,34 @@
 		}
 	}
 
+  #bar-parent {
+		svg {			
+			position: relative;
+			display: block;
+	  	margin-right: auto;
+			margin-left: auto;
+			margin-top: -2%;
+			z-index: 200;
+		}
+  }
+
 	#bar {
-		float: right;
 		display: block;
-		width: 171px;
+		width: 177px;
+		margin-left: 6%;
+
 		height: 10px;
-		background: black;
-		border: 1px solid white;
 		border-radius: 10px;
 
-		@include mobile-only {
-			width: 158px;
-		}
-		@include mq($until: 320px) {
-			width: 139px;
-		}
-
+		background: black;
+		border: 1px solid white;
+		
 		#inner {
 			display: block;
 			height: 8px;
 			width: 0px;
+			border: solid 1px black;
+	    border-radius: 10px;
 			background-image: cdn-image('toolbar/wellbeing-fill');
 			background-repeat: repeat-x;
 			@include transition(width, .7s, ease-in);

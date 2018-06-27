@@ -159,7 +159,7 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
     
     // Add the "show" class to the filtered elements, and remove the "show" class from the elements that are not selected
     for (i = 0; i < x.length; i++) {
-      x[i].classList.remove("show");
+      x[i].style.display = 'none';
     
       if(showAll) {
         x[i].classList.add("show");
@@ -167,10 +167,9 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
       }
 
       if (x[i].dataset.categories !== undefined && x[i].dataset.categories.indexOf(category) > -1)
-        x[i].classList.add("show");
-        // locationsShown.push(x[i]);
-
+        locationsShown.push(x[i]);
     }
+    TweenMax.staggerFromTo(locationsShown, .3, {scale:0} {scale:1, delay:1.1, display:'block', ease:Back.easeOut}, .2);
 
     this.router.navigate([], {
       relativeTo: this.route,

@@ -46,10 +46,12 @@
 
   #bar-parent {
 		svg {			
+			position: relative;
 			display: block;
 	  	margin-right: auto;
 			margin-left: auto;
-			margin-top: 5%;
+			margin-top: -3%;
+			z-index: 200;
 		}
   }
 

@@ -12,7 +12,6 @@ import { Character } from '../../models/character';
 })
 export class TutorialComponent implements OnInit {
 
-  public character: Character;
   public wellnessGoal: number;
 
 	currentScreen: number = 0;
@@ -22,7 +21,6 @@ export class TutorialComponent implements OnInit {
   ngOnInit() {
 
     this._dataSvc.playerDataUpdate.subscribe(response => {
-      
       // Default 
       this.wellnessGoal = this._dataSvc.playerData.wellnessGoal;
     });
