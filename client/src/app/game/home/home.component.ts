@@ -51,7 +51,7 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
     this._dataSvc.getAllData().subscribe(response => {
 
       let locationImgIndex: number = 1;
-      this.locations = _.reject(this._dataSvc.locationData, { categoriesStr: 'discover' });
+      this.locations = _.filter(this._dataSvc.locationData, (loc) => { return loc.categoriesStr !== 'discover'; });
       this.discoverLocations = _.where(this._dataSvc.locationData, { categoriesStr: 'discover' });
 
       // Assign image index
@@ -169,7 +169,7 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
       if (x[i].dataset.categories !== undefined && x[i].dataset.categories.indexOf(category) > -1)
         locationsShown.push(x[i]);
     }
-    TweenMax.staggerFromTo(locationsShown, .3, {scale:0} {scale:1, delay:1.1, display:'block', ease:Back.easeOut}, .2);
+    TweenMax.staggerFromTo(locationsShown, .3, {scale:0}, {scale:1, delay:1.1, display:'block', ease:Back.easeOut}, .2);
 
     this.router.navigate([], {
       relativeTo: this.route,

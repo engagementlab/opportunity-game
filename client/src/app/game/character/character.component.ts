@@ -144,7 +144,7 @@ export class GameCharacterComponent implements OnInit {
     TweenLite.fromTo(document.querySelector('#tutorial #buttons'), 1, {scale:0}, {scale:1, delay:2, display:'block', ease:Elastic.easeOut});
 
     TweenMax.to(scroll, 2, {val:97, ease:Sine.easeOut, delay:2, onUpdate:() => {
-      document.querySelector('#tutorial #inner').style.width = scroll.val + '%';
+      (<HTMLElement>document.querySelector('#tutorial #inner')).style.width = scroll.val + '%';
     }});
 
   }
