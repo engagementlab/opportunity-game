@@ -13,8 +13,9 @@ $pinkish-grey: #c6c6c6;
 $white-three: #e0e0e0;
 
 @mixin font-cabin() {
-	font-family: 'Cabin', sans-serif;
-	// @return $font-family;
+	
+    font-family: 'Cabin', sans-serif;
+
 }
 
 $mq-breakpoints: (
@@ -22,6 +23,7 @@ $mq-breakpoints: (
     mobileLg:  360px,
     // Forces mobile width forever
     tablet:  10000px,
+    tabletPortrait:  768px,
     desktop: 980px,
     wide:    1300px,
 

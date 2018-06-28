@@ -18,6 +18,7 @@ export const config: CloudinaryConfiguration = cloudinaryConfiguration;
 import { AppComponent } from './app.component';
 import { DataService } from './data.service';
 import { AppRoutingModule } from './/app-routing.module';
+import { PendingChangesGuard } from './deactivate-guard';
 
 import { AppNavbarComponent } from './app-navbar/app-navbar.component';
 import { AppFooterComponent } from './app-footer/app-footer.component';
@@ -51,9 +52,8 @@ const appRoutes: Routes = [
     children: [
       {path: '', redirectTo: 'start', pathMatch: 'full'}, 
       {path: 'start', component: GameStartComponent, data: {index: 0}}, 
-      // {path: 'character', component: GameCharacterComponent, data: {index: 1}}, 
       {path: 'welcome', component: GameWelcomeComponent}, 
-      {path: 'home', component: GameHomeComponent}, 
+      {path: 'home', canDeactivate: [PendingChangesGuard], component: GameHomeComponent}, 
       {path: 'location/:locationUrl', component: GameLocationComponent} 
     ]
   },
@@ -105,7 +105,8 @@ const appRoutes: Routes = [
   ],
   providers: [
     DataService,
-    LoaderComponent
+    LoaderComponent,
+    PendingChangesGuard
   ],
   bootstrap: [AppComponent]
 })

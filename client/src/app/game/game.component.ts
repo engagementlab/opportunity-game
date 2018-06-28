@@ -151,8 +151,6 @@ export class GameComponent implements OnInit {
 
     this._dataSvc.lifeEventTrigger.subscribe(() => {
 
-      debugger;
-
       // Show only if any left
       let allEvents = document.querySelectorAll('#life-events .game-event');
       if(allEvents.length > 0) {
@@ -171,10 +169,6 @@ export class GameComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    // let stars = document.querySelectorAll('.stars path');
-    // console.log(stars)
-    // TweenMax.staggerFrom(stars, .5, {autoAlpha:0, scale:0, rotation:'-=359', delay:4, ease:Elastic.easeOut}, .2);
 
   }
 

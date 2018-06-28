@@ -249,3 +249,9 @@ $base-font-size: 16px;
   -ms-flex: $fg $fs $fb;
   flex: $fg $fs $fb;
 }
+
+@mixin game-width() {
+  
+  max-width: 416px;
+
+}
