@@ -12,7 +12,6 @@ $grid-gutter-width: 30px !default;
 
 body {
   background: cdn-image('outer-bg', f_auto);
-  // background-repeat: no-repeat;
 }
 
 ::-webkit-scrollbar {
@@ -201,5 +200,5 @@ div {
     right: 0;
     top: 0;
   }
-  
+
 }

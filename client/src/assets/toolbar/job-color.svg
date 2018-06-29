@@ -1,1 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 201 201"><defs><style>.cls-1,.cls-3{fill:#dca927;}.cls-2{fill:#f0b0cf;}.cls-2,.cls-3,.cls-4,.cls-5{stroke:#010101;stroke-miterlimit:10;stroke-width:4px;}.cls-4{fill:#f15822;}.cls-5{fill:#a3d4a0;}</style></defs><title>portland_icon</title><g id="Layer_1" data-name="Layer 1"><ellipse class="cls-1" cx="106.64" cy="69.01" rx="24.4" ry="17.96"/><rect class="cls-2" x="38.19" y="103.83" width="128.57" height="71.43"/><rect class="cls-3" x="45.33" y="96.68" width="14.29" height="7.14"/><rect class="cls-4" x="45.33" y="103.83" width="14.29" height="71.43"/><rect class="cls-3" x="145.33" y="96.68" width="14.29" height="7.14"/><rect class="cls-4" x="145.33" y="103.83" width="14.29" height="71.43"/><polygon class="cls-4" points="66.76 68.11 66.76 75.26 66.76 103.83 73.9 103.83 73.9 75.26 131.05 75.26 131.05 103.83 138.19 103.83 138.19 75.26 138.19 68.11 66.76 68.11"/><path class="cls-3" d="M73.9,89.54a7.15,7.15,0,0,0,14.29,0V75.26a7.15,7.15,0,1,0-14.29,0Z"/><path class="cls-3" d="M102.48,89.54a7.15,7.15,0,0,1-14.29,0V75.26a7.15,7.15,0,1,1,14.29,0Z"/><path class="cls-3" d="M116.76,89.54a7.14,7.14,0,1,1-14.28,0V75.26a7.14,7.14,0,1,1,14.28,0Z"/><path class="cls-3" d="M131.05,89.54a7.15,7.15,0,0,1-14.29,0V75.26a7.15,7.15,0,1,1,14.29,0Z"/><path class="cls-3" d="M102.48,53.83A14.24,14.24,0,0,1,88.19,68.11h7.14c7.15,0,14.29,7.15,14.29,14.29H81.05s-7.15,0-7.15-7.14V68.11a28.58,28.58,0,0,1,57.15,0"/><rect class="cls-5" x="73.9" y="25.26" width="57.14" height="21.43"/><circle class="cls-3" cx="84.62" cy="35.97" r="3.57"/></g></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="34.515 22.108 135.354 156.559" width="135.354" height="156.559" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>.cls-1,.cls-3{fill:#dca927;}.cls-2{fill:#f0b0cf;}.cls-2,.cls-3,.cls-4,.cls-5{stroke:#010101;stroke-miterlimit:10;stroke-width:4px;}.cls-4{fill:#f15822;}.cls-5{fill:#a3d4a0;}</style>
+  </defs>
+  <g id="Layer_1" data-name="Layer 1">
+    <ellipse class="cls-1" cx="106.64" cy="69.01" rx="24.4" ry="17.96"/>
+    <rect class="cls-2" x="38.19" y="103.83" width="128.57" height="71.43"/>
+    <rect class="cls-3" x="45.33" y="96.68" width="14.29" height="7.14"/>
+    <rect class="cls-4" x="45.33" y="103.83" width="14.29" height="71.43"/>
+    <rect class="cls-3" x="145.33" y="96.68" width="14.29" height="7.14"/>
+    <rect class="cls-4" x="145.33" y="103.83" width="14.29" height="71.43"/>
+    <polygon class="cls-4" points="66.76 68.11 66.76 75.26 66.76 103.83 73.9 103.83 73.9 75.26 131.05 75.26 131.05 103.83 138.19 103.83 138.19 75.26 138.19 68.11 66.76 68.11"/>
+    <path class="cls-3" d="M73.9,89.54a7.15,7.15,0,0,0,14.29,0V75.26a7.15,7.15,0,1,0-14.29,0Z"/>
+    <path class="cls-3" d="M102.48,89.54a7.15,7.15,0,0,1-14.29,0V75.26a7.15,7.15,0,1,1,14.29,0Z"/>
+    <path class="cls-3" d="M116.76,89.54a7.14,7.14,0,1,1-14.28,0V75.26a7.14,7.14,0,1,1,14.28,0Z"/>
+    <path class="cls-3" d="M131.05,89.54a7.15,7.15,0,0,1-14.29,0V75.26a7.15,7.15,0,1,1,14.29,0Z"/>
+    <path class="cls-3" d="M102.48,53.83A14.24,14.24,0,0,1,88.19,68.11h7.14c7.15,0,14.29,7.15,14.29,14.29H81.05s-7.15,0-7.15-7.14V68.11a28.58,28.58,0,0,1,57.15,0"/>
+    <rect class="cls-5" x="73.9" y="25.26" width="57.14" height="21.43"/>
+    <circle class="cls-3" cx="84.62" cy="35.97" r="3.57"/>
+  </g>
+</svg>

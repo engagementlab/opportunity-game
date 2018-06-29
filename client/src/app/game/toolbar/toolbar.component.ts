@@ -51,8 +51,7 @@ export class GameToolbarComponent implements OnInit {
       this.commLevel = data.commLevel;
       this.jobLevel = data.jobLevel;
       this.englishLevel = data.englishLevel;
-      this.round = data.round;
-
+      
       if(data.gotTransit)
         this.hasTransit = true;
       else if(data.gotJob)
