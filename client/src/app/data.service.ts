@@ -57,7 +57,7 @@ export class DataService {
 
     baseUrl: string;
     index: any;
-    actionsUntilLifeEvent: number = 6;
+    actionsUntilLifeEvent: number = environment.dev ? 1 : 6;
     actionsUntilPayday: number = 5;
 
     durationEffectQueue = [];
@@ -188,8 +188,8 @@ export class DataService {
             this.durationEffectQueue = _.difference(this.durationEffectQueue, effectsToRemove);
         }
 
-        // Reward now or later?
-        if(opportunity.triggerAmt === 0) {
+        // Reward now or later (undefined if life event)
+        if(opportunity.triggerAmt === 0 || opportunity.triggerAmt === undefined) {
 
             this.playerData.commLevel += opportunity.commReward;
             this.playerData.jobLevel += opportunity.jobReward;

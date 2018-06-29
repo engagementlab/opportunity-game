@@ -200,7 +200,7 @@ export class GameComponent implements OnInit {
   }
  
   selectYes(eventId: string) {
-    
+   
     this._dataSvc.updateStats(this._dataSvc.getEventById(eventId));
     this.removeEvent(eventId);
 
