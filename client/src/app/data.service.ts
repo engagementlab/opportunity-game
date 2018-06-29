@@ -57,7 +57,7 @@ export class DataService {
 
     baseUrl: string;
     index: any;
-    actionsUntilLifeEvent: number = environment.dev ? 1 : 6;
+    actionsUntilLifeEvent: number = 6;
     actionsUntilPayday: number = 5;
 
     durationEffectQueue = [];
@@ -148,9 +148,8 @@ export class DataService {
                 if(effect.trigger === DurationEffectTrigger.actions) {
                     effect.triggerCount += opportunity.actionCost;
 
-                    if(effect.triggerCount >= effect.triggerWait) {
+                    if(effect.triggerCount >= effect.triggerWait)
                         effectsToRemove.push(effect);
-                    }
                 }
 
                 i++;
@@ -194,7 +193,7 @@ export class DataService {
             this.playerData.commLevel += opportunity.commReward;
             this.playerData.jobLevel += opportunity.jobReward;
             this.playerData.englishLevel += opportunity.englishReward;
-            
+
             this.playerData.money += opportunity.moneyReward;            
             this.playerData.actions += opportunity.actionReward;
 

@@ -43,6 +43,7 @@ import { RepeatEndDirective } from './utils/repeat-end.directive';
 import { WellbeingComponent } from './wellbeing/wellbeing.component';
 import { RemoveTagsPipe } from './utils/remove-tags.pipe';
 import { TutorialComponent } from './game/tutorial/tutorial.component';
+import { CardComponent } from './game/card/card.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'game', pathMatch: 'full' },
@@ -86,7 +87,8 @@ const appRoutes: Routes = [
     RepeatEndDirective,
     WellbeingComponent,
     RemoveTagsPipe,
-    TutorialComponent
+    TutorialComponent,
+    CardComponent
   ],
   imports: [
     RouterModule.forRoot(

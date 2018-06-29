@@ -147,6 +147,9 @@
 }
 
 #details {
+	.vert-center {
+		top: 25%;
+	}
 	.stars {
 		position: absolute;
 		width: 100%;
@@ -259,7 +262,7 @@
 	}
 }
 
-.opportunity {
+/* .opportunity {
 	text-align: center;
 	font-size: large;
 	background: white;
@@ -348,4 +351,4 @@
 	    font-size: xx-large;
 		}
 	}
-}
+} */

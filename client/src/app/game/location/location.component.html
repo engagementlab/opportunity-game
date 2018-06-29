@@ -43,62 +43,8 @@
 
 	<div id="details" class="modal hidden">
 		<div *ngFor="let opportunity of currentLocation?.opportunities" class="opportunity col-5 col-centered vert-center medium hidden" id="detail_{{opportunity._id}}">
-				<div>
-					<span class="bold">{{opportunity.description.html | removeTags}}</span>
-				</div>
-				<div class="row reward-bg">
-					<!-- Reward -->
-					<div class="reward col-2 col-centered no-pad">
-						<div class="badge" *ngIf="opportunity.triggerAmt > 0">
-							<cdn-image cloudinaryId="opportunity-game/icons/gold_clock.svg" width="25" alt="Icon for Delay"></cdn-image>
-						</div>
-						<div class="icon">
-							<cdn-image cloudinaryId="opportunity-game/icons/{{opportunity.reward.icon}}.svg" alt="Icon for Reward"></cdn-image>
-						</div>
-
-					</div>
-					
-				</div>
-				<div class="delay bold" *ngIf="opportunity.triggerAmt > 0">
-					This takes {{opportunity.triggerAmt}} Actions to complete
-				</div>
-
-				<div class="footer">
-	
-					<!-- costs -->
-					<div class="costs" *ngIf="opportunity.costs.length > 0">
-						<div class="bold medium" *ngIf="opportunity.costs.length > 0">COST</div> 
-						<div class="items" *ngIf="opportunity.enabled === undefined">
-							<div *ngFor="let cost of opportunity.costs" [class.notenough]="cost.has !== undefined && !cost.has" class="cost {{cost.icon}}">
-								<div *ngIf="cost.amt !== undefined && cost.isLvl === undefined" class="text bold">{{cost.amt}}</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- requirements -->
-					<div class="reqs">
-						<div class="bold medium" *ngIf="opportunity.reqs.length > 0">REQUIRED</div> 
-						<div class="items" *ngIf="opportunity.enabled === undefined">
-							<div *ngFor="let cost of opportunity.reqs" [class.notenough]="cost.has !== undefined && !cost.has" class="cost {{cost.icon}} auto">
-								<div *ngIf="cost.isLvl === true" class="badge bold">{{cost.amt}}</div>
-							</div>
-						</div>
-					</div>
-						
-				</div>
-
-				<div class="col-6 auto small">
-					<span class="bold" *ngIf="opportunity.costs.length < 1">This opportunity is free!</span>
-					<span class="bold" *ngIf="opportunity.locked === true"><br/>Come back when you have these requirements.</span>
-				</div>
-
-				<div class="row no-margin buttons" *ngIf="opportunity.locked === false">
-					<app-button label="Yes" ariaLabel="Click to learn about {{opportunity.name}}" clickData="true" (clickEvent)="selectOpportunity(opportunity, opportunity._id)" class="green"></app-button>
-					<app-button label="No" ariaLabel="Click to close {{opportunity.name}} window" clickData="true" (clickEvent)="backToList(opportunity._id)" class="orange"></app-button>
-				</div>
-				<div class="no-margin buttons" *ngIf="opportunity.locked === true">
-					<app-button label="Close" ariaLabel="Click to close {{opportunity.name}} window" clickData="true" (clickEvent)="backToList(opportunity._id)" class="orange"></app-button>
-				</div>
+			
+			<game-card [data]="opportunity" (clickEvent)="selectOpportunity(opportunity, opportunity._id)" (clickNoEvent)="backToList(opportunity._id)"></game-card>
 
 		</div>
 	</div>

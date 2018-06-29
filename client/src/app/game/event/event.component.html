@@ -1,7 +1,9 @@
 <div class="game-event col-5 vert-center medium inner-modal hidden" id="{{data._id}}">
 
-<!-- 	<h2 *ngIf="data.type === 'effect'" class="small">Opportunity: {{data.name}}</h2>
-	<h2>Life Event</h2> -->
+	<game-card [data]="data" type="{{data.type}}" (clickEvent)="selectYes(data._id)" (clickNoEvent)="selectNo(data._id)"></game-card>
+
+</div>
+<!-- 
 
 	<div>
 		<span class="bold">{{data.flavor}}</span>
@@ -15,7 +17,6 @@
 
 	<div class="footer">
 
-		<!-- costs -->
 		<div class="costs" *ngIf="data.costs.length > 0">
 			<div class="bold medium" *ngIf="data.costs.length > 0">COST</div> 
 			<div class="items">
@@ -34,7 +35,6 @@
 
 	</div>
 
-	<div *ngIf="data.type === 'life'">
 		<div class="row" *ngIf="data.locked === false">
 			<app-button label="Yes" ariaLabel="Click/tap to learn accept {{data.name}}" clickData="true" (clickEvent)="selectYes(data._id)" class="green large col-centered"></app-button>
 			<app-button label="No" ariaLabel="Click/tap to close {{data.name}} window" clickData="true" (clickEvent)="selectNo(data._id)" class="orange large col-centered"></app-button>
@@ -48,4 +48,4 @@
 		<app-button label="Got it!" ariaLabel="Click/tap to confirm and close {{data.name}} window" clickData="true" (clickEvent)="selectNo(data._id)" class="gold large effect"></app-button>
 	</div>
 
-</div>
+</div> -->

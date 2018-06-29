@@ -84,21 +84,25 @@ export class GameLocationComponent implements OnInit {
 
   viewOpportunity(id: Opportunity["_id"], enabled: boolean) {
 
-    if(enabled === false) return;
+    if(enabled === false) {
+      TweenMax.fromTo(document.getElementById('listing_'+id), 0.15, {x:-20}, {x:20, repeat:2, yoyo:true, ease:Sine.easeInOut, onComplete:function(){
+        TweenMax.to(this.target, 1.5, {x:0, ease:Elastic.easeOut});
+      }});
+      return;
+    } 
 
     let detailsParent = document.getElementById('details');
-    let allDetails = document.querySelector('#details').querySelectorAll('.opportunity');
     let detailsChild = (<HTMLElement>document.getElementById('detail_' + id));
+    let allDetails = document.querySelector('#details').querySelectorAll('.opportunity');
 
     _.each(allDetails, (el) => {
       (<HTMLElement>el).style.display = 'none';
     });
 
     TweenLite.to(detailsParent, .5, {autoAlpha:1, display:'block'});
-    TweenLite.to(document.getElementById('list'), .5, {autoAlpha:0, display:'none', oncomplete:() => {
+    TweenLite.to(document.getElementById('list'), .3, {autoAlpha:0, display:'none', oncomplete:() => {
 
-      TweenLite.fromTo(detailsChild, 2, {autoAlpha:0}, {autoAlpha:1, delay:.5, display:'block', ease:Elastic.easeOut});
-      
+      TweenLite.fromTo(detailsChild, 1, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, delay:.3, display:'block', ease:Back.easeOut});
     
     }});
 
@@ -106,12 +110,9 @@ export class GameLocationComponent implements OnInit {
 
   backToList(modalId: string) {
     
-    TweenLite.to(document.getElementById('detail_'+modalId), 1, {autoAlpha:0, display:'none', ease: Back.easeIn, oncomplete:() => {
-
-      TweenLite.to(document.getElementById('list'), 1, {autoAlpha:1, display:'block'});
-      TweenLite.to(document.getElementById('details'), .5, {autoAlpha:0, display:'none'});
-    
-    }});
+    TweenLite.fromTo(document.getElementById('detail_'+modalId), .5, {autoAlpha:1, scale:1}, {autoAlpha:0, scale:0, display:'none', ease:Back.easeIn});
+    TweenLite.to(document.getElementById('list'), .3, {autoAlpha:1, delay:.5, display:'block'});
+    TweenLite.to(document.getElementById('details'), .5, {autoAlpha:0, delay:.5, display:'none'});
 
   }
 
@@ -122,6 +123,9 @@ export class GameLocationComponent implements OnInit {
   }
 
   selectOpportunity(opportunity: Opportunity, modalId: string) {
+
+    // Hide buttons
+    TweenLite.to(document.querySelector('#detail_'+modalId+' .buttons'), .001, {alpha:0});
 
     this.backToList(modalId);
 

@@ -1,0 +1,78 @@
+<section class="card">
+
+	<div>
+		<span class="bold" *ngIf="type === undefined">{{data.description.html | removeTags}}</span>
+		<span class="bold" *ngIf="type === 'life' || type === 'effect'">{{data.flavor}}</span>
+	</div>
+
+	<div class="row reward-bg">
+
+		<!-- Reward -->
+		<div class="reward col-2 col-centered no-pad">
+
+			<div class="badge" *ngIf="data.triggerAmt > 0 && isEvent === undefined">
+				<cdn-image cloudinaryId="opportunity-game/icons/gold_clock.svg" width="25" alt="Icon for Delay"></cdn-image>
+			</div>
+			
+			<div class="icon" *ngIf="data.reward !== undefined">
+				<cdn-image cloudinaryId="opportunity-game/icons/{{data.reward.icon}}.svg" alt="Icon for Reward"></cdn-image>
+			</div>
+
+		</div>
+		
+	</div>
+
+	<div class="delay bold" *ngIf="data.triggerAmt > 0 && isEvent === undefined">
+		This takes {{data.triggerAmt}} Actions to complete
+	</div>
+
+	<div class="footer">
+
+		<!-- costs -->
+		<div class="costs" *ngIf="data.costs.length > 0">
+			<div class="bold medium" *ngIf="data.costs.length > 0">COST</div> 
+			<div class="items" *ngIf="data.enabled === undefined">
+				<div *ngFor="let cost of data.costs" [class.notenough]="cost.has !== undefined && !cost.has" class="cost {{cost.icon}}">
+					<div *ngIf="cost.amt !== undefined && cost.isLvl === undefined" class="text bold">{{cost.amt}}</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- requirements -->
+		<div class="reqs">
+			<div class="bold medium" *ngIf="data.reqs.length > 0">REQUIRED</div> 
+			<div class="items" *ngIf="data.enabled === undefined">
+				<div *ngFor="let cost of data.reqs" [class.notenough]="cost.has !== undefined && !cost.has" class="cost {{cost.icon}} auto">
+					<div *ngIf="cost.isLvl === true" class="badge bold">{{cost.amt}}</div>
+				</div>
+			</div>
+		</div>
+			
+	</div>
+
+	<div class="col-6 auto small">
+		<span class="bold" *ngIf="data.costs.length < 1 && type === undefined">This opportunity is free!</span>
+		<span class="bold" *ngIf="data.costs.length < 1 && type === 'life'">This event is free!</span>
+
+		<span class="bold" *ngIf="data.locked === true && type === undefined"><br/>Come back when you have these requirements.</span>
+		<span class="bold" *ngIf="data.locked === true && type === 'life'"><br/>You don't have the requirements to say yes!</span>
+	</div>
+
+	<div *ngIf="type !== 'effect'">
+		<div class="row no-margin buttons" *ngIf="data.locked === false">
+			<app-button label="Yes" ariaLabel="Click/tap to learn about {{data.name}}" clickData="true" (click)="clickHandler()" class="green"></app-button>
+			<app-button label="No" ariaLabel="Click/tap to close {{data.name}} window" clickData="true" (click)="clickNo()" class="orange"></app-button>
+		</div>
+		<div class="no-margin buttons" *ngIf="data.locked === true && data.enabled === undefined">
+			<app-button label="Close" ariaLabel="Click/tap to close {{data.name}} window" clickData="true" (click)="clickNo()" class="orange"></app-button>
+		</div>
+	</div>
+
+	<div class="col-5 col-centered" *ngIf="type === 'effect'">
+		<div class="no-margin buttons">
+			<app-button label="Got it!" ariaLabel="Click/tap to confirm and close {{data.name}} window" clickData="true" (click)="clickNo()" class="gold effect"></app-button>
+		</div>
+	</div>
+
+
+</section>

@@ -1,0 +1,142 @@
+@import "~sass/_variables";
+
+.card {
+	text-align: center;
+	font-size: large;
+	background: white;
+	padding: 5%;
+	@include box-shadow(4px, 4px, 0, #000000);
+	min-height: 250px;
+
+	.footer {
+		display: flex;
+		flex-direction: row;		
+		justify-content: center;
+
+		font-size: small;
+    text-align: center;
+    margin: 0;
+    width: 100%;
+    padding-top: 5%;
+
+    .items {
+			display: flex;
+			flex-direction: row;
+
+			.cost {
+				min-width: 55px;
+			}
+    }
+    .reqs {
+    	margin-left: 5%;
+    }
+  	.badge {
+			display: inline-block;
+			position: relative;
+			width: 15px;
+			top: 30px;
+
+		  z-index: 1;
+		  float: left;
+		  left: 9%;
+
+		  background-color: $gold;
+		  border-radius: 50%;
+		}
+	}
+
+	.buttons {
+		width: 100%;
+    margin-top: 5%;
+		display: flex;
+		flex-direction: row;		
+		justify-content: space-evenly;
+
+		:not(.effect) > ::ng-deep .btn {
+			padding: 20%;
+		}
+	}
+
+	.reward-bg {
+		background-image: cdn-image('stars', c_scale, w_55);
+		background-size: 73%;
+    background-repeat: no-repeat;
+    background-position: center;
+	}
+	.reward {
+		::ng-deep img {
+    	max-width: 120px;
+		}
+		.badge {
+			top: 66%;
+	    padding-right: 50px;
+	    left: 17%;
+		}
+	}
+
+	.cost {
+		display: block;
+		min-width: 50px;
+		min-height: 45px;
+		text-align: right;
+		background-repeat: no-repeat;
+
+		.text {
+			vertical-align: top;
+	    display: inline-flex;
+	    padding-top: 5%;
+	    margin-left: -18%;
+	    font-size: xx-large;
+		}
+		&.money {
+			background-image: cdn-image('icons/money', c_scale, w_15);
+			&.notenough {
+				background-image: cdn-image('icons/money-white', c_scale, w_15);
+			}
+		}
+		&.action {
+			background-image: cdn-image('icons/action', c_scale, w_15);
+			
+			&.notenough {
+				background-image: cdn-image('icons/action-clear', c_scale, w_15);
+			}
+		}
+		&.community {
+			background-image: cdn-image('icons/community', c_scale, w_15);
+			&.notenough {
+				background-image: cdn-image('icons/community-clear', c_scale, w_15);
+			}
+		}
+		&.english {
+			background-image: cdn-image('icons/english', c_scale, w_15);
+			&.notenough {
+				background-image: cdn-image('icons/english-clear', c_scale, w_15);
+			}
+		}
+		&.training {
+			background-image: cdn-image('icons/training-color', c_scale, w_15);
+			&.notenough {
+				background-image: cdn-image('icons/training-clear', c_scale, w_40);
+			}
+		}
+		&.job {
+			background-image: cdn-image('icons/job', c_scale, w_15);
+			&.notenough {
+				background-image: cdn-image('icons/job-clear', c_scale, w_15);
+			}
+		}
+		&.transit {
+			background-image: cdn-image('icons/transit', c_scale, w_15);
+			&.notenough {
+				background-image: cdn-image('icons/transit-clear', c_scale, w_15);
+			}
+		}
+	}
+
+	.buttons {
+		.effect {
+
+		}
+	}
+
+}
