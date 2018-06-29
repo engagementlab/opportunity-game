@@ -20,6 +20,8 @@ export class PendingChangesGuard implements CanDeactivate<DeactivateGuard> {
   	else if(nextState.url.indexOf('/game') > -1)
   		allow = true;
 
+    debugger;
+
     // if there are no pending changes, just allow deactivation; else confirm first
     return !allow ? confirm('WARNING: Your game will end if you leave!') : true; 
   }

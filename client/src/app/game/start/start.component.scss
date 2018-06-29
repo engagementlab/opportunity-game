@@ -24,14 +24,11 @@
 		background-repeat: repeat-x;
 	}
 
-	@include mq($from: desktop) {
-		border-bottom: 4px solid black;
-	}
 }
 
 #start {
 	
-	position: absolute;
+	position: relative;
 	height: 97vh;
   
   @include game-width();

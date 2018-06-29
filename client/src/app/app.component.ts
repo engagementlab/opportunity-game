@@ -10,10 +10,9 @@ import { DeactivateGuard } from './deactivate-guard';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  host: {'window:beforeunload':'beforeunloadHandler'}
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, DeactivateGuard {
+export class AppComponent implements OnInit {
   public loading: boolean;
   public isQABuild: boolean;
   title = 'Portland of Opportunity';
@@ -27,14 +26,9 @@ export class AppComponent implements OnInit, DeactivateGuard {
   }
 
   // @HostListener allows us to also guard against browser refresh, close, etc.
-  // @HostListener('window:beforeunload')
-  // canDeactivate(): Observable<boolean> | boolean {
-  //   return true;
-  // }
-@HostListener('window:beforeunload', ['$event'])
-beforeunloadHandler(event) {
-    // console.log(event)
-    event.preventDefault();
-    return alert('By refreshing this page you may lost all data.');
-}
+  @HostListener('window:beforeunload')
+  canDeactivate(): Observable<boolean> | boolean {
+    return false;
+  }
+
 }
