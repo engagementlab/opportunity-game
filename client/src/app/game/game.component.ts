@@ -80,20 +80,8 @@ export class GameComponent implements OnInit {
 
   constructor(private router: Router, public _dataSvc: DataService) { 
 
+    let gameEnd: boolean;
     this.getData();
-
-    router.events.subscribe((val) =>  {
-
-      if(val instanceof NavigationEnd) {
-        
-        if(val.url.indexOf("/game/home") > -1) {
-          TweenLite.to(document.getElementById('toolbar-parent'), 1, {autoAlpha: 1, display:'block'});
-          TweenLite.to(document.getElementById('wellbeing'), 1, {autoAlpha: 1, display:'block'});
-        }
-        
-      }
-      
-    });
 
     this._dataSvc.playerDataUpdate.subscribe((data: PlayerData) => {
 
@@ -102,7 +90,8 @@ export class GameComponent implements OnInit {
 
       if(data.gameEnded) {
         
-        this.currentWellnessScore = (data.wellnessScore / data.wellnessGoal) * data.wellnessGoal;
+        gameEnd = true;
+        this.currentWellnessScore = Math.round((data.wellnessScore / data.wellnessGoal) * data.wellnessGoal);
 
         this.wonGame = data.wellnessScore === data.wellnessGoal;
         (<HTMLElement>document.querySelector('#game-over #inner')).style.width = this.currentWellnessScore + "%";
@@ -111,6 +100,8 @@ export class GameComponent implements OnInit {
         
         let content = <HTMLElement>document.querySelector('#game-over #content');
         content.style.visibility = 'hidden';
+
+        TweenLite.to(document.getElementById('wellbeing'), 1, {autoAlpha:0, display:'none'});
         TweenLite.fromTo(document.getElementById('game-over'), 3, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, display:'block', ease: Sine.easeOut});
         TweenLite.to(content, 1, {autoAlpha:1, delay:3.1});
 
@@ -156,6 +147,21 @@ export class GameComponent implements OnInit {
         TweenLite.to(eventEl, 1, {autoAlpha:1, display:'block'});
         
       }
+    });
+
+    router.events.subscribe((val) =>  {
+
+      if(gameEnd) return;
+
+      if(val instanceof NavigationEnd) {
+        
+        if(val.url.indexOf("/game/home") > -1) {
+          TweenLite.to(document.getElementById('toolbar-parent'), 1, {autoAlpha: 1, display:'block'});
+          TweenLite.to(document.getElementById('wellbeing'), 1, {autoAlpha: 1, display:'block'});
+        }
+        
+      }
+      
     });
 
   }
