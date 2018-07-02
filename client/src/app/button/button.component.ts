@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-button',
@@ -17,6 +17,13 @@ export class ButtonComponent implements OnInit {
   @Input() clickData: any;
 
   @Output() clickEvent = new EventEmitter<any>();
+
+  @HostListener('click', ['$event.target'])
+  onClick(targetElement) {
+
+    ion.sound.play('click');
+    
+  }
 
   constructor() { }
 

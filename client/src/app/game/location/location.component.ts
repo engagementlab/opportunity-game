@@ -117,6 +117,8 @@ export class GameLocationComponent implements OnInit {
   }
 
   backToCategory() {
+
+    ion.sound.play('click');
     
     this.location.back();
 
@@ -144,7 +146,35 @@ export class GameLocationComponent implements OnInit {
     if(opportunity.locationUnlocks !== undefined && opportunity.locationUnlocks.length > 0 && opportunity.triggerAmt === 0)
       this._dataSvc.enableLocations(opportunity.locationUnlocks);
     
-    this._dataSvc.playerData.sawTutorial = true;
+    if(!this._dataSvc.playerData.sawTutorial) {
+      this._dataSvc.playerData.sawTutorial = true;
+
+      // ion.sound.stop('music-tutorial');
+      let newVolume = 1;
+      let fadeOut = setInterval(() => {
+        
+        ion.sound.volume('music-tutorial', {volume: newVolume});
+        newVolume -= .05;
+
+        if(newVolume <= 0) {
+          clearInterval(fadeOut);
+
+          ion.sound.stop('music-tutorial');
+          ion.sound.play('music-base', {loop: true, volume:newVolume});
+          
+          let fadeIn = setInterval(() => {
+            newVolume += .05;
+            ion.sound.volume('music-base', {volume: newVolume});
+            if(newVolume >= 1)
+              clearInterval(fadeIn);
+
+          }, 100);
+
+        }
+
+      }, 100);
+    
+    }
     
     this.location.back();
 

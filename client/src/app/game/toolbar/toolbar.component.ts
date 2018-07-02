@@ -102,7 +102,6 @@ export class GameToolbarComponent implements OnInit {
       }
       else if(data.type === 'location') {
         Array.prototype.push.apply(this.rewardLocations, data.location);
-        // this.rewardLocations.push(data.location);
         elemId = data.location._id;
 
         setTimeout(() => {

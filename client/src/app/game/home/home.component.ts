@@ -145,6 +145,8 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
 
   filterSelection(category: string) {
 
+    ion.sound.play('click');
+
     let x, i;
     let showAll = (category === "all");
     let label = _.where(this.filters, {key: category})[0]['label'];
@@ -182,6 +184,8 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
   }
 
   backToHome() { 
+
+    ion.sound.play('click');
     
     TweenLite.fromTo(document.getElementById('map'), .7, {autoAlpha:1, left:0}, {autoAlpha:0, left:'100%', display:'none', ease:Back.easeIn});
     TweenLite.fromTo(document.getElementById('home'), .7, {autoAlpha:0, left:'-100%'}, {autoAlpha:1, left:0, delay:.7, display:'block', ease:Back.easeOut});

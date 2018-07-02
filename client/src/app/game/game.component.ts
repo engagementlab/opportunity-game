@@ -42,12 +42,26 @@ export class GameComponent implements OnInit {
   }
 
   @HostListener('document:click', ['$event.target'])
-  public onClick(targetElement) {
+  onClick(targetElement) {
       ion.sound({
           sounds: [
-              {
-                  name: "confirm"
+            {
+              name: "confirm"
+            },
+            {
+              name: "music-tutorial",        
+              ready_callback: (obj) => {  
+                setTimeout(() => 
+                  { ion.sound.play('music-tutorial', {loop: true}) },
+                  500);
               }
+            },
+            {
+              name: "music-base"
+            },
+            {
+              name: "click"
+            }
           ],
           volume: 1,
           path: this.sfxPath,
