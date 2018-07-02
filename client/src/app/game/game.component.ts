@@ -57,10 +57,6 @@ export class GameComponent implements OnInit {
 
   getData() {
 
-    this.commLevel = this._dataSvc.playerData.commLevel;
-    this.jobLevel = this._dataSvc.playerData.jobLevel;
-    this.englishLevel = this._dataSvc.playerData.englishLevel;
-
     // DEBUG: If no goal, get data and assign one
     if(this.assignedGoal === undefined) {
       this._dataSvc.getCharacterData().subscribe(response => {
