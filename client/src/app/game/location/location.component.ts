@@ -145,6 +145,8 @@ export class GameLocationComponent implements OnInit {
       this._dataSvc.enableLocations(opportunity.locationUnlocks);
     
     this._dataSvc.playerData.sawTutorial = true;
+    
+    this.location.back();
 
   }
 

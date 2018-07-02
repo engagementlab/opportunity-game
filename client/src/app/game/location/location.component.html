@@ -5,6 +5,12 @@
 	</div>
 
  	<div id="list" class="col-6">
+
+	 	<div id="flavor" class="col-5">
+			<h2>{{currentLocation.name}}</h2>
+			<div class="medium">{{currentLocation.intro.html | removeTags}}</div>
+		</div>
+
 		<button *ngFor="let opportunity of currentLocation?.opportunities" (click)="viewOpportunity(opportunity._id, opportunity.enabled)" class="col-6 bold" 
 			[class.unlocked]="opportunity.enabled === undefined" id="listing_{{opportunity._id}}">
 

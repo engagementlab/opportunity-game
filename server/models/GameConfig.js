@@ -34,6 +34,7 @@ GameConfig.add({
   startingMoney: { type: Number, required: true, initial: true },
   startingActions: { type: Number, required: true, initial: true },
   wellnessGoal: { type: Number, required: true, initial: true },
+  surveyUrl: { type: Types.Url },
 
 	createdAt: { type: Date, default: Date.now, noedit: true, hidden: true }
 });

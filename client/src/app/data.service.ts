@@ -54,6 +54,7 @@ export class DataService {
     public commGoalLast: number = 0;
     public jobGoalLast: number = 0;
     public englishGoalLast: number = 0;
+    public surveyUrl: string;
 
     baseUrl: string;
     index: any;
@@ -250,6 +251,7 @@ export class DataService {
         // Update availability
         _.each(this.eventData, (thisEvt) => {
             let canBuy = false;
+
             if(thisEvt.moneyCost > 0 && thisEvt.actionCost > 0)
                 canBuy = (this.playerData.money >= thisEvt.moneyCost && this.playerData.actions >= thisEvt.actionCost);
             else if(thisEvt.moneyCost > 0 && thisEvt.actionCost < 1)
@@ -399,6 +401,9 @@ export class DataService {
         this.playerData.money = newData.config.startingMoney;
         this.playerData.actions = newData.config.startingActions;
         this.playerData.wellnessGoal = newData.config.wellnessGoal;
+
+        this.surveyUrl = newData.config.surveyUrl;
+
         this.playerDataUpdate.emit(this.playerData);
 
         this.locationData = newData.locations;

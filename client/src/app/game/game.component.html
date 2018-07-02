@@ -44,7 +44,7 @@
 		</div>
 
 		<div class="col-6 auto">
-			<app-button label="Share Your Input" ariaLabel="Click/tap to go to post-game survery" href="/" class="gold"></app-button>
+			<app-button label="Share Your Input" ariaLabel="Click/tap to go to post-game survey" href="{{surveyUrl}}" class="gold" *ngIf="surveyUrl !== undefined"></app-button>
 			<div id="play-again" class="btn col-6" (click)="startOver()"><cdn-image cloudinaryId="opportunity-game/icons/arrow-back.svg" width="20" alt="Play again arrow icon" class=""></cdn-image>Play Again</div>
 		</div>
 

@@ -11,9 +11,7 @@ a.btn {
 
   letter-spacing: 2px;
   padding: 7%;
-  // padding-top: 2%;
-  // max-height: 50px;
-
+  
   flex: 1 1 auto;
   text-align: center;
   text-transform: uppercase;
@@ -22,14 +20,16 @@ a.btn {
 
   @include border-radius(70);
   @include transition(all, 150ms, cubic-bezier(0.64, 0.57, 0.67, 1.53));
+  @include box-shadow(0, 4px, 0, rgba(0, 0, 0, 0.1));
 
   &:hover {
     cursor: pointer;
-    @include scale(1.2);
+    @include scale(1.05);
+    @include box-shadow(4px, 8px, 21px, rgba(0, 0, 0, 0.1));
   }
   &:active {
     cursor: pointer;
-    @include scale(.8);
+    @include scale(.9);
   }
 
   &.gold {

@@ -25,6 +25,7 @@ export class GameComponent implements OnInit {
   public character: Character;
   public wonGame: boolean = false;
   public currentWellnessScore: number = 0;
+  public surveyUrl: string;
 
   eventsQueue: HTMLElement[] = [];
   
@@ -32,9 +33,6 @@ export class GameComponent implements OnInit {
   round: number = 1;
   gameEnded: number;
 
-  commLevel: number;
-  jobLevel: number;
-  englishLevel: number;
   assignedGoal: Goal;
   
   sfxPath: string = 'https://res.cloudinary.com/engagement-lab-home/video/upload/v1000000/opportunity-game/sfx/';
@@ -104,14 +102,12 @@ export class GameComponent implements OnInit {
     this._dataSvc.playerDataUpdate.subscribe((data: PlayerData) => {
 
       this.character = this._dataSvc.assignedChar;
-
-      this.commLevel = data.commLevel;
-      this.jobLevel = data.jobLevel;
-      this.englishLevel = data.englishLevel;
+      this.surveyUrl = this._dataSvc.surveyUrl;
 
       if(data.gameEnded) {
         
         this.currentWellnessScore = (data.wellnessScore / data.wellnessGoal) * data.wellnessGoal;
+
         this.wonGame = data.wellnessScore === data.wellnessGoal;
         (<HTMLElement>document.querySelector('#game-over #inner')).style.width = this.currentWellnessScore + "%";
 
