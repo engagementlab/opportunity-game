@@ -1,8 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg viewBox="0 0 25 25" width="25" height="25" xmlns="http://www.w3.org/2000/svg">
-  <g fill="none" fill-rule="evenodd" transform="matrix(0.9999999999999999, 0, 0, 0.9999999999999999, -2.220446049250313e-16, 0)">
-    <g stroke="#000" stroke-width="2">
-      <path d="M 12.5 18 L 12.547 8 M 12.5 7.5 C 12.5 10.538 10.038 13 7 13 M 12.5 7.5 C 12.5 10.538 14.962 13 18 13" transform="matrix(0, -1, 1, 0, -0.249999, 25.25)"/>
-    </g>
-  </g>
-</svg>
+<svg height="15" viewBox="0 0 15 15" width="15" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="#fff" stroke-width="2" transform="matrix(-1 0 0 1 15 0)"><path d="m0 7.5 13.6362161.06342477"/><path d="m14.3181818 7.5c-4.1422836 0-7.49999998-3.35812892-7.49999998-7.5"/><path d="m14.3181818 7.5c-4.1422836 0-7.49999998 3.3581289-7.49999998 7.5"/></g></svg>
