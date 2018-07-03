@@ -127,8 +127,6 @@ export class DataService {
         if(this.playerData.actions <= 0)
             this.playerData.actions = 0;
 
-        this.playerData.wellnessScore = this.calcWellness();
-
         this.actionsUntilLifeEvent -= opportunity.actionCost;
         this.actionsUntilPayday -= opportunity.actionCost;
 
@@ -215,6 +213,7 @@ export class DataService {
             this.delayedRewardQueue.push(delayedReward);
         }
 
+        this.playerData.wellnessScore = this.calcWellness();
         this.playerDataUpdate.emit(this.playerData);
 
         if(this.playerData.actions <= 0)
@@ -375,8 +374,16 @@ export class DataService {
 
     private calcWellness() {
 
-        let jceLvl = 2 * (this.playerData.jobLevel + this.playerData.commLevel + this.playerData.englishLevel);
-        return jceLvl + this.playerData.money;
+        let jceLvl = (6*this.playerData.jobLevel) + (6*this.playerData.commLevel) + (6*this.playerData.englishLevel);
+        
+        if(this.playerData.hasJob)
+            jceLvl += 15;
+        if(this.playerData.hasTransit)
+            jceLvl += 15;
+
+        debugger;
+
+        return jceLvl;
 
     }
 
