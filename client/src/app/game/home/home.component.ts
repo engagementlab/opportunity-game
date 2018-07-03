@@ -71,7 +71,10 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
 
       this.loaded = true;
 
-      this.screenAnimation();
+
+      let categoryId = this.route.snapshot.queryParams.cat;
+      if(!categoryId)
+        this.screenAnimation();
 
     });
 
@@ -95,7 +98,7 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
     let categoryId = this.route.snapshot.queryParams.cat;
     // Load category now?
     if(categoryId)
-      this.filterSelection(categoryId);
+      this.filterSelection(categoryId, true);
 
     this.loadedCategory = true;
 
@@ -143,7 +146,7 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
 
   }
 
-  filterSelection(category: string) {
+  filterSelection(category: string, onLoad: boolean=false) {
 
     ion.sound.play('click');
 
@@ -154,8 +157,12 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
 
     x = document.getElementsByClassName("location");
 
-    TweenLite.fromTo(document.getElementById('home'), .7, {autoAlpha:1, left:0}, {autoAlpha:0, left:'-100%', display:'none', ease:Back.easeIn});
-    TweenLite.fromTo(document.getElementById('map'), .7, {autoAlpha:1, left:'100%'}, {autoAlpha:1, left:0, delay:.7, display:'block', ease:Back.easeOut});
+    if(!onLoad)
+      TweenLite.fromTo(document.getElementById('home'), .7, {autoAlpha:1, left:0}, {autoAlpha:0, left:'-100%', display:'none', ease:Back.easeIn});
+    else
+      document.getElementById('home').style.display = 'none';
+
+    TweenLite.fromTo(document.getElementById('map'), .7, {autoAlpha:1, left:'100%'}, {autoAlpha:1, left:0, delay:(!onLoad ? .7 : 1), display:'block', ease:Back.easeOut});
 
     document.getElementById('category-label').innerHTML = label;
     
@@ -186,9 +193,21 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
   backToHome() { 
 
     ion.sound.play('click');
+
+    document.getElementById('city').style.display = 'block';
+    if(this.loadedCategory) {
+      TweenLite.fromTo(document.getElementById('map'), .7, {autoAlpha:1, left:0}, {autoAlpha:0, left:'100%', display:'none', ease:Back.easeIn});
+      TweenLite.fromTo(document.getElementById('home'), .7, {autoAlpha:0, left:'-100%'}, {autoAlpha:0, left:0, delay:.7, display:'block', ease:Back.easeOut, onComplete: () => {
+
+        this.screenAnimation();
+      }});
+    }
+    else {
     
-    TweenLite.fromTo(document.getElementById('map'), .7, {autoAlpha:1, left:0}, {autoAlpha:0, left:'100%', display:'none', ease:Back.easeIn});
-    TweenLite.fromTo(document.getElementById('home'), .7, {autoAlpha:0, left:'-100%'}, {autoAlpha:1, left:0, delay:.7, display:'block', ease:Back.easeOut});
+      TweenLite.fromTo(document.getElementById('map'), .7, {autoAlpha:1, left:0}, {autoAlpha:0, left:'100%', display:'none', ease:Back.easeIn});
+      TweenLite.fromTo(document.getElementById('home'), .7, {autoAlpha:0, left:'-100%'}, {autoAlpha:1, left:0, delay:.7, display:'block', ease:Back.easeOut});
+
+    }
 
     const params = { ...this.route.snapshot.queryParams };
     delete params.cat;
