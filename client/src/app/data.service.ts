@@ -120,7 +120,13 @@ export class DataService {
     public updateStats(opportunity: any) {
 
         this.playerData.money -= opportunity.moneyCost;
+        if(this.playerData.money <= 0)
+            this.playerData.money = 0;
+
         this.playerData.actions -= opportunity.actionCost;
+        if(this.playerData.actions <= 0)
+            this.playerData.actions = 0;
+
         this.playerData.wellnessScore = this.calcWellness();
 
         this.actionsUntilLifeEvent -= opportunity.actionCost;

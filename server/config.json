@@ -3,7 +3,9 @@
 	"database": "opportunity-game",
 	"allowed_domains": ["portland.qa.opportunitygame.org", "portland.opportunitygame.org"],
 	"admin_nav": { 
-									"locations": ["Location", "Opportunity", "Event"],
-									"character": ["Character", "Goal"]
+									"locations": ["Location", "Opportunity"],
+									"events": ["Event"],
+									"characters": ["Character"],
+									"config": ["GameConfig"]
 								}
 }
