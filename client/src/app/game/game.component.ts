@@ -153,6 +153,7 @@ export class GameComponent implements OnInit {
       if(allEvents.length > 0) {
   
         let eventIndex = Math.floor(Math.random() * ((allEvents.length-1) - 0 + 1));
+        // debugger;
         let eventEl = allEvents[eventIndex];
         
         if(eventEl === undefined) return;

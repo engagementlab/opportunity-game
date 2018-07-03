@@ -60,18 +60,23 @@
 
 	<div *ngIf="type !== 'effect'">
 		<div class="row no-margin buttons" *ngIf="data.locked === false">
-			<app-button label="Yes" ariaLabel="Click/tap to learn about {{data.name}}" clickData="true" (click)="clickHandler()" class="green"></app-button>
-			<app-button label="No" ariaLabel="Click/tap to close {{data.name}} window" clickData="true" (click)="clickNo()" class="orange"></app-button>
+			<app-button label="Yes" ariaLabel="Click/tap to say yes to the event '{{data.name}}'" clickData="true" (click)="clickHandler()" class="green"></app-button>
+			<app-button label="No" ariaLabel="Click/tap to say no to the event '{{data.name}}'" clickData="true" (click)="clickNo()" class="orange"></app-button>
 		</div>
 		<div class="no-margin buttons" *ngIf="data.locked === true && data.enabled === undefined">
 			<app-button label="Close" ariaLabel="Click/tap to close {{data.name}} window" clickData="true" (click)="clickNo()" class="orange"></app-button>
 		</div>
 	</div>
 
-	<div class="col-5 col-centered" *ngIf="type === 'effect'">
-		<div class="no-margin buttons">
-			<app-button label="Got it!" ariaLabel="Click/tap to confirm and close {{data.name}} window" clickData="true" (click)="clickNo()" class="gold effect"></app-button>
-		</div>
+	<!-- Effects event -->
+	<div class="row no-margin buttons" *ngIf="type === 'effect' && data.costs.length > 0">
+		<app-button label="Yes" ariaLabel="Click/tap to say yes to the event '{{data.name}}'" clickData="true" (click)="clickHandler()" class="green"></app-button>
+		<app-button label="No" ariaLabel="Click/tap to say no to the event '{{data.name}}'" clickData="true" (click)="clickNo()" class="orange"></app-button>
+	</div>
+
+	<!-- Free -->
+	<div class="col-5 col-centered" *ngIf="type === 'effect' && data.costs.length < 1">
+		<app-button label="Got it!" ariaLabel="Click/tap to confirm and close {{data.name}} window" clickData="true" (click)="clickHandler()" class="gold effect"></app-button>
 	</div>
 
 

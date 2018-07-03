@@ -381,8 +381,6 @@ export class DataService {
         if(this.playerData.hasTransit)
             jceLvl += 15;
 
-        debugger;
-
         return jceLvl;
 
     }
