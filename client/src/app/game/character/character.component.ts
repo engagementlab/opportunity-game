@@ -36,7 +36,7 @@ export class GameCharacterComponent implements OnInit {
   ngOnInit() {
     
     let bubble = document.getElementById('bubble');
-    TweenLite.fromTo(bubble, 1.5, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, delay:3, display:'block', ease:Elastic.easeOut});
+    TweenLite.fromTo(bubble, 1.5, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, delay:2, display:'block', ease:Elastic.easeOut});
   }
 
   goBack() {
@@ -55,36 +55,27 @@ export class GameCharacterComponent implements OnInit {
   onSelectionChange(evt) {
     
   	let category = evt.target.name;
-  	let otherCategories = document.getElementsByClassName('buttons');
-    let startBtnDesktop = document.getElementById('submit-btn-desktop');
-    let startBtnMobile = document.getElementById('submit-btn-mobile');
-
-		this.categoryData.set(category, evt.target);
+  	let otherCategories = document.getElementsByClassName('input');
+    let startBtn = document.getElementById('submit-btn');
 
     _.each(otherCategories, (el) => {
-
-      _.each(el.children, (child) => {
-        // Get radio button
-        let childEl = <HTMLInputElement>child.children[0];
-
-        // Find if value already checked in other category and uncheck
-        if(evt.target.value === childEl.value && 
-           childEl.getAttribute('name') !== category)
-          childEl.checked = false;
-  		});
+      
+      if(el !== evt.target) {
+        TweenLite.to(document.getElementById((<HTMLInputElement>el).name), .5, {scale:1, ease:Back.easeOut});
+        (<HTMLInputElement>el).checked = false;
+      }
+      else {
+        TweenLite.to(document.getElementById(evt.target.name), .5, {scale:1.2, ease:Elastic.easeOut});
+        this._dataSvc.playerPriority = evt.target.value;
+      }
 
   	});
 
-    // Show/hide submit
-    if(document.querySelectorAll('input[type="radio"]:checked').length === 3 && !this.showBtn) {
-      TweenLite.fromTo([startBtnDesktop, startBtnMobile], 1.2, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, display:'block', ease:Elastic.easeOut});
+    // Show
+    if(!this.showBtn) {
       this.showBtn = true;
+      TweenLite.fromTo(startBtn, 1.2, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, display:'block', ease:Elastic.easeOut});
     }
-    else if(this.showBtn) {
-      TweenLite.to([startBtnDesktop, startBtnMobile], .6, {autoAlpha:0, scale:0, display:'none', ease:Back.easeIn});
-      this.showBtn = false;
-    }
-
   }
 
   chooseCharacter(index: number) {
@@ -103,28 +94,8 @@ export class GameCharacterComponent implements OnInit {
     let assignedIndex = (Math.floor(Math.random() * (3 - 0 + 1)) + 0);
     this.wellbeingGoal = this._dataSvc.playerData.wellnessGoal;
 
-    // Find goal for player matching at least two of their rankings
-    this.goals.forEach((goal) => {
-
-      let matches: number = 0;
-
-      this.categoryData.forEach((input, key, map) => {
-
-        if(goal[key] === parseInt(input.value))
-          matches++;
-
-      });
-
-      if(matches >= 2)
-        this.assignedGoal = goal;
-
-    });
-
-    // If no goal matched, assign random one
-    this.assignedGoal = this.goals[assignedIndex];
-
     let bubble = document.getElementById('bubble');
-    TweenLite.to(bubble, .3, {autoAlpha:0, scale:0, display:'hide', ease:Back.easeIn});
+    TweenLite.to(bubble, .3, {autoAlpha:0, scale:0, display:'none', ease:Back.easeIn});
 
     document.getElementById('welcome').classList.remove('hidden');
     document.getElementById('character-detail').classList.remove('hidden')

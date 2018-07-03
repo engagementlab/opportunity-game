@@ -54,6 +54,7 @@ export class DataService {
     public commGoalLast: number = 0;
     public jobGoalLast: number = 0;
     public englishGoalLast: number = 0;
+    public playerPriority: number = 1;
     public surveyUrl: string;
 
     baseUrl: string;

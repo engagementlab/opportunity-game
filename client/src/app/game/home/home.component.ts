@@ -197,9 +197,9 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
     document.getElementById('city').style.display = 'block';
     if(this.loadedCategory) {
       TweenLite.fromTo(document.getElementById('map'), .7, {autoAlpha:1, left:0}, {autoAlpha:0, left:'100%', display:'none', ease:Back.easeIn});
-      TweenLite.fromTo(document.getElementById('home'), .7, {autoAlpha:0, left:'-100%'}, {autoAlpha:0, left:0, delay:.7, display:'block', ease:Back.easeOut, onComplete: () => {
+      TweenLite.fromTo(document.getElementById('home'), .7, {autoAlpha:0, left:'-100%'}, {autoAlpha:1, left:0, delay:.7, display:'block', ease:Back.easeOut, onComplete: () => {
 
-        this.screenAnimation();
+      this.screenAnimation();
       }});
     }
     else {
