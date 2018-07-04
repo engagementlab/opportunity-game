@@ -110,7 +110,7 @@ export class GameCharacterComponent implements OnInit {
 
     let bubble = document.getElementById('bubble');
 
-    this._dataSvc.changeCharacter(assignedIndex, this.assignedGoal);
+    this._dataSvc.changeCharacter(assignedIndex);
 
     let letters = document.querySelectorAll('.letter');
     let ellipses = document.getElementById('ellipses');

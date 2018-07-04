@@ -109,10 +109,9 @@ export class DataService {
 
     }
 
-    public changeCharacter(index: number, goal: Goal) {
+    public changeCharacter(index: number) {
 
         this.assignedChar = this.characterData[index];
-        this.assignedGoal = goal;
         
         this.playerDataUpdate.emit(this.playerData);
 
