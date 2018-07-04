@@ -1,3 +1,23 @@
+<div id="wait" class="col-6 hidden">
+
+	<h2>
+		<span style.color="#{{letter.color}}" class="letter" *ngFor="let letter of textObject">{{letter.string}}</span>
+
+		<div id="ellipses" class="hidden">
+			...
+		</div>
+	</h2>
+
+<!-- 	<div class="row">
+		<div class="col-3 col-centered">
+		</div>
+		<div class="col-3 col-centered">
+			<div id="wait">Please wait</div>
+		</div>
+	</div> -->
+
+</div>
+
 <div id="bubble" class="col-6 hidden">
 	<div class="bubble">
 			What is most important to you?<br />Select one.
@@ -28,42 +48,6 @@
 				</div>
 
 				<div class="col-3">
-					<!-- <h3 class="no-margin">GOALS</h3>
-					<div class="goals bold">
-						<div class="community row">
-
-							<div class="col-3">
-								<cdn-image cloudinaryId="opportunity-game/icons/community.svg" width="51" alt="Community goal icon" class=""></cdn-image>
-							</div>
-							<div class="col-3 no-pad">
-								{{assignedGoal.commGoal}}
-							</div>
-
-						</div>
-
-						<div class="job row">
-							
-							<div class="col-3">
-								<cdn-image cloudinaryId="opportunity-game/icons/training-color.svg" width="51" alt="Job goal icon" class=""></cdn-image>
-							</div>
-							<div class="col-3 no-pad">
-								{{assignedGoal.jobGoal}}
-							</div>
-
-						</div>
-
-						<div class="english row">
-							
-							<div class="col-3">
-								<cdn-image cloudinaryId="opportunity-game/icons/english.svg" width="51" alt="English goal icon" class=""></cdn-image>
-							</div>
-							<div class="col-3 no-pad">
-								{{assignedGoal.englishGoal}}
-							</div>
-
-						</div>
-					</div>
-				</div> -->
 					<cdn-image cloudinaryId="opportunity-game/icons/wellbeing-goal.svg" width="175" alt="Wellbeing goal icon"></cdn-image>
 					<div id="goal" class="bold">{{wellbeingGoal}}</div>
 				</div>

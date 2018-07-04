@@ -12,11 +12,12 @@ import * as _ from 'underscore';
 export class GameCharacterComponent implements OnInit {
 
   public assignedGoal: Goal;
+  public textObject: Array<Object>;
 
   characters: Character[];
   goals: Goal[];
 
-	categoryData = new Map<string, HTMLInputElement>();
+  categoryData = new Map<string, HTMLInputElement>();
   showBtn: boolean;
   wellbeingGoal: number;
 
@@ -37,6 +38,19 @@ export class GameCharacterComponent implements OnInit {
     
     let bubble = document.getElementById('bubble');
     TweenLite.fromTo(bubble, 1.5, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, delay:2, display:'block', ease:Elastic.easeOut});
+
+    let waitHeader = document.querySelector('#wait h2');
+    let textArr = 'Choosing\nYour\nCharacter'.split('');
+    let colors = ['9fe2a2', 'dda812', 'ff5500', 'ffaee4'];
+
+    this.textObject = new Array<Object>();
+    let colorInd = 0;
+    for(let i = 0; i < textArr.length; i++) {
+      colorInd++;
+      if(colorInd > 3) colorInd = 0;
+
+      this.textObject.push({color:colors[colorInd], string:textArr[i]});
+    }
   }
 
   goBack() {
@@ -95,14 +109,39 @@ export class GameCharacterComponent implements OnInit {
     this.wellbeingGoal = this._dataSvc.playerData.wellnessGoal;
 
     let bubble = document.getElementById('bubble');
-    TweenLite.to(bubble, .3, {autoAlpha:0, scale:0, display:'none', ease:Back.easeIn});
-
-    document.getElementById('welcome').classList.remove('hidden');
-    document.getElementById('character-detail').classList.remove('hidden')
-    document.querySelector('#character-detail #detail-'+assignedIndex).classList.remove('hidden');
-    document.getElementById('questionnaire-mobile').style.display = 'none';
 
     this._dataSvc.changeCharacter(assignedIndex, this.assignedGoal);
+
+    let letters = document.querySelectorAll('.letter');
+    let ellipses = document.getElementById('ellipses');
+
+    TweenLite.fromTo(document.getElementById('wait'), .5, {autoAlpha:0, left:'-100%'}, {autoAlpha:1, left:0, delay: 1, display:'block', ease:Back.easeOut, onComplete:() => {
+      
+      TweenMax.staggerFromTo(letters, .4, {autoAlpha:0, top:'30px'}, {autoAlpha:1, top:0, visibility:'visible', ease:Ease.easeOut}, .05, () => {
+
+        let spacing = {val: 0};
+
+        TweenLite.fromTo(ellipses, .1, {autoAlpha:0}, {autoAlpha:1, display:'block'});
+        TweenMax.to(spacing, .5, {val:.3, yoyo:true, repeat:-1, ease:Sine.easeOut, onUpdate:() => {
+          ellipses.style.letterSpacing = spacing.val + 'em';
+        }});
+
+      });
+
+      setTimeout(() =>  {
+
+        bubble.style.display = 'none';
+
+        TweenLite.to(document.getElementById('wait'), .5, {autoAlpha:0, left:'100%', display:'none', ease:Back.easeOut});
+
+        document.getElementById('welcome').classList.remove('hidden');
+        document.getElementById('character-detail').classList.remove('hidden')
+        document.querySelector('#character-detail #detail-'+assignedIndex).classList.remove('hidden');
+        document.getElementById('questionnaire-mobile').style.display = 'none';
+
+      }, 5000);
+
+    }});
 
   }
 
