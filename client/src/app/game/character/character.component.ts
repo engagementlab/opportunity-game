@@ -117,7 +117,7 @@ export class GameCharacterComponent implements OnInit {
 
     TweenLite.fromTo(document.getElementById('wait'), .5, {autoAlpha:0, left:'-100%'}, {autoAlpha:1, left:0, delay: 1, display:'block', ease:Back.easeOut, onComplete:() => {
       
-      TweenMax.staggerFromTo(letters, .4, {autoAlpha:0, top:'30px'}, {autoAlpha:1, top:0, visibility:'visible', ease:Ease.easeOut}, .05, () => {
+      TweenMax.staggerFromTo(letters, .4, {autoAlpha:0, top:'30px'}, {autoAlpha:1, top:0, visibility:'visible', ease:Sine.easeOut}, .05, () => {
 
         let spacing = {val: 0};
 
