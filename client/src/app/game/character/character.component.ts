@@ -151,6 +151,8 @@ export class GameCharacterComponent implements OnInit {
         TweenMax.to(spacing, .5, {val:.3, yoyo:true, repeat:-1, ease:Sine.easeOut, onUpdate:() => {
           ellipses.style.letterSpacing = spacing.val + 'em';
         }});
+        TweenMax.fromTo(document.getElementById('wait-text'), .5, {autoAlpha:0}, {autoAlpha:1, yoyo:true, repeat:-1, ease:Sine.easeOut});
+
 
       });
 

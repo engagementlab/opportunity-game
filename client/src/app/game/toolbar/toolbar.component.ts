@@ -155,6 +155,15 @@ export class GameToolbarComponent implements OnInit {
 
    }
 
+   showTooltip(evt) {
+    
+    TweenLite.to(document.querySelectorAll('.icon-lg .tooltip'), .2, {autoAlpha:0, scale:0, display:'none', ease:Back.easeIn});
+
+    TweenLite.fromTo(evt.target.getElementsByClassName('tooltip')[0], .5, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, display:'block', ease:Back.easeOut});
+    TweenLite.to(evt.target.getElementsByClassName('tooltip')[0], .5, {autoAlpha:0, scale:0, delay:2, display:'none', ease:Back.easeIn});
+    
+  }
+
    showLvlUp(stat: string, amount: number) {
 
       let elem = <HTMLElement>document.querySelector('#'+stat+'-lvl');
@@ -173,7 +182,9 @@ export class GameToolbarComponent implements OnInit {
 
    }
 
-   openDrawer() {
+   openDrawer(evt) {
+
+      if(evt.target.classList.contains('icon-lg')) return;
       
       document.getElementById('mobile-drawer').classList.toggle('open');
       document.getElementById('drawer').classList.toggle('open');
