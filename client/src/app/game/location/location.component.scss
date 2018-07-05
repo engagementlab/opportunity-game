@@ -26,7 +26,7 @@
 	&.career {
 		background-image:  cdn-image('locations/background/career', c_scale, w_1440);
 		@include mobile-only {
-			background-image:  cdn-image('locations/background/career_mobile');
+			background-image:  cdn-image('locations/background/career_mobile-bw');
 		}
 	}
 	&.child-care {
@@ -44,19 +44,19 @@
 	&.hospital {
 		background-image:  cdn-image('locations/background/hospital', c_scale, w_1440);
 		@include mobile-only {
-			background-image:  cdn-image('locations/background/hospital_mobile');
+			background-image:  cdn-image('locations/background/hospital_mobile-bw');
 		}
 	}
 	&.info-center {
 		background-image:  cdn-image('locations/background/info-center', c_scale, w_1440);
 		@include mobile-only {
-			background-image:  cdn-image('locations/background/info-center_mobile');
+			background-image:  cdn-image('locations/background/info-center_mobile-bw');
 		}
 	}
 	&.school {
 		background-image:  cdn-image('locations/background/school', c_scale, w_1440);
 		@include mobile-only {
-			background-image:  cdn-image('locations/background/school_mobile');
+			background-image:  cdn-image('locations/background/school_mobile-bw');
 		}
 	}
 }
@@ -64,11 +64,13 @@
 #flavor {
 	margin: 0 auto;
 	text-align: center;
-	h1 {
-		font-size: 1em;
+	h2 {
+		font-size: 1.3em;
+		position: relative;
 	}
 	div {
 		font-size: .9em;
+		position: relative;
 	}
 }
 

@@ -11,7 +11,7 @@
 	visibility: hidden;
 	transition: background-image 1s ease-in-out;
 
-	background-image: url(http://res.cloudinary.com/engagement-lab-home/image/upload/c_scale,f_auto,w_480/v1525878909/opportunity-game/confetti-mobile-top.png);
+	background-image: cdn-image('confetti-mobile-top', c_scale, w_480, f_auto);
 	background-repeat: no-repeat;
 	background-position-x: 35%;
 
