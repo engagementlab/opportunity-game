@@ -197,7 +197,7 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
 
     if(this.loadedCategory) {
       document.getElementById('city-tutorial').style.top = '-100%';
-      document.getElementById('house').style.opacity = 0;
+      document.getElementById('house').style.opacity = '0'; 
 
       TweenLite.fromTo(document.getElementById('map'), .7, {autoAlpha:1, left:0}, {autoAlpha:0, left:'100%', display:'none', ease:Back.easeIn});
       TweenLite.fromTo(document.getElementById('home'), .7, {autoAlpha:0, left:'-100%'}, {autoAlpha:1, left:0, delay:.7, display:'block', ease:Back.easeOut, onComplete: () => {
