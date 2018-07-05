@@ -66,8 +66,12 @@
 
 #game {
 	
-	background: $white-three;
+	background: white;
 	height: 97vh;
+
+	&.home {
+		background: $white-three;
+	}
 	
 	@include mq($from: tabletPortrait) {
 		border-left: 4px solid black;

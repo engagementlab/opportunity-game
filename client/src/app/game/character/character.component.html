@@ -68,7 +68,7 @@
 		
 		<div id="english" class="row">
 			<div class="col-3 container">
-				<input class="input" type="radio" name="english" value="1" (change)="onSelectionChange($event)"/>
+				<input class="input" type="radio" name="english" value="1" (mouseenter)="onSelectionHover($event)" (mouseleave)="onSelectionLeave($event)" (change)="onSelectionChange($event)"/>
 				<span class="radio">
 					<cdn-image cloudinaryId="opportunity-game/icons/english.svg" alt="Learn English icon"></cdn-image>
 				</span>
@@ -81,7 +81,7 @@
 
 		<div id="job" class="row">
 			<div class="col-3 container">
-				<input class="input" type="radio" name="job" value="2" (change)="onSelectionChange($event)"/>
+				<input class="input" type="radio" name="job" value="2" (mouseenter)="onSelectionHover($event)" (mouseleave)="onSelectionLeave($event)" (change)="onSelectionChange($event)"/>
 				<span class="radio">
 					<cdn-image cloudinaryId="opportunity-game/icons/training-color.svg" alt="Get a Job icon"></cdn-image>
 				</span>
@@ -94,7 +94,7 @@
 
 		<div id="people" class="row">
 			<div class="col-3 container">
-				<input class="input" type="radio" name="people" value="3" (change)="onSelectionChange($event)"/>
+				<input class="input" type="radio" name="people" value="3" (mouseenter)="onSelectionHover($event)" (mouseleave)="onSelectionLeave($event)" (change)="onSelectionChange($event)"/>
 				<span class="radio">
 					<cdn-image cloudinaryId="opportunity-game/icons/community.svg" alt="Meet People icon"></cdn-image>
 				</span>

@@ -6,7 +6,7 @@
 	
 </div>
 
-<div id="game" [@slideAnimation]="getRouterOutletState(o)" class="round-{{round}}">
+<div id="game" [@slideAnimation]="getRouterOutletState(o)" class="round-{{round}}" [class.home]="atHome === true">
 	
 	<router-outlet #o="outlet"></router-outlet>
 

@@ -23,6 +23,7 @@ export class GameComponent implements OnInit {
   public lifeEvents: Event[];
   public effectEvents: Event[];
   public character: Character;
+  public atHome: boolean = false;
   public wonGame: boolean = false;
   public currentWellnessScore: number = 0;
   public surveyUrl: string;
@@ -173,6 +174,8 @@ export class GameComponent implements OnInit {
         if(val.url.indexOf("/game/home") > -1) {
           TweenLite.to(document.getElementById('toolbar-parent'), 1, {autoAlpha: 1, display:'block'});
           TweenLite.to(document.getElementById('wellbeing'), 1, {autoAlpha: 1, display:'block'});
+
+          this.atHome = true;
         }
         
       }

@@ -65,10 +65,35 @@ export class GameCharacterComponent implements OnInit {
     });
 
   }
+ 
+  onSelectionLeave(evt) {
+    
+    let otherCategories = document.getElementsByClassName('input');
+
+    _.each(otherCategories, (el) => {
+      
+      TweenLite.to(document.getElementById((<HTMLInputElement>el).name), .2, {autoAlpha:1});
+
+    });
+
+  }
+  onSelectionHover(evt) {
+    
+    let otherCategories = document.getElementsByClassName('input');
+
+    _.each(otherCategories, (el) => {
+      
+      if(el !== evt.target && !(<HTMLInputElement>el).checked)
+        TweenLite.to(document.getElementById((<HTMLInputElement>el).name), .2, {autoAlpha:.5});
+      else
+        TweenLite.to(document.getElementById((<HTMLInputElement>el).name), .2, {autoAlpha:1});
+
+    });
+
+  }
 
   onSelectionChange(evt) {
     
-  	let category = evt.target.name;
   	let otherCategories = document.getElementsByClassName('input');
     let startBtn = document.getElementById('submit-btn');
 
@@ -78,6 +103,7 @@ export class GameCharacterComponent implements OnInit {
         TweenLite.to(document.getElementById((<HTMLInputElement>el).name), .5, {scale:1, ease:Back.easeOut});
         (<HTMLInputElement>el).checked = false;
       }
+
       else {
         TweenLite.to(document.getElementById(evt.target.name), .5, {scale:1.2, ease:Elastic.easeOut});
         this._dataSvc.playerPriority = evt.target.value;

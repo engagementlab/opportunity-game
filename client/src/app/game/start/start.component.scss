@@ -12,10 +12,10 @@
 	transition: background-image 1s ease-in-out;
 
 	background-image: url(http://res.cloudinary.com/engagement-lab-home/image/upload/c_scale,f_auto,w_480/v1525878909/opportunity-game/confetti-mobile-top.png);
-	background-color: white;
 	background-repeat: no-repeat;
+	background-position-x: 35%;
 
-	height: 97vh;
+	height: 50vh;
 	width: 100%;
 
   @include game-width();

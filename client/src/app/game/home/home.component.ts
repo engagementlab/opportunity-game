@@ -110,6 +110,7 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
 
     // City animation
     if(!this._dataSvc.playerData.sawTutorial) {
+      // document.getElementById('city').style.display = 'none';
       TweenLite.fromTo(document.getElementById('city-tutorial'), 1, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, delay:1, display:'block', 
        onComplete:() => {
           let scroll = {val: 0};
@@ -194,12 +195,13 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
 
     ion.sound.play('click');
 
-    document.getElementById('city').style.display = 'block';
     if(this.loadedCategory) {
+      document.getElementById('city-tutorial').style.top = '-100%';
+      document.getElementById('house').style.opacity = 0;
+
       TweenLite.fromTo(document.getElementById('map'), .7, {autoAlpha:1, left:0}, {autoAlpha:0, left:'100%', display:'none', ease:Back.easeIn});
       TweenLite.fromTo(document.getElementById('home'), .7, {autoAlpha:0, left:'-100%'}, {autoAlpha:1, left:0, delay:.7, display:'block', ease:Back.easeOut, onComplete: () => {
-
-      this.screenAnimation();
+        this.screenAnimation();
       }});
     }
     else {
