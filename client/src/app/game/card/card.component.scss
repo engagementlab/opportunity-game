@@ -55,6 +55,14 @@
 		:not(.effect) > ::ng-deep .btn {
 			padding: 20%;
 		}
+
+		.opp-btn {
+			::ng-deep a {
+		    font-size: .6em;
+		    width: 105px;
+		    padding: 4%!important;
+		  }
+		}
 	}
 
 	.reward-bg {

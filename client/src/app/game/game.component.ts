@@ -32,7 +32,7 @@ export class GameComponent implements OnInit {
   
   lastWellnessScore: number = 0;
   round: number = 1;
-  gameEnded: number;
+  gameEnded: boolean;
 
   assignedGoal: Goal;
   
