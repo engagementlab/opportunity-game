@@ -11,17 +11,22 @@ main {
 
 #qa-build {
 	position: absolute;
-	top: 0;
+	bottom: 100%;
 	left: 0;
 	right: 0;
 	background-color: $yellow;
 	text-align: center;
 	font-weight: bold;
-	font-size: medium;
+	font-size: large;
+	z-index: 100;
 
-	span {
-		font-size: small;
+	#text {
+		font-size: xx-large;
 	}
+	span {
+		vertical-align: top;
+	}
+	
 }
 
 #content {
