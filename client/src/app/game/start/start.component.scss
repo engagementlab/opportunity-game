@@ -5,44 +5,54 @@
   to {background-position: 0 130%;}
 }
 
-#parent {
+#bg {
 
-	border-bottom: 4px solid black;
+	position: fixed;
+	visibility: hidden;
 	transition: background-image 1s ease-in-out;
+
+	background-image: cdn-image('confetti-mobile-top', c_scale, w_480, f_auto);
+	background-repeat: no-repeat;
+	background-position-x: 35%;
+
+	height: 50vh;
+	width: 100%;
+
+  @include game-width();
 	@include mq($from: tablet) {
 		background-image: cdn-image('confetti');
 		background-repeat: repeat-x;
 	}
-	background-image: url(http://res.cloudinary.com/engagement-lab-home/image/upload/c_scale,f_auto,w_480/v1525878909/opportunity-game/confetti-mobile.png);
-	background-color: white;
-	// background-position-y: 200%;
-	height: 100%;
 
-	@include mobile-only {
-		background-repeat: no-repeat;
-		// @include animation(backgroundMove 5s linear 1);
-		&.characters {
-			background-image: url(http://res.cloudinary.com/engagement-lab-home/image/upload/c_scale,f_auto,w_480/v1525878909/opportunity-game/confetti-mobile-top.png);
-		}
-	}
 }
 
 #start {
-	@include mq($from: desktop) {
-	  max-width: 70%;
-		margin: auto;
-	}
+	
+	position: relative;
+	height: 97vh;
+  
+  @include game-width();
+
 }
 
 #new {
   float: none;
+	visibility: hidden;
   margin: 0 auto;
   font-size: xx-large;
   text-align: center;
 }
 
 #logo {
+	display: none;
 	img {
 		width: 100%;
 	}
+}
+
+
+#characters-parent {
+	
+	position: relative;
+
 }

@@ -24,40 +24,41 @@
 	}
 	
 	&.career {
-		background-image:  cdn-image('locations/background/career', c_scale, w_1440);
-		@include mobile-only {
-			background-image:  cdn-image('locations/background/career_mobile');
-		}
+		background-image: cdn-image('locations/background/career_mobile-bw', c_scale, w_480, f_auto);
 	}
 	&.child-care {
-		background-image:  cdn-image('locations/background/child-care', c_scale, w_1440);
-		@include mobile-only {
-			background-image:  cdn-image('locations/background/child-care_mobile');
-		}
+		background-image: cdn-image('locations/background/child-care_mobile-bw', c_scale, w_480, f_auto);
 	}
 	&.cultural-center {
-		background-image:  cdn-image('locations/background/cultural-center', c_scale, w_1440);
-		@include mobile-only {
-			background-image:  cdn-image('locations/background/cultural-center_mobile');
-		}
+		background-image: cdn-image('locations/background/cultural-center_mobile-bw', c_scale, w_480, f_auto);
 	}
 	&.hospital {
-		background-image:  cdn-image('locations/background/hospital', c_scale, w_1440);
-		@include mobile-only {
-			background-image:  cdn-image('locations/background/hospital_mobile');
-		}
+		background-image:  cdn-image('locations/background/hospital_interior_mobile-bw', c_scale, w_480, f_auto);
 	}
 	&.info-center {
-		background-image:  cdn-image('locations/background/info-center', c_scale, w_1440);
-		@include mobile-only {
-			background-image:  cdn-image('locations/background/info-center_mobile');
-		}
+		background-image:  cdn-image('locations/background/info-center_mobile-bw', c_scale, w_480, f_auto);
 	}
 	&.school {
-		background-image:  cdn-image('locations/background/school', c_scale, w_1440);
-		@include mobile-only {
-			background-image:  cdn-image('locations/background/school_mobile');
-		}
+		background-image:  cdn-image('locations/background/school_mobile-bw', c_scale, w_480, f_auto);
+	}
+	&.bus {
+		background-image:  cdn-image('locations/background/bus', c_scale, w_480, f_auto);
+	}
+	&.movein {
+		background-image:  cdn-image('locations/background/movein', c_scale, w_480, f_auto);
+	}
+}
+
+#flavor {
+	margin: 0 auto;
+	text-align: center;
+	h2 {
+		font-size: 1.3em;
+		position: relative;
+	}
+	div {
+		font-size: .9em;
+		position: relative;
 	}
 }
 
@@ -147,6 +148,9 @@
 }
 
 #details {
+	.vert-center {
+		top: 25%;
+	}
 	.stars {
 		position: absolute;
 		width: 100%;
@@ -259,7 +263,7 @@
 	}
 }
 
-.opportunity {
+/* .opportunity {
 	text-align: center;
 	font-size: large;
 	background: white;
@@ -281,6 +285,10 @@
     .items {
 			display: flex;
 			flex-direction: row;
+
+			.cost {
+				min-width: 55px;
+			}
     }
     .reqs {
     	margin-left: 5%;
@@ -302,9 +310,10 @@
 
 	.buttons {
 		width: 100%;
+    margin-top: 5%;
 		display: flex;
 		flex-direction: row;		
-		justify-content: center;
+		justify-content: space-evenly;
 
 	 ::ng-deep .btn {
 			padding: 20%;
@@ -343,4 +352,4 @@
 	    font-size: xx-large;
 		}
 	}
-}
+} */

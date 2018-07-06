@@ -54,6 +54,8 @@ export class DataService {
     public commGoalLast: number = 0;
     public jobGoalLast: number = 0;
     public englishGoalLast: number = 0;
+    public playerPriority: number = 1;
+    public surveyUrl: string;
 
     baseUrl: string;
     index: any;
@@ -107,10 +109,9 @@ export class DataService {
 
     }
 
-    public changeCharacter(index: number, goal: Goal) {
+    public changeCharacter(index: number) {
 
         this.assignedChar = this.characterData[index];
-        this.assignedGoal = goal;
         
         this.playerDataUpdate.emit(this.playerData);
 
@@ -119,17 +120,16 @@ export class DataService {
     public updateStats(opportunity: any) {
 
         this.playerData.money -= opportunity.moneyCost;
+        if(this.playerData.money <= 0)
+            this.playerData.money = 0;
+
         this.playerData.actions -= opportunity.actionCost;
-        this.playerData.wellnessScore = this.calcWellness();
+        if(this.playerData.actions <= 0)
+            this.playerData.actions = 0;
 
         this.actionsUntilLifeEvent -= opportunity.actionCost;
         this.actionsUntilPayday -= opportunity.actionCost;
 
-        if(this.actionsUntilLifeEvent === 0)
-        {
-            this.actionsUntilLifeEvent = 6;
-            this.lifeEventTrigger.emit();
-        }
         if(this.actionsUntilPayday === 0)
         {
             this.actionsUntilPayday = 5;
@@ -137,64 +137,13 @@ export class DataService {
             this.showPayday();
         }
 
-        // Trigger duration effects or delayed rewards? (if actions being removed)
-        if(opportunity.actionCost > 0)
-        { 
-            let i = 0;
-            let effectsToRemove = [];
-            while(i < this.durationEffectQueue.length) {
-                let effect = this.durationEffectQueue[i];
-    
-                if(effect.trigger === DurationEffectTrigger.actions) {
-                    effect.triggerCount += opportunity.actionCost;
-
-                    if(effect.triggerCount >= effect.triggerWait) {
-                        effectsToRemove.push(effect);
-                    }
-                }
-
-                i++;
-            }
-
-            let e = 0;
-            while(e < this.delayedRewardQueue.length) {
-            
-                let reward = this.delayedRewardQueue[e];
-                reward.triggerWait -= opportunity.actionCost;
-
-                if(reward.triggerWait <= 0) {
-
-                    this.playerData.commLevel += reward.opportunity.commReward;
-                    this.playerData.jobLevel += reward.opportunity.jobReward;
-                    this.playerData.englishLevel += reward.opportunity.englishReward;
-                    
-                    this.playerData.money += reward.opportunity.moneyReward;         
-                    this.playerData.actions += reward.opportunity.actionReward;
-                    
-                    this.rewardTrigger.emit({type: 'opportunity', opp: reward.opportunity});
-                    this.playerDataUpdate.emit(this.playerData);
-
-                    this.delayedRewardQueue.splice(e, 1);
-                    break;
-
-                }
-
-                e++;
-            
-            }
-
-            // Remove used effects
-            this.effectTrigger.emit(effectsToRemove);
-            this.durationEffectQueue = _.difference(this.durationEffectQueue, effectsToRemove);
-        }
-
-        // Reward now or later?
-        if(opportunity.triggerAmt === 0) {
+        // Reward now or later (undefined if life event)
+        if(opportunity.triggerAmt === 0 || opportunity.triggerAmt === undefined) {
 
             this.playerData.commLevel += opportunity.commReward;
             this.playerData.jobLevel += opportunity.jobReward;
             this.playerData.englishLevel += opportunity.englishReward;
-            
+
             this.playerData.money += opportunity.moneyReward;            
             this.playerData.actions += opportunity.actionReward;
 
@@ -209,10 +158,70 @@ export class DataService {
             this.delayedRewardQueue.push(delayedReward);
         }
 
-        this.playerDataUpdate.emit(this.playerData);
 
-        if(this.playerData.actions <= 0)
+        // Show life events and process opportunity effects only if not game over
+        if(this.playerData.actions <= 0 || (this.playerData.wellnessScore >= this.playerData.wellnessGoal))
             this.endGame();
+        else {            
+            if(this.actionsUntilLifeEvent === 0)
+            {
+                this.actionsUntilLifeEvent = 6;
+                this.lifeEventTrigger.emit();
+            }
+
+            // Trigger duration effects or delayed rewards? (if actions being removed)
+            if(opportunity.actionCost > 0)
+            { 
+                let i = 0;
+                let effectsToRemove = [];
+                while(i < this.durationEffectQueue.length) {
+                    let effect = this.durationEffectQueue[i];
+        
+                    if(effect.trigger === DurationEffectTrigger.actions) {
+                        effect.triggerCount += opportunity.actionCost;
+
+                        if(effect.triggerCount >= effect.triggerWait)
+                            effectsToRemove.push(effect);
+                    }
+
+                    i++;
+                }
+
+                let e = 0;
+                while(e < this.delayedRewardQueue.length) {
+                
+                    let reward = this.delayedRewardQueue[e];
+                    reward.triggerWait -= opportunity.actionCost;
+
+                    if(reward.triggerWait <= 0) {
+
+                        this.playerData.commLevel += reward.opportunity.commReward;
+                        this.playerData.jobLevel += reward.opportunity.jobReward;
+                        this.playerData.englishLevel += reward.opportunity.englishReward;
+                        
+                        this.playerData.money += reward.opportunity.moneyReward;         
+                        this.playerData.actions += reward.opportunity.actionReward;
+                        
+                        this.rewardTrigger.emit({type: 'opportunity', opp: reward.opportunity});
+                        this.playerDataUpdate.emit(this.playerData);
+
+                        this.delayedRewardQueue.splice(e, 1);
+                        break;
+
+                    }
+
+                    e++;
+                
+                }
+
+                // Remove used effects
+                this.effectTrigger.emit(effectsToRemove);
+                this.durationEffectQueue = _.difference(this.durationEffectQueue, effectsToRemove);
+            }
+        }
+
+        this.playerData.wellnessScore = this.calcWellness();
+        this.playerDataUpdate.emit(this.playerData);
 
     }
 
@@ -251,6 +260,7 @@ export class DataService {
         // Update availability
         _.each(this.eventData, (thisEvt) => {
             let canBuy = false;
+
             if(thisEvt.moneyCost > 0 && thisEvt.actionCost > 0)
                 canBuy = (this.playerData.money >= thisEvt.moneyCost && this.playerData.actions >= thisEvt.actionCost);
             else if(thisEvt.moneyCost > 0 && thisEvt.actionCost < 1)
@@ -368,8 +378,14 @@ export class DataService {
 
     private calcWellness() {
 
-        let jceLvl = 2 * (this.playerData.jobLevel + this.playerData.commLevel + this.playerData.englishLevel);
-        return jceLvl + this.playerData.money;
+        let jceLvl = (6*this.playerData.jobLevel) + (6*this.playerData.commLevel) + (6*this.playerData.englishLevel);
+        
+        if(this.playerData.hasJob)
+            jceLvl += 15;
+        if(this.playerData.hasTransit)
+            jceLvl += 15;
+
+        return jceLvl;
 
     }
 
@@ -400,6 +416,9 @@ export class DataService {
         this.playerData.money = newData.config.startingMoney;
         this.playerData.actions = newData.config.startingActions;
         this.playerData.wellnessGoal = newData.config.wellnessGoal;
+
+        this.surveyUrl = newData.config.surveyUrl;
+
         this.playerDataUpdate.emit(this.playerData);
 
         this.locationData = newData.locations;

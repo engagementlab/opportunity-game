@@ -10,16 +10,16 @@
 			[
 				"node_modules"
 			],
-			"name": "Server",
-			"path": "server"
+			"name": "All",
+			"path": "."
 		},
 		{
 			"folder_exclude_patterns":
 			[
 				"node_modules"
 			],
-			"name": "All",
-			"path": "."
+			"name": "Server",
+			"path": "server"
 		},
 		{
 			"path": "server/node_modules/keystone"

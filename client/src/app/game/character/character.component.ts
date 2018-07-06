@@ -12,11 +12,12 @@ import * as _ from 'underscore';
 export class GameCharacterComponent implements OnInit {
 
   public assignedGoal: Goal;
+  public textObject: Array<Object>;
 
   characters: Character[];
   goals: Goal[];
 
-	categoryData = new Map<string, HTMLInputElement>();
+  categoryData = new Map<string, HTMLInputElement>();
   showBtn: boolean;
   wellbeingGoal: number;
 
@@ -36,7 +37,20 @@ export class GameCharacterComponent implements OnInit {
   ngOnInit() {
     
     let bubble = document.getElementById('bubble');
-    TweenLite.fromTo(bubble, 1.5, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, delay:3, display:'block', ease:Elastic.easeOut});
+    TweenLite.fromTo(bubble, 1.5, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, delay:2, display:'block', ease:Elastic.easeOut});
+
+    let waitHeader = document.querySelector('#wait h2');
+    let textArr = 'Choosing\nYour\nCharacter'.split('');
+    let colors = ['9fe2a2', 'dda812', 'ff5500', 'ffaee4'];
+
+    this.textObject = new Array<Object>();
+    let colorInd = 0;
+    for(let i = 0; i < textArr.length; i++) {
+      colorInd++;
+      if(colorInd > 3) colorInd = 0;
+
+      this.textObject.push({color:colors[colorInd], string:textArr[i]});
+    }
   }
 
   goBack() {
@@ -51,40 +65,57 @@ export class GameCharacterComponent implements OnInit {
     });
 
   }
+ 
+  onSelectionLeave(evt) {
+    
+    let otherCategories = document.getElementsByClassName('input');
+
+    _.each(otherCategories, (el) => {
+      
+      TweenLite.to(document.getElementById((<HTMLInputElement>el).name), .2, {autoAlpha:1});
+
+    });
+
+  }
+  onSelectionHover(evt) {
+    
+    let otherCategories = document.getElementsByClassName('input');
+
+    _.each(otherCategories, (el) => {
+      
+      if(el !== evt.target && !(<HTMLInputElement>el).checked)
+        TweenLite.to(document.getElementById((<HTMLInputElement>el).name), .2, {autoAlpha:.5});
+      else
+        TweenLite.to(document.getElementById((<HTMLInputElement>el).name), .2, {autoAlpha:1});
+
+    });
+
+  }
 
   onSelectionChange(evt) {
     
-  	let category = evt.target.name;
-  	let otherCategories = document.getElementsByClassName('buttons');
-    let startBtnDesktop = document.getElementById('submit-btn-desktop');
-    let startBtnMobile = document.getElementById('submit-btn-mobile');
-
-		this.categoryData.set(category, evt.target);
+  	let otherCategories = document.getElementsByClassName('input');
+    let startBtn = document.getElementById('submit-btn');
 
     _.each(otherCategories, (el) => {
+      
+      if(el !== evt.target) {
+        TweenLite.to(document.getElementById((<HTMLInputElement>el).name), .5, {scale:1, ease:Back.easeOut});
+        (<HTMLInputElement>el).checked = false;
+      }
 
-      _.each(el.children, (child) => {
-        // Get radio button
-        let childEl = <HTMLInputElement>child.children[0];
-
-        // Find if value already checked in other category and uncheck
-        if(evt.target.value === childEl.value && 
-           childEl.getAttribute('name') !== category)
-          childEl.checked = false;
-  		});
+      else {
+        TweenLite.to(document.getElementById(evt.target.name), .5, {scale:1.2, ease:Elastic.easeOut});
+        this._dataSvc.playerPriority = evt.target.value;
+      }
 
   	});
 
-    // Show/hide submit
-    if(document.querySelectorAll('input[type="radio"]:checked').length === 3 && !this.showBtn) {
-      TweenLite.fromTo([startBtnDesktop, startBtnMobile], 1.2, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, display:'block', ease:Elastic.easeOut});
+    // Show
+    if(!this.showBtn) {
       this.showBtn = true;
+      TweenLite.fromTo(startBtn, 1.2, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, display:'block', ease:Elastic.easeOut});
     }
-    else if(this.showBtn) {
-      TweenLite.to([startBtnDesktop, startBtnMobile], .6, {autoAlpha:0, scale:0, display:'none', ease:Back.easeIn});
-      this.showBtn = false;
-    }
-
   }
 
   chooseCharacter(index: number) {
@@ -103,43 +134,56 @@ export class GameCharacterComponent implements OnInit {
     let assignedIndex = (Math.floor(Math.random() * (3 - 0 + 1)) + 0);
     this.wellbeingGoal = this._dataSvc.playerData.wellnessGoal;
 
-    // Find goal for player matching at least two of their rankings
-    this.goals.forEach((goal) => {
+    let bubble = document.getElementById('bubble');
 
-      let matches: number = 0;
+    this._dataSvc.changeCharacter(assignedIndex);
 
-      this.categoryData.forEach((input, key, map) => {
+    let letters = document.querySelectorAll('.letter');
+    let ellipses = document.getElementById('ellipses');
 
-        if(goal[key] === parseInt(input.value))
-          matches++;
+    TweenLite.fromTo(document.getElementById('wait'), .5, {autoAlpha:0, left:'-100%'}, {autoAlpha:1, left:0, delay: 1, display:'block', ease:Back.easeOut, onComplete:() => {
+      
+      TweenMax.staggerFromTo(letters, .4, {autoAlpha:0, top:'30px'}, {autoAlpha:1, top:0, visibility:'visible', ease:Sine.easeOut}, .05, () => {
+
+        let spacing = {val: 0};
+
+        TweenLite.fromTo(ellipses, .1, {autoAlpha:0}, {autoAlpha:1, display:'block'});
+        TweenMax.to(spacing, .5, {val:.3, yoyo:true, repeat:-1, ease:Sine.easeOut, onUpdate:() => {
+          ellipses.style.letterSpacing = spacing.val + 'em';
+        }});
+        TweenMax.fromTo(document.getElementById('wait-text'), .5, {autoAlpha:0}, {autoAlpha:1, yoyo:true, repeat:-1, ease:Sine.easeOut});
+
 
       });
 
-      if(matches >= 2)
-        this.assignedGoal = goal;
+      setTimeout(() =>  {
 
-    });
+        bubble.style.display = 'none';
 
-    // If no goal matched, assign random one
-    this.assignedGoal = this.goals[assignedIndex];
+        TweenLite.to(document.getElementById('wait'), .5, {autoAlpha:0, left:'100%', display:'none', ease:Back.easeOut});
 
-    let bubble = document.getElementById('bubble');
-    TweenLite.to(bubble, .3, {autoAlpha:0, scale:0, display:'hide', ease:Back.easeIn});
+        document.getElementById('welcome').classList.remove('hidden');
+        document.getElementById('character-detail').classList.remove('hidden')
+        document.querySelector('#character-detail #detail-'+assignedIndex).classList.remove('hidden');
+        document.getElementById('questionnaire-mobile').style.display = 'none';
 
-    document.getElementById('welcome').classList.remove('hidden');
-    document.getElementById('character-detail').classList.remove('hidden')
-    document.querySelector('#character-detail #detail-'+assignedIndex).classList.remove('hidden');
-    document.getElementById('questionnaire-mobile').style.display = 'none';
+      }, 5000);
 
-    this._dataSvc.changeCharacter(assignedIndex, this.assignedGoal);
+    }});
 
   }
 
   openTutorial() {
 
-    TweenLite.fromTo(document.getElementById('tutorial-parent'), 1.2, {autoAlpha:0}, {autoAlpha:1, delay: 1, display:'block'});
-    TweenLite.fromTo(document.getElementById('screen0'), 1, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:'0%', delay: 1.8, display:'block', ease:Back.easeOut});      
-    TweenLite.fromTo(document.querySelector('#tutorial #buttons'), 1, {scale:0}, {scale:1, delay: 3.3, display:'block', ease:Elastic.easeOut});
+    let scroll  = {val: 0};
+
+    TweenLite.fromTo(document.getElementById('tutorial-parent'), .7, {autoAlpha:0}, {autoAlpha:1, display:'block'});
+    TweenLite.fromTo(document.getElementById('screen0'), .7, {autoAlpha:0, left:'-100%'}, {autoAlpha:1, left:0, delay: 1, display:'block', ease:Back.easeOut});      
+    TweenLite.fromTo(document.querySelector('#tutorial #buttons'), 1, {scale:0}, {scale:1, delay:2, display:'block', ease:Elastic.easeOut});
+
+    TweenMax.to(scroll, 2, {val:97, ease:Sine.easeOut, delay:2, onUpdate:() => {
+      (<HTMLElement>document.querySelector('#tutorial #inner')).style.width = scroll.val + '%';
+    }});
 
   }
 

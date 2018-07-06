@@ -5,5 +5,6 @@ export interface GameConfig {
 	readonly startingMoney: number;
 	readonly startingActions: number;
 	readonly wellnessGoal: number;
+	readonly surveyUrl: string;
 
 }

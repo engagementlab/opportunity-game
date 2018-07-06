@@ -1,4 +1,4 @@
-<div id="toolbar" class="btn no-margin">
+<div id="toolbar" class="btn no-margin" (click)="openDrawer($event);">
 
 	<div id="notifications" class="col-6 bold">
 			<div class="row reward" id="reward_{{opportunity._id}}" *ngFor="let opportunity of rewardOpportunities; let i = index; ">
@@ -45,7 +45,7 @@
 
 	</div>
 
-	<div id="main" class="row no-margin" (click)="openDrawer();">
+	<div id="main" class="row no-margin">
 		
 		<div class="flex">
 			
@@ -62,17 +62,21 @@
 
 			<div id="levels" class="col-4 auto">
 
-				<span id="community-lvl" class="icon-lg community">
+				<span id="community-lvl" class="icon-lg community" (click)="showTooltip($event)">
+					<div class="tooltip"><span>Community</span></div>
 					<div class="badge bold">{{commLevel}}</div>
 					<span class="amt bold"></span>
+
 				</span>
 
-				<span id="job-lvl" class="icon-lg training">
+				<span id="job-lvl" class="icon-lg training" (click)="showTooltip($event)">					
+					<div class="tooltip"><span>Job Training</span></div>
 					<div class="badge bold">{{jobLevel}}</div>
 					<span class="amt bold"></span>
 				</span>
 
-				<span id="english-lvl" class="icon-lg english">
+				<span id="english-lvl" class="icon-lg english" (click)="showTooltip($event)">					
+					<div class="tooltip"><span>English</span></div>
 					<div class="badge bold">{{englishLevel}}</div>
 					<span class="amt bold"></span>
 				</span>
@@ -81,7 +85,7 @@
 
 			<span id="open-btn">
 				<div>
-					<cdn-image cloudinaryId="opportunity-game/toolbar/open-close.svg" alt="Open/close button icon"></cdn-image>
+					<cdn-image cloudinaryId="opportunity-game/toolbar/open-close.svg" width="25" alt="Open/close button icon"></cdn-image>
 				</div>
 			</span>
 
@@ -91,19 +95,21 @@
 
 	</div>
 
-	<div id="drawer" class="row no-margin" (click)="openDrawer()">
+	<div id="drawer" class="row no-margin">
 
-		<div id="job" [class.disabled]="hasJob === undefined" class="col-1 icon-lg">
-				<cdn-image cloudinaryId="opportunity-game/toolbar/transit.svg" alt="Public transit toolbar icon"></cdn-image> 
+		<div id="job" [class.disabled]="hasTransit === undefined" class="col-1 icon-lg">
+			<cdn-image cloudinaryId="opportunity-game/toolbar/transit.svg" alt="Public transit toolbar icon" *ngIf="hasTransit === undefined"></cdn-image> 
+			<cdn-image cloudinaryId="opportunity-game/icons/transit.svg" alt="Public transit toolbar icon" *ngIf="hasTransit === true"></cdn-image> 
 		</div>
 		<div *ngIf="hasTransit === undefined" class="col-2 medium label no-pad">You don’t have transportation yet!</div>
-		<div *ngIf="hasTransit === true" class="col-2 medium label no-pad">Bus pass</div>
+		<div *ngIf="hasTransit === true" class="col-2 medium label no-pad">You have a bus pass!</div>
 
 		<div id="transit" [class.disabled]="hasJob === undefined" class="col-1 icon-lg">
-			<cdn-image cloudinaryId="opportunity-game/toolbar/job.svg" alt="Job toolbar icon"></cdn-image>
+			<cdn-image cloudinaryId="opportunity-game/toolbar/job.svg" alt="Public transit toolbar icon" *ngIf="hasJob === undefined"></cdn-image> 
+			<cdn-image cloudinaryId="opportunity-game/toolbar/job-color.svg" alt="Job toolbar icon" *ngIf="hasJob === true"></cdn-image>
 		</div>	
 		<div *ngIf="hasJob === undefined" class="col-2 medium label no-pad">You don’t have a job yet!</div>
-		<div *ngIf="hasJob === true" class="col-2 medium label no-pad">Part-time Job</div>
+		<div *ngIf="hasJob === true" class="col-2 medium label no-pad">You have a part-time job!</div>
 
 	</div>
 

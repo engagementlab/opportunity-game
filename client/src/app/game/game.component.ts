@@ -23,18 +23,17 @@ export class GameComponent implements OnInit {
   public lifeEvents: Event[];
   public effectEvents: Event[];
   public character: Character;
+  public atHome: boolean = false;
   public wonGame: boolean = false;
   public currentWellnessScore: number = 0;
+  public surveyUrl: string;
 
   eventsQueue: HTMLElement[] = [];
   
   lastWellnessScore: number = 0;
   round: number = 1;
-  gameEnded: number;
+  gameEnded: boolean;
 
-  commLevel: number;
-  jobLevel: number;
-  englishLevel: number;
   assignedGoal: Goal;
   
   sfxPath: string = 'https://res.cloudinary.com/engagement-lab-home/video/upload/v1000000/opportunity-game/sfx/';
@@ -44,12 +43,26 @@ export class GameComponent implements OnInit {
   }
 
   @HostListener('document:click', ['$event.target'])
-  public onClick(targetElement) {
+  onClick(targetElement) {
       ion.sound({
           sounds: [
-              {
-                  name: "confirm"
+            {
+              name: "confirm"
+            },
+            {
+              name: "music-tutorial",        
+              ready_callback: (obj) => {  
+                setTimeout(() => 
+                  { ion.sound.play('music-tutorial', {loop: true}) },
+                  500);
               }
+            },
+            {
+              name: "music-base"
+            },
+            {
+              name: "click"
+            }
           ],
           volume: 1,
           path: this.sfxPath,
@@ -58,10 +71,6 @@ export class GameComponent implements OnInit {
   }
 
   getData() {
-
-    this.commLevel = this._dataSvc.playerData.commLevel;
-    this.jobLevel = this._dataSvc.playerData.jobLevel;
-    this.englishLevel = this._dataSvc.playerData.englishLevel;
 
     // DEBUG: If no goal, get data and assign one
     if(this.assignedGoal === undefined) {
@@ -88,37 +97,26 @@ export class GameComponent implements OnInit {
 
     this.getData();
 
-    router.events.subscribe((val) =>  {
-
-      if(val instanceof NavigationEnd) {
-        
-        if(val.url === "/game/home") {
-          TweenLite.to(document.getElementById('toolbar-parent'), 1, {autoAlpha: 1, display:'block'});
-          TweenLite.to(document.getElementById('wellbeing'), 1, {autoAlpha: 1, display:'block'});
-        }
-        
-      }
-      
-    });
-
     this._dataSvc.playerDataUpdate.subscribe((data: PlayerData) => {
 
       this.character = this._dataSvc.assignedChar;
-
-      this.commLevel = data.commLevel;
-      this.jobLevel = data.jobLevel;
-      this.englishLevel = data.englishLevel;
+      this.surveyUrl = this._dataSvc.surveyUrl;
 
       if(data.gameEnded) {
         
-        this.currentWellnessScore = (data.wellnessScore / data.wellnessGoal) * data.wellnessGoal;
-        this.wonGame = data.wellnessScore === data.wellnessGoal;
-        (<HTMLElement>document.querySelector('#game-over #inner')).style.width = this.currentWellnessScore + "%";
+        this.gameEnded = true;
+        this.currentWellnessScore = Math.round((data.wellnessScore / data.wellnessGoal) * data.wellnessGoal);
+        if(this.currentWellnessScore > 100) this.currentWellnessScore = 100;
+
+        this.wonGame = data.wellnessScore >= data.wellnessGoal;
+        (<HTMLElement>document.querySelector('#game-over #inner')).style.width = (this.currentWellnessScore >= 96) ? '96' : this.currentWellnessScore + "%";
 
         this.lifeEvents = _.filter(this._dataSvc.getUpdatedEvents(), (e) => {return e.type === 'life'});
         
         let content = <HTMLElement>document.querySelector('#game-over #content');
         content.style.visibility = 'hidden';
+
+        TweenLite.to(document.getElementById('wellbeing'), 1, {autoAlpha:0, display:'none'});
         TweenLite.fromTo(document.getElementById('game-over'), 3, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, display:'block', ease: Sine.easeOut});
         TweenLite.to(content, 1, {autoAlpha:1, delay:3.1});
 
@@ -128,7 +126,7 @@ export class GameComponent implements OnInit {
 
     this._dataSvc.effectTrigger.subscribe((events: any[]) => {
 
-      if(!events || events.length < 1) return;
+      if(!events || events.length < 1 || this.gameEnded) return;
 
       let effectEventSel = document.getElementById('effect-events');
       _.each(events, (event, i) => {
@@ -151,13 +149,14 @@ export class GameComponent implements OnInit {
 
     this._dataSvc.lifeEventTrigger.subscribe(() => {
 
-      debugger;
+      if(this.gameEnded) return;
 
       // Show only if any left
       let allEvents = document.querySelectorAll('#life-events .game-event');
       if(allEvents.length > 0) {
   
         let eventIndex = Math.floor(Math.random() * ((allEvents.length-1) - 0 + 1));
+        // debugger;
         let eventEl = allEvents[eventIndex];
         
         if(eventEl === undefined) return;
@@ -168,13 +167,26 @@ export class GameComponent implements OnInit {
       }
     });
 
+    router.events.subscribe((val) =>  {
+
+      if(this.gameEnded) return;
+
+      if(val instanceof NavigationEnd) {
+        
+        if(val.url.indexOf("/game/home") > -1) {
+          TweenLite.to(document.getElementById('toolbar-parent'), 1, {autoAlpha: 1, display:'block'});
+          TweenLite.to(document.getElementById('wellbeing'), 1, {autoAlpha: 1, display:'block'});
+
+          this.atHome = true;
+        }
+        
+      }
+      
+    });
+
   }
 
   ngOnInit() {
-
-    // let stars = document.querySelectorAll('.stars path');
-    // console.log(stars)
-    // TweenMax.staggerFrom(stars, .5, {autoAlpha:0, scale:0, rotation:'-=359', delay:4, ease:Elastic.easeOut}, .2);
 
   }
 
@@ -206,7 +218,7 @@ export class GameComponent implements OnInit {
   }
  
   selectYes(eventId: string) {
-    
+   
     this._dataSvc.updateStats(this._dataSvc.getEventById(eventId));
     this.removeEvent(eventId);
 

@@ -1,5 +1,3 @@
-<!-- QA Build Banner -->
-<div *ngIf="isQABuild === true" id="qa-build">QA BUILD <cdn-image cloudinaryId="qa-build.svg" width="24" alt="QA Build icon"></cdn-image>  <span>May be unstable. Not intended for external use.</span></div>
 <app-loader></app-loader>
 
 <main role="main" class="container col-sm-12">
@@ -9,3 +7,12 @@
 	</div>
 	
 </main>
+
+<!-- QA Build Banner -->
+<div *ngIf="isQABuild === true" id="qa-build"> 
+
+	<cdn-image cloudinaryId="qa-build.svg" width="50" alt="QA Build icon"></cdn-image>
+	<span id="text">QA BUILD</span>
+  <div>May be unstable. Not intended for external use.</div>
+
+</div>

@@ -80,25 +80,36 @@ export class GameLocationComponent implements OnInit {
         thisOpp.stars = this.getStars();
     });
 
+    TweenLite.fromTo(document.querySelector('#flavor h2'), 1, {autoAlpha:0, top:-47}, {autoAlpha:1, top:0, delay:.7, ease:Back.easeOut});
+    TweenLite.fromTo(document.querySelector('#flavor div'), 1, {autoAlpha:0, top:-47}, {autoAlpha:1, top:0, delay:1, ease:Back.easeOut});
+    // TweenLite.fromTo(document.getElementById('back'), 1, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, delay:1.9, ease:Elastic.easeOut});
+    setTimeout(() => {
+      TweenMax.staggerFromTo(document.querySelectorAll('#list button'), .4, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, display:'block', ease:Back.easeOut}, .08);
+    }, 2000);
+
   }
 
   viewOpportunity(id: Opportunity["_id"], enabled: boolean) {
 
-    if(enabled === false) return;
+    if(enabled === false) {
+      TweenMax.fromTo(document.getElementById('listing_'+id), 0.15, {x:-20}, {x:20, repeat:2, yoyo:true, ease:Sine.easeInOut, onComplete:function(){
+        TweenMax.to(this.target, 1.5, {x:0, ease:Elastic.easeOut});
+      }});
+      return;
+    } 
 
     let detailsParent = document.getElementById('details');
-    let allDetails = document.querySelector('#details').querySelectorAll('.opportunity');
     let detailsChild = (<HTMLElement>document.getElementById('detail_' + id));
+    let allDetails = document.querySelector('#details').querySelectorAll('.opportunity');
 
     _.each(allDetails, (el) => {
       (<HTMLElement>el).style.display = 'none';
     });
 
     TweenLite.to(detailsParent, .5, {autoAlpha:1, display:'block'});
-    TweenLite.to(document.getElementById('list'), .5, {autoAlpha:0, display:'none', oncomplete:() => {
+    TweenLite.to(document.getElementById('list'), .3, {autoAlpha:0, display:'none', oncomplete:() => {
 
-      TweenLite.fromTo(detailsChild, 2, {autoAlpha:0}, {autoAlpha:1, delay:.5, display:'block', ease:Elastic.easeOut});
-      
+      TweenLite.fromTo(detailsChild, 1, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, delay:.3, display:'block', ease:Back.easeOut});
     
     }});
 
@@ -106,22 +117,24 @@ export class GameLocationComponent implements OnInit {
 
   backToList(modalId: string) {
     
-    TweenLite.to(document.getElementById('detail_'+modalId), 1, {autoAlpha:0, display:'none', ease: Back.easeIn, oncomplete:() => {
-
-      TweenLite.to(document.getElementById('list'), 1, {autoAlpha:1, display:'block'});
-      TweenLite.to(document.getElementById('details'), .5, {autoAlpha:0, display:'none'});
-    
-    }});
+    TweenLite.fromTo(document.getElementById('detail_'+modalId), .5, {autoAlpha:1, scale:1}, {autoAlpha:0, scale:0, display:'none', ease:Back.easeIn});
+    TweenLite.to(document.getElementById('list'), .3, {autoAlpha:1, delay:.5, display:'block'});
+    TweenLite.to(document.getElementById('details'), .5, {autoAlpha:0, delay:.5, display:'none'});
 
   }
 
   backToCategory() {
+
+    ion.sound.play('click');
     
     this.location.back();
 
   }
 
   selectOpportunity(opportunity: Opportunity, modalId: string) {
+
+    // Hide buttons
+    TweenLite.to(document.querySelector('#detail_'+modalId+' .buttons'), .001, {alpha:0});
 
     this.backToList(modalId);
 
@@ -140,7 +153,37 @@ export class GameLocationComponent implements OnInit {
     if(opportunity.locationUnlocks !== undefined && opportunity.locationUnlocks.length > 0 && opportunity.triggerAmt === 0)
       this._dataSvc.enableLocations(opportunity.locationUnlocks);
     
-    this._dataSvc.playerData.sawTutorial = true;
+    if(!this._dataSvc.playerData.sawTutorial) {
+      this._dataSvc.playerData.sawTutorial = true;
+
+      // ion.sound.stop('music-tutorial');
+      let newVolume = 1;
+      let fadeOut = setInterval(() => {
+        
+        ion.sound.volume('music-tutorial', {volume: newVolume});
+        newVolume -= .05;
+
+        if(newVolume <= 0) {
+          clearInterval(fadeOut);
+
+          ion.sound.stop('music-tutorial');
+          ion.sound.play('music-base', {loop: true, volume:newVolume});
+          
+          let fadeIn = setInterval(() => {
+            newVolume += .05;
+            ion.sound.volume('music-base', {volume: newVolume});
+            if(newVolume >= 1)
+              clearInterval(fadeIn);
+
+          }, 100);
+
+        }
+
+      }, 100);
+    
+    }
+    
+    this.location.back();
 
   }
 

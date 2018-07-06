@@ -19,6 +19,7 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
 
   loaded: boolean;
   locations: any[];
+  discoverLocations: any[];
   filters: object[] = 
   [
       {key: 'community', label: 'Community'},
@@ -50,8 +51,9 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
     this._dataSvc.getAllData().subscribe(response => {
 
       let locationImgIndex: number = 1;
-      this.locations = this._dataSvc.locationData;
-      
+      this.locations = _.filter(this._dataSvc.locationData, (loc) => { return loc.categoriesStr !== 'discover'; });
+      this.discoverLocations = _.where(this._dataSvc.locationData, { categoriesStr: 'discover' });
+
       // Assign image index
       _.each(this.locations, (l) => {
 
@@ -62,13 +64,17 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
         
         l.imageIndex = locationImgIndex;
       });
+      _.each(this.discoverLocations, (l, i) => { l.imageIndex = i+1; });
 
       this.loadCategory = true;
       this.character = this._dataSvc.assignedChar;
 
       this.loaded = true;
 
-      this.screenAnimation();
+
+      let categoryId = this.route.snapshot.queryParams.cat;
+      if(!categoryId)
+        this.screenAnimation();
 
     });
 
@@ -92,7 +98,7 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
     let categoryId = this.route.snapshot.queryParams.cat;
     // Load category now?
     if(categoryId)
-      this.filterSelection(categoryId);
+      this.filterSelection(categoryId, true);
 
     this.loadedCategory = true;
 
@@ -104,7 +110,8 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
 
     // City animation
     if(!this._dataSvc.playerData.sawTutorial) {
-      TweenLite.fromTo(document.getElementById('city-tutorial'), 1, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, delay:1, display:'block', 
+      TweenLite.fromTo(document.getElementById('tutorial-header'), .7, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, delay:1, ease:Expo.easeOut});  
+      TweenLite.fromTo(document.getElementById('city-tutorial'), 1, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, delay:1.3, display:'block', 
        onComplete:() => {
           let scroll = {val: 0};
           TweenMax.to(scroll, 5, {val:this.mapContainer.nativeElement.scrollHeight, delay:2, ease:Sine.easeOut, onUpdate:() => {
@@ -140,31 +147,40 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
 
   }
 
-  filterSelection(category: string) {
+  filterSelection(category: string, onLoad: boolean=false) {
+
+    ion.sound.play('click');
 
     let x, i;
     let showAll = (category === "all");
     let label = _.where(this.filters, {key: category})[0]['label'];
+    let locationsShown = [];
 
     x = document.getElementsByClassName("location");
-    document.getElementById('map').classList.remove('hidden');
-    document.getElementById('home').classList.add('hidden');
-
     document.getElementById('category-label').innerHTML = label;
     
     // Add the "show" class to the filtered elements, and remove the "show" class from the elements that are not selected
     for (i = 0; i < x.length; i++) {
-      x[i].classList.remove("show");
+      x[i].style.display = 'none';
     
       if(showAll) {
         x[i].classList.add("show");
         continue;
       }
 
-      if (x[i].dataset.categories !== undefined && x[i].dataset.categories.indexOf(category) > -1) 
-        x[i].classList.add("show");
-
+      if (x[i].dataset.categories !== undefined && x[i].dataset.categories.indexOf(category) > -1)
+        locationsShown.push(x[i]);
     }
+
+    if(!onLoad) {
+      TweenLite.fromTo(document.getElementById('tutorial-header'), .7, {autoAlpha:1, top:0}, {autoAlpha:0, top:'-100%', ease:Expo.easeIn});
+      TweenLite.fromTo(document.getElementById('home'), .7, {autoAlpha:1, left:0}, {autoAlpha:0, left:'-100%', display:'none', delay:.7, ease:Back.easeIn});
+    }
+    else
+      document.getElementById('home').style.display = 'none';
+
+    TweenLite.fromTo(document.getElementById('map'), .7, {autoAlpha:1, left:'100%'}, {autoAlpha:1, left:0, delay:(!onLoad ? 1.7 : 1), display:'block', ease:Back.easeOut});
+    TweenMax.staggerFromTo(locationsShown, .3, {scale:0}, {scale:1, delay:2, display:'block', ease:Back.easeOut}, .2);
 
     this.router.navigate([], {
       relativeTo: this.route,
@@ -178,13 +194,31 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
 
   backToHome() { 
 
-    document.getElementById('map').classList.add('hidden');
-    document.getElementById('home').classList.remove('hidden');
+    ion.sound.play('click');
+
+    if(this.loadedCategory) {
+      
+      document.getElementById('city-tutorial').style.top = '-100%';
+      document.getElementById('house').style.opacity = '0'; 
+
+      TweenLite.fromTo(document.getElementById('map'), .7, {autoAlpha:1, left:0}, {autoAlpha:0, left:'100%', display:'none', ease:Back.easeIn});
+      TweenLite.fromTo(document.getElementById('home'), .7, {autoAlpha:0, left:'-100%'}, {autoAlpha:1, left:0, delay:.7, display:'block', ease:Back.easeOut, onComplete: () => {
+        this.screenAnimation();
+      }});
+
+    }
+    else {
+      
+
+      TweenLite.fromTo(document.getElementById('tutorial-header'), .7, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, ease:Expo.easeOut});
+      TweenLite.fromTo(document.getElementById('map'), .7, {autoAlpha:1, left:0}, {autoAlpha:0, left:'100%', display:'none', ease:Back.easeIn});
+      TweenLite.fromTo(document.getElementById('home'), .7, {autoAlpha:0, left:'-100%'}, {autoAlpha:1, left:0, delay:.7, display:'block', ease:Back.easeOut});
+
+    }
 
     const params = { ...this.route.snapshot.queryParams };
     delete params.cat;
     this.router.navigate([], { queryParams: params });
-    
 
   }
 

@@ -20,7 +20,7 @@
         "nb_sides": 4
       },
       "image": {
-        "src": "https://res.cloudinary.com/engagement-lab-home/image/upload/v1525110825/opportunity-game/icons/duration.png",
+        "src": ["https://res.cloudinary.com/engagement-lab-home/image/upload/v1525110825/opportunity-game/icons/star-1.png", "https://res.cloudinary.com/engagement-lab-home/image/upload/v1525110825/opportunity-game/icons/gold_levelup.png"],
         "width": 200,
         "height": 200
       }

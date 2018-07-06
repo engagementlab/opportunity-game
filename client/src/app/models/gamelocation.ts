@@ -4,7 +4,7 @@ export interface GameLocation {
 
 	_id?: string;
 	readonly name: string;
-	readonly intro: string;
+	readonly intro: any;
 	readonly description: string;
 	readonly image: string;
 	readonly key: string;

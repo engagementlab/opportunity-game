@@ -27,6 +27,16 @@
 
 #home {
 	
+	#tutorial-header {
+		position: absolute;
+		top: -100%;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+	}
+
+	position: relative;
+	max-width: 425px;
 	height: 100%;
 	background-color: $white-three;
 
@@ -86,8 +96,11 @@
 
 #map {
 	
+  position: relative;
 	background: cdn-image('map-bg');
+	background-color: $white-three;
 	min-height: 400%;
+  top: 0;
 		
 	#category-label {
 		text-align: center;
@@ -102,31 +115,29 @@
 
 .locations {
 	margin: auto;
-  // height: 65vh;
-	// @media(max-height: 680px) {
-		height: 68vh;
-	// }
+	height: 68vh;
+
 	@include mobile-only {
 	  overflow: scroll;
 	}
+}
 
-	.location {
-		display: none;
+.location {
+	display: none;
 
-		a {
-			text-decoration: none;
-		}
+	a {
+		text-decoration: none;
+	}
 
-		.name {
-			color: black;
-			text-align: center;
-			font-size: smaller;
-		}
-		.locked {
-			@include filter(opacity, 50%);
-		}
-		&.show {
-			display: block;
-		}
+	.name {
+		color: black;
+		text-align: center;
+		font-size: smaller;
+	}
+	.locked {
+		@include filter(opacity, 50%);
+	}
+	&.show {
+		display: block;
 	}
 }
