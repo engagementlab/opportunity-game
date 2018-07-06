@@ -69,7 +69,8 @@
 			
 		</div>
 		<div class="no-margin buttons" *ngIf="data.locked === true && data.enabled === undefined">
-			<app-button label="Close" ariaLabel="Click/tap to close {{data.name}} window" clickData="true" (click)="clickNo()" class="orange"></app-button>
+			<app-button *ngIf="type === 'life'" label="Close" ariaLabel="Click/tap to close {{data.name}} window" clickData="true" (click)="clickNo()" class="orange"></app-button>
+			<app-button *ngIf="type !== 'life'" label="Return to Location" ariaLabel="Click/tap to close '{{data.name}}' opportunity" clickData="true" (click)="clickNo()" class="orange opp-btn"></app-button>
 		</div>
 	</div>
 
