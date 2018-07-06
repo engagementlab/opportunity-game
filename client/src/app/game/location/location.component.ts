@@ -80,12 +80,12 @@ export class GameLocationComponent implements OnInit {
         thisOpp.stars = this.getStars();
     });
 
-    TweenLite.fromTo(document.querySelector('#flavor h2'), 1, {autoAlpha:0, top:-47}, {autoAlpha:1, top:0, delay:1, ease:Back.easeOut});
-    TweenLite.fromTo(document.querySelector('#flavor div'), 1, {autoAlpha:0, top:-47}, {autoAlpha:1, top:0, delay:1.7, ease:Back.easeOut});
+    TweenLite.fromTo(document.querySelector('#flavor h2'), 1, {autoAlpha:0, top:-47}, {autoAlpha:1, top:0, delay:.7, ease:Back.easeOut});
+    TweenLite.fromTo(document.querySelector('#flavor div'), 1, {autoAlpha:0, top:-47}, {autoAlpha:1, top:0, delay:1, ease:Back.easeOut});
     // TweenLite.fromTo(document.getElementById('back'), 1, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, delay:1.9, ease:Elastic.easeOut});
     setTimeout(() => {
       TweenMax.staggerFromTo(document.querySelectorAll('#list button'), .4, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, display:'block', ease:Back.easeOut}, .08);
-    }, 2500);
+    }, 2000);
 
   }
 

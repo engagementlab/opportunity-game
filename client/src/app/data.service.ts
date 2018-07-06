@@ -130,66 +130,11 @@ export class DataService {
         this.actionsUntilLifeEvent -= opportunity.actionCost;
         this.actionsUntilPayday -= opportunity.actionCost;
 
-        if(this.actionsUntilLifeEvent === 0)
-        {
-            this.actionsUntilLifeEvent = 6;
-            this.lifeEventTrigger.emit();
-        }
         if(this.actionsUntilPayday === 0)
         {
             this.actionsUntilPayday = 5;
             this.playerData.money += 5;
             this.showPayday();
-        }
-
-        // Trigger duration effects or delayed rewards? (if actions being removed)
-        if(opportunity.actionCost > 0)
-        { 
-            let i = 0;
-            let effectsToRemove = [];
-            while(i < this.durationEffectQueue.length) {
-                let effect = this.durationEffectQueue[i];
-    
-                if(effect.trigger === DurationEffectTrigger.actions) {
-                    effect.triggerCount += opportunity.actionCost;
-
-                    if(effect.triggerCount >= effect.triggerWait)
-                        effectsToRemove.push(effect);
-                }
-
-                i++;
-            }
-
-            let e = 0;
-            while(e < this.delayedRewardQueue.length) {
-            
-                let reward = this.delayedRewardQueue[e];
-                reward.triggerWait -= opportunity.actionCost;
-
-                if(reward.triggerWait <= 0) {
-
-                    this.playerData.commLevel += reward.opportunity.commReward;
-                    this.playerData.jobLevel += reward.opportunity.jobReward;
-                    this.playerData.englishLevel += reward.opportunity.englishReward;
-                    
-                    this.playerData.money += reward.opportunity.moneyReward;         
-                    this.playerData.actions += reward.opportunity.actionReward;
-                    
-                    this.rewardTrigger.emit({type: 'opportunity', opp: reward.opportunity});
-                    this.playerDataUpdate.emit(this.playerData);
-
-                    this.delayedRewardQueue.splice(e, 1);
-                    break;
-
-                }
-
-                e++;
-            
-            }
-
-            // Remove used effects
-            this.effectTrigger.emit(effectsToRemove);
-            this.durationEffectQueue = _.difference(this.durationEffectQueue, effectsToRemove);
         }
 
         // Reward now or later (undefined if life event)
@@ -213,11 +158,70 @@ export class DataService {
             this.delayedRewardQueue.push(delayedReward);
         }
 
-        this.playerData.wellnessScore = this.calcWellness();
-        this.playerDataUpdate.emit(this.playerData);
 
+        // Show life events and process opportunity effects only if not game over
         if(this.playerData.actions <= 0)
             this.endGame();
+        else {            
+            if(this.actionsUntilLifeEvent === 0)
+            {
+                this.actionsUntilLifeEvent = 6;
+                this.lifeEventTrigger.emit();
+            }
+
+            // Trigger duration effects or delayed rewards? (if actions being removed)
+            if(opportunity.actionCost > 0)
+            { 
+                let i = 0;
+                let effectsToRemove = [];
+                while(i < this.durationEffectQueue.length) {
+                    let effect = this.durationEffectQueue[i];
+        
+                    if(effect.trigger === DurationEffectTrigger.actions) {
+                        effect.triggerCount += opportunity.actionCost;
+
+                        if(effect.triggerCount >= effect.triggerWait)
+                            effectsToRemove.push(effect);
+                    }
+
+                    i++;
+                }
+
+                let e = 0;
+                while(e < this.delayedRewardQueue.length) {
+                
+                    let reward = this.delayedRewardQueue[e];
+                    reward.triggerWait -= opportunity.actionCost;
+
+                    if(reward.triggerWait <= 0) {
+
+                        this.playerData.commLevel += reward.opportunity.commReward;
+                        this.playerData.jobLevel += reward.opportunity.jobReward;
+                        this.playerData.englishLevel += reward.opportunity.englishReward;
+                        
+                        this.playerData.money += reward.opportunity.moneyReward;         
+                        this.playerData.actions += reward.opportunity.actionReward;
+                        
+                        this.rewardTrigger.emit({type: 'opportunity', opp: reward.opportunity});
+                        this.playerDataUpdate.emit(this.playerData);
+
+                        this.delayedRewardQueue.splice(e, 1);
+                        break;
+
+                    }
+
+                    e++;
+                
+                }
+
+                // Remove used effects
+                this.effectTrigger.emit(effectsToRemove);
+                this.durationEffectQueue = _.difference(this.durationEffectQueue, effectsToRemove);
+            }
+        }
+
+        this.playerData.wellnessScore = this.calcWellness();
+        this.playerDataUpdate.emit(this.playerData);
 
     }
 

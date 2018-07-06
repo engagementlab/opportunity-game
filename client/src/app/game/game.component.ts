@@ -95,7 +95,6 @@ export class GameComponent implements OnInit {
 
   constructor(private router: Router, public _dataSvc: DataService) { 
 
-    let gameEnd: boolean;
     this.getData();
 
     this._dataSvc.playerDataUpdate.subscribe((data: PlayerData) => {
@@ -105,7 +104,7 @@ export class GameComponent implements OnInit {
 
       if(data.gameEnded) {
         
-        gameEnd = true;
+        this.gameEnded = true;
         this.currentWellnessScore = Math.round((data.wellnessScore / data.wellnessGoal) * data.wellnessGoal);
 
         this.wonGame = data.wellnessScore === data.wellnessGoal;
@@ -126,7 +125,7 @@ export class GameComponent implements OnInit {
 
     this._dataSvc.effectTrigger.subscribe((events: any[]) => {
 
-      if(!events || events.length < 1) return;
+      if(!events || events.length < 1 || this.gameEnded) return;
 
       let effectEventSel = document.getElementById('effect-events');
       _.each(events, (event, i) => {
@@ -149,6 +148,8 @@ export class GameComponent implements OnInit {
 
     this._dataSvc.lifeEventTrigger.subscribe(() => {
 
+      if(this.gameEnded) return;
+
       // Show only if any left
       let allEvents = document.querySelectorAll('#life-events .game-event');
       if(allEvents.length > 0) {
@@ -167,7 +168,7 @@ export class GameComponent implements OnInit {
 
     router.events.subscribe((val) =>  {
 
-      if(gameEnd) return;
+      if(this.gameEnded) return;
 
       if(val instanceof NavigationEnd) {
         

@@ -31,7 +31,6 @@
 
 			</div>
 
-			<!-- Requires: {{opportunity.type}} -->
 			<div class="costs row col-6" *ngIf="opportunity.enabled === undefined">
 				<div class="{{cost.icon}} cost col-1" [class.notenough]="cost.has !== undefined && !cost.has" *ngFor="let cost of opportunity.costs">
 					<span *ngIf="cost.amt !== undefined">{{cost.amt}}</span>

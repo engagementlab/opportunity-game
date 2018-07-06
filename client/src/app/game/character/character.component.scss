@@ -7,12 +7,13 @@ label {
 #wait {
 	position: absolute;
   width: 100%;
-  max-width: 425px;
-  height: 97vh;
+  height: 100vh;
   z-index: 25;
 
 	background: black;
 	color: white;
+	
+  @include game-width();
 	@include mq($until: 320px) {
 		height: 160vh;
 	}
