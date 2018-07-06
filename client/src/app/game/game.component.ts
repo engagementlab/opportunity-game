@@ -106,9 +106,10 @@ export class GameComponent implements OnInit {
         
         this.gameEnded = true;
         this.currentWellnessScore = Math.round((data.wellnessScore / data.wellnessGoal) * data.wellnessGoal);
+        if(this.currentWellnessScore > 100) this.currentWellnessScore = 100;
 
-        this.wonGame = data.wellnessScore === data.wellnessGoal;
-        (<HTMLElement>document.querySelector('#game-over #inner')).style.width = this.currentWellnessScore + "%";
+        this.wonGame = data.wellnessScore >= data.wellnessGoal;
+        (<HTMLElement>document.querySelector('#game-over #inner')).style.width = (this.currentWellnessScore >= 96) ? 96 : this.currentWellnessScore + "%";
 
         this.lifeEvents = _.filter(this._dataSvc.getUpdatedEvents(), (e) => {return e.type === 'life'});
         

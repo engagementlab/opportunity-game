@@ -160,7 +160,7 @@ export class DataService {
 
 
         // Show life events and process opportunity effects only if not game over
-        if(this.playerData.actions <= 0)
+        if(this.playerData.actions <= 0 || (this.playerData.wellnessScore >= this.playerData.wellnessGoal))
             this.endGame();
         else {            
             if(this.actionsUntilLifeEvent === 0)

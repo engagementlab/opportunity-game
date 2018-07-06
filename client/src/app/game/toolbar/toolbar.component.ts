@@ -54,7 +54,7 @@ export class GameToolbarComponent implements OnInit {
       
       if(data.gotTransit)
         this.hasTransit = true;
-      else if(data.gotJob)
+      if(data.gotJob)
         this.hasJob = true;
 
      if(data.gotTransit || data.gotJob) {
