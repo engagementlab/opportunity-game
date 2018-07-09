@@ -160,7 +160,7 @@ export class GameToolbarComponent implements OnInit {
     TweenLite.to(document.querySelectorAll('.icon-lg .tooltip'), .2, {autoAlpha:0, scale:0, display:'none', ease:Back.easeIn});
 
     TweenLite.fromTo(evt.target.getElementsByClassName('tooltip')[0], .5, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, display:'block', ease:Back.easeOut});
-    TweenLite.to(evt.target.getElementsByClassName('tooltip')[0], .5, {autoAlpha:0, scale:0, delay:2, display:'none', ease:Back.easeIn});
+    // TweenLite.to(evt.target.getElementsByClassName('tooltip')[0], .5, {autoAlpha:0, scale:0, delay:2, display:'none', ease:Back.easeIn});
     
   }
 

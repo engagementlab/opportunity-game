@@ -64,8 +64,8 @@
 			<app-button *ngIf="type === 'life'" label="Yes" ariaLabel="Click/tap to say yes to the event '{{data.name}}'" clickData="true" (click)="clickHandler()" class="green"></app-button>
 			<app-button *ngIf="type === 'life'" label="No" ariaLabel="Click/tap to say no to the event '{{data.name}}'" clickData="true" (click)="clickNo()" class="orange"></app-button>
 			
-			<app-button *ngIf="type !== 'life'" label="Get Opportunity" ariaLabel="Click/tap to say yes to the '{{data.name}}' opportunity" clickData="true" (click)="clickHandler()" class="green opp-btn"></app-button>
-			<app-button *ngIf="type !== 'life'" label="Return to location" ariaLabel="Click/tap to say no to the '{{data.name}}' opportunity" clickData="true" (click)="clickNo()" class="orange opp-btn"></app-button>
+			<app-button *ngIf="type !== 'life'" label="Do It" ariaLabel="Click/tap to say yes to the '{{data.name}}' opportunity" clickData="true" (click)="clickHandler()" class="green opp-btn"></app-button>
+			<app-button *ngIf="type !== 'life'" label="No Thanks" ariaLabel="Click/tap to say no to the '{{data.name}}' opportunity" clickData="true" (click)="clickNo()" class="orange opp-btn"></app-button>
 			
 		</div>
 		<div class="no-margin buttons" *ngIf="data.locked === true && data.enabled === undefined">
