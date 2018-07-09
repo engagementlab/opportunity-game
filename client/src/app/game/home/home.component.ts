@@ -75,7 +75,11 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
       let categoryId = this.route.snapshot.queryParams.cat;
       if(!categoryId)
         this.screenAnimation();
+      
+      setTimeout(() => {
 
+      }, 2000);
+      
     });
 
     // DEBUG: If no character, get data and assign one
@@ -87,7 +91,6 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
 
       });
     }
-    
   }
 
   ngAfterViewChecked() {
@@ -180,7 +183,13 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
       document.getElementById('home').style.display = 'none';
 
     TweenLite.fromTo(document.getElementById('map'), .7, {autoAlpha:1, left:'100%'}, {autoAlpha:1, left:0, delay:(!onLoad ? 1.7 : 1), display:'block', ease:Back.easeOut});
-    TweenMax.staggerFromTo(locationsShown, .3, {scale:0}, {scale:1, delay:2, display:'block', ease:Back.easeOut}, .2);
+    TweenMax.staggerFromTo(locationsShown, .3, {scale:0}, {scale:1, delay:2, display:'block', ease:Back.easeOut, onComplete: () => {
+      
+        
+        let list = document.getElementById('list');
+        let toolbar = document.getElementById('toolbar');
+        list.style.height = (toolbar.offsetTop - list.offsetTop) + 'px';
+    }}, .2);
 
     this.router.navigate([], {
       relativeTo: this.route,

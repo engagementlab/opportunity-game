@@ -131,8 +131,8 @@ export class GameComponent implements OnInit {
       let effectEventSel = document.getElementById('effect-events');
       _.each(events, (event, i) => {
 
-        let eventToShow;
-        eventToShow = document.getElementById(event.id);
+        let eventToShow = document.getElementById(event.id);
+        
         // Only ever show one event at once
         if(eventToShow === undefined || eventToShow === null || i > 0) {
           if(eventToShow !== undefined)
