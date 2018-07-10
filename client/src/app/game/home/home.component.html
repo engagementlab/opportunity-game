@@ -21,15 +21,17 @@
 		<div id="house" class="row-lg">
 
 			<div class="col-6 row">
-				<div class="col-3">
-					<div class="vert-center">
-						<cdn-image *ngIf="character !== undefined" cloudinaryId="opportunity-game/characters/char-{{character?.image}}-home.svg" width="350" alt="Icon for Home"></cdn-image>
-					</div>
+				<div class="col-2">
+					<!-- -->
+						<cdn-image *ngIf="character !== undefined" cloudinaryId="opportunity-game/characters/{{character?.image}}.svg" alt="Icon for Home"></cdn-image>
+					<!-- </div> -->
 				</div>
 		
-				<div class="col-3">
+				<div class="col-4">
+					<div class="vert-center"> 
 					<div id="house-bubble" class="bubble">
 						<span class="round1">Go to DISCOVER to learn more.</span>
+					</div>
 					</div>
 				</div>
 			</div>	

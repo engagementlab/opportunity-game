@@ -75,11 +75,16 @@
 }
 
 #house {
-
-	position: relative;
+  
+  position: absolute;
 	visibility: hidden;
+  bottom: 5%;
 	min-height: 20%;
 	width: 100%;
+
+	::ng-deep img {
+		max-width: 100%;
+	}
 
   .centered {
   	position: absolute;

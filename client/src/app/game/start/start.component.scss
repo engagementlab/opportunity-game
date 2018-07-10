@@ -50,9 +50,14 @@
 	}
 }
 
-
 #characters-parent {
-	
 	position: relative;
+}
 
+#footer {
+	visibility: hidden;
+	color: $gold;
+	font-size: large;
+	text-align: center;
+	margin-top: -5%;
 }
