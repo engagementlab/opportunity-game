@@ -75,10 +75,9 @@
 }
 
 #house {
-  
-  position: absolute;
+
+	position: relative;
 	visibility: hidden;
-  bottom: 5%;
 	min-height: 20%;
 	width: 100%;
 
@@ -91,6 +90,11 @@
   	width: 45%;
   	transform: translate(35%, -100%);
   }
+
+ //  &.tutorial {
+	//   position: absolute;
+	//   bottom: 5%;
+	// }
 
 	@include mobile-only {
 		.mobile {

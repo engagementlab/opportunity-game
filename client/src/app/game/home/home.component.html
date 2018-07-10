@@ -17,27 +17,45 @@
 	  <div id="city-tutorial" class="filter btn hidden" (click)="filterSelection('discover')">
 			<cdn-image cloudinaryId="opportunity-game/home/tutorial.svg" width="1000" alt="Image for tutorials screen"></cdn-image>
 		</div>
-
-		<div id="house" class="row-lg">
+<!-- 
+		<div id="house-tutorial" class="house tutorial row-lg">
 
 			<div class="col-6 row">
 				<div class="col-2">
-					<!-- -->
 						<cdn-image *ngIf="character !== undefined" cloudinaryId="opportunity-game/characters/{{character?.image}}.svg" alt="Icon for Home"></cdn-image>
-					<!-- </div> -->
 				</div>
 		
 				<div class="col-4">
 					<div class="vert-center"> 
-					<div id="house-bubble" class="bubble">
-						<span class="round1">Go to DISCOVER to learn more.</span>
+						<div class="bubble">
+							<span>Go to DISCOVER to learn more.</span>
+						</div>
 					</div>
+				</div>
+			</div>	
+
+		</div> -->
+
+		<div id="house" class="house row-lg">
+
+			<div class="col-6 row">
+				<div class="col-2">
+						<cdn-image *ngIf="character !== undefined" cloudinaryId="opportunity-game/characters/{{character?.image}}.svg" alt="Icon for Home"></cdn-image>
+				</div>
+		
+				<div class="col-4">
+					<div class="vert-center">  
+						<div class="bubble tutorial hidden">
+							<span>Go to DISCOVER to learn more.</span>
+						</div>
+						<div class="bubble categories hidden">
+							<span>Select a category to view its locations.</span>
+						</div>
 					</div>
 				</div>
 			</div>	
 
 		</div>
-
 	
 	</div>
 
