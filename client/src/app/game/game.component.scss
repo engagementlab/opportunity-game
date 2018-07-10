@@ -94,8 +94,8 @@
 		border: solid black 20px;
 		border-radius: 50%;
 		::ng-deep img {
-			@include scale(1.28);
-			clip-path: ellipse(42% 41% at 50% 50%);
+			@include transform(translateY(20px));
+			clip-path: ellipse(110% 62% at 50% 32%);
 		}
 		&.won {
 			::ng-deep img {

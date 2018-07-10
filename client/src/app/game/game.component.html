@@ -23,9 +23,9 @@
 		<h1 class="col-xs-2 auto" *ngIf="wonGame === true"><cdn-image cloudinaryId="opportunity-game/game-won.svg" width="350" alt="Game won image"></cdn-image></h1>
 		<h1 class="col-xs-2 auto" *ngIf="wonGame === false"><cdn-image cloudinaryId="opportunity-game/game-lost.svg" width="350" alt="Game lost image"></cdn-image></h1>
 
-		<div class="col-6 auto character" [class.won]="wonGame === true">
-			<cdn-image *ngIf="wonGame === true" cloudinaryId="opportunity-game/characters/{{character?.image}}_win.svg" width="450" alt="Image of happy character"></cdn-image>
-			<cdn-image *ngIf="wonGame === false" cloudinaryId="opportunity-game/characters/{{character?.image}}_lose.svg" width="450" alt="Image of sad character"></cdn-image>
+		<div class="col-5 auto character" [class.won]="wonGame === true">
+			<cdn-image *ngIf="wonGame === true" cloudinaryId="opportunity-game/characters/{{character?.image}}_win.svg" width="130" alt="Image of happy character"></cdn-image>
+			<cdn-image *ngIf="wonGame === false" cloudinaryId="opportunity-game/characters/{{character?.image}}_lose.svg" width="121" alt="Image of sad character"></cdn-image>
 		</div>
 
 		<div class="row">

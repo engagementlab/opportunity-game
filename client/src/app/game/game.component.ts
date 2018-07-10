@@ -100,7 +100,7 @@ export class GameComponent implements OnInit {
     this._dataSvc.playerDataUpdate.subscribe((data: PlayerData) => {
 
       this.character = this._dataSvc.assignedChar;
-      this.surveyUrl = this._dataSvc.surveyUrl;
+      this.surveyUrl = this._dataSvc.surveyUrl + '?priority=' + this._dataSvc.playerPriority;
 
       if(data.gameEnded) {
         
