@@ -225,7 +225,7 @@
 	&.transit {
 		background-image: cdn-image('icons/transit', c_scale, w_15);
 		&.notenough {
-			background-image: cdn-image('icons/transit-clear', c_scale, w_15);
+			background-image: cdn-image('icons/transit-clear.png', c_scale, w_35);
 		}
 	}
 }
