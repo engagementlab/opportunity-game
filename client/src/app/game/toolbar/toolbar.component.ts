@@ -143,21 +143,8 @@ export class GameToolbarComponent implements OnInit {
     TweenMax.staggerFromTo(notifications, .4, {autoAlpha:0, bottom:bannerY}, {autoAlpha:1, bottom:0, display:'inline-flex', ease:Back.easeOut}, .4, () => {
 
       this.animatingNotifications = false;
-
       _.each(notifications, (n, i) => {
         (<HTMLElement>n).style.zIndex = i+'';
-        
-        // setTimeout(() => {n.classList.add('remove');  }, 2000*(i+1));
-
-        // if(n.classList.contains('reward'))
-        //   setTimeout(() => {
-        //     (<HTMLElement>n).style.display = 'none';
-        //     (<HTMLElement>n).classList.remove('show');
-        //     (<HTMLElement>n).classList.add('done');
-        //   }, 2400*(i+1));
-        // else
-        //   setTimeout(() => { (<HTMLElement>n).style.display = 'none'; }, 2400*(i+1));
-
       });
 
     });
