@@ -1,17 +1,17 @@
-<div id="toolbar" class="btn no-margin" (click)="openDrawer($event);">
+<div id="toolbar" class="btn no-margin">
 
-	<div id="notifications" class="col-6 bold">
+	<div id="notifications" class="col-6">
 			<div class="row reward" id="reward_{{opportunity._id}}" *ngFor="let opportunity of rewardOpportunities; let i = index; ">
-				<div class="col-1">
-					<cdn-image cloudinaryId="opportunity-game/icons/{{opportunity.reward.iconDetail}}.svg" alt="{{opportunity.name}} reward icon"></cdn-image>
+				<div class="col-1 no-pad">
+					<cdn-image cloudinaryId="opportunity-game/icons/{{opportunity.reward.iconDetail}}.svg" width="40" alt="{{opportunity.name}} reward icon"></cdn-image>
 				</div>  
-				<div class="col-5">
+				<div class="col-5 no-pad">
 					{{opportunity.rewardFlavor}}
 				</div>
 			</div>
 			<div class="row reward location" id="loc_{{location._id}}" *ngFor="let location of rewardLocations; let i = index;">
 				<div class="col-1">
-					<cdn-image cloudinaryId="opportunity-game/icons/map.svg" alt="{{location.name}} unlocked icon"></cdn-image>
+					<cdn-image cloudinaryId="opportunity-game/icons/map-clear.png" width="40" alt="{{location.name}} unlocked icon"></cdn-image>
 				</div>  
 				<div class="col-5">
 					{{location.name}} unlocked
@@ -20,32 +20,32 @@
 
 			<div id="transit-cheevo" class="row cheevo hidden">
 					<div class="col-1">
-						<cdn-image cloudinaryId="opportunity-game/toolbar/transit-color.svg" alt="Public transit unlocked icon"></cdn-image>
+						<cdn-image cloudinaryId="opportunity-game/icons/transit-clear.png" width="50" alt="Public transit unlocked icon"></cdn-image>
 					</div>  
-					<div class="col-5">
-						Public Transit unlocked!
+					<div class="col-5 no-pad">
+						You got a bus pass!
 					</div>
 			</div>
 			<div id="job-cheevo" class="row cheevo hidden">
 					<div class="col-1">
-						<cdn-image cloudinaryId="opportunity-game/toolbar/job-color.svg" alt="Job unlocked icon"></cdn-image>
+						<cdn-image cloudinaryId="opportunity-game/icons/job-clear.png" alt="Job unlocked icon"></cdn-image>
 					</div>  
-					<div class="col-3">
-						Job started!
+					<div class="col-5 no-pad">
+						You started a job!
 					</div>
 			</div>
 			<div id="payday" class="row hidden">
-					<div class="col-2">
-						PAY DAY!
+					<div class="col-1">
+						<cdn-image cloudinaryId="opportunity-game/icons/money-clear.png" width="50" alt="Payday icon"></cdn-image>
 					</div>  
-					<div class="col-4">
-						You earned +5 cash
+					<div class="col-5">
+						Pay Day! You earned $5.
 					</div>
 			</div>
 
 	</div>
 
-	<div id="main" class="row no-margin">
+	<div id="main" class="row no-margin" (click)="openDrawer($event);">
 		
 		<div class="flex">
 			
@@ -95,7 +95,7 @@
 
 	</div>
 
-	<div id="drawer" class="row no-margin">
+	<div id="drawer" class="row no-margin" (click)="openDrawer($event);">
 
 		<div id="job" [class.disabled]="hasTransit === undefined" class="col-1 icon-lg">
 			<cdn-image cloudinaryId="opportunity-game/toolbar/transit.svg" alt="Public transit toolbar icon" *ngIf="hasTransit === undefined"></cdn-image> 

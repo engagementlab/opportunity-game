@@ -105,7 +105,7 @@
 
 	</div>
 	<div id="buttons">
-		<app-button id="submit-btn" label="Get My Character" ariaLabel="Click/tap to see character" clickData="true" (clickEvent)="assignCharacter()" class="green hidden col-centered"></app-button>
+		<app-button id="submit-btn" label="Get My Character" ariaLabel="{{ {desktop:'Click',mobile:'Tap'} | deviceAction }} to see character" clickData="true" (clickEvent)="assignCharacter()" class="green hidden col-centered"></app-button>
 	</div>
 
 </div>

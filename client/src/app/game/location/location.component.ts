@@ -136,7 +136,14 @@ export class GameLocationComponent implements OnInit {
     // Hide buttons
     TweenLite.to(document.querySelector('#detail_'+modalId+' .buttons'), .001, {alpha:0});
 
-    this.backToList(modalId);
+    // Show 'go home' modal?
+    if(this.currentLocation.key === 'your-new-apartment') {
+      TweenLite.fromTo(document.getElementById('detail_'+modalId), .5, {autoAlpha:1, scale:1}, {autoAlpha:0, scale:0, display:'none', ease:Back.easeIn});
+      TweenLite.to(document.getElementById('details'), .5, {autoAlpha:0, delay:.5, display:'none'});
+      TweenLite.fromTo(document.getElementById('details-home'), 1, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, delay:.7, display:'block', ease:Back.easeOut});
+    }  
+    else
+      this.backToList(modalId);
 
     if(opportunity.givesTransit)
       this._dataSvc.modifyPlayerData('hasTransit', true);
@@ -156,7 +163,6 @@ export class GameLocationComponent implements OnInit {
     if(!this._dataSvc.playerData.sawTutorial) {
       this._dataSvc.playerData.sawTutorial = true;
 
-      // ion.sound.stop('music-tutorial');
       let newVolume = 1;
       let fadeOut = setInterval(() => {
         
@@ -182,8 +188,7 @@ export class GameLocationComponent implements OnInit {
       }, 100);
     
     }
-    
-    this.location.back();
+
 
   }
 

@@ -97,11 +97,14 @@
 		<p>To win, get your <span class="orange">score</span> to {{wellnessGoal}} before running out of</p>
 
 		<div class="row">
-			<div class="col-3 no-pad col-centered">
+			<div class="col-2 no-pad col-centered">
 				<cdn-image cloudinaryId="opportunity-game/icons/action.svg" width="120" alt="Action icon"></cdn-image>
 				<div>Actions</div>
 			</div>
-			<div class="col-3 no-pad col-centered">
+			<div class="col-2 no-pad col-centered">
+				<div class="vert-center">and</div>
+			</div>
+			<div class="col-2 no-pad col-centered">
 				<cdn-image cloudinaryId="opportunity-game/icons/money.svg" width="120" alt="Money icon"></cdn-image>
 				<div>Money</div>
 			</div>
@@ -111,7 +114,7 @@
 
 	<div id="screen1" class="col-6 hidden">
 
-		<p>Strengthen these 5 <span class="gold">abilities</span> to unlock more opportunities and increase your <span class="orange">score</span></p>
+		<p class="small">Strengthen these 3 <span class="gold">abilities</span> to unlock more opportunities and increase your <span class="orange">score</span></p>
 
 		<div class="row">
 			<div class="col-2 no-pad col-centered">
@@ -128,6 +131,8 @@
 			</div>
 		</div>
 
+		<p class="small">Get a</p>
+
 		<div class="row">
 			<div class="col-3 no-pad col-centered">
 				<cdn-image cloudinaryId="opportunity-game/icons/transit.svg" width="120" alt="Transit icon"></cdn-image>
@@ -139,11 +144,13 @@
 			</div>
 		</div>
 
+		<p class="small">to increase your score</p>
+
 	</div>
 
 	<div id="buttons" class="hidden">
-		<app-button id="continue-btn" label="continue" ariaLabel="Click/tap for next screen" clickData="true" (clickEvent)="nextScreen()" class="white"></app-button>
-		<app-button id="start-btn" label="Begin your Journey" ariaLabel="Click/tap to start" clickData="true" (clickEvent)="close()" class="green hidden"></app-button>
+		<app-button id="continue-btn" label="continue" ariaLabel="{{ {desktop:'Click',mobile:'Tap'} | deviceAction }} for next screen" clickData="true" (clickEvent)="nextScreen()" class="white"></app-button>
+		<app-button id="start-btn" label="Begin your Journey" ariaLabel="{{ {desktop:'Click',mobile:'Tap'} | deviceAction }} to start" clickData="true" (clickEvent)="close()" class="green hidden"></app-button>
 	</div>
 	
 </section>

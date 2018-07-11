@@ -7,6 +7,7 @@ import { Character } from '../../models/character';
 import { PlayerData } from '../../models/playerdata';
 
 import * as _ from 'underscore';
+import { ScrollEvent } from 'ngx-scroll-event';
 
 @Component({
   selector: 'app-home',
@@ -32,6 +33,10 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
   loadCategory: boolean;
   loadedCategory: boolean;
   @ViewChild('map') mapContainer: ElementRef;
+
+  public mapScrolled(event: ScrollEvent) {
+    console.log('scroll', event.originalEvent);
+  }
 
   canDeactivate() {
     return !this.loaded;
@@ -183,7 +188,7 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
     }
 
     if(!onLoad) {
-      TweenLite.fromTo(document.getElementById('tutorial-header'), .7, {autoAlpha:1, top:0}, {autoAlpha:0, top:'-100%', ease:Expo.easeIn});
+      TweenLite.to(document.getElementById('tutorial-header'), .7, {autoAlpha:0, top:'-100%', ease:Expo.easeIn});
       TweenLite.fromTo(document.getElementById('home'), .7, {autoAlpha:1, left:0}, {autoAlpha:0, left:'-100%', display:'none', delay:.7, ease:Back.easeIn});
     }
     else

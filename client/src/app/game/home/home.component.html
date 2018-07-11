@@ -4,7 +4,7 @@
 		<cdn-image cloudinaryId="opportunity-game/home/header.svg" width="1000"></cdn-image>
 	</div>
 
-	<div #map id="filters" class="row auto">
+	<div #map id="filters" class="row auto" (onScroll)="mapScrolled($event)">
 	
 		<!-- Categories -->
 	  <div id="city" class="hidden">
