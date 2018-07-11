@@ -189,25 +189,30 @@ export class DataService {
 
                 let e = 0;
                 while(e < this.delayedRewardQueue.length) {
-                
+
                     let reward = this.delayedRewardQueue[e];
-                    reward.triggerWait -= opportunity.actionCost;
 
-                    if(reward.triggerWait <= 0) {
+                    // Prevent counting opp just taken towards delayed trigger
+                    if(reward.opportunity !== opportunity) {
+                
+                        reward.triggerWait -= opportunity.actionCost;
 
-                        this.playerData.commLevel += reward.opportunity.commReward;
-                        this.playerData.jobLevel += reward.opportunity.jobReward;
-                        this.playerData.englishLevel += reward.opportunity.englishReward;
-                        
-                        this.playerData.money += reward.opportunity.moneyReward;         
-                        this.playerData.actions += reward.opportunity.actionReward;
-                        
-                        this.rewardTrigger.emit({type: 'opportunity', opp: reward.opportunity});
-                        this.playerDataUpdate.emit(this.playerData);
+                        if(reward.triggerWait <= 0) {
 
-                        this.delayedRewardQueue.splice(e, 1);
-                        break;
+                            this.playerData.commLevel += reward.opportunity.commReward;
+                            this.playerData.jobLevel += reward.opportunity.jobReward;
+                            this.playerData.englishLevel += reward.opportunity.englishReward;
+                            
+                            this.playerData.money += reward.opportunity.moneyReward;         
+                            this.playerData.actions += reward.opportunity.actionReward;
+                            
+                            this.rewardTrigger.emit({type: 'opportunity', opp: reward.opportunity});
+                            this.playerDataUpdate.emit(this.playerData);
 
+                            this.delayedRewardQueue.splice(e, 1);
+                            break;
+
+                        }
                     }
 
                     e++;
