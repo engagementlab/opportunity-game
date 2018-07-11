@@ -14,6 +14,7 @@ export class ButtonComponent implements OnInit {
 	@Input() class: string;
 	@Input() ariaLabel: string;
 	@Input() newWindow: boolean;
+  @Input() customSfx: boolean;
   @Input() clickData: any;
 
   @Output() clickEvent = new EventEmitter<any>();
@@ -21,7 +22,8 @@ export class ButtonComponent implements OnInit {
   @HostListener('click', ['$event.target'])
   onClick(targetElement) {
 
-    ion.sound.play('click');
+    if(!this.customSfx)
+      ion.sound.play('click');
     
   }
 

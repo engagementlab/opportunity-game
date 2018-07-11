@@ -48,9 +48,9 @@ export class TutorialComponent implements OnInit {
   }
 
   close() {
-   
+  
+    ion.sound.play('transition');
     TweenLite.fromTo(document.getElementById('tutorial'), 1, {autoAlpha:1}, {autoAlpha:0, display:'none'}); 
-    // document.getElementById('game').classList.add('home');
 
     this.router.navigateByUrl('/game/home');
 

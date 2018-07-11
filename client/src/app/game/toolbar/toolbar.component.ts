@@ -170,6 +170,15 @@ export class GameToolbarComponent implements OnInit {
     _.each(notifications, (n, i) => {
       
       setTimeout(() => {n.classList.add('remove');  }, 200*(i+1));
+
+      if(n.classList.contains('reward'))
+        setTimeout(() => {
+          (<HTMLElement>n).style.display = 'none';
+          (<HTMLElement>n).classList.remove('show');
+          (<HTMLElement>n).classList.add('done');
+        }, 400*(i+1));
+      else
+        setTimeout(() => { (<HTMLElement>n).style.display = 'none'; }, 400*(i+1));
       
     });
 

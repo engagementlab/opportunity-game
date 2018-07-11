@@ -48,6 +48,7 @@ export class CardComponent implements OnInit {
 
   clickNo(data: any) {
 
+    ion.sound.play('decline');    
     this.clickNoEvent.emit(data);
 
   }

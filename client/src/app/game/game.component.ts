@@ -62,6 +62,18 @@ export class GameComponent implements OnInit {
             },
             {
               name: "click"
+            },
+            {
+              name: "transition"
+            },
+            {
+              name: "accept"
+            },
+            {
+              name: "decline"
+            },
+            {
+              name: "level-up"
             }
           ],
           volume: 1,

@@ -116,6 +116,8 @@ export class GameLocationComponent implements OnInit {
   }
 
   backToList(modalId: string) {
+
+    ion.sound.play('accept');  
     
     TweenLite.fromTo(document.getElementById('detail_'+modalId), .5, {autoAlpha:1, scale:1}, {autoAlpha:0, scale:0, display:'none', ease:Back.easeIn});
     TweenLite.to(document.getElementById('list'), .3, {autoAlpha:1, delay:.5, display:'block'});
