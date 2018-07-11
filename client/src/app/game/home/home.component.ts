@@ -35,7 +35,7 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
   @ViewChild('map') mapContainer: ElementRef;
 
   public mapScrolled(event: ScrollEvent) {
-    console.log('scroll', event.originalEvent);
+    console.log('scroll', event);
   }
 
   canDeactivate() {

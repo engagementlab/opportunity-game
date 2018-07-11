@@ -21,6 +21,7 @@ export class GameToolbarComponent implements OnInit {
   jobLevel: number;
   englishLevel: number;
 
+  animatingNotifications: boolean;
   showingNotifications: boolean;
 
   cheevoBanner: HTMLElement;
@@ -119,7 +120,6 @@ export class GameToolbarComponent implements OnInit {
       }
 
 
-
     });
 
    }
@@ -136,10 +136,13 @@ export class GameToolbarComponent implements OnInit {
     let bannerY = -document.getElementById('toolbar').offsetHeight;
     let notifications = Array.from(document.querySelectorAll('#notifications .row.show:not(.done)'));
     
+    this.animatingNotifications = true;
     if(notifications.length > 0)
       this.showingNotifications = true;
 
     TweenMax.staggerFromTo(notifications, .4, {autoAlpha:0, bottom:bannerY}, {autoAlpha:1, bottom:0, display:'inline-flex', ease:Back.easeOut}, .4, () => {
+
+      this.animatingNotifications = false;
 
       _.each(notifications, (n, i) => {
         (<HTMLElement>n).style.zIndex = i+'';
@@ -163,10 +166,10 @@ export class GameToolbarComponent implements OnInit {
 
    @HostListener('document:click', ['$event.target'])
    hideNotifications() {
-    if(!this.showingNotifications) return;
+    if(!this.showingNotifications || this.animatingNotifications) return;
+    this.showingNotifications = false;
 
     let notifications = Array.from(document.querySelectorAll('#notifications .row.show:not(.done)'));
-
     _.each(notifications, (n, i) => {
       
       setTimeout(() => {n.classList.add('remove');  }, 200*(i+1));
