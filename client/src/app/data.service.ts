@@ -308,9 +308,11 @@ export class DataService {
                 thisOpp.costs = this.getCosts(thisOpp);
                 thisOpp.reqs = this.getReqs(thisOpp);
 
-                thisOpp.locked = _.some(thisOpp.costs, (opp) => {
+                thisOpp.locked = _.some(thisOpp.costs.concat(thisOpp.reqs), (opp) => {
                                       return opp['has'] !== undefined && opp['has'] === false;
                                     });
+
+                console.log(thisOpp.name, thisOpp.locked)
             });
 
             if(thisOpp) {

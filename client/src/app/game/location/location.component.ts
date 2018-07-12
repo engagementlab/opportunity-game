@@ -58,10 +58,6 @@ export class GameLocationComponent implements OnInit {
 
       this.currentLocation = data;
 
-      _.each(data.opportunities, (thisOpp) => {
-          thisOpp.stars = this.getStars();
-      });
-
     });
 
   }
