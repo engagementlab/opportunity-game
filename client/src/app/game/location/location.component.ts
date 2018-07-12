@@ -139,7 +139,7 @@ export class GameLocationComponent implements OnInit {
     TweenLite.to(document.querySelector('#detail_'+modalId+' .buttons'), .001, {alpha:0});
 
     // Show 'go home' modal?
-    if(this.currentLocation.key === 'your-new-apartment') {
+    if(this.currentLocation.categoriesStr === 'discover') {
       TweenLite.fromTo(document.getElementById('detail_'+modalId), .5, {autoAlpha:1, scale:1}, {autoAlpha:0, scale:0, display:'none', ease:Back.easeIn});
       TweenLite.to(document.getElementById('details'), .5, {autoAlpha:0, delay:.5, display:'none'});
       TweenLite.fromTo(document.getElementById('details-home'), 1, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, delay:.7, display:'block', ease:Back.easeOut});

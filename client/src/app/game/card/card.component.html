@@ -2,7 +2,9 @@
 
 	<div id="gohome" *ngIf="homeButton === true">
 
-		<span class="bold">Whenever you see this icon, {{ {desktop:'click',mobile:'tap'} | deviceAction}} it to return home. Try it now!</span>
+		<span class="bold" *ngIf="transit === false">Whenever you see this icon, {{ {desktop:'click',mobile:'tap'} | deviceAction}} it to return home. Try it now!</span>
+		<span class="bold" *ngIf="transit === true">{{ {desktop:'Click',mobile:'Tap'} | deviceAction}} this icon again to head home!</span>
+
 		<div id="back" (click)="backToHome()" class="btn"><cdn-image cloudinaryId="opportunity-game/icons/home.svg" alt="Back to Home"></cdn-image></div>
 
 	</div>

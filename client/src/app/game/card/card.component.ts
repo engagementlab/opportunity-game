@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class CardComponent implements OnInit {
 
   @Input() homeButton: boolean = false;
+  @Input() transit: boolean = false;
   @Input() data: any;
   @Input() type: string;
   @Input() clickData: any;

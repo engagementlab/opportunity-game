@@ -60,4 +60,10 @@
 		</div>
 	</div>
 
+	<div id="details-home" class="modal hidden" *ngIf="currentLocation?.key === 'bus-station'">
+		<div class="opportunity col-5 auto vert-center medium">
+			<game-card [homeButton]="true" [transit]="true"></game-card>
+		</div>
+	</div>
+
 </div>

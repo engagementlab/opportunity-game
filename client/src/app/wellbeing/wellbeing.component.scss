@@ -1,5 +1,14 @@
 @import "~sass/_variables";
 
+
+#wellbeing-header {
+	position: absolute;
+	top: -100%;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+}
+
 #wellbeing {
 
 	position: absolute;
