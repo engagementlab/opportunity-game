@@ -51,6 +51,8 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
 
   ngOnInit() {
     
+    this._dataSvc.unsetLocation();
+    
     this._dataSvc.playerDataUpdate.subscribe((data: PlayerData) => {
 
       this.character = this._dataSvc.assignedChar;

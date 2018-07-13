@@ -57,6 +57,8 @@ export class DataService {
     public playerPriority: number = 1;
     public surveyUrl: string;
 
+    currentLocation: Location;
+
     baseUrl: string;
     index: any;
     actionsUntilLifeEvent: number = 6;
@@ -228,6 +230,12 @@ export class DataService {
         this.playerData.wellnessScore = this.calcWellness();
         this.playerDataUpdate.emit(this.playerData);
 
+        // Update location player is at, if any
+        if(this.currentLocation !== undefined) {
+            this.updateCurrentLocation(this.currentLocation);
+            this.locationDataUpdate.emit(this.currentLocation);
+        }
+
     }
 
     public modifyPlayerData(key: string, value: any) {
@@ -244,11 +252,11 @@ export class DataService {
 
     public getLocationByKey(locationKey: string) {
 
-        let currentLoc = _.where(this.locationData, {key: locationKey})[0];
-        if(currentLoc === undefined) return undefined;
+        this.currentLocation = _.where(this.locationData, {key: locationKey})[0];
+        if(this.currentLocation === undefined) return undefined;
         
         // Update costs
-        _.each(currentLoc.opportunities, (thisOpp) => {
+        _.each(this.currentLocation.opportunities, (thisOpp) => {
             thisOpp.costs = this.getCosts(thisOpp);
             thisOpp.reqs = this.getReqs(thisOpp);
             thisOpp.locked = _.some(thisOpp.costs.concat(thisOpp.reqs), (opp) => {
@@ -256,7 +264,13 @@ export class DataService {
                                 });
         });
 
-        return currentLoc;
+        return this.currentLocation;
+
+    }
+
+    public unsetLocation() {
+        
+        this.currentLocation = undefined;
 
     }
 
@@ -303,17 +317,7 @@ export class DataService {
 
             let thisOpp = _.where(loc.opportunities, {_id: opportunity._id})[0];
 
-            // Update costs
-            _.each(loc.opportunities, (thisOpp) => {
-                thisOpp.costs = this.getCosts(thisOpp);
-                thisOpp.reqs = this.getReqs(thisOpp);
-
-                thisOpp.locked = _.some(thisOpp.costs.concat(thisOpp.reqs), (opp) => {
-                                      return opp['has'] !== undefined && opp['has'] === false;
-                                    });
-
-                console.log(thisOpp.name, thisOpp.locked)
-            });
+            this.updateCurrentLocation(loc);
 
             if(thisOpp) {
                 thisOpp.enabled = false;
@@ -355,6 +359,21 @@ export class DataService {
         // Only if player has job
         if(this.playerData.hasJob === true)
             this.paydayTrigger.emit();
+
+    }
+
+    private updateCurrentLocation(loc: Location) {
+
+        // Update costs of locations' opportunities
+        _.each(loc.opportunities, (thisOpp) => {
+            thisOpp.costs = this.getCosts(thisOpp);
+            thisOpp.reqs = this.getReqs(thisOpp);
+
+            thisOpp.locked = _.some(thisOpp.costs.concat(thisOpp.reqs), (opp) => {
+                                  return opp['has'] !== undefined && opp['has'] === false;
+                                });
+
+        });
 
     }
 
