@@ -43,7 +43,7 @@
 			<div class="costs" *ngIf="data.costs.length > 0">
 				<div class="bold medium" *ngIf="data.costs.length > 0">COST</div> 
 				<div class="items" *ngIf="data.enabled === undefined">
-					<div *ngFor="let cost of data.costs" [class.notenough]="cost.has !== undefined && !cost.has" class="cost {{cost.icon}}">
+					<div *ngFor="let cost of data.costs" class="cost {{cost.icon}}" [class.notenough]="cost.has === false">
 						<div *ngIf="cost.amt !== undefined && cost.isLvl === undefined" class="text bold">{{cost.amt}}</div>
 					</div>
 				</div>
@@ -53,7 +53,7 @@
 			<div class="reqs">
 				<div class="bold medium" *ngIf="data.reqs.length > 0">REQUIRED</div> 
 				<div class="items" *ngIf="data.enabled === undefined">
-					<div *ngFor="let cost of data.reqs" [class.notenough]="cost.has !== undefined && !cost.has" class="cost {{cost.icon}} auto">
+					<div *ngFor="let cost of data.reqs" class="cost {{cost.icon}} auto" [class.notenough]="cost.has === false">
 						<div *ngIf="cost.isLvl === true" class="badge bold">{{cost.amt}}</div>
 					</div>
 				</div>

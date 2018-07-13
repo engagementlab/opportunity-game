@@ -141,12 +141,6 @@
 		}
 	}
 
-	.buttons {
-		.effect {
-
-		}
-	}
-
 	#back {
 	  
 	  @include transition(all, 150ms, cubic-bezier(0.64, 0.57, 0.67, 1.53));

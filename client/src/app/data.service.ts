@@ -382,20 +382,6 @@ export class DataService {
         // Only if player has job
         if(this.playerData.hasJob === true)
             this.playerData.money += environment.dev ? 20 : 3;
-        
-        // DEBUG ONLY
-        /*if(environment.dev) {
-            _.each(this.locationData, (loc) => {
-                _.each(loc.opportunities, (thisOpp) => {
-
-                  thisOpp.enabled = undefined;
-                  thisOpp.locked = undefined;
-
-                }); 
-
-                this.locationDataUpdate.emit(loc);
-            }); 
-        }*/
 
         this.playerData.gameEnded = true;
         this.playerDataUpdate.emit(this.playerData);
