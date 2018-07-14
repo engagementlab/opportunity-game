@@ -126,11 +126,26 @@ export class GameComponent implements OnInit {
         this.lifeEvents = _.filter(this._dataSvc.getUpdatedEvents(), (e) => {return e.type === 'life'});
         
         let content = <HTMLElement>document.querySelector('#game-over #content');
+        let radius = {val: 0};
+        let charImg = document.querySelector('.character img');
         content.style.visibility = 'hidden';
 
         TweenLite.to(document.getElementById('wellbeing'), 1, {autoAlpha:0, display:'none'});
-        TweenLite.fromTo(document.getElementById('game-over'), 3, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, display:'block', ease: Sine.easeOut});
-        TweenLite.to(content, 1, {autoAlpha:1, delay:3.1});
+        TweenLite.fromTo(document.getElementById('game-over'), 2, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, display:'block', ease:Sine.easeOut});
+        TweenLite.to(content, 1, {autoAlpha:1, delay:2.1});
+
+        TweenLite.fromTo(document.querySelector('#game-over #header'), .7, {autoAlpha:0, top:'-140px'}, {autoAlpha:1, top:0, delay:3.1, display:'block', ease:Back.easeOut});
+
+        TweenMax.to(document.getElementById('circle'), 1, {attr:{r:45}, delay:4, ease:Back.easeOut});
+        TweenMax.to(radius, 1, {val:66, delay:4.7, ease:Sine.easeOut, 
+          onUpdate:() => {
+           charImg.style.clipPath = 'circle('+radius.val+'% at 54% 43%)';
+          }
+        });
+        TweenLite.fromTo(document.getElementById('wellbeing-score'), 1, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, delay:5, display:'flex', ease:Back.easeOut});
+        TweenLite.fromTo(document.getElementById('share'), 1, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, delay:5.5, display:'block', ease:Elastic.easeOut});
+        TweenLite.fromTo(document.getElementById('play-again'), 1, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, delay:5.7, display:'inline-flex', ease:Sine.easeOut});
+
 
       }
 
