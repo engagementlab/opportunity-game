@@ -126,8 +126,8 @@ export class GameComponent implements OnInit {
         this.lifeEvents = _.filter(this._dataSvc.getUpdatedEvents(), (e) => {return e.type === 'life'});
         
         let content = <HTMLElement>document.querySelector('#game-over #content');
+        let charImg = <HTMLElement>document.querySelector('.character img');
         let radius = {val: 0};
-        let charImg = document.querySelector('.character img');
         content.style.visibility = 'hidden';
 
         TweenLite.to(document.getElementById('wellbeing'), 1, {autoAlpha:0, display:'none'});

@@ -57,7 +57,7 @@ export class DataService {
     public playerPriority: number = 1;
     public surveyUrl: string;
 
-    currentLocation: Location;
+    currentLocation: GameLocation;
 
     baseUrl: string;
     index: any;
@@ -362,7 +362,7 @@ export class DataService {
 
     }
 
-    private updateCurrentLocation(loc: Location) {
+    private updateCurrentLocation(loc: GameLocation) {
 
         // Update costs of locations' opportunities
         _.each(loc.opportunities, (thisOpp) => {
