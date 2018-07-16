@@ -51,6 +51,7 @@ export class GameCharacterComponent implements OnInit {
 
       this.textObject.push({color:colors[colorInd], string:textArr[i]});
     }
+    
   }
 
   goBack() {

@@ -160,6 +160,7 @@ export class DataService {
             this.delayedRewardQueue.push(delayedReward);
         }
 
+        this.playerData.wellnessScore = this.calcWellness();
 
         // Show life events and process opportunity effects only if not game over
         if(this.playerData.actions <= 0 || (this.playerData.wellnessScore >= this.playerData.wellnessGoal))
@@ -227,7 +228,6 @@ export class DataService {
             }
         }
 
-        this.playerData.wellnessScore = this.calcWellness();
         this.playerDataUpdate.emit(this.playerData);
 
         // Update location player is at, if any
@@ -380,8 +380,8 @@ export class DataService {
     private endGame() {
 
         // Only if player has job
-        if(this.playerData.hasJob === true)
-            this.playerData.money += environment.dev ? 20 : 3;
+        // if(this.playerData.hasJob === true)
+        //     this.playerData.money += environment.dev ? 20 : 3;
 
         this.playerData.gameEnded = true;
         this.playerDataUpdate.emit(this.playerData);

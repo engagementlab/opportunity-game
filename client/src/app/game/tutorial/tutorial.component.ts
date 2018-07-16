@@ -36,7 +36,7 @@ export class TutorialComponent implements OnInit {
   	this.currentScreen++;  
 		TweenLite.fromTo(document.getElementById('screen'+this.currentScreen), .7, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:'0%', delay: 1, display:'block', ease:Back.easeOut, onComplete:() => {
 
-			if(this.currentScreen === 1) {
+			if(this.currentScreen === 2) {
 				document.getElementById('continue-btn').remove();
 				document.getElementById('start-btn').style.display = 'block';
 			}
