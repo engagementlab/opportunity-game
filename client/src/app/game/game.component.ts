@@ -126,7 +126,7 @@ export class GameComponent implements OnInit {
         this.lifeEvents = _.filter(this._dataSvc.getUpdatedEvents(), (e) => {return e.type === 'life'});
         
         let content = <HTMLElement>document.querySelector('#game-over #content');
-        let charImg = <HTMLElement>document.querySelector('.character img');
+        let charImg = <HTMLElement>document.querySelector('#game-over .character img');
         let radius = {val: 0};
         content.style.visibility = 'hidden';
 
@@ -136,16 +136,14 @@ export class GameComponent implements OnInit {
 
         TweenLite.fromTo(document.querySelector('#game-over #header'), .7, {autoAlpha:0, top:'-140px'}, {autoAlpha:1, top:0, delay:3.1, display:'block', ease:Back.easeOut});
 
-        TweenMax.to(document.getElementById('circle'), 1, {attr:{r:45}, delay:4, ease:Back.easeOut});
-        TweenMax.to(radius, 1, {val:66, delay:4.7, ease:Sine.easeOut, 
+        TweenMax.to(radius, 1, {val:45, delay:4.7, ease:Back.easeOut, 
           onUpdate:() => {
-           charImg.style.clipPath = 'circle('+radius.val+'% at 54% 43%)';
+           charImg.style.clipPath = 'circle('+radius.val+'% at 50% 50%)';
           }
         });
         TweenLite.fromTo(document.getElementById('wellbeing-score'), 1, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, delay:5, display:'flex', ease:Back.easeOut});
         TweenLite.fromTo(document.getElementById('share'), 1, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, delay:5.5, display:'block', ease:Elastic.easeOut});
         TweenLite.fromTo(document.getElementById('play-again'), 1, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, delay:5.7, display:'inline-flex', ease:Sine.easeOut});
-
 
       }
 

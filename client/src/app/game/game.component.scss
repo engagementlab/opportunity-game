@@ -93,12 +93,8 @@
 	}
 
 	.character {
-
 		::ng-deep img {
-			@include transform(translate(70%, 26%));
-			position: absolute;
-			width: 40%;
-			clip-path: circle(0% at 54% 43%);
+			clip-path: circle(0% at 50% 50%);
 		}
 	}
 

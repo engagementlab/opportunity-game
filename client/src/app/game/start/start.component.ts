@@ -10,11 +10,6 @@ export class GameStartComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
-        
-        TweenLite.fromTo(document.getElementById('logo'), 1, {scale:0}, {scale:1, delay: 2, display:'block', ease:Elastic.easeOut});
-        TweenLite.fromTo(document.getElementById('new'), 1, {scale:0}, {scale:1, delay: 2.5, visibility:'visible', ease:Elastic.easeOut});
-        TweenLite.fromTo(document.getElementById('footer'), .5, {scale:0}, {scale:1, delay: 2.7, visibility:'visible', ease:Back.easeOut});
-        TweenLite.fromTo(document.getElementById('bg'), 1, {alpha:0}, {alpha:1, delay: 2.7, visibility:'visible'});
 
     }
 
@@ -28,5 +23,24 @@ export class GameStartComponent implements OnInit {
         TweenLite.fromTo(footer, .7, {autoAlpha:1}, {autoAlpha:0, top:'100%', display:'none', ease:Back.easeIn});
         TweenLite.fromTo(characters, .7, {autoAlpha:1, left:'100%'}, {autoAlpha:1, left:0, delay:.7, display:'block', ease:Back.easeOut});
 
+    }
+    
+    showGame() {
+
+        let top = document.getElementById('top');
+        let enter = document.querySelector('a#enter');
+        let bottom = document.getElementById('bottom');
+
+        TweenLite.fromTo(enter, .7, {scale:1}, {scale:0, ease:Back.easeIn});
+        TweenLite.fromTo(bottom, .7, {autoAlpha:1}, {autoAlpha:0, bottom:'100%', display:'none', ease:Back.easeIn});
+        TweenLite.to(top, .7, {height:'100%', delay:.7, ease:Back.easeIn});
+        // TweenLite.fromTo(footer, .7, {autoAlpha:1}, {autoAlpha:0, top:'100%', display:'none', ease:Back.easeIn});
+        // TweenLite.fromTo(characters, .7, {autoAlpha:1, left:'100%'}, {autoAlpha:1, left:0, delay:.7, display:'block', ease:Back.easeOut});
+
+        
+        TweenLite.fromTo(document.getElementById('logo'), 1, {scale:0}, {scale:1, delay: 2, display:'block', ease:Elastic.easeOut});
+        TweenLite.fromTo(document.getElementById('new'), 1, {scale:0}, {scale:1, delay: 2.5, visibility:'visible', ease:Elastic.easeOut});
+        TweenLite.fromTo(document.getElementById('footer'), .5, {scale:0}, {scale:1, delay: 2.7, visibility:'visible', ease:Back.easeOut});
+        TweenLite.fromTo(document.getElementById('bg'), 1, {alpha:0}, {alpha:1, delay: 2.7, visibility:'visible'});
     }
 }
