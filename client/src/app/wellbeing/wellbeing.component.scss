@@ -1,10 +1,24 @@
 @import "~sass/_variables";
 
+
+
 #wellbeing {
+	
+	#wellbeing-header {
+		position: absolute;
+		top: -200%;
+	  left: 0;
+	  z-index: 1;
+	  width: 100%;
+	  max-height: 60px;
+	}
 
 	position: absolute;
 	z-index: 20;
-	left: 43vw;
+  margin: 0 auto;
+	left: 0;
+	right: 0;
+	@include game-width();
 
 	#icon {
 		::ng-deep img {
@@ -15,20 +29,24 @@
 	}
 
   #bar-parent {
+    position: relative;
+  	z-index: 20;
+		top: 8px;
 		svg {			
-			position: relative;
+			// position: relative;
 			display: block;
 	  	margin-right: auto;
 			margin-left: auto;
 			margin-top: -2%;
-			z-index: 200;
+			// z-index: 200;
 		}
   }
 
 	#bar {
 		display: block;
 		width: 177px;
-		margin-left: 6%;
+  	margin-right: auto;
+		margin-left: auto;
 
 		height: 10px;
 		border-radius: 10px;

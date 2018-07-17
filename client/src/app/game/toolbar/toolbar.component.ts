@@ -1,4 +1,5 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, HostListener } from '@angular/core';
+
 import { DataService } from '../../data.service';
 import { PlayerData } from '../../models/playerdata';
 import { GameLocation } from '../../models/gamelocation';
@@ -19,6 +20,9 @@ export class GameToolbarComponent implements OnInit {
   commLevel: number;
   jobLevel: number;
   englishLevel: number;
+
+  animatingNotifications: boolean;
+  showingNotifications: boolean;
 
   cheevoBanner: HTMLElement;
   rewardOpportunities: Opportunity[] = [];
@@ -116,7 +120,6 @@ export class GameToolbarComponent implements OnInit {
       }
 
 
-
     });
 
    }
@@ -132,25 +135,41 @@ export class GameToolbarComponent implements OnInit {
 
     let bannerY = -document.getElementById('toolbar').offsetHeight;
     let notifications = Array.from(document.querySelectorAll('#notifications .row.show:not(.done)'));
+    
+    this.animatingNotifications = true;
+    if(notifications.length > 0)
+      this.showingNotifications = true;
 
     TweenMax.staggerFromTo(notifications, .4, {autoAlpha:0, bottom:bannerY}, {autoAlpha:1, bottom:0, display:'inline-flex', ease:Back.easeOut}, .4, () => {
 
+      this.animatingNotifications = false;
       _.each(notifications, (n, i) => {
         (<HTMLElement>n).style.zIndex = i+'';
-        
-        setTimeout(() => {n.classList.add('remove');  }, 2000*(i+1));
-
-        if(n.classList.contains('reward'))
-          setTimeout(() => {
-            (<HTMLElement>n).style.display = 'none';
-            (<HTMLElement>n).classList.remove('show');
-            (<HTMLElement>n).classList.add('done');
-          }, 2400*(i+1));
-        else
-          setTimeout(() => { (<HTMLElement>n).style.display = 'none'; }, 2400*(i+1));
-
       });
 
+    });
+
+   }
+
+   @HostListener('document:click', ['$event.target'])
+   hideNotifications() {
+    if(!this.showingNotifications || this.animatingNotifications) return;
+    this.showingNotifications = false;
+
+    let notifications = Array.from(document.querySelectorAll('#notifications .row.show:not(.done)'));
+    _.each(notifications, (n, i) => {
+      
+      setTimeout(() => {n.classList.add('remove');  }, 200*(i+1));
+
+      if(n.classList.contains('reward'))
+        setTimeout(() => {
+          (<HTMLElement>n).style.display = 'none';
+          (<HTMLElement>n).classList.remove('show');
+          (<HTMLElement>n).classList.add('done');
+        }, 400*(i+1));
+      else
+        setTimeout(() => { (<HTMLElement>n).style.display = 'none'; }, 400*(i+1));
+      
     });
 
    }

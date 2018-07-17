@@ -51,6 +51,7 @@ export class GameCharacterComponent implements OnInit {
 
       this.textObject.push({color:colors[colorInd], string:textArr[i]});
     }
+    
   }
 
   goBack() {
@@ -141,7 +142,7 @@ export class GameCharacterComponent implements OnInit {
     let letters = document.querySelectorAll('.letter');
     let ellipses = document.getElementById('ellipses');
 
-    TweenLite.fromTo(document.getElementById('wait'), .5, {autoAlpha:0, left:'-100%'}, {autoAlpha:1, left:0, delay: 1, display:'block', ease:Back.easeOut, onComplete:() => {
+    TweenLite.fromTo(document.getElementById('wait'), .5, {autoAlpha:0, left:'-100%'}, {autoAlpha:1, left:0, delay: 1, display:'block', ease:Sine.easeOut, onComplete:() => {
       
       TweenMax.staggerFromTo(letters, .4, {autoAlpha:0, top:'30px'}, {autoAlpha:1, top:0, visibility:'visible', ease:Sine.easeOut}, .05, () => {
 

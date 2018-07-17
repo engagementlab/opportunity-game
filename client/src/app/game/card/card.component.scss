@@ -60,7 +60,7 @@
 			::ng-deep a {
 		    font-size: .6em;
 		    width: 105px;
-		    padding: 4%!important;
+		    padding: 13%!important;
 		  }
 		}
 	}
@@ -141,10 +141,17 @@
 		}
 	}
 
-	.buttons {
-		.effect {
-
-		}
+	#back {
+	  
+	  @include transition(all, 150ms, cubic-bezier(0.64, 0.57, 0.67, 1.53));
+	 
+	  &:hover {
+	    @include scale(1.2);
+	  }
+	  &:active {
+	    @include scale(.8);
+	  }
 	}
+
 
 }

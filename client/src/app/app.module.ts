@@ -8,6 +8,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { Cloudinary as CloudinaryCore } from 'cloudinary-core';
 import { CloudinaryConfiguration, CloudinaryModule } from '@cloudinary/angular-5.x';
+import { ScrollEventModule } from 'ngx-scroll-event';
 
 import cloudinaryConfiguration from './config';
 export const cloudinary = {
@@ -44,6 +45,7 @@ import { WellbeingComponent } from './wellbeing/wellbeing.component';
 import { RemoveTagsPipe } from './utils/remove-tags.pipe';
 import { TutorialComponent } from './game/tutorial/tutorial.component';
 import { CardComponent } from './game/card/card.component';
+import { DeviceactionPipe } from './utils/deviceaction.pipe';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'game', pathMatch: 'full' },
@@ -88,7 +90,8 @@ const appRoutes: Routes = [
     WellbeingComponent,
     RemoveTagsPipe,
     TutorialComponent,
-    CardComponent
+    CardComponent,
+    DeviceactionPipe
   ],
   imports: [
     RouterModule.forRoot(
@@ -99,7 +102,8 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ScrollEventModule
   ],
   exports: [
     RouterModule,

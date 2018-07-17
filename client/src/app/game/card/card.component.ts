@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'game-card',
@@ -7,6 +8,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class CardComponent implements OnInit {
 
+  @Input() homeButton: boolean = false;
+  @Input() transit: boolean = false;
   @Input() data: any;
   @Input() type: string;
   @Input() clickData: any;
@@ -14,7 +17,7 @@ export class CardComponent implements OnInit {
   @Output() clickEvent = new EventEmitter<any>();
   @Output() clickNoEvent = new EventEmitter<any>();
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
 
@@ -31,6 +34,13 @@ export class CardComponent implements OnInit {
 
   }
 
+  backToHome() { 
+
+    ion.sound.play('click');
+    this.router.navigateByUrl('/game/home');
+
+  }
+
   clickHandler(data: any) {
 
     this.clickEvent.emit(data);
@@ -39,6 +49,7 @@ export class CardComponent implements OnInit {
 
   clickNo(data: any) {
 
+    ion.sound.play('decline');    
     this.clickNoEvent.emit(data);
 
   }

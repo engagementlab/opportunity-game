@@ -34,7 +34,7 @@
 .full-screen {
 	position: fixed;
 	top: 0;
-	z-index: 10;
+	z-index: 100;
 	color: white;
   background: black;
 	max-width: 425px;
@@ -88,23 +88,23 @@
 
 #game-over {
 
+	#header {
+		position: relative;
+	}
+
 	.character {
-		min-height: 264px;
-		background: white;
-		border: solid black 20px;
-		border-radius: 50%;
+
 		::ng-deep img {
-			@include scale(1.28);
-			clip-path: ellipse(42% 41% at 50% 50%);
-		}
-		&.won {
-			::ng-deep img {
-				@include transform(scale(1.1) translateY(7%));
-				clip-path: ellipse(48% 43% at 50% 47%);
-			}
+			@include transform(translate(70%, 26%));
+			position: absolute;
+			width: 40%;
+			clip-path: circle(0% at 54% 43%);
 		}
 	}
 
+	#wellbeing-score {
+		position: relative;	
+	}
 	#perc {
 		width: 80%;
 		font-size: x-large;
@@ -136,7 +136,9 @@
 		font-size: large;
 		text-transform: uppercase;
 		vertical-align: middle;
-    display: inline-flex;
+		position: relative;
+		
+    display: none;
     color: white;
     
 	  align-items: center;

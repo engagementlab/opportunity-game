@@ -57,6 +57,8 @@ export class DataService {
     public playerPriority: number = 1;
     public surveyUrl: string;
 
+    currentLocation: GameLocation;
+
     baseUrl: string;
     index: any;
     actionsUntilLifeEvent: number = 6;
@@ -158,6 +160,7 @@ export class DataService {
             this.delayedRewardQueue.push(delayedReward);
         }
 
+        this.playerData.wellnessScore = this.calcWellness();
 
         // Show life events and process opportunity effects only if not game over
         if(this.playerData.actions <= 0 || (this.playerData.wellnessScore >= this.playerData.wellnessGoal))
@@ -189,25 +192,30 @@ export class DataService {
 
                 let e = 0;
                 while(e < this.delayedRewardQueue.length) {
-                
+
                     let reward = this.delayedRewardQueue[e];
-                    reward.triggerWait -= opportunity.actionCost;
 
-                    if(reward.triggerWait <= 0) {
+                    // Prevent counting opp just taken towards delayed trigger
+                    if(reward.opportunity !== opportunity) {
+                
+                        reward.triggerWait -= opportunity.actionCost;
 
-                        this.playerData.commLevel += reward.opportunity.commReward;
-                        this.playerData.jobLevel += reward.opportunity.jobReward;
-                        this.playerData.englishLevel += reward.opportunity.englishReward;
-                        
-                        this.playerData.money += reward.opportunity.moneyReward;         
-                        this.playerData.actions += reward.opportunity.actionReward;
-                        
-                        this.rewardTrigger.emit({type: 'opportunity', opp: reward.opportunity});
-                        this.playerDataUpdate.emit(this.playerData);
+                        if(reward.triggerWait <= 0) {
 
-                        this.delayedRewardQueue.splice(e, 1);
-                        break;
+                            this.playerData.commLevel += reward.opportunity.commReward;
+                            this.playerData.jobLevel += reward.opportunity.jobReward;
+                            this.playerData.englishLevel += reward.opportunity.englishReward;
+                            
+                            this.playerData.money += reward.opportunity.moneyReward;         
+                            this.playerData.actions += reward.opportunity.actionReward;
+                            
+                            this.rewardTrigger.emit({type: 'opportunity', opp: reward.opportunity});
+                            this.playerDataUpdate.emit(this.playerData);
 
+                            this.delayedRewardQueue.splice(e, 1);
+                            break;
+
+                        }
                     }
 
                     e++;
@@ -220,8 +228,13 @@ export class DataService {
             }
         }
 
-        this.playerData.wellnessScore = this.calcWellness();
         this.playerDataUpdate.emit(this.playerData);
+
+        // Update location player is at, if any
+        if(this.currentLocation !== undefined) {
+            this.updateCurrentLocation(this.currentLocation);
+            this.locationDataUpdate.emit(this.currentLocation);
+        }
 
     }
 
@@ -239,11 +252,11 @@ export class DataService {
 
     public getLocationByKey(locationKey: string) {
 
-        let currentLoc = _.where(this.locationData, {key: locationKey})[0];
-        if(currentLoc === undefined) return undefined;
+        this.currentLocation = _.where(this.locationData, {key: locationKey})[0];
+        if(this.currentLocation === undefined) return undefined;
         
         // Update costs
-        _.each(currentLoc.opportunities, (thisOpp) => {
+        _.each(this.currentLocation.opportunities, (thisOpp) => {
             thisOpp.costs = this.getCosts(thisOpp);
             thisOpp.reqs = this.getReqs(thisOpp);
             thisOpp.locked = _.some(thisOpp.costs.concat(thisOpp.reqs), (opp) => {
@@ -251,7 +264,13 @@ export class DataService {
                                 });
         });
 
-        return currentLoc;
+        return this.currentLocation;
+
+    }
+
+    public unsetLocation() {
+        
+        this.currentLocation = undefined;
 
     }
 
@@ -298,15 +317,7 @@ export class DataService {
 
             let thisOpp = _.where(loc.opportunities, {_id: opportunity._id})[0];
 
-            // Update costs
-            _.each(loc.opportunities, (thisOpp) => {
-                thisOpp.costs = this.getCosts(thisOpp);
-                thisOpp.reqs = this.getReqs(thisOpp);
-
-                thisOpp.locked = _.some(thisOpp.costs, (opp) => {
-                                      return opp['has'] !== undefined && opp['has'] === false;
-                                    });
-            });
+            this.updateCurrentLocation(loc);
 
             if(thisOpp) {
                 thisOpp.enabled = false;
@@ -351,25 +362,26 @@ export class DataService {
 
     }
 
+    private updateCurrentLocation(loc: GameLocation) {
+
+        // Update costs of locations' opportunities
+        _.each(loc.opportunities, (thisOpp) => {
+            thisOpp.costs = this.getCosts(thisOpp);
+            thisOpp.reqs = this.getReqs(thisOpp);
+
+            thisOpp.locked = _.some(thisOpp.costs.concat(thisOpp.reqs), (opp) => {
+                                  return opp['has'] !== undefined && opp['has'] === false;
+                                });
+
+        });
+
+    }
+
     private endGame() {
 
         // Only if player has job
-        if(this.playerData.hasJob === true)
-            this.playerData.money += environment.dev ? 20 : 3;
-        
-        // DEBUG ONLY
-        /*if(environment.dev) {
-            _.each(this.locationData, (loc) => {
-                _.each(loc.opportunities, (thisOpp) => {
-
-                  thisOpp.enabled = undefined;
-                  thisOpp.locked = undefined;
-
-                }); 
-
-                this.locationDataUpdate.emit(loc);
-            }); 
-        }*/
+        // if(this.playerData.hasJob === true)
+        //     this.playerData.money += environment.dev ? 20 : 3;
 
         this.playerData.gameEnded = true;
         this.playerDataUpdate.emit(this.playerData);

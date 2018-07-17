@@ -2,6 +2,9 @@
 
 #back {
 	display: inline-block;
+	position: relative;
+	z-index: 30;
+
   @include transition(all, 150ms, cubic-bezier(0.64, 0.57, 0.67, 1.53));
  
   &:hover {
@@ -18,6 +21,7 @@
 .location {
 	min-height: 480px;
 	height: 100%;
+
 	@include mobile-only {
 		background-size: cover;
 		background-repeat: no-repeat;
@@ -65,9 +69,8 @@
 #list {
 	overflow: scroll;
 	padding-bottom: 5%;
+  height: 76%;  
 	margin: auto;
-
-  height: 82vh;
 
 	button {
 		cursor: auto;
@@ -161,42 +164,6 @@
 		::ng-deep img {
 			max-width: 40px;
 		}
-		&.nudge1 {
-			margin-left: -40px;
-			::ng-deep img {
-				width: 20px;
-			}
-		}
-		&.nudge2 {
-			margin-left: 10px;
-			::ng-deep img {
-				width: 25px;
-			}
-		}
-		&.nudge3 {
-			margin-left: 35px;
-			::ng-deep img {
-				width: 15px;
-			}
-		}
-		&.nudge4 {
-			margin-left: 0px;
-			::ng-deep img {
-				width: 20px;
-			}
-		}
-		&.nudge5 {
-			margin-left: -20px;
-			::ng-deep img {
-				width: 10px;
-			}
-		}
-		&.nudge6 {
-			margin-left: -34px;
-			::ng-deep img {
-				width: 15px;
-			}
-		}
 	}
 	.delay {
 		font-size: x-small;
@@ -258,98 +225,7 @@
 	&.transit {
 		background-image: cdn-image('icons/transit', c_scale, w_15);
 		&.notenough {
-			background-image: cdn-image('icons/transit-clear', c_scale, w_15);
+			background-image: cdn-image('icons/transit-clear.png', c_scale, w_35);
 		}
 	}
 }
-
-/* .opportunity {
-	text-align: center;
-	font-size: large;
-	background: white;
-	padding: 5%;
-	@include box-shadow(4px, 4px, 0, #000000);
-	min-height: 250px;
-
-	.footer {
-		display: flex;
-		flex-direction: row;		
-		justify-content: center;
-
-		font-size: small;
-    text-align: center;
-    margin: 0;
-    width: 100%;
-    padding-top: 5%;
-
-    .items {
-			display: flex;
-			flex-direction: row;
-
-			.cost {
-				min-width: 55px;
-			}
-    }
-    .reqs {
-    	margin-left: 5%;
-    }
-  	.badge {
-			display: inline-block;
-			position: relative;
-			width: 15px;
-			top: 30px;
-
-		  z-index: 1;
-		  float: left;
-		  left: 9%;
-
-		  background-color: $gold;
-		  border-radius: 50%;
-		}
-	}
-
-	.buttons {
-		width: 100%;
-    margin-top: 5%;
-		display: flex;
-		flex-direction: row;		
-		justify-content: space-evenly;
-
-	 ::ng-deep .btn {
-			padding: 20%;
-		}
-	}
-
-	.reward-bg {
-		background-image: cdn-image('stars', c_scale, w_55);
-		background-size: 73%;
-    background-repeat: no-repeat;
-    background-position: center;
-	}
-	.reward {
-		::ng-deep img {
-    	max-width: 120px;
-		}
-		.badge {
-			top: 66%;
-	    padding-right: 50px;
-	    left: 17%;
-		}
-	}
-
-	.cost {
-		display: block;
-		min-width: 50px;
-		min-height: 45px;
-		text-align: right;
-		background-repeat: no-repeat;
-
-		.text {
-			vertical-align: top;
-	    display: inline-flex;
-	    padding-top: 5%;
-	    margin-left: -18%;
-	    font-size: xx-large;
-		}
-	}
-} */

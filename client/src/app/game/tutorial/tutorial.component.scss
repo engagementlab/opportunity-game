@@ -24,9 +24,12 @@
 		font-size: x-large;
 		font-weight: bold;	
 		text-align: center;
-		margin-left: 5%;
-		margin-right: 5%;
+
 		letter-spacing: 0.9px;
+
+		&.small {
+			font-size: large;
+		}
 	
 		.orange {
 			color: $bright-orange;
@@ -57,7 +60,7 @@
 
 	#bar {
 		display: block;
-		width: 176px;
+		width: 254px;
 		height: 28px;
 		background: black;
 		border: 2px solid white;
@@ -93,7 +96,10 @@
 	  }
 
 	  #start-btn {
-	  	font-size: x-large;
+	  	font-size: large;
+		  ::ng-deep a {
+		  	padding-top: 4%;
+		  }
 	  }
 	}
 

@@ -1,10 +1,6 @@
 <div id="home">
-	
-	<div id="tutorial-header">
-		<cdn-image cloudinaryId="opportunity-game/home/header.svg" width="1000"></cdn-image>
-	</div>
 
-	<div #map id="filters" class="row auto">
+	<div #map detect-scroll id="filters" class="row auto" (onScroll)="mapScrolled($event)">
 	
 		<!-- Categories -->
 	  <div id="city" class="hidden">
@@ -18,24 +14,26 @@
 			<cdn-image cloudinaryId="opportunity-game/home/tutorial.svg" width="1000" alt="Image for tutorials screen"></cdn-image>
 		</div>
 
-		<div id="house" class="row-lg">
+		<div id="house" class="house row-lg">
 
 			<div class="col-6 row">
-				<div class="col-3">
-					<div class="vert-center">
-						<cdn-image *ngIf="character !== undefined" cloudinaryId="opportunity-game/characters/char-{{character?.image}}-home.svg" width="350" alt="Icon for Home"></cdn-image>
-					</div>
+				<div class="col-2">
+						<cdn-image *ngIf="character !== undefined" cloudinaryId="opportunity-game/characters/{{character?.image}}.svg" alt="Icon for Home"></cdn-image>
 				</div>
 		
-				<div class="col-3">
-					<div id="house-bubble" class="bubble">
-						<span class="round1">Go to DISCOVER to learn more.</span>
+				<div class="col-4">
+					<div class="vert-center">  
+						<div class="bubble tutorial hidden">
+							<span>Go to MOVE IN to learn more.</span>
+						</div>
+						<div class="bubble categories hidden">
+							<span>Select a category to view its locations.</span>
+						</div>
 					</div>
 				</div>
 			</div>	
 
 		</div>
-
 	
 	</div>
 
@@ -54,7 +52,7 @@
 		</a>
 	</div>
 
-	<div class="locations row">
+	<div id="list" class="locations row">
 		<div *ngFor="let location of locations" attr.data-categories="{{location.categoriesStr}}" class="location col-3">
 
 			<div>

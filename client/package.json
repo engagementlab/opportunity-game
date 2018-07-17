@@ -41,6 +41,7 @@
     "gsap": "^1.20.4",
     "ismobilejs": "^0.4.1",
     "ngx-loading": "^1.0.14",
+    "ngx-scroll-event": "^1.0.8",
     "popper.js": "^1.12.5",
     "rxjs": "^5.5.6",
     "sass-mq": "^4.0.2",
