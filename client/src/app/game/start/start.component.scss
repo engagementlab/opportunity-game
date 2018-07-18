@@ -7,10 +7,13 @@
 
 #splash {
 	position: absolute;
-  width: 100%;
-  @include game-width();
-  height: 100vh;
+	margin-left: -4px;
+  height: 100%;
+  @include game-width(10);
 	z-index: 20;
+	@include mq($until: 320px) {
+		font-size: em(14px);
+	}
 	font-size: em(16px);
 
 	background: cdn-image('map-bg', c_scale, w_640, f_auto);
@@ -25,7 +28,8 @@
 	}
 	#top {
 		text-align: center;
-		height: 60vh;
+		height: 0;
+		opacity: 0;
 		padding-left: 5%;
 		padding-right: 5%;
 		background: white;
@@ -45,7 +49,7 @@
 
 	  #copy {
 	  	position: absolute;
-	  	bottom: 5%;
+	  	bottom: 10%;
 	  	display: flex;
 	  	font-size: 11px;
 	    margin-left: 5%;
@@ -56,11 +60,12 @@
 			text-align: center;
 		}
 		#txt {
-			width: 75%;
+			width: 85%;
 			padding-left: 8%;
 			text-align: left;
 		}
 		::ng-deep a {
+			display: none;
 			font-size: large;
 		}
 	}
