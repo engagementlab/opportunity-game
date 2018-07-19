@@ -142,13 +142,14 @@ export class GameLocationComponent implements OnInit {
     }  
     else
       this.backToList(modalId);
+    
+    this._dataSvc.updateStats(opportunity);
 
     if(opportunity.givesTransit)
       this._dataSvc.modifyPlayerData('hasTransit', true);
     else if(opportunity.givesJob)
       this._dataSvc.modifyPlayerData('hasJob', true);
     
-    this._dataSvc.updateStats(opportunity);
     this._dataSvc.updateOpportunity(opportunity, this.route.snapshot.params.locationUrl); 
     
     // Duration effect?

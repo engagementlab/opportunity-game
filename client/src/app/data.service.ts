@@ -62,7 +62,9 @@ export class DataService {
     baseUrl: string;
     index: any;
     actionsUntilLifeEvent: number = 6;
-    actionsUntilPayday: number = 5;
+    paydayWaitActions: number;
+    actionsUntilPayday: number;
+    paydayMoney: number;
 
     durationEffectQueue = [];
     delayedRewardQueue = [];
@@ -130,13 +132,17 @@ export class DataService {
             this.playerData.actions = 0;
 
         this.actionsUntilLifeEvent -= opportunity.actionCost;
-        this.actionsUntilPayday -= opportunity.actionCost;
 
-        if(this.actionsUntilPayday === 0)
-        {
-            this.actionsUntilPayday = 5;
-            this.playerData.money += 5;
-            this.showPayday();
+        // Only if player has job
+        if(this.playerData.hasJob === true) {
+            this.actionsUntilPayday -= opportunity.actionCost;
+            console.log(this.actionsUntilPayday, opportunity.actionCost)
+            if(this.actionsUntilPayday <= 0)
+            {
+                this.actionsUntilPayday = this.paydayWaitActions;
+                this.playerData.money += this.paydayMoney;
+                this.showPayday();
+            }
         }
 
         // Reward now or later (undefined if life event)
@@ -247,6 +253,9 @@ export class DataService {
 
         this.playerData[key] = value;
         this.playerDataUpdate.emit(this.playerData);
+        
+        this.playerData.gotTransit = false;
+        this.playerData.gotJob = false;
 
     }
 
@@ -356,9 +365,7 @@ export class DataService {
 
     public showPayday() {
 
-        // Only if player has job
-        if(this.playerData.hasJob === true)
-            this.paydayTrigger.emit();
+        this.paydayTrigger.emit();
 
     }
 
@@ -428,6 +435,10 @@ export class DataService {
         this.playerData.money = newData.config.startingMoney;
         this.playerData.actions = newData.config.startingActions;
         this.playerData.wellnessGoal = newData.config.wellnessGoal;
+        this.paydayMoney = newData.config.paydayMoney;
+
+        this.actionsUntilPayday = newData.config.paydayWaitActions; 
+        this.paydayWaitActions = newData.config.paydayWaitActions;
 
         this.surveyUrl = newData.config.surveyUrl;
 

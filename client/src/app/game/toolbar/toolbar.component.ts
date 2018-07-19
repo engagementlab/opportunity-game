@@ -16,7 +16,8 @@ export class GameToolbarComponent implements OnInit {
 
   round: number = 1;
   actions: number;
-	money: number;
+  money: number;
+	paydayMoney: number;
   commLevel: number;
   jobLevel: number;
   englishLevel: number;
@@ -41,6 +42,8 @@ export class GameToolbarComponent implements OnInit {
     this.englishLevel = this._dataSvc.playerData.englishLevel;
 
     this._dataSvc.playerDataUpdate.subscribe((data: PlayerData) => {
+
+      this.paydayMoney = this._dataSvc.paydayMoney;
 
       if(this.commLevel < data.commLevel)
         this.showLvlUp('community', data.commLevel - this.commLevel);
@@ -167,6 +170,8 @@ export class GameToolbarComponent implements OnInit {
           (<HTMLElement>n).classList.remove('show');
           (<HTMLElement>n).classList.add('done');
         }, 400*(i+1));
+      else if(n.classList.contains('cheevo'))
+        setTimeout(() => { (<HTMLElement>n.parentNode.removeChild(<HTMLElement>n)); }, 400*(i+1));
       else
         setTimeout(() => { (<HTMLElement>n).style.display = 'none'; }, 400*(i+1));
       
