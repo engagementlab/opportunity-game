@@ -105,7 +105,7 @@ export class GameLocationComponent implements OnInit {
     TweenLite.to(detailsParent, .5, {autoAlpha:1, display:'block'});
     TweenLite.to(document.getElementById('list'), .3, {autoAlpha:0, display:'none', oncomplete:() => {
 
-      TweenLite.fromTo(detailsChild, 1, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, delay:.3, display:'block', ease:Back.easeOut});
+      TweenLite.fromTo(detailsChild, 1, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, yPercent:-50, delay:.3, display:'block', ease:Back.easeOut});
     
     }});
 
@@ -115,7 +115,7 @@ export class GameLocationComponent implements OnInit {
 
     ion.sound.play('accept');  
     
-    TweenLite.fromTo(document.getElementById('detail_'+modalId), .5, {autoAlpha:1, scale:1}, {autoAlpha:0, scale:0, display:'none', ease:Back.easeIn});
+    TweenLite.fromTo(document.getElementById('detail_'+modalId), .5, {autoAlpha:1, scale:1}, {autoAlpha:0, yPercent:0, scale:0, display:'none', ease:Back.easeIn});
     TweenLite.to(document.getElementById('list'), .3, {autoAlpha:1, delay:.5, display:'block'});
     TweenLite.to(document.getElementById('details'), .5, {autoAlpha:0, delay:.5, display:'none'});
 
