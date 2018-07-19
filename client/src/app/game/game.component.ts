@@ -10,6 +10,7 @@ import { Event } from '../models/event';
 import { Goal } from '../models/goal';
 import { Character } from '../models/character';
 
+import { environment } from '../../environments/environment';
 import * as _ from 'underscore';
 
 @Component({
@@ -32,6 +33,7 @@ export class GameComponent implements OnInit {
   
   lastWellnessScore: number = 0;
   round: number = 1;
+  cheatKeyDown: boolean;
   gameEnded: boolean;
 
   assignedGoal: Goal;
@@ -40,6 +42,33 @@ export class GameComponent implements OnInit {
 
   public getRouterOutletState(outlet) {
     return outlet.isActivated ? outlet.activatedRoute : '';
+  }
+ 
+  // Cheaters prosper!
+  @HostListener('window:keydown', ['$event'])
+  keyDownEvent(event: KeyboardEvent) {
+
+    if(environment.production) return;
+    
+    if(event.keyCode === 16)
+      this.cheatKeyDown = true;
+
+  }
+  @HostListener('window:keyup', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+
+    if(environment.production) return;
+
+    if(this.cheatKeyDown) {
+      if(event.key === 'J')
+        this._dataSvc.playerData.jobLevel += 1;
+      else if(event.key === 'C')
+        this._dataSvc.playerData.commLevel += 1;
+      else if(event.key === 'E')
+        this._dataSvc.playerData.englishLevel += 1;
+
+      this._dataSvc.playerDataUpdate.emit(this._dataSvc.playerData);
+    }
   }
 
   @HostListener('document:click', ['$event.target'])

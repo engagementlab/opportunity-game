@@ -515,7 +515,7 @@ export class DataService {
         else if(opportunity.locationUnlocks && opportunity.locationUnlocks.length > 0)
           rewardToShow = {icon: 'map-opportunity', iconDetail: 'map', badges: ['gold_unlock']};
 
-        if((opportunity.effect && opportunity.effectWait > 0) || opportunity.triggerAmt > 0) {
+        if(opportunity.triggerAmt > 0) {
             rewardToShow.badges.push('gold_clock');
         }
 
