@@ -136,7 +136,6 @@ export class DataService {
         // Only if player has job
         if(this.playerData.hasJob === true) {
             this.actionsUntilPayday -= opportunity.actionCost;
-            console.log(this.actionsUntilPayday, opportunity.actionCost)
             if(this.actionsUntilPayday <= 0)
             {
                 this.actionsUntilPayday = this.paydayWaitActions;
@@ -146,7 +145,7 @@ export class DataService {
         }
 
         // Reward now or later (undefined if life event)
-        if(opportunity.triggerAmt === 0 || opportunity.triggerAmt === undefined) {
+        if(opportunity.triggerAmt === 0 || !opportunity.triggerAmt) {
 
             this.playerData.commLevel += opportunity.commReward;
             this.playerData.jobLevel += opportunity.jobReward;
@@ -460,6 +459,7 @@ export class DataService {
             });
 
         }); 
+
         _.each(this.eventData, (thisEvt) => {
             thisEvt.reward = this.getReward(thisEvt);
             thisEvt.costs = this.getCosts(thisEvt);

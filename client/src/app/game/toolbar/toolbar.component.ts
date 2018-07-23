@@ -66,9 +66,9 @@ export class GameToolbarComponent implements OnInit {
 
      if(data.gotTransit || data.gotJob) {
         
-        if(data.gotJob && document.getElementById('job-cheevo') !== undefined)
+        if(data.gotJob && document.getElementById('job-cheevo'))
           document.getElementById('job-cheevo').classList.add('show');
-        else if(data.gotTransit && document.getElementById('transit-cheevo') !== undefined)
+        else if(data.gotTransit && document.getElementById('transit-cheevo'))
           document.getElementById('transit-cheevo').classList.add('show');
 
         this.showNotification();
