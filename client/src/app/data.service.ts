@@ -218,6 +218,7 @@ export class DataService {
                             this.playerDataUpdate.emit(this.playerData);
 
                             this.delayedRewardQueue.splice(e, 1);
+
                             break;
 
                         }
@@ -226,6 +227,9 @@ export class DataService {
                     e++;
                 
                 }
+
+                // Calculate again in case delayed reward was given
+                this.playerData.wellnessScore = this.calcWellness();
 
                 // Remove used effects
                 this.effectTrigger.emit(effectsToRemove);

@@ -23,7 +23,7 @@ export class WellbeingComponent implements OnInit {
     this._dataSvc.playerDataUpdate.subscribe((data: PlayerData) => {
 
     	this.currentWellnessScore = (data.wellnessScore / data.wellnessGoal);
-    	this.wellnessFill.style.width = (this.currentWellnessScore * data.wellnessGoal) + "%";
+    	this.wellnessFill.style.width = Math.min(100, this.currentWellnessScore * data.wellnessGoal) + "%";
 
     });
 
