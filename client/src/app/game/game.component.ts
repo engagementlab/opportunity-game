@@ -60,14 +60,18 @@ export class GameComponent implements OnInit {
     if(environment.production) return;
 
     if(this.cheatKeyDown) {
+
       if(event.key === 'J')
         this._dataSvc.playerData.jobLevel += 1;
       else if(event.key === 'C')
         this._dataSvc.playerData.commLevel += 1;
       else if(event.key === 'E')
         this._dataSvc.playerData.englishLevel += 1;
+      else if(event.key === '+')
+        this._dataSvc.playerData.wellnessScore += 5;
 
       this._dataSvc.playerDataUpdate.emit(this._dataSvc.playerData);
+
     }
   }
 
@@ -214,7 +218,6 @@ export class GameComponent implements OnInit {
       if(allEvents.length > 0) {
   
         let eventIndex = Math.floor(Math.random() * ((allEvents.length-1) - 0 + 1));
-        // debugger;
         let eventEl = allEvents[eventIndex];
         
         if(eventEl === undefined) return;
