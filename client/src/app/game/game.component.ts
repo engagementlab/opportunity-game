@@ -172,7 +172,6 @@ export class GameComponent implements OnInit {
 
           TweenMax.to(radius, 1, {val:45, delay:1, ease:Back.easeOut, 
             onUpdate:() => {
-              console.log(charImg);
              charImg.style.clipPath = 'circle('+radius.val+'% at 50% 50%)';
             }
           });
@@ -260,6 +259,7 @@ export class GameComponent implements OnInit {
   removeEvent(eventId: string) {
 
     let thisEl = document.getElementById('event_'+eventId);
+    
     TweenLite.to(thisEl, 1, {autoAlpha: 0, display:'none', oncomplete: () => {
       
       thisEl.parentNode.removeChild(thisEl);

@@ -132,7 +132,7 @@ export class GameLocationComponent implements OnInit {
   selectOpportunity(opportunity: Opportunity, modalId: string) {
 
     // Hide buttons
-    TweenLite.to(document.querySelector('#detail_'+modalId+' .buttons'), .001, {alpha:0});
+    TweenLite.to(document.querySelector('#detail_'+modalId+' .buttons'), .001, {alpha:0, display:'none'});
 
     // Show 'go home' modal?
     if(this.currentLocation.categoriesStr === 'discover') {

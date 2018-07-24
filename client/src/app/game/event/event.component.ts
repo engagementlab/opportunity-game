@@ -22,6 +22,9 @@ export class GameEventComponent implements OnInit {
 
     let thisEl = document.getElementById(eventId);
       
+    // Hide buttons
+    TweenLite.to(thisEl.querySelectorAll('.app-button'), .001, {alpha:0, visibility:'hidden'});
+
     // Close events only if others not showing
     let otherEvents = document.querySelectorAll('#' + this.type + '-events .game-event.queue');
     if(otherEvents && otherEvents.length > 0) {
