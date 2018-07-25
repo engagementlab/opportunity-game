@@ -121,9 +121,17 @@
 }
 
 #footer {
+
 	visibility: hidden;
-	color: $gold;
-	font-size: large;
-	text-align: center;
-	margin-top: -10%;
+  position: absolute;
+  bottom: 1%;
+  text-align: center;
+  
+	::ng-deep img {
+		display: inline-block;
+		position: relative;
+		vertical-align: middle;
+		margin-left: 2%;
+	}
+
 }
