@@ -5,6 +5,72 @@
   to {background-position: 0 130%;}
 }
 
+#splash {
+	position: absolute;
+	margin-left: -4px;
+  height: 100%;
+  @include game-width(10);
+	z-index: 20;
+	@include mq($until: 320px) {
+		font-size: em(14px);
+	}
+	font-size: em(16px);
+
+	background: cdn-image('map-bg', c_scale, w_640, f_auto);
+	background-position-y: 100%;
+	background-repeat: repeat-y;
+
+	h1 {
+		margin: 0;
+	}
+	#small {
+		font-size: em(14px);
+	}
+	#top {
+		text-align: center;
+		height: 0;
+		opacity: 0;
+		padding-left: 5%;
+		padding-right: 5%;
+		background: white;
+	}
+	#wave {
+		display: block;
+		height: 50px;
+		width: 100%;
+		background-repeat: repeat-x;
+		background-image: cdn-image('white-wave');
+	}
+
+	#bottom {
+		text-align: center;
+		position: relative;
+		height:33vh;
+
+	  #copy {
+	  	position: absolute;
+	  	bottom: 10%;
+	  	display: flex;
+	  	font-size: 11px;
+	    margin-left: 5%;
+	    margin-right: 5%;
+	  }
+
+		#img {
+			text-align: center;
+		}
+		#txt {
+			width: 85%;
+			padding-left: 8%;
+			text-align: left;
+		}
+		::ng-deep a {
+			display: none;
+			font-size: large;
+		}
+	}
+}
+
 #bg {
 
 	position: fixed;
@@ -55,9 +121,17 @@
 }
 
 #footer {
+
 	visibility: hidden;
-	color: $gold;
-	font-size: large;
-	text-align: center;
-	margin-top: -10%;
+  position: absolute;
+  bottom: 1%;
+  text-align: center;
+  
+	::ng-deep img {
+		display: inline-block;
+		position: relative;
+		vertical-align: middle;
+		margin-left: 2%;
+	}
+
 }

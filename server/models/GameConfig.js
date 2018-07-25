@@ -33,6 +33,8 @@ GameConfig.add({
 	name: { type: String, default: "Game Config", hidden: true, required: true, initial: true },
   startingMoney: { type: Number, required: true, initial: true },
   startingActions: { type: Number, required: true, initial: true },
+  paydayMoney: { type: Number, required: true, initial: true },
+  paydayWaitActions: { type: Number, required: true, initial: true },
   wellnessGoal: { type: Number, required: true, initial: true },
   surveyUrl: { type: Types.Url },
 

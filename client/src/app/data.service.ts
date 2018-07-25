@@ -62,7 +62,9 @@ export class DataService {
     baseUrl: string;
     index: any;
     actionsUntilLifeEvent: number = 6;
-    actionsUntilPayday: number = 5;
+    paydayWaitActions: number;
+    actionsUntilPayday: number;
+    paydayMoney: number;
 
     durationEffectQueue = [];
     delayedRewardQueue = [];
@@ -130,17 +132,20 @@ export class DataService {
             this.playerData.actions = 0;
 
         this.actionsUntilLifeEvent -= opportunity.actionCost;
-        this.actionsUntilPayday -= opportunity.actionCost;
 
-        if(this.actionsUntilPayday === 0)
-        {
-            this.actionsUntilPayday = 5;
-            this.playerData.money += 5;
-            this.showPayday();
+        // Only if player has job
+        if(this.playerData.hasJob === true) {
+            this.actionsUntilPayday -= opportunity.actionCost;
+            if(this.actionsUntilPayday <= 0)
+            {
+                this.actionsUntilPayday = this.paydayWaitActions;
+                this.playerData.money += this.paydayMoney;
+                this.showPayday();
+            }
         }
 
         // Reward now or later (undefined if life event)
-        if(opportunity.triggerAmt === 0 || opportunity.triggerAmt === undefined) {
+        if(opportunity.triggerAmt === 0 || !opportunity.triggerAmt) {
 
             this.playerData.commLevel += opportunity.commReward;
             this.playerData.jobLevel += opportunity.jobReward;
@@ -163,7 +168,7 @@ export class DataService {
         this.playerData.wellnessScore = this.calcWellness();
 
         // Show life events and process opportunity effects only if not game over
-        if(this.playerData.actions <= 0 || (this.playerData.wellnessScore >= this.playerData.wellnessGoal))
+        if(this.playerData.actions <= 0 || this.playerData.money <= 0 || (this.playerData.wellnessScore >= this.playerData.wellnessGoal))
             this.endGame();
         else {            
             if(this.actionsUntilLifeEvent === 0)
@@ -213,6 +218,7 @@ export class DataService {
                             this.playerDataUpdate.emit(this.playerData);
 
                             this.delayedRewardQueue.splice(e, 1);
+
                             break;
 
                         }
@@ -221,6 +227,9 @@ export class DataService {
                     e++;
                 
                 }
+
+                // Calculate again in case delayed reward was given
+                this.playerData.wellnessScore = this.calcWellness();
 
                 // Remove used effects
                 this.effectTrigger.emit(effectsToRemove);
@@ -247,6 +256,9 @@ export class DataService {
 
         this.playerData[key] = value;
         this.playerDataUpdate.emit(this.playerData);
+        
+        this.playerData.gotTransit = false;
+        this.playerData.gotJob = false;
 
     }
 
@@ -356,9 +368,7 @@ export class DataService {
 
     public showPayday() {
 
-        // Only if player has job
-        if(this.playerData.hasJob === true)
-            this.paydayTrigger.emit();
+        this.paydayTrigger.emit();
 
     }
 
@@ -428,6 +438,10 @@ export class DataService {
         this.playerData.money = newData.config.startingMoney;
         this.playerData.actions = newData.config.startingActions;
         this.playerData.wellnessGoal = newData.config.wellnessGoal;
+        this.paydayMoney = newData.config.paydayMoney;
+
+        this.actionsUntilPayday = newData.config.paydayWaitActions; 
+        this.paydayWaitActions = newData.config.paydayWaitActions;
 
         this.surveyUrl = newData.config.surveyUrl;
 
@@ -449,6 +463,7 @@ export class DataService {
             });
 
         }); 
+
         _.each(this.eventData, (thisEvt) => {
             thisEvt.reward = this.getReward(thisEvt);
             thisEvt.costs = this.getCosts(thisEvt);
@@ -515,7 +530,7 @@ export class DataService {
         else if(opportunity.locationUnlocks && opportunity.locationUnlocks.length > 0)
           rewardToShow = {icon: 'map-opportunity', iconDetail: 'map', badges: ['gold_unlock']};
 
-        if((opportunity.effect && opportunity.effectWait > 0) || opportunity.triggerAmt > 0) {
+        if(opportunity.triggerAmt > 0) {
             rewardToShow.badges.push('gold_clock');
         }
 

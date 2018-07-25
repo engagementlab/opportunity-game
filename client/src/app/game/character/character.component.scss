@@ -8,12 +8,15 @@ label {
 	position: absolute;
   width: 100%;
   height: 100vh;
+	@include mq($from: tabletPortrait) {
+	  height: 97vh;
+	}
   z-index: 25;
 
 	background: black;
 	color: white;
 	
-  @include game-width();
+  @include game-width(2);
 	@include mq($until: 320px) {
 		height: 160vh;
 	}

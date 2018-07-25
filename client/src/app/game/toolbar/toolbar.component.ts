@@ -16,7 +16,8 @@ export class GameToolbarComponent implements OnInit {
 
   round: number = 1;
   actions: number;
-	money: number;
+  money: number;
+	paydayMoney: number;
   commLevel: number;
   jobLevel: number;
   englishLevel: number;
@@ -42,6 +43,8 @@ export class GameToolbarComponent implements OnInit {
 
     this._dataSvc.playerDataUpdate.subscribe((data: PlayerData) => {
 
+      this.paydayMoney = this._dataSvc.paydayMoney;
+
       if(this.commLevel < data.commLevel)
         this.showLvlUp('community', data.commLevel - this.commLevel);
       if(this.jobLevel < data.jobLevel)
@@ -63,9 +66,9 @@ export class GameToolbarComponent implements OnInit {
 
      if(data.gotTransit || data.gotJob) {
         
-        if(data.gotJob && document.getElementById('job-cheevo') !== undefined)
+        if(data.gotJob && document.getElementById('job-cheevo'))
           document.getElementById('job-cheevo').classList.add('show');
-        else if(data.gotTransit && document.getElementById('transit-cheevo') !== undefined)
+        else if(data.gotTransit && document.getElementById('transit-cheevo'))
           document.getElementById('transit-cheevo').classList.add('show');
 
         this.showNotification();
@@ -167,6 +170,8 @@ export class GameToolbarComponent implements OnInit {
           (<HTMLElement>n).classList.remove('show');
           (<HTMLElement>n).classList.add('done');
         }, 400*(i+1));
+      else if(n.classList.contains('cheevo'))
+        setTimeout(() => { (<HTMLElement>n.parentNode.removeChild(<HTMLElement>n)); }, 400*(i+1));
       else
         setTimeout(() => { (<HTMLElement>n).style.display = 'none'; }, 400*(i+1));
       

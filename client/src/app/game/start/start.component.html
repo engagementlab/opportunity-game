@@ -1,3 +1,31 @@
+<div id="splash">
+	<div id="top" class="medium">
+		<h1>Welcome to the</h1>
+	  <cdn-image cloudinaryId="opportunity-game/logo.svg" width="200" autoFormat="false" alt="Portland of Opportunity logo"></cdn-image>
+	  <h1>GAME</h1>
+
+		<p>Move to Portland, Maine as an immigrant or refugee. Visit real places in Portland to meet people, learn English, and get job training, but don’t run out of time or money!</p>
+		<p>Complete a <span class="bold">survey</span> afterwards to tell city government how to do a better job helping immigrants and refugees.</p>
+		<p id="small">To learn more about how to use this game in your community, contact <span class="bold">jtrujillo@portlandmaine.gov</span>.</p>
+
+	</div>
+	
+	<div id="wave"></div>
+
+	<div id="bottom">
+		<app-button id="enter" label="Enter" clickData="true" (clickEvent)="showGame()" class="gold" ariaLabel="Enter the game"></app-button>
+		<div id="copy">
+			<div id="img">
+			  <cdn-image cloudinaryId="opportunity-game/el-logo.svg" width="50" autoFormat="false" alt="Engagement Lab logo"></cdn-image>
+			</div>
+			<div id="txt">
+				Portland of Opportunity is brought to you by the Portland Office of Economic Opportunity and developed by the Engagement Lab at Emerson College.
+			</div>
+		</div>
+	</div>
+
+</div>
+
 <div id="bg">
 </div>
 <div id="start">
@@ -14,8 +42,17 @@
 			<app-button label="New Game" clickData="true" (clickEvent)="newGame()" class="large gold" ariaLabel="Start new Game"></app-button>
 		</div>
 	</div>
+
+	<div id="footer" class="col-6">
+		
+		<cdn-image cloudinaryId="opportunity-game/logo-portland.png" width="50" autoFormat="true" alt="City of Portland logo"></cdn-image>
+		<cdn-image cloudinaryId="opportunity-game/logo-gorman.png" width="100" autoFormat="true" alt="John T. Gorman Foundation logo"></cdn-image>
+		<cdn-image cloudinaryId="opportunity-game/logo-gateways.png" width="100" autoFormat="true" alt="Gateways for Growth logo"></cdn-image>
+		<p>
+			<cdn-image cloudinaryId="opportunity-game/logo-mti.png" width="100" autoFormat="true" alt="Maine Technology Institute logo"></cdn-image>
+			<cdn-image cloudinaryId="opportunity-game/logo-nae.png" width="100" autoFormat="true" alt="New American Economy logo"></cdn-image>
+	</p>
+	</div>
 </div>
 		
 <game-character id="characters-parent" class="hidden"></game-character>
-
-<div id="footer" class="bold">Office of Economic Opportunity</div>

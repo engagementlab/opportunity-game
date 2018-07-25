@@ -10,6 +10,7 @@ import { Event } from '../models/event';
 import { Goal } from '../models/goal';
 import { Character } from '../models/character';
 
+import { environment } from '../../environments/environment';
 import * as _ from 'underscore';
 
 @Component({
@@ -32,6 +33,7 @@ export class GameComponent implements OnInit {
   
   lastWellnessScore: number = 0;
   round: number = 1;
+  cheatKeyDown: boolean;
   gameEnded: boolean;
 
   assignedGoal: Goal;
@@ -40,6 +42,37 @@ export class GameComponent implements OnInit {
 
   public getRouterOutletState(outlet) {
     return outlet.isActivated ? outlet.activatedRoute : '';
+  }
+ 
+  // Cheaters prosper!
+  @HostListener('window:keydown', ['$event'])
+  keyDownEvent(event: KeyboardEvent) {
+
+    if(environment.production) return;
+    
+    if(event.keyCode === 16)
+      this.cheatKeyDown = true;
+
+  }
+  @HostListener('window:keyup', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+
+    if(environment.production) return;
+
+    if(this.cheatKeyDown) {
+
+      if(event.key === 'J')
+        this._dataSvc.playerData.jobLevel += 1;
+      else if(event.key === 'C')
+        this._dataSvc.playerData.commLevel += 1;
+      else if(event.key === 'E')
+        this._dataSvc.playerData.englishLevel += 1;
+      else if(event.key === '+')
+        this._dataSvc.playerData.wellnessScore += 5;
+
+      this._dataSvc.playerDataUpdate.emit(this._dataSvc.playerData);
+
+    }
   }
 
   @HostListener('document:click', ['$event.target'])
@@ -126,26 +159,27 @@ export class GameComponent implements OnInit {
         this.lifeEvents = _.filter(this._dataSvc.getUpdatedEvents(), (e) => {return e.type === 'life'});
         
         let content = <HTMLElement>document.querySelector('#game-over #content');
-        let charImg = <HTMLElement>document.querySelector('.character img');
         let radius = {val: 0};
         content.style.visibility = 'hidden';
 
         TweenLite.to(document.getElementById('wellbeing'), 1, {autoAlpha:0, display:'none'});
-        TweenLite.fromTo(document.getElementById('game-over'), 2, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, display:'block', ease:Sine.easeOut});
-        TweenLite.to(content, 1, {autoAlpha:1, delay:2.1});
+        TweenLite.fromTo(document.getElementById('game-over'), 2, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, display:'block', ease:Sine.easeOut, onComplete: () => {
 
-        TweenLite.fromTo(document.querySelector('#game-over #header'), .7, {autoAlpha:0, top:'-140px'}, {autoAlpha:1, top:0, delay:3.1, display:'block', ease:Back.easeOut});
+          let charImg = <HTMLElement>document.querySelector('#game-over .character img');
+          TweenLite.to(content, .2, {autoAlpha:1, delay:.2});
 
-        TweenMax.to(document.getElementById('circle'), 1, {attr:{r:45}, delay:4, ease:Back.easeOut});
-        TweenMax.to(radius, 1, {val:66, delay:4.7, ease:Sine.easeOut, 
-          onUpdate:() => {
-           charImg.style.clipPath = 'circle('+radius.val+'% at 54% 43%)';
-          }
-        });
-        TweenLite.fromTo(document.getElementById('wellbeing-score'), 1, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, delay:5, display:'flex', ease:Back.easeOut});
-        TweenLite.fromTo(document.getElementById('share'), 1, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, delay:5.5, display:'block', ease:Elastic.easeOut});
-        TweenLite.fromTo(document.getElementById('play-again'), 1, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, delay:5.7, display:'inline-flex', ease:Sine.easeOut});
+          TweenLite.fromTo(document.querySelector('#game-over #header'), .7, {autoAlpha:0, top:'-140px'}, {autoAlpha:1, top:0, delay:.2, display:'block', ease:Back.easeOut});
 
+          TweenMax.to(radius, 1, {val:45, delay:1, ease:Back.easeOut, 
+            onUpdate:() => {
+             charImg.style.clipPath = 'circle('+radius.val+'% at 50% 50%)';
+            }
+          });
+          TweenLite.fromTo(document.getElementById('wellbeing-score'), 1, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, delay:2, display:'flex', ease:Back.easeOut});
+          TweenLite.fromTo(document.getElementById('share'), 1, {autoAlpha:0, scale:0}, {autoAlpha:1, scale:1, delay:3, display:'block', ease:Elastic.easeOut});
+          TweenLite.fromTo(document.getElementById('play-again'), 1, {autoAlpha:0, top:'-100%'}, {autoAlpha:1, top:0, delay:3.2, display:'inline-flex', ease:Sine.easeOut});
+
+        }});
 
       }
 
@@ -183,7 +217,6 @@ export class GameComponent implements OnInit {
       if(allEvents.length > 0) {
   
         let eventIndex = Math.floor(Math.random() * ((allEvents.length-1) - 0 + 1));
-        // debugger;
         let eventEl = allEvents[eventIndex];
         
         if(eventEl === undefined) return;
@@ -226,6 +259,7 @@ export class GameComponent implements OnInit {
   removeEvent(eventId: string) {
 
     let thisEl = document.getElementById('event_'+eventId);
+    
     TweenLite.to(thisEl, 1, {autoAlpha: 0, display:'none', oncomplete: () => {
       
       thisEl.parentNode.removeChild(thisEl);

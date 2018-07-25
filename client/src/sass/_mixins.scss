@@ -250,8 +250,8 @@ $base-font-size: 16px;
   flex: $fg $fs $fb;
 }
 
-@mixin game-width() {
+@mixin game-width($offset: 0) {
   
-  max-width: 416px;
+  max-width: (416 + $offset) + px;
 
 }
