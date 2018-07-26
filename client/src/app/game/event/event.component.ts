@@ -26,7 +26,7 @@ export class GameEventComponent implements OnInit {
     TweenLite.to(thisEl.querySelectorAll('.app-button'), .001, {alpha:0, visibility:'hidden'});
 
     // Close events only if others not showing
-    let otherEvents = document.querySelectorAll('#' + this.type + '-events .game-event.queue');
+    let otherEvents = document.querySelectorAll('.game-event.queue');
     if(otherEvents && otherEvents.length > 0) {
       TweenLite.to(thisEl, 1, {left:'100%', autoAlpha:0, ease:Back.easeIn, onComplete: () => {
         thisEl.remove();
@@ -41,7 +41,7 @@ export class GameEventComponent implements OnInit {
       TweenLite.to(thisEl, 1, {autoAlpha: 0, display:'none', onComplete: () => {
         thisEl.remove();
         this._dataSvc.removeEvent(eventId);
-        TweenLite.to(document.getElementById(this.type + '-events'), 1, {autoAlpha: 0, display:'none'});
+        TweenLite.to(document.getElementById('events-modal'), 1, {autoAlpha: 0, display:'none'});
       }});
     }
 

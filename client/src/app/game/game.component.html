@@ -52,12 +52,16 @@
 
 </div>
 
+<div id="events-modal" class="col-6 full-screen events hidden">
+	
+	<!-- LIFE EVENTS -->
+	<section id="life-events">
+		<game-event [data]="event" type="life" class="event" *ngFor="let event of lifeEvents"></game-event>
+	</section>
 
-<div id="life-events" class="col-6 full-screen events hidden">
-	<game-event [data]="event" type="life" class="event" *ngFor="let event of lifeEvents"></game-event>
-</div>
+	<!-- EFFECT EVENTS -->
+	<section id="effect-events">
+		<game-event [data]="event" type="effect" class="event" *ngFor="let event of effectEvents"></game-event>
+	</section>
 
-<!-- EFFECT EVENTS -->
-<div id="effect-events" class="col-6 full-screen events hidden">
-	<game-event [data]="event" type="effect" class="event" *ngFor="let event of effectEvents"></game-event>
 </div>

@@ -45,6 +45,12 @@
   overflow: hidden;
 
   @include game-width();
+
+  &#events-modal {
+  	section {
+  		display: contents;
+  	}
+  }
   
 	#content {
 		text-align: center;

@@ -61,7 +61,7 @@ export class DataService {
 
     baseUrl: string;
     index: any;
-    actionsUntilLifeEvent: number = 6;
+    actionsUntilLifeEvent: number = 2;
     paydayWaitActions: number;
     actionsUntilPayday: number;
     paydayMoney: number;
