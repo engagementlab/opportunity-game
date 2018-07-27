@@ -189,19 +189,22 @@ export class GameComponent implements OnInit {
 
       if(!events || events.length < 1 || this.gameEnded) return;
 
-      let effectEventSel = document.getElementById('effect-events');
       _.each(events, (event, i) => {
 
         let eventToShow = document.getElementById(event.id);
         
-        // Only ever show one event at once
-        if(eventToShow === undefined || eventToShow === null || i > 0) {
+        // Only ever show one event at once or if a life event shows
+        let multipleEvents = (eventToShow === undefined || eventToShow === null || i > 0);
+        let lifeEvent = document.querySelectorAll('#life-events .game-event.show').length > 0;
+
+        if(multipleEvents || lifeEvent) {
           if(eventToShow !== undefined)
             eventToShow.classList.add('queue');
         }
         else {
-          TweenLite.to(effectEventSel, 1, {autoAlpha: 1, display:'block'});
+          TweenLite.to(document.getElementById('events-modal'), 1, {autoAlpha: 1, display:'block'});
           TweenLite.to(eventToShow, 1, {autoAlpha:1, display:'block'});
+          eventToShow.classList.add('show');
         }
 
       });
@@ -215,14 +218,22 @@ export class GameComponent implements OnInit {
       // Show only if any left
       let allEvents = document.querySelectorAll('#life-events .game-event');
       if(allEvents.length > 0) {
-  
+          
         let eventIndex = Math.floor(Math.random() * ((allEvents.length-1) - 0 + 1));
         let eventEl = allEvents[eventIndex];
         
         if(eventEl === undefined) return;
 
-        TweenLite.to(document.getElementById('life-events'), 1, {autoAlpha: 1, display:'block'});
+        // Queue if events showing
+        let otherEvents = document.querySelectorAll('.game-event.show');
+        if(otherEvents && otherEvents.length > 0) {
+          eventEl.classList.add('queue');
+          return;
+        }
+
+        TweenLite.to(document.getElementById('events-modal'), 1, {autoAlpha: 1, display:'block'});
         TweenLite.to(eventEl, 1, {autoAlpha:1, display:'block'});
+        eventEl.classList.add('show');
         
       }
     });
