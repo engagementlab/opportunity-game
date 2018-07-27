@@ -16,8 +16,8 @@
 	}
 	font-size: em(16px);
 
-	background: cdn-image('map-bg', c_scale, w_640, f_auto);
-	background-position-y: 100%;
+	background-image: cdn-image('bg-trees', c_scale, w_640);
+	background-color: $white-three;
 	background-repeat: repeat-y;
 
 	h1 {
