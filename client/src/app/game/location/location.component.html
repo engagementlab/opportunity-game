@@ -21,7 +21,8 @@
 			<!-- Rewards -->
 			<div class="reward">
 				<div class="icon">
-					<cdn-image cloudinaryId="opportunity-game/icons/{{opportunity.reward.icon}}.svg" width="75" alt="Icon for Reward" *ngIf="opportunity.enabled === undefined"></cdn-image>
+					<cdn-image cloudinaryId="opportunity-game/icons/{{opportunity.reward.icon}}.svg" width="75" alt="Icon for Reward" *ngIf="opportunity.enabled === undefined && opportunity.locked === false"></cdn-image>
+					<cdn-image cloudinaryId="opportunity-game/icons/{{opportunity.reward.icon}}-locked.svg" width="75" alt="Icon for Reward" *ngIf="opportunity.enabled === undefined && opportunity.locked === true"></cdn-image>
 					<cdn-image cloudinaryId="opportunity-game/icons/{{opportunity.reward.icon}}-used.svg" width="75" alt="Icon for Reward" *ngIf="opportunity.enabled === false"></cdn-image>
 				</div>
 
