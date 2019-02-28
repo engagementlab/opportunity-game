@@ -10,7 +10,7 @@
  * @static
  **/
 
-var keystone = require('keystone');
+const keystone = global.keystone;
 var _ = require('underscore');
 
 /**

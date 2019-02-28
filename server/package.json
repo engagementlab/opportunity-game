@@ -1,25 +1,21 @@
 {
   "name": "opportunity-game",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/engagementgamelab/opportunity-game.git"
+    "url": "git+https://github.com/engagementlab/opportunity-game.git"
   },
   "description": "Data backend for Portland of Opportunity game.",
   "main": "app.js",
   "dependencies": {
-    "app-module-path": "^1.0.6",
-    "app-root-path": "^1.0.0",
+    "@engagementlab/el-bootstrapper": "^0.0.4",
     "bluebird": "3.5.1",
     "body-parser": "^1.18.2",
     "colors": "^1.1.2",
-    "connect-mongo": "^2.0.1",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "json-fs-store": "^1.0.0",
-    "keystone": "4.0.0-beta.8",
-    "keystone-slacker": "git://github.com/engagementgamelab/keystone-slacker.git",
     "keystone-storage-adapter-azure": "^1.1.0",
     "lodash": "^4.17.5",
     "lodash-humps": "^3.1.2",

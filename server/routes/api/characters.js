@@ -7,7 +7,7 @@
  *
  * ==========
  */
-const keystone = require('keystone'),
+const keystone = global.keystone,
       mongoose = keystone.get('mongoose'),
       Bluebird = require('bluebird'),
       Character = keystone.list('Character'),

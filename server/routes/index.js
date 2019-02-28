@@ -12,7 +12,7 @@
 
 var express = require('express');
 var router = express.Router();
-var keystone = require('keystone');
+const keystone = global.keystone;
 var middleware = require('./middleware');
 var importRoutes = keystone.importer(__dirname);
 

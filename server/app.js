@@ -1,6 +1,6 @@
 /**
- * APP NAME
- * Developed by Engagement Lab, 2017
+ * Portland of Opportunity backend
+ * Developed by Engagement Lab, 2018
  * ==============
  * App boot logic
  *
@@ -13,39 +13,28 @@
 // Load .env vars
 if(process.env.NODE_ENV !== 'test')
 	require('dotenv').load();
-
-const SiteFactory = require('./factory'),
-		 express = require('express');
-
+	
 _ = require('lodash');
-colors = require('colors');
-
-// Return server object
-serverStart = function() {
-
-	return express();
-
-};
-
-module.exports = function() {
-
-	// let expressApp = serverStart();
-
-	// expressApp.listen(process.env.PORT || 3000, () => {
-
-		require('fs').readFile('./config.json', {encoding: 'utf8'}, function (err, data) {
-		  
-		  if (err) throw err;
-		  var configData = 	JSON.parse(data);
-
-			new SiteFactory({ 
-
-				config: configData
-
-			});
-
-		});
-
-	// });
-
-}();
+ 
+const bootstrap = require('@engagementlab/el-bootstrapper'), 
+      express = require('express');
+ 
+let app = express();
+bootstrap.start(
+    // Path to config
+    './config.json', 
+    // Express
+    app,
+    // The root of this app on disk, needed for keystonejs
+    __dirname + '/', 
+    // Any additional config vars you want for keystonejs instance
+    // See: https://keystonejs.com/documentation/configuration/
+    {
+        'name': 'Portland of Opportunity CMS'
+    },
+    () => {
+        // any logic to run after app is mounted
+        // you need at least:
+        app.listen(process.env.PORT);
+    }
+);

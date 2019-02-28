@@ -9,7 +9,7 @@
  * ==========
  */
 
-var keystone = require('keystone');
+const keystone = global.keystone;
 var Types = keystone.Field.Types;
 
 /**
