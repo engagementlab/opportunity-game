@@ -11,7 +11,7 @@ import { Goal } from '../models/goal';
 import { Character } from '../models/character';
 
 import { environment } from '../../environments/environment';
-import * as _ from 'underscore';
+import * as _ from '../../../node_modules/@types/underscore';
 
 @Component({
   selector: 'app-game',

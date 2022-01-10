@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as ismobile from 'ismobilejs';
+import * as ismobile from '../../../node_modules/@types/ismobilejs';
 
 @Component({
   selector: 'app-navbar',

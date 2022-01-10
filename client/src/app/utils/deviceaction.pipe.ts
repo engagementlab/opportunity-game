@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import * as ismobile from 'ismobilejs';
+import * as ismobile from '../../../node_modules/ismobilejs';
 
 @Pipe({
   name: 'deviceAction'

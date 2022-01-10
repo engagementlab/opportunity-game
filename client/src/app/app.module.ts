@@ -2,13 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '../../node_modules/@angular/platform-browser/animations';
 
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '../../node_modules/@angular/common/http';
 
 import { Cloudinary as CloudinaryCore } from 'cloudinary-core';
-import { CloudinaryConfiguration, CloudinaryModule } from '@cloudinary/angular-5.x';
-import { ScrollEventModule } from 'ngx-scroll-event';
+import { CloudinaryConfiguration, CloudinaryModule } from '../../node_modules/@cloudinary/angular-5.x';
+import { NgxScrollEventModule } from '../../node_modules/ngx-scroll-event/dist/ngx-scroll-event';
 
 import cloudinaryConfiguration from './config';
 export const cloudinary = {
@@ -103,7 +103,7 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    ScrollEventModule
+    NgxScrollEventModule
   ],
   exports: [
     RouterModule,

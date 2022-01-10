@@ -2,8 +2,7 @@ import { Injectable, Input, Output, EventEmitter } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Response } from '@angular/http';
 
-import { Subject } from 'rxjs';
-import { Observable } from 'rxjs/Observable';
+import { Subject ,  Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { environment } from '../environments/environment';
@@ -17,10 +16,9 @@ import { Goal } from './models/goal';
 
 import * as _ from 'underscore';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/observable/of';
+import { of } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 
 enum DurationEffectTrigger {
     actions = 0,
@@ -572,37 +570,19 @@ export class DataService {
     
     public getCharacterData(): Observable<any> {
 
-        if(this.characterData !== undefined)            
-            return Observable.of(this.characterData).map((d:any) => d);
-
-        this.isLoading.next(true);
-        
-        return this.http.get(this.baseUrl+'get/characters')
-        .map((res:any)=> {
+        return this.http.get(this.baseUrl+'get/characters').pipe(
+            map((res:any)=> {
           return this.assembleCharacterData(res.data);
-        })
-        .catch((error:any) => { 
-            this.isLoading.next(false);
-            return Observable.throw(error);
-        });
+        }));
 
     }
 	
     public getAllData(): Observable<any> {
 
-        if(this.locationData !== undefined)            
-            return Observable.of(this.locationData).map((d:any) => d);
-
-        this.isLoading.next(true);
-        
-        return this.http.get(this.baseUrl+'get/data')
-        .map((res:any)=> {
+        return this.http.get(this.baseUrl+'get/data').pipe(
+            map((res:any)=> {
           return this.assembleData(res.data);
-        })
-        .catch((error:any) => { 
-            this.isLoading.next(false);
-            return Observable.throw(error);
-        });
+        }))
 
 	}
 }

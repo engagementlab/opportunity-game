@@ -1,4 +1,4 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed, inject } from '../../node_modules/@angular/core/testing';
 describe('DataService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({

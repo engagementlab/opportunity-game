@@ -3,7 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { HostListener } from '@angular/core';
 
 import { environment } from '../environments/environment';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { DeactivateGuard } from './deactivate-guard';
 
