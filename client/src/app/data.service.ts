@@ -2,8 +2,8 @@ import { Injectable, Input, Output, EventEmitter } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Response } from '@angular/http';
 
-import { Subject ,  Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Subject ,  Observable ,  of } from 'rxjs';
+import { catchError ,  map } from 'rxjs/operators';
 
 import { environment } from '../environments/environment';
 
@@ -15,9 +15,6 @@ import { Opportunity } from './models/opportunity';
 import { Goal } from './models/goal';
 
 import * as _ from 'underscore';
-
-import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 
 enum DurationEffectTrigger {

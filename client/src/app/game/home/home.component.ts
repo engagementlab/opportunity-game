@@ -7,7 +7,7 @@ import { Character } from '../../models/character';
 import { PlayerData } from '../../models/playerdata';
 
 import * as _ from 'underscore';
-import { ScrollEvent } from 'ngx-scroll-event';
+import { NgxScrollEvent } from '../../../../node_modules/ngx-scroll-event/dist/ngx-scroll-event';
 
 @Component({
   selector: 'app-home',
@@ -38,7 +38,7 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
 
   @ViewChild('map') mapContainer: ElementRef;
 
-  public mapScrolled(event: ScrollEvent) {
+  public mapScrolled(event: NgxScrollEvent) {
 
   }
 
