@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../data.service';
 import { Character } from '../../models/character';
 import { Goal } from '../../models/goal';
-import * as _ from '../../../../node_modules/@types/underscore';
+import * as _ from 'underscore';
+import { Back, Elastic, Sine, TweenLite, TweenMax } from 'gsap';
+
 
 @Component({
   selector: 'game-character',

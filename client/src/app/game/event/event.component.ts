@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from '../../data.service';
 import { Event } from '../../models/event';
-import { TweenLite } from "gsap";
+import { Back, TweenLite } from "gsap";
 
 @Component({
   selector: 'game-event',

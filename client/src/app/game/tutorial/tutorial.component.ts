@@ -1,9 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router'
-import { DOCUMENT } from '@angular/platform-browser';
+import { DOCUMENT } from "@angular/common";
 
 import { DataService } from '../../data.service';
 import { Character } from '../../models/character';
+import { TweenLite, Back, Elastic } from 'gsap';
 
 @Component({
   selector: 'game-tutorial',

@@ -8,7 +8,6 @@ import { HttpClient, HttpClientModule } from '../../node_modules/@angular/common
 
 import { Cloudinary as CloudinaryCore } from 'cloudinary-core';
 import { CloudinaryConfiguration, CloudinaryModule } from '../../node_modules/@cloudinary/angular-5.x';
-import { NgxScrollEventModule } from '../../node_modules/ngx-scroll-event/dist/ngx-scroll-event';
 
 import cloudinaryConfiguration from './config';
 export const cloudinary = {
@@ -103,7 +102,6 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    NgxScrollEventModule
   ],
   exports: [
     RouterModule,

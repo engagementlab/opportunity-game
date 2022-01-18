@@ -4,8 +4,9 @@ import { DataService } from '../../data.service';
 import { PlayerData } from '../../models/playerdata';
 import { GameLocation } from '../../models/gamelocation';
 import { Opportunity } from '../../models/opportunity';
+import * as _ from 'underscore';
+import { TweenMax, Back, TweenLite, Elastic } from 'gsap';
 
-import * as _ from '../../../../node_modules/@types/underscore';
 
 @Component({
   selector: 'game-toolbar',

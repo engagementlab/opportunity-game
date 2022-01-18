@@ -1,9 +1,9 @@
 import { Component, OnInit, HostBinding, Inject, HostListener } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router'
-import { DOCUMENT } from "@angular/platform-browser";
+import { DOCUMENT } from "@angular/common";
 import { DataService } from '../data.service';
 import { slideAnimation } from '../_animations/slide';
-import { TweenLite } from "gsap";
+import { Back, Elastic, Sine, TweenLite, TweenMax } from "gsap";
 
 import { PlayerData } from '../models/playerdata';
 import { Event } from '../models/event';
@@ -11,7 +11,8 @@ import { Goal } from '../models/goal';
 import { Character } from '../models/character';
 
 import { environment } from '../../environments/environment';
-import * as _ from '../../../node_modules/@types/underscore';
+import * as _ from 'underscore';
+
 
 @Component({
   selector: 'app-game',

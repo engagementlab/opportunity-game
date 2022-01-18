@@ -7,7 +7,7 @@ import { Character } from '../../models/character';
 import { PlayerData } from '../../models/playerdata';
 
 import * as _ from 'underscore';
-import { NgxScrollEvent } from '../../../../node_modules/ngx-scroll-event/dist/ngx-scroll-event';
+import { TweenLite, Expo, TweenMax, Sine, Back, Elastic } from 'gsap';
 
 @Component({
   selector: 'app-home',
@@ -36,11 +36,7 @@ export class GameHomeComponent implements OnInit, AfterViewChecked {
   loadedCategory: boolean;
   scrollTween: object;
 
-  @ViewChild('map') mapContainer: ElementRef;
-
-  public mapScrolled(event: NgxScrollEvent) {
-
-  }
+  @ViewChild('map', {static: false}) mapContainer: ElementRef;
 
   canDeactivate() {
     return !this.loaded;

@@ -8,7 +8,8 @@ import { GameLocation } from '../../models/gamelocation';
 import { PlayerData } from '../../models/playerdata';
 import { Opportunity } from '../../models/opportunity';
 
-import * as _ from '../../../../node_modules/@types/underscore';
+import * as _ from 'underscore';
+import { TweenLite, Back, TweenMax, Sine, Elastic } from 'gsap';
 
 
 @Component({

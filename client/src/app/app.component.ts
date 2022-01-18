@@ -6,6 +6,7 @@ import { environment } from '../environments/environment';
 import { Observable } from 'rxjs';
 
 import { DeactivateGuard } from './deactivate-guard';
+import { Back, Expo, TweenLite } from 'gsap';
 
 @Component({
   selector: 'app-root',
